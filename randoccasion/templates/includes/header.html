@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+{% with request.resolver_match.view_name as view_name %}
+<header class="nav nav-bar">
+    <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="{% static 'img/cat.png' %}" width="200" height="75" class="d-inline-block align-top" alt="">
+            {% trans "Главная" %}
+        </a>
+        <ul class="nav nav-tabs">
+            {% if user.is_staff %}
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/">{% trans "Админка" %}</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link {% if view_name == 'homepage:main'%}active disabled{%endif%}"
+                   href="{% url 'homepage:main' %}">{% trans "На главную" %}</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+{% endwith %}

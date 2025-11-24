@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicons/favicon.ico' %}">
+    <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicons/favicon.svg' %}"/>
+    <link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}"/>
+    <meta name="apple-mobile-web-app-title" content="DjangoLMS"/>
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}"/>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body style=" position: relative;
+    min-height: 100vh;
+    padding-bottom: 300px;
+    box-sizing: border-box;">
+{% include "includes/header.html" %}
+{% block content %}
+{% endblock %}
+</body>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/timezone.js' %}"></script>
+</html>
