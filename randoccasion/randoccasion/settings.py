@@ -25,6 +25,7 @@ SECRET_KEY = (
 
 DEBUG = load_value('DJANGO_DEBUG', False)
 
+
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
@@ -46,6 +47,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+    INSTALLED_APPS += ["debug_toolbar"]
+    INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = 'randoccasion.urls'
 
@@ -107,9 +113,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    BASE_DIR / os.getenv('DJANGO_STATIC_PATH', 'static'),
+    BASE_DIR / "static_dev",
 ]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
