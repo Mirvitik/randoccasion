@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% translate "Мой профиль" %}</h2>
+{% if messages %}
+    <div class="mb-4">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ profile_form.as_p }}
+    <button type="submit" class="btn btn-primary">{% translate "Сохранить" %}</button>
+</form>
+<hr>
+<a href="{% url 'users:password_change' %}" class="btn btn-warning mt-3">
+    {% translate "Сменить пароль" %}
+</a>
+<a href="{% url 'homepage:coffee' %}" class="btn btn-secondary mt-3">{% translate "Выпить кофе" %}</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title h3 text-center mb-4">{% translate "Вход в аккаунт" %}</h1>
+                
+                {% include "users/login_form.html" %}
+                
+                <div class="mt-4 pt-3 border-top">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'users:password_reset' %}" class="btn btn-outline-secondary">
+                            {% translate "Забыли пароль?" %}
+                        </a>
+                        <a href="{% url 'users:signup' %}" class="btn btn-outline-primary">
+                            {% translate "Нет аккаунта? Регистрация" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

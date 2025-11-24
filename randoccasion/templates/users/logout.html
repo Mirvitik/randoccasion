@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>{% translate "Выход" %}</h2>
+            <p>{% translate "Вы успешно вышли из системы." %}</p>
+            <a href="{% url 'homepage:homepage' %}" class="btn btn-primary">
+                {% translate "На главную" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

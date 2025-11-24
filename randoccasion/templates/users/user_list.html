@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% translate "Список пользователей" %}</h2>
+<div class="row">
+    {% for user in user_list %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            {% if user.profile.image %}
+            <img src="{{ user.profile.get_image_300x300.url }}" class="card-img-top" alt="{{ user.username }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ user.username }}</h5>
+                {% if user.profile.birthday %}
+                <p class="card-text">
+                    {% translate "День рождения:" %} {{ user.profile.birthday|date:"d M" }}
+                </p>
+                {% endif %}
+                <a href="{% url 'users:user_detail' user.pk %}" class="btn btn-primary">{% translate "Подробнее" %}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
