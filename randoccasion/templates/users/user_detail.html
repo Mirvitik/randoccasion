@@ -37,6 +37,20 @@
                 <span class="text-muted">{% translate "не указано:" %}</span>
             {% endif %}
         </p>
+
+        <p><strong>{% translate "Интересы:" %}</strong>
+    {% if user.profile.interests.all %}
+        {% if user.profile.interests.count > 0 %}
+            {% for interest in user.profile.interests.all %}
+                <span class="badge bg-primary me-1">{{ interest.name }}</span>
+            {% endfor %}
+        {% else %}
+            <span class="text-muted fst-italic">{% translate "не указаны" %}</span>
+        {% endif %}
+    {% else %}
+        <span class="text-muted fst-italic">{% translate "не указаны" %}</span>
+    {% endif %}
+</p>
         
     </div>
 </div>

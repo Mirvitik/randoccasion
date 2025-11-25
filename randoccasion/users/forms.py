@@ -5,7 +5,7 @@ from datetime import date
 from django import forms
 from django.contrib import auth
 
-from users.models import Profile, User
+from users.models import Interest, Profile, User
 
 
 class UserChangeForm(auth.forms.UserChangeForm):
@@ -71,9 +71,16 @@ class ProfileUpdateForm(forms.ModelForm):
     email = forms.EmailField(label="Email")
     first_name = forms.CharField(label="Имя", required=False, max_length=40)
     last_name = forms.CharField(label="Фамилия", required=False, max_length=40)
+    interests = forms.ModelMultipleChoiceField(
+        queryset=Interest.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Интересы",
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         if self.instance.user:
             self.initial["email"] = self.instance.user.email
             self.initial["first_name"] = self.instance.user.first_name
@@ -85,11 +92,16 @@ class ProfileUpdateForm(forms.ModelForm):
             )
 
         for field in self.visible_fields():
-            field.field.widget.attrs["class"] = "form-control"
+            if not isinstance(
+                field.field.widget,
+                forms.CheckboxSelectMultiple,
+            ):
+                field.field.widget.attrs["class"] = "form-control"
 
     def save(self, commit=True):
         profile = super().save(commit=False)
         user = profile.user
+
         user.email = self.cleaned_data["email"]
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
@@ -97,6 +109,7 @@ class ProfileUpdateForm(forms.ModelForm):
         if commit:
             user.save()
             profile.save()
+            self.save_m2m()
 
         return profile
 
@@ -105,9 +118,7 @@ class ProfileUpdateForm(forms.ModelForm):
         if email:
             email = email.lower().strip()
             if (
-                User.objects.filter(
-                    email=email,
-                )
+                User.objects.filter(email=email)
                 .exclude(id=self.instance.user.id)
                 .exists()
             ):
@@ -130,15 +141,12 @@ class ProfileUpdateForm(forms.ModelForm):
                 )
 
             if birthday > latest:
-                raise forms.ValidationError(
-                    "Дата рождения не может быть в будущем.",
-                )
+                raise forms.ValidationError("Дата не может быть в будущем.")
 
         return birthday
 
     def clean_image(self):
         image = self.cleaned_data.get("image")
-
         if not image:
             return image
 
@@ -151,11 +159,13 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            Profile.birthday.field.name,
-            Profile.image.field.name,
+            "birthday",
+            "image",
+            "interests",
         ]
         widgets = {
-            Profile.birthday.field.name: forms.DateInput(
+            "birthday": forms.DateInput(
                 attrs={"class": "form-control", "type": "date"},
             ),
+            Profile.interests.field.name: forms.CheckboxSelectMultiple(),
         }

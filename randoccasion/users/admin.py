@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from users.forms import UserChangeForm
-from users.models import Profile, User
+from users.models import Interest, Profile, User
 
 
 class ProfileInline(admin.StackedInline):
@@ -14,7 +14,9 @@ class ProfileInline(admin.StackedInline):
     fields = (
         Profile.birthday.field.name,
         Profile.image.field.name,
+        Profile.interests.field.name,
     )
+    filter_horizontal = (Profile.interests.field.name,)
 
 
 class UserAdmin(BaseUserAdmin):
@@ -33,3 +35,9 @@ except admin.sites.NotRegistered:
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Profile)
+
+
+@admin.register(Interest)
+class InterestAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
+    list_display = ("id", "name")

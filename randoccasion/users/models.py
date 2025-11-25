@@ -89,6 +89,18 @@ if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
     User._meta.get_field("email")._unique = True
 
 
+class Interest(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=120, unique=True)
+
+    class Meta:
+        verbose_name = "Интерес"
+        verbose_name_plural = "Интересы"
+
+    def __str__(self):
+        return self.name
+
+
 class Profile(models.Model):
     def get_upload_path(self, filename):
         return f"uploads/{self.id}/{filename}"
@@ -108,6 +120,12 @@ class Profile(models.Model):
         upload_to=get_upload_path,
         null=True,
         blank=True,
+    )
+    interests = models.ManyToManyField(
+        Interest,
+        verbose_name=_("интересы"),
+        blank=True,
+        related_name="profiles",
     )
 
     def get_image_300x300(self):
