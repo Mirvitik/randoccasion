@@ -1,28 +1,49 @@
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="ru">
+  <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    {% load static %}
-    <link rel="icon" type="image/x-icon" href="{% static 'favicons/favicon.ico' %}">
-    <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96"/>
-    <link rel="icon" type="image/svg+xml" href="{% static 'favicons/favicon.svg' %}"/>
-    <link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}"/>
-    <meta name="apple-mobile-web-app-title" content="DjangoLMS"/>
-    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}"/>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-</head>
-<body style=" position: relative;
-    min-height: 100vh;
-    padding-bottom: 300px;
-    box-sizing: border-box;">
-{% include "includes/header.html" %}
-{% block content %}
-{% endblock %}
-</body>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/timezone.js' %}"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Встречалки{% endblock %}</title>
+    <link rel="icon" href='{% static "img/favicon.ico" %}' type="image/x-icon">
+    <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "css/styles.css" %}' rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="header-container">
+          {% include "includes/header.html" %}
+        </div>
+      </header>
+
+      <main>
+        <div class="container">
+          {% block content %}
+            <h1>{% translate "Содержимое страницы недоступно" %}</h1>
+          {% endblock %}
+
+          <div class="row justify-content-center">
+              {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == 'homepage:homepage' %}
+                  <div class="row justify-content-center">
+                    <div class="col-9 col-md-6 col-xl-3 pt-5 text-center">
+                      <img src="{% static 'img/racoon.jpg' %}" class="img-fluid rounded-4 shadow-sm" alt="{% translate 'Raccoon' %}">
+                    </div>
+                  </div>
+                {% endif %}
+              {% endwith %}
+          </div>
+        </div>
+      </main>
+      
+      <footer>
+        <div class="footer-container">
+          {% include "includes/footer.html" %}
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>

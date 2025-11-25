@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="container">
+  <h6 class="fs-4">&copy; ООО «тмыв денег», <span id="year">{% now "Y" %}</span></h6>
+  <input type="hidden" id="server-time" value="{% now 'Y-m-d' %}T{% now 'H:i:s' %}Z" />
+  
+  <script src="{% static 'js/footer-year.js' %}" defer></script>
+  
+  <noscript>
+    <div class="server-time-note">
+      #year::after {
+        content: " (server time)";
+        font-size: 0.8em;
+        color: #6c757d;
+      }
+    </div>
+  </noscript>
+</div>

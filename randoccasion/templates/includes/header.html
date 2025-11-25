@@ -1,23 +1,66 @@
 {% load static %}
 {% load i18n %}
-{% with request.resolver_match.view_name as view_name %}
-<header class="nav nav-bar">
-    <nav class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="{% static 'img/cat.png' %}" width="200" height="75" class="d-inline-block align-top" alt="">
-            {% trans "Главная" %}
+<div class="header-container">
+  <div class="container"> 
+    <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <a href="{% url 'homepage:main' %}" class="text-decoration-none">
+          <img src="{% static 'img/logo.png' %}" width="110" height="80" alt="{% translate 'Логотип' %}">
         </a>
-        <ul class="nav nav-tabs">
-            {% if user.is_staff %}
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/">{% trans "Админка" %}</a>
-            </li>
+        <span class="fs-4 ms-2">{% translate "Встречалки" %}</span>
+      </div>
+
+      {% with request.resolver_match.view_name as view_name %}
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            {% if view_name == 'homepage' %}
+              <span class="nav-link active" aria-current="page">{% translate "Главная" %}</span>
+            {% else %}
+              <a href="{% url 'homepage:main' %}" class="nav-link">{% translate "Главная" %}</a>
             {% endif %}
+          </li>
+    
+          <!-- ССЫЛКИ ДЛЯ USERS -->
+          {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link {% if view_name == 'homepage:main'%}active disabled{%endif%}"
-                   href="{% url 'homepage:main' %}">{% trans "На главную" %}</a>
+              {% if view_name == 'users:user_list' %}
+                <span class="nav-link active" aria-current="page">{% translate "Пользователи" %}</span>
+              {% else %}
+                <a href="{% url 'users:user_list' %}" class="nav-link">{% translate "Пользователи" %}</a>
+              {% endif %}
             </li>
+            <li class="nav-item">
+              {% if view_name == 'users:profile' %}
+                <span class="nav-link active" aria-current="page">{% translate "Мой профиль" %}</span>
+              {% else %}
+                <a href="{% url 'users:profile' %}" class="nav-link">{% translate "Мой профиль" %}</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+    <form method="post" action="{% url 'users:logout' %}" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link nav-link p-2 border-0 text-start w-100">
+            {% translate "Выйти" %}
+        </button>
+    </form>
+</li>
+          {% else %}
+            <li class="nav-item">
+              {% if view_name == 'users:login' %}
+                <span class="nav-link active" aria-current="page">{% translate "Войти" %}</span>
+              {% else %}
+                <a href="{% url 'users:login' %}" class="nav-link">{% translate "Войти" %}</a>
+              {% endif %}
+            </li>
+          {% endif %}
+          
+          {% if user.is_staff %}
+            <li class="nav-item">
+              <a href="{% url 'admin:index' %}" class="nav-link">{% translate "Панель администратора" %}</a>
+            </li>
+          {% endif %}
         </ul>
-    </nav>
-</header>
-{% endwith %}
+      {% endwith %}
+    </div>
+  </div>
+</div>

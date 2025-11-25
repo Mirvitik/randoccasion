@@ -1,0 +1,96 @@
+from django.contrib.auth import views as views_auth
+from django.urls import path
+
+from users import views
+
+
+app_name = "users"
+
+urlpatterns = [
+    path(
+        "login/",
+        views_auth.LoginView.as_view(
+            template_name="users/login.html",
+        ),
+        name="login",
+    ),
+    path(
+        "logout/",
+        views_auth.LogoutView.as_view(
+            template_name="users/logout.html",
+        ),
+        name="logout",
+    ),
+    path(
+        "password_change/",
+        views_auth.PasswordChangeView.as_view(
+            template_name="users/password_change.html",
+        ),
+        name="password_change",
+    ),
+    path(
+        "password_change/done/",
+        views_auth.PasswordChangeDoneView.as_view(
+            template_name="users/password_change_done.html",
+        ),
+        name="password_change_done",
+    ),
+    path(
+        "password_reset/",
+        views_auth.PasswordResetView.as_view(
+            template_name="users/password_reset.html",
+        ),
+        name="password_reset",
+    ),
+    path(
+        "password_reset/done/",
+        views_auth.PasswordResetDoneView.as_view(
+            template_name="users/password_reset_done.html",
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        views_auth.PasswordResetConfirmView.as_view(
+            template_name="users/password_reset_confirm.html",
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        views_auth.PasswordResetCompleteView.as_view(
+            template_name="users/password_reset_complete.html",
+        ),
+        name="password_reset_complete",
+    ),
+    path(
+        "signup/",
+        views.signup_view,
+        name="signup",
+    ),
+    path(
+        "activate/<str:username>/",
+        views.activate_user_view,
+        name="activate",
+    ),
+    path(
+        "user_list/",
+        views.user_list_view,
+        name="user_list",
+    ),
+    path(
+        "user_detail/<int:pk>",
+        views.user_detail_view,
+        name="user_detail",
+    ),
+    path(
+        "profile/",
+        views.profile_view,
+        name="profile",
+    ),
+    path(
+        "reactivate_account/<signed_username>/",
+        views.reactivate_account,
+        name="reactivate_account",
+    ),
+]
