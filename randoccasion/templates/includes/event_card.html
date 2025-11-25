@@ -1,0 +1,24 @@
+<div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{event.name}}</h5>
+                <p class="card-text">{{event.description|truncatechars:150}}</p>
+                <div class="mt-auto">
+                    <span class="badge bg-primary">Тема</span>
+                    <small class="text-muted d-block mt-2">
+                        🌐 Местоположение: {{event.location}}
+                    </small>
+                </div>
+                <div class="mt-auto">
+                    <span class="badge bg-success">Пользователь: {{event.creator.username}}</span>
+                    <span class="badge bg-warning">Пройдёт через: {{event.expires_after}}</span>
+                </div>
+                <div class="mt-auto pt-3">
+                <a href="#" class="btn btn-outline-primary btn-sm">
+                    Подробнее →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

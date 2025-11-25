@@ -9,6 +9,7 @@ urlpatterns = [
     path("auth/", include("users.urls", namespace="users")),
     path("auth/", include("django.contrib.auth.urls")),
     path("", include("homepage.urls")),
+    path("events/", include("events.urls")),
 ]
 
 if settings.DEBUG:
