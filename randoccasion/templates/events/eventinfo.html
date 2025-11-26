@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <strong>{{event.name}}</strong>
+    <div>{{event.topic}}</div>
+    <div>Тема:{{event.slug}}</div>
+    <p class="card-text">{{event.description|safe|truncatewords_html:150}}</p>
+    <div>🗺️ Место проведения:{{event.location}}</div>
+    <span class="badge bg-warning">Пройдёт через: {{event.expires_after}}</span>
+</div>
+{% endblock content %}

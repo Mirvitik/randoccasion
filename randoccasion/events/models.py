@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django_ckeditor_5.fields import CKEditor5Field
 
 from events.managers import EventManager
 from users.models import User
@@ -20,7 +21,7 @@ class Event(models.Model):
         default="Без темы",
     )
     slug = models.SlugField(unique=True)
-    description = models.TextField(verbose_name=_("Описание"), blank=True)
+    description = CKEditor5Field("Описание", blank=True)
     is_active = models.BooleanField(verbose_name=_("Активно"), default=True)
     creator = models.ForeignKey(
         to=User,
@@ -75,7 +76,8 @@ class Event(models.Model):
 
         if days > 0:
             return f"{days} д. {hours} ч."
-        elif hours > 0:
+
+        if hours > 0:
             return f"{hours} ч. {minutes} мин."
 
         return f"{minutes} мин."

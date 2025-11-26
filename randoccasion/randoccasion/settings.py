@@ -33,13 +33,11 @@ def load_bool_env(name, default):
 
 DEBUG = load_bool_env("DJANGO_DEBUG", False)
 
-
 ALLOWED_HOSTS_ENV = os.getenv("DJANGO_ALLOWED_HOSTS", "")
 if ALLOWED_HOSTS_ENV:
     ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_ENV.split(",")]
 else:
     ALLOWED_HOSTS = ["localhost"] if DEBUG else [""]
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -53,6 +51,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "events.apps.EventsConfig",
     "users.apps.UsersConfig",
+    "django_ckeditor_5",
     "django_cleanup.apps.CleanupConfig",
 ]
 
@@ -102,7 +101,6 @@ DEFAULT_USER_IS_ACTIVE = os.getenv(
     default=DEBUG,
 )
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -129,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru-RU")
 
 TIME_ZONE = "UTC"
@@ -146,6 +143,31 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
 
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "bulletedList",
+            "numberedList",
+            "blockQuote",
+            "imageUpload",
+            "fontColor",
+            "fontBackgroundColor",
+            "bulletedList",
+            "numberedList",
+            "todoList",
+            "outdent",
+            "indent",
+        ],
+    },
+}
+CKEDITOR_5_CUSTOM_CSS = "css/ckeditor5/admin_dark.css"
+CKEDITOR_5_UPLOAD_PATH = "uploads/"
+
 DJANGO_MAIL = os.getenv("DJANGO_MAIL", "fake@example.com")
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "send_mail/"
@@ -158,6 +180,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 MAX_AUTH_ATTEMPTS = int(os.getenv("DJANGO_MAX_AUTH_ATTEMPTS", default=3))
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

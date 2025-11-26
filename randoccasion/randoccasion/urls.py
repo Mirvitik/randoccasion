@@ -10,7 +10,8 @@ urlpatterns = [
     path("auth/", include("django.contrib.auth.urls")),
     path("", include("homepage.urls")),
     path("events/", include("events.urls")),
-]
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     from debug_toolbar.toolbar import debug_toolbar_urls
