@@ -11,6 +11,11 @@ from users.models import User
 
 
 class Event(models.Model):
+    WHO_CAN_SEE_CHOICES = [
+        ("all", _("Все")),
+        ("only_friends", _("Только друзья")),
+        ("only_for_me", _("Только я")),
+    ]
     name = models.CharField(
         verbose_name=_("Событие"),
         max_length=200,
@@ -19,6 +24,11 @@ class Event(models.Model):
     topic = models.CharField(
         verbose_name=_("Тема события"),
         default="Без темы",
+    )
+    who_can_see = models.CharField(
+        verbose_name="Кто может видеть публикацию",
+        choices=WHO_CAN_SEE_CHOICES,
+        default=WHO_CAN_SEE_CHOICES[0],
     )
     slug = models.SlugField(unique=True)
     description = CKEditor5Field("Описание", blank=True)

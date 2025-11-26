@@ -1,17 +1,27 @@
 __all__ = ()
 
-from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from events.models import Event
+from events.utils import q_search
 
 
-def all_events(request):
+class EventIndexView(ListView):
     template_name = "events/events.html"
-    context = {
-        "events": Event.objects.is_active(),
-    }
-    return render(request, template_name, context)
+    context_object_name = "events"
+    queryset = Event.objects.is_active()
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+
+        if query:
+            return q_search(query)
+
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class EventDetailView(DetailView):

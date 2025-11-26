@@ -1,9 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+<form class="d-flex" role="search" action="{% url "events:all_events" %}" method="get">
+  <div class="input-group">
+    <input type="search" class="form-control rounded" name="q" placeholder="Искать событие..." aria-label="Search" aria-describedby="search-addon" />
+    <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>🔎</button>
+  </div>
+</form>
 <div class="container py-4">
+    {% if request.GET.q %}
+      <h3 class="mt-4">Результаты поиска по запросу <strong>{{ request.GET.q }}</strong></h3>
+    {% endif %}
+    
     {% for event in events %}
         {% include "includes/event_card.html" %}
+    
+    {% empty %}
+    <h6>Кажется здесь ничего нет...</h6>
     {% endfor %}
+    
 </div>
 {% endblock content %}

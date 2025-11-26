@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container-fluid">
+    <button type="button" class="btn btn-info">
+        <a class="text-decoration-none link-light" href="{% url "events:all_events" %}">К списку событий</a>
+    </button>
+</div>
 <div class="container py-4">
     <strong>{{event.name}}</strong>
     <div>{{event.topic}}</div>
-    <div>Тема:{{event.slug}}</div>
     <p class="card-text">{{event.description|safe|truncatewords_html:150}}</p>
     <div>🗺️ Место проведения:{{event.location}}</div>
+    <div>👤 Проводит: <a href="{% url "users:user_detail" event.creator.id %}">{{event.creator.username}}</a></div>
     <span class="badge bg-warning">Пройдёт через: {{event.expires_after}}</span>
 </div>
 {% endblock content %}
