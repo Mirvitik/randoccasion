@@ -87,7 +87,9 @@ def user_detail_view(request, pk):
         and request.user.has_received_request_from(user)
     ):
         received_request_obj = Friendship.objects.get(
-            from_user=user, to_user=request.user, status="pending"
+            from_user=user,
+            to_user=request.user,
+            status="pending",
         )
 
     context = {
