@@ -26,7 +26,7 @@
             {% if user.last_name %}
                 {{ user.last_name }}
             {% else %}
-                <span class="text-muted fst-italic">{% translate "не указано:" %}</span>
+                <span class="text-muted fst-italic">{% translate "не указано" %}</span>
             {% endif %}
         </p>
         
@@ -34,24 +34,55 @@
             {% if user.profile.birthday %}
                 {{ user.profile.birthday }}
             {% else %}
-                <span class="text-muted">{% translate "не указано:" %}</span>
+                <span class="text-muted">{% translate "не указано" %}</span>
             {% endif %}
         </p>
 
         <p><strong>{% translate "Интересы:" %}</strong>
-    {% if user.profile.interests.all %}
-        {% if user.profile.interests.count > 0 %}
-            {% for interest in user.profile.interests.all %}
-                <span class="badge bg-primary me-1">{{ interest.name }}</span>
-            {% endfor %}
+            {% if user.profile.interests.count %}
+                {% for interest in user.profile.interests.all %}
+                    <span class="badge bg-primary me-1">{{ interest.name }}</span>
+                {% endfor %}
+            {% else %}
+                <span class="text-muted fst-italic">{% translate "не указаны" %}</span>
+            {% endif %}
+        </p>
+        <hr>
+
+        {% if request.user.is_authenticated and request.user != user %}
+    <div class="mt-3">
+
+        {% if are_friends %}
+            <span class="text-success fw-bold">
+                ✓ Вы друзья
+            </span>
+
+        {% elif sent_request %}
+            <span class="text-warning">
+                Заявка отправлена
+            </span>
+
+        {% elif received_request %}
+            <a href="{% url 'users:accept_friend_request' received_request.id %}"
+               class="btn btn-success btn-sm me-2">
+               Принять заявку
+            </a>
+
+            <a href="{% url 'users:reject_friend_request' received_request.id %}"
+               class="btn btn-danger btn-sm">
+               Отклонить
+            </a>
+
         {% else %}
-            <span class="text-muted fst-italic">{% translate "не указаны" %}</span>
+            <a href="{% url 'users:send_friend_request' user.id %}"
+               class="btn btn-primary btn-sm">
+               Добавить в друзья
+            </a>
         {% endif %}
-    {% else %}
-        <span class="text-muted fst-italic">{% translate "не указаны" %}</span>
-    {% endif %}
-</p>
-        
+
+    </div>
+{% endif %}
+
     </div>
 </div>
 {% endblock %}

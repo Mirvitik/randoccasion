@@ -12,7 +12,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from users.forms import ProfileUpdateForm, SignUpForm
-from users.models import Profile, User
+from users.models import Friendship, Profile, User
 
 
 def signup_view(request):
@@ -68,9 +68,35 @@ def user_list_view(request):
     return render(request, "users/user_list.html", {"user_list": users_list})
 
 
+@login_required
 def user_detail_view(request, pk):
     user = get_object_or_404(User, pk=pk, is_active=True)
-    return render(request, "users/user_detail.html", {"user": user})
+    are_friends = (
+        request.user.is_friends_with(user)
+        if request.user.is_authenticated
+        else False
+    )
+    sent_request = (
+        request.user.has_sent_request_to(user)
+        if request.user.is_authenticated
+        else False
+    )
+    received_request_obj = None
+    if (
+        request.user.is_authenticated
+        and request.user.has_received_request_from(user)
+    ):
+        received_request_obj = Friendship.objects.get(
+            from_user=user, to_user=request.user, status="pending"
+        )
+
+    context = {
+        "user": user,
+        "are_friends": are_friends,
+        "sent_request": sent_request,
+        "received_request": received_request_obj,
+    }
+    return render(request, "users/user_detail.html", context)
 
 
 @login_required
@@ -114,3 +140,74 @@ def reactivate_account(request, signed_username):
         messages.error(request, "Неверная ссылка для активации.")
 
     return redirect("users:login")
+
+
+@login_required
+def send_friend_request(request, user_id):
+    to_user = get_object_or_404(User, id=user_id)
+
+    if to_user == request.user:
+        messages.error(request, "Вы не можете добавить самого себя.")
+        return redirect("users:user_detail", pk=user_id)
+
+    fr, created = Friendship.objects.get_or_create(
+        from_user=request.user,
+        to_user=to_user,
+        defaults={"status": "pending"},
+    )
+
+    if not created:
+        messages.info(request, "Заявка уже отправлена.")
+    else:
+        messages.success(request, "Заявка в друзья отправлена.")
+
+    return redirect("users:user_detail", pk=user_id)
+
+
+@login_required
+def accept_friend_request(request, request_id):
+    fr = get_object_or_404(
+        Friendship,
+        id=request_id,
+        to_user=request.user,
+        status="pending",
+    )
+    fr.status = "accepted"
+    fr.save()
+
+    messages.success(request, "Заявка принята!")
+    return redirect("users:friend_requests")
+
+
+@login_required
+def reject_friend_request(request, request_id):
+    fr = get_object_or_404(
+        Friendship,
+        id=request_id,
+        to_user=request.user,
+        status="pending",
+    )
+    fr.status = "rejected"
+    fr.save()
+
+    messages.info(request, "Заявка отклонена.")
+    return redirect("users:friend_requests")
+
+
+@login_required
+def friends_list_view(request):
+    friends = request.user.friends
+    return render(request, "users/friends_list.html", {"friends": friends})
+
+
+@login_required
+def friend_requests_view(request):
+    friend_requests = Friendship.objects.filter(
+        to_user=request.user,
+        status="pending",
+    )
+    return render(
+        request,
+        "users/friend_requests.html",
+        {"friend_requests": friend_requests},
+    )

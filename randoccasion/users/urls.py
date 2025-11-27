@@ -93,4 +93,29 @@ urlpatterns = [
         views.reactivate_account,
         name="reactivate_account",
     ),
+    path(
+        "friend/request/<int:user_id>/",
+        views.send_friend_request,
+        name="send_friend_request",
+    ),
+    path(
+        "friend/accept/<int:request_id>/",
+        views.accept_friend_request,
+        name="accept_friend_request",
+    ),
+    path(
+        "friend/reject/<int:request_id>/",
+        views.reject_friend_request,
+        name="reject_friend_request",
+    ),
+    path(
+        "friends/",
+        views.friends_list_view,
+        name="friends_list",
+    ),
+    path(
+        "friend/requests/",
+        views.friend_requests_view,
+        name="friend_requests",
+    ),
 ]

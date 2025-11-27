@@ -84,6 +84,37 @@ class User(CustomUser):
     def get_profile(self):
         return self.profile
 
+    @property
+    def friends(self):
+        sent = Friendship.objects.filter(
+            from_user=self,
+            status="accepted",
+        ).values_list("to_user", flat=True)
+
+        received = Friendship.objects.filter(
+            to_user=self,
+            status="accepted",
+        ).values_list("from_user", flat=True)
+
+        return User.objects.filter(id__in=list(sent) + list(received))
+
+    def is_friends_with(self, other_user):
+        return other_user in self.friends
+
+    def has_sent_request_to(self, other_user):
+        return Friendship.objects.filter(
+            from_user=self,
+            to_user=other_user,
+            status="pending",
+        ).exists()
+
+    def has_received_request_from(self, other_user):
+        return Friendship.objects.filter(
+            from_user=other_user,
+            to_user=self,
+            status="pending",
+        ).exists()
+
 
 if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
     User._meta.get_field("email")._unique = True
@@ -145,3 +176,38 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - Профиль"
+
+
+class Friendship(models.Model):
+    from_user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="friendships_sent",
+    )
+    to_user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="friendships_received",
+    )
+
+    STATUS_CHOICES = (
+        ("pending", "Ожидание"),
+        ("accepted", "Принят"),
+        ("rejected", "Отклонён"),
+    )
+
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default="pending",
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("from_user", "to_user")
+        verbose_name = "Заявка в друзья"
+        verbose_name_plural = "Заявки в друзья"
+
+    def __str__(self):
+        return f"{self.from_user} → {self.to_user} ({self.status})"

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% translate "Входящие заявки в друзья" %}</h2>
+
+{% if friend_requests %}
+    <ul class="list-group">
+        {% for request in friend_requests %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'users:user_detail' request.from_user.id %}">
+                    {{ request.from_user.username }}
+                </a>
+                <div>
+                    <a href="{% url 'users:accept_friend_request' request.id %}" class="btn btn-success btn-sm me-2">
+                        {% translate "Принять" %}
+                    </a>
+                    <a href="{% url 'users:reject_friend_request' request.id %}" class="btn btn-danger btn-sm">
+                        {% translate "Отклонить" %}
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="text-muted">{% translate "Нет входящих заявок." %}</p>
+{% endif %}
+
+{% endblock %}

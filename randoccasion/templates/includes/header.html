@@ -30,6 +30,20 @@
               {% endif %}
             </li>
             <li class="nav-item">
+        {% if view_name == 'users:friends_list' %}
+            <span class="nav-link active" aria-current="page">{% translate "Мои друзья" %}</span>
+        {% else %}
+            <a href="{% url 'users:friends_list' %}" class="nav-link">{% translate "Мои друзья" %}</a>
+        {% endif %}
+    </li>
+    <li class="nav-item">
+        {% if view_name == 'users:friend_requests' %}
+            <span class="nav-link active" aria-current="page">{% translate "Заявки в друзья" %}</span>
+        {% else %}
+            <a href="{% url 'users:friend_requests' %}" class="nav-link">{% translate "Заявки в друзья" %}</a>
+        {% endif %}
+    </li>
+            <li class="nav-item">
               {% if view_name == 'users:profile' %}
                 <span class="nav-link active" aria-current="page">{% translate "Мой профиль" %}</span>
               {% else %}
