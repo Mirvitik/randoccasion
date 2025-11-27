@@ -6,6 +6,116 @@
     <input type="search" class="form-control rounded" name="q" placeholder="Искать событие..." aria-label="Search" aria-describedby="search-addon" />
     <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>🔎</button>
   </div>
+  <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Фильтры
+      </button>
+      <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown" style="min-width: 320px;">
+        <form action="{% url "events:all_events" %}" method="get" onclick="event.stopPropagation()">
+          {% if request.GET.q %}
+            <input type="hidden" name="q" value="{{ request.GET.q }}">
+          {% endif %}
+
+          <h6 class="dropdown-header px-0">Фильтрация событий</h6>
+          
+          <div class="mb-3">
+            <label for="date_from" class="form-label small">Дата начала</label>
+            <input type="date" class="form-control form-control-sm" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
+          </div>
+
+          <div class="mb-3">
+            <label for="date_to" class="form-label small">Дата окончания</label>
+            <input type="date" class="form-control form-control-sm" id="date_to" name="date_to" value="{{ request.GET.date_to }}">
+          </div>
+
+
+          <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="only_active" id="only_active" value="true" {% if request.GET.only_active %}checked{% endif %}>
+            <label class="form-check-label small" for="only_active">
+              Только активные события
+            </label>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Сортировка</label>
+  
+            <div class="mb-2">
+              <small class="text-muted d-block mb-1">По дате публикации:</small>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_published" id="sort_date_published_desc" value="desc" {% if request.GET.sort_published == "desc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_date_published_desc">
+                  Сначала новые
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_published" id="sort_date_published_asc" value="asc" {% if request.GET.sort_published == "asc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_date_published_asc">
+                  Сначала старые
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_published" id="sort_published_none" value="" {% if not request.GET.sort_published %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_published_none">
+                  Не использовать
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <small class="text-muted d-block mb-1">По дате истечения:</small>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_expiry" id="sort_date_expiry_asc" value="asc" {% if request.GET.sort_expiry == "asc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_date_expiry_asc">
+                  Сначала ближайшие
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_expiry" id="sort_date_expiry_desc" value="desc" {% if request.GET.sort_expiry == "desc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_date_expiry_desc">
+                  Сначала дальние
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_expiry" id="sort_expiry_none" value="" {% if not request.GET.sort_expiry %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_expiry_none">
+                  Не использовать
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <small class="text-muted d-block mb-1">По алфавиту:</small>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_asc" value="asc" {% if request.GET.sort_alpha == "asc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_asc">
+                  А-Я
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_desc" value="desc" {% if request.GET.sort_alpha == "desc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_desc">
+                  Я-А
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_none" value="" {% if not request.GET.sort_alpha %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_none">
+                  Не использовать
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <hr class="dropdown-divider">
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Применить</button>
+            <a href="/events/" class="btn btn-outline-secondary btn-sm">Сбросить</a>
+          </div>
+      </div>
+    </div>
+  </div>
 </form>
 <div class="container py-4">
     {% if request.GET.q %}

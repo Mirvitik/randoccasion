@@ -9,7 +9,7 @@ def q_search(query):
     if query.isdigit():
         return Event.objects.filter(id=query)
 
-    keywords = [word for word in query.split() if len(word) > 2]
+    keywords = [word for word in query.split() if word]
 
     q_objects = Q()
 
@@ -18,5 +18,6 @@ def q_search(query):
         q_objects |= Q(name__icontains=token)
         q_objects |= Q(location__icontains=token)
         q_objects |= Q(topic__icontains=token)
+        q_objects |= Q(creator__icontains=token)
 
     return Event.objects.filter(q_objects)
