@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
     AbstractUser,
     UserManager as DjangoUserManager,
 )
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
@@ -192,6 +193,21 @@ class Profile(models.Model):
         verbose_name=_("интересы"),
         blank=True,
         related_name="profiles",
+    )
+    telegram_id = models.PositiveIntegerField(
+        verbose_name=_("telegram_id"),
+        blank=True,
+        null=True,
+    )
+    tg_messages_cnt = models.PositiveIntegerField(
+        verbose_name=_("Количество сообщений"),
+        blank=True,
+        default=0,
+        validators=[MaxValueValidator(10)],
+    )
+    tg_last_message_date = models.DateTimeField(
+        blank=True,
+        null=True,
     )
 
     def get_image_300x300(self):
