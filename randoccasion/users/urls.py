@@ -123,4 +123,9 @@ urlpatterns = [
         views.remove_friend_view,
         name="remove_friend",
     ),
+    path(
+        "verify-tg/",
+        views.verify_tg,
+        name="verify-tg",
+    ),
 ]
