@@ -3,7 +3,6 @@ from django.urls import path
 
 from users import views
 
-
 app_name = "users"
 
 urlpatterns = [
@@ -117,5 +116,10 @@ urlpatterns = [
         "friend/requests/",
         views.friend_requests_view,
         name="friend_requests",
+    ),
+    path(
+        "verify-tg.",
+        views.verify_tg,
+        name="verify-tg",
     ),
 ]

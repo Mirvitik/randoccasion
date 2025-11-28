@@ -5,6 +5,8 @@ from datetime import date
 from django import forms
 from django.contrib import auth
 from django.core.validators import MinValueValidator
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from users.models import Interest, Profile, User
 
@@ -85,7 +87,14 @@ class ProfileUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        verify_url = reverse("users:verify-tg")
+        self.fields["telegram_id"].help_text = mark_safe(
+            (
+                "Telegram ID нужен нам для отправки Вам "
+                "уведомлений на Ваш аккаунт, мы не рассылаем спам."
+                f"<a href={verify_url}>Подтверждение аккаунта</a>"
+            ),
+        )
         if self.instance.user:
             self.initial["telegram_id"] = self.instance.telegram_id
             self.initial["email"] = self.instance.user.email

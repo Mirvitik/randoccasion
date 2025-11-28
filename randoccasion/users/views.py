@@ -71,6 +71,11 @@ def user_list_view(request):
 
 
 @login_required
+def verify_tg(request):
+    return render(request, "users/verify_tg.html")
+
+
+@login_required
 def user_detail_view(request, pk):
     user = get_object_or_404(User, pk=pk, is_active=True)
     are_friends = (
