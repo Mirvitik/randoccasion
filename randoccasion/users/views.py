@@ -1,5 +1,6 @@
 __all__ = ()
 
+import datetime
 from datetime import timedelta
 
 from django.conf import settings
@@ -13,6 +14,7 @@ from django.utils import timezone
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import Friendship, Profile, User
+from users.utils import send_tg_message_sync
 
 
 def signup_view(request):
@@ -161,6 +163,27 @@ def send_friend_request(request, user_id):
     if not created:
         messages.info(request, "Заявка уже отправлена.")
     else:
+        message = (
+            f"Вам пришла новая заявка в друзья от {request.user.username}!\n"
+            f"Зайдите на сайт и проверьте её"
+        )
+        if to_user.profile.telegram_id is not None:
+            if request.user.tg_last_message_date is not None:
+                deltatime = (
+                    datetime.datetime.now() - request.user.tg_last_message_date
+                )
+                if (deltatime.total_seconds() / 3600) >= 24:
+                    request.user.tg_messages_cnt = 0
+                    request.user.tg_last_message_date = None
+
+            if request.user.tg_messages_cnt < 10:
+                send_tg_message_sync(
+                    tg_id=to_user.profile.telegram_id,
+                    message=message,
+                )
+                request.user.tg_messages_cnt += 1
+                request.user.tg_last_message_date = datetime.datetime.now()
+
         messages.success(request, "Заявка в друзья отправлена.")
 
     return redirect("users:user_detail", pk=user_id)

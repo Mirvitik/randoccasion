@@ -126,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
         ".NumericPasswordValidator",
     },
 ]
-
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru-RU")
 
 TIME_ZONE = "UTC"
