@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import signing
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -241,3 +242,20 @@ def friend_requests_view(request):
         "users/friend_requests.html",
         {"friend_requests": friend_requests},
     )
+
+
+@login_required
+def remove_friend_view(request, friend_id):
+    friend = get_object_or_404(User, id=friend_id)
+
+    Friendship.objects.filter(
+        Q(from_user=request.user, to_user=friend, status="accepted") |
+        Q(from_user=friend, to_user=request.user, status="accepted"),
+    ).delete()
+
+    messages.success(
+            request,
+            f"Вы удалили {friend.username} из друзей",
+        )
+
+    return redirect("users:friends_list")

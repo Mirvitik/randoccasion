@@ -80,6 +80,10 @@ class Event(models.Model):
 
     def expires_after(self):
         tot_seconds = (self.expires_at - timezone.now()).total_seconds()
+
+        if tot_seconds <= 0:
+            return -1
+
         days = int(tot_seconds // 86400)
         hours = int((tot_seconds % 86400) // 3600)
         minutes = int((tot_seconds % 3600) // 60)

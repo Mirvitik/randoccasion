@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static events_tags %}
 
 {% block content %}
 <form class="d-flex" role="search" action="{% url "events:all_events" %}" method="get">
@@ -19,13 +20,15 @@
           <h6 class="dropdown-header px-0">Фильтрация событий</h6>
           
           <div class="mb-3">
-            <label for="date_from" class="form-label small">Дата начала</label>
-            <input type="date" class="form-control form-control-sm" id="date_from" name="date_from" value="{{ request.GET.date_from }}">
+            <label for="date_from" class="form-label small">Дата создания с:</label>
+            <input type="date" class="form-control form-control-sm" id="date_from" name="date_from" value="{{ request.GET.date_from }}"
+            {% if request.GET.date_to %}max="{{ request.GET.date_to }}"{% endif %}>
           </div>
 
           <div class="mb-3">
-            <label for="date_to" class="form-label small">Дата окончания</label>
-            <input type="date" class="form-control form-control-sm" id="date_to" name="date_to" value="{{ request.GET.date_to }}">
+            <label for="date_to" class="form-label small">Дата создания по:</label>
+            <input type="date" class="form-control form-control-sm" id="date_to" name="date_to" value="{{ request.GET.date_to }}"
+            {% if request.GET.date_from %}min="{{ request.GET.date_from }}"{% endif %}>
           </div>
 
 
@@ -73,7 +76,7 @@
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_expiry" id="sort_date_expiry_desc" value="desc" {% if request.GET.sort_expiry == "desc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_date_expiry_desc">
-                  Сначала дальние
+                  Сначала отдалённые
                 </label>
               </div>
               <div class="form-check">
@@ -111,7 +114,7 @@
 
           <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Применить</button>
-            <a href="/events/" class="btn btn-outline-secondary btn-sm">Сбросить</a>
+            <a href="{% url "events:all_events" %}" class="btn btn-outline-secondary btn-sm">Сбросить</a>
           </div>
       </div>
     </div>
@@ -122,12 +125,38 @@
       <h3 class="mt-4">Результаты поиска по запросу <strong>{{ request.GET.q }}</strong></h3>
     {% endif %}
     
-    {% for event in events %}
-        {% include "includes/event_card.html" %}
-    
-    {% empty %}
+    <div class="row g-3">
+      {% for event in page_obj %}
+          {% include "includes/event_card.html" %}
+      
+      {% empty %}
+    </div>
     <h6>Кажется здесь ничего нет...</h6>
     {% endfor %}
     
+    <nav aria-label="pg-navigation" class="d-flex justify-content-center">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo; В начало</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+          {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+            <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+              <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
 </div>
+
+<script src="{% static "js/events_filters.js" %}"></script>
 {% endblock content %}
