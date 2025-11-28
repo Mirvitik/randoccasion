@@ -10,6 +10,14 @@
     <link href='{% static "bootstrap/bootstrap.min.css" %}' rel="stylesheet">
     <link href='{% static "css/styles.css" %}' rel="stylesheet">
   </head>
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+  {% endif %}
 
   <body>
     <div class="wrapper">

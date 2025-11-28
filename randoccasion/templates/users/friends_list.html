@@ -6,9 +6,16 @@
     <ul>
     {% for friend in friends %}
         <li>
-            <a href="{% url 'users:user_detail' friend.id %}">
+            <strong><a href="{% url 'users:user_detail' friend.id %}">
                 {{ friend.username }}
-            </a>
+            </a></strong>
+            <form method="post" action="{% url "users:remove_friend" friend.id %}">
+                    {% csrf_token %}
+                    <button type="submit" name="remove_friend" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Вы уверены, что хотите удалить {{ friend.username }} из друзей?')">
+                    Удалить из друзей
+                </button>
+            </form>
         </li>
     {% endfor %}
     </ul>
