@@ -3,4 +3,5 @@ django-ckeditor-5==0.2.18
 django-cleanup==9.0.0
 pillow==12.0.0
 python-dotenv==1.1.1
+python-telegram-bot==22.3
 sorl-thumbnail==12.11.0
