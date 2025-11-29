@@ -91,8 +91,8 @@ def user_detail_view(request, pk):
     )
     received_request_obj = None
     if (
-        request.user.is_authenticated
-        and request.user.has_received_request_from(user)
+            request.user.is_authenticated
+            and request.user.has_received_request_from(user)
     ):
         received_request_obj = Friendship.objects.get(
             from_user=user,
@@ -174,22 +174,22 @@ def send_friend_request(request, user_id):
             f"Зайдите на сайт и проверьте её"
         )
         if to_user.profile.telegram_id is not None:
-            if request.user.tg_last_message_date is not None:
+            if request.user.profile.tg_last_message_date is not None:
                 deltatime = (
-                    datetime.datetime.now() - request.user.tg_last_message_date
+                        datetime.datetime.now() - request.user.profile.tg_last_message_date
                 )
                 if (deltatime.total_seconds() / 3600) >= 24:
-                    request.user.tg_messages_cnt = 0
-                    request.user.tg_last_message_date = None
+                    request.user.profile.tg_messages_cnt = 0
+                    request.user.profile.tg_last_message_date = None
 
-            if request.user.tg_messages_cnt < 10:
+            if request.user.profile.tg_messages_cnt < 10:
                 send_tg_message_sync(
                     tg_id=to_user.profile.telegram_id,
                     message=message,
                 )
-                request.user.tg_messages_cnt += 1
-                request.user.tg_last_message_date = datetime.datetime.now()
-
+                request.user.profile.tg_messages_cnt += 1
+                request.user.profile.tg_last_message_date = datetime.datetime.now()
+        request.user.profile.save()
         messages.success(request, "Заявка в друзья отправлена.")
 
     return redirect("users:user_detail", pk=user_id)
@@ -254,8 +254,8 @@ def remove_friend_view(request, friend_id):
     ).delete()
 
     messages.success(
-            request,
-            f"Вы удалили {friend.username} из друзей",
-        )
+        request,
+        f"Вы удалили {friend.username} из друзей",
+    )
 
     return redirect("users:friends_list")
