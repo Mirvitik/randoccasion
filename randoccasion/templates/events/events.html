@@ -1,10 +1,22 @@
 {% extends "base.html" %}
-{% load static events_tags %}
+{% load static events_tags i18n %}
 
 {% block content %}
+<div class="container d-flex" style="margin-bottom: 20px">
+  <a href="{% url 'events:my_events_requests' %}" class="btn btn-info mt-3">
+    {% translate "Заявки на мои события" %}
+  </a>
+</div>
+
+
 <form class="d-flex" role="search" action="{% url "events:all_events" %}" method="get">
   <div class="input-group">
     <input type="search" class="form-control rounded" name="q" placeholder="Искать событие..." aria-label="Search" aria-describedby="search-addon" />
+    {% if request.GET.q %}
+        <a href="{% url "events:all_events" %}" class="btn btn-outline-secondary" type="button">
+            <i class="bi bi-x">x</i>
+        </a>
+    {% endif %}
     <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>🔎</button>
   </div>
   <div class="dropdown">
@@ -39,7 +51,23 @@
               Только активные события
             </label>
           </div>
+          {% if user.is_authenticated %}
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="only_friends" id="only_friends" value="true" {% if request.GET.only_friends %}checked{% endif %}>
+              <label class="form-check-label small" for="only_friends">
+                События друзей
+              </label>
+            </div>
 
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="only_my" id="only_my" value="true" {% if request.GET.only_my %}checked{% endif %}>
+              <label class="form-check-label small" for="only_my">
+                Мои события
+              </label>
+            </div>
+          </div>
+          {% endif %}
           <div class="mb-3">
             <label class="form-label small fw-bold">Сортировка</label>
   
@@ -120,6 +148,8 @@
     </div>
   </div>
 </form>
+
+
 <div class="container py-4">
     {% if request.GET.q %}
       <h3 class="mt-4">Результаты поиска по запросу <strong>{{ request.GET.q }}</strong></h3>

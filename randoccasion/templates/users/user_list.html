@@ -3,7 +3,74 @@
 
 {% block content %}
 <h2>{% translate "Список пользователей" %}</h2>
-<div class="row">
+
+<form class="d-flex" role="search" action="{% url "users:user_list" %}" method="get" style="margin-bottom: 20px">
+  <div class="input-group">
+    <input type="search" class="form-control rounded" name="q" placeholder="Введите имя, интересы, id, username или email пользователя" aria-label="Search" aria-describedby="search-addon" />
+    {% if request.GET.q %}
+        <a href="{% url "users:user_list" %}" class="btn btn-outline-secondary" type="button">
+            <i class="bi bi-x">x</i>
+        </a>
+    {% endif %}
+    <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>🔎</button>
+  </div>
+  <div class="dropdown">
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Фильтры
+      </button>
+      <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown" style="min-width: 320px;">
+        <form action="{% url "users:user_list" %}" method="get" onclick="event.stopPropagation()">
+          {% if request.GET.q %}
+            <input type="hidden" name="q" value="{{ request.GET.q }}">
+          {% endif %}
+
+          <label class="form-label small fw-bold">Фильтрация пользователей</label>
+
+          <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="maybe_familiar" id="maybe_familiar" value="true" {% if request.GET.maybe_familiar %}checked{% endif %}>
+            <label class="form-check-label small" for="maybe_familiar">
+              Возможно вам знакомы
+            </label>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Сортировка</label>
+            <div class="mb-2">
+              <small class="text-muted d-block mb-1">По алфавиту:</small>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_asc" value="asc" {% if request.GET.sort_alpha == "asc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_asc">
+                  А-Я
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_desc" value="desc" {% if request.GET.sort_alpha == "desc" %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_desc">
+                  Я-А
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_none" value="" {% if not request.GET.sort_alpha %}checked{% endif %}>
+                <label class="form-check-label small" for="sort_alpha_none">
+                  Не использовать
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <hr class="dropdown-divider">
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Применить</button>
+            <a href="{% url "events:all_events" %}" class="btn btn-outline-secondary btn-sm">Сбросить</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row justify-content-center">
     {% for user in user_list %}
     <div class="col-md-4 mb-3">
         <div class="card">
@@ -11,6 +78,7 @@
             <img src="{{ user.profile.get_image_300x300.url }}" class="card-img-top" alt="{{ user.username }}">
             {% endif %}
             <div class="card-body">
+                {% if request.user == user %}<span class="badge bg-secondary rounded-pill flex-shrink-0">Это вы</span>{% endif %}
                 <h5 class="card-title">{{ user.username }}</h5>
                 {% if user.profile.birthday %}
                 <p class="card-text">

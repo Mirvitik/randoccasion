@@ -18,6 +18,6 @@ def q_search(query):
         q_objects |= Q(name__icontains=token)
         q_objects |= Q(location__icontains=token)
         q_objects |= Q(topic__icontains=token)
-        q_objects |= Q(creator__icontains=token)
+        q_objects |= Q(creator__username__icontains=token)
 
     return Event.objects.filter(q_objects)

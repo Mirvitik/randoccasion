@@ -19,7 +19,15 @@
               <a href="{% url 'homepage:main' %}" class="nav-link">{% translate "Главная" %}</a>
             {% endif %}
           </li>
-    
+          
+          <li class="nav-item">
+              {% if view_name == 'events:all_events' %}
+                  <span class="nav-link active" aria-current="page">{% translate "События" %}</span>
+              {% else %}
+                  <a href="{% url 'events:all_events' %}" class="nav-link">{% translate "События" %}</a>
+              {% endif %}
+          </li>
+
           <!-- ССЫЛКИ ДЛЯ USERS -->
           {% if user.is_authenticated %}
             <li class="nav-item">

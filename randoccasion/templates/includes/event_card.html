@@ -29,9 +29,14 @@
                         <span>🕜️ Пройдёт через: {{event.expires_after}}</span>
                     {% endif %}
                 </div>
+                {% if user.is_authenticated %}
+                    {% if user in event.participants.all %}
+                        <span class="badge bg-success rounded-pill flex-shrink-0">Вы записаны</span>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="mt-auto pt-2">
-                <a href="/events/{{event.pk}}/" class="btn btn-primary btn-sm w-100 d-flex align-items-center justify-content-center">
+                <a href="{% url "events:event-detail" event.id %}" class="btn btn-primary btn-sm w-100 d-flex align-items-center justify-content-center">
                     Подробнее
                     <i class="bi bi-arrow-right ms-1"></i>
                 </a>

@@ -95,3 +95,78 @@ class Event(models.Model):
             return f"{hours} ч. {minutes} мин."
 
         return f"{minutes} мин."
+
+    def available_slots(self):
+        return self.max_participants - self.participants.count()
+
+    def is_full(self):
+        return self.participants.count() >= self.max_participants
+
+    def can_join(self, user):
+        if (
+            not user.is_authenticated
+            or self.creator == user
+            or not self.is_active
+            or self.expires_at <= timezone.now()
+        ):
+            return False
+
+        return (
+            not self.is_full()
+            and not self.participants.filter(id=user.id).exists()
+        )
+
+
+class EventRequest(models.Model):
+    STATUS_CHOICES = [
+        ("pending", _("В ожидании")),
+        ("accepted", _("Принят")),
+        ("rejected", _("Отклонен")),
+    ]
+
+    event = models.ForeignKey(
+        Event,
+        related_name="requests",
+        on_delete=models.CASCADE,
+        verbose_name=_("Событие"),
+    )
+    user = models.ForeignKey(
+        User,
+        related_name="event_requests",
+        on_delete=models.CASCADE,
+        verbose_name=_("Пользователь"),
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending",
+        verbose_name=_("Статус"),
+    )
+    message = models.TextField(
+        verbose_name=_("Сообщение"),
+        blank=True,
+        max_length=500,
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_("Создано"),
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_("Обновлено"),
+    )
+
+    class Meta:
+        db_table = "event_request"
+        constraints = [
+            models.constraints.UniqueConstraint(
+                fields=("event", "user"),
+                name="unique_constraint_event_user",
+            ),
+        ]
+        ordering = ["-created_at"]
+        verbose_name = _("Запрос на событие")
+        verbose_name_plural = _("Запросы на события")
+
+    def __str__(self):
+        return f"{self.user.username} -> {self.event.name} [{self.status}]"

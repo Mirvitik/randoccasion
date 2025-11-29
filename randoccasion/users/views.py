@@ -15,6 +15,7 @@ from django.utils import timezone
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import Friendship, Profile, User
+from users.utils import q_search
 from users.utils import send_tg_message_sync
 
 
@@ -67,7 +68,24 @@ def activate_user_view(request, username):
 
 @login_required
 def user_list_view(request):
-    users_list = User.objects.filter(is_active=True).select_related("profile")
+    query = request.GET.get("q")
+    maybe_familiar = request.GET.get("maybe_familiar")
+    sort_by_alpha = request.GET.get("sort_alpha")
+    if query:
+        users_list = q_search(query)
+    else:
+        users_list = User.objects.filter(
+            is_active=True,
+        ).select_related("profile")
+
+    if maybe_familiar:
+        users_list = request.user.friends_of_friends
+
+    if sort_by_alpha == "desc":
+        users_list.order_by("-name")
+    elif sort_by_alpha == "asc":
+        users_list.order_by("name")
+
     return render(request, "users/user_list.html", {"user_list": users_list})
 
 
@@ -227,7 +245,7 @@ def reject_friend_request(request, request_id):
 
 @login_required
 def friends_list_view(request):
-    friends = request.user.friends
+    friends = request.user.friends.order_by("username")
     return render(request, "users/friends_list.html", {"friends": friends})
 
 
@@ -249,8 +267,8 @@ def remove_friend_view(request, friend_id):
     friend = get_object_or_404(User, id=friend_id)
 
     Friendship.objects.filter(
-        Q(from_user=request.user, to_user=friend, status="accepted") |
-        Q(from_user=friend, to_user=request.user, status="accepted"),
+        Q(from_user=request.user, to_user=friend, status="accepted")
+        | Q(from_user=friend, to_user=request.user, status="accepted"),
     ).delete()
 
     messages.success(

@@ -8,6 +8,7 @@ from django.contrib.auth.models import (
 )
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from sorl.thumbnail import get_thumbnail
 
@@ -98,6 +99,42 @@ class User(CustomUser):
         ).values_list("from_user", flat=True)
 
         return User.objects.filter(id__in=list(sent) + list(received))
+
+    @property
+    def friends_of_friends(self):
+        friend_ids = Friendship.objects.filter(
+            from_user=self,
+            status="accepted",
+        ).values_list("to_user_id", flat=True)
+        friend_ids = friend_ids.union(
+            Friendship.objects.filter(
+                to_user=self,
+                status="accepted",
+            ).values_list("from_user_id", flat=True),
+        )
+
+        if not friend_ids:
+            return User.objects.none()
+
+        fof_ids = (
+            Friendship.objects.filter(
+                Q(from_user_id__in=friend_ids) | Q(to_user_id__in=friend_ids),
+                status="accepted",
+            )
+            .exclude(from_user=self)
+            .exclude(to_user=self)
+            .values_list("from_user_id", "to_user_id")
+        )
+
+        fof_set = set()
+        for a, b in fof_ids:
+            fof_set.add(a)
+            fof_set.add(b)
+
+        fof_set.discard(self.id)
+        fof_set.difference_update(friend_ids)
+
+        return User.objects.filter(id__in=fof_set).select_related("profile")
 
     def is_friends_with(self, other_user):
         return other_user in self.friends

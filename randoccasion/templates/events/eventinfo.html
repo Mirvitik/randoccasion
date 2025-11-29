@@ -12,6 +12,50 @@
     <p class="card-text">{{event.description|safe|truncatewords_html:150}}</p>
     <div>🗺️ Место проведения:{{event.location}}</div>
     <div>👤 Проводит: <a href="{% url "users:user_detail" event.creator.id %}">{{event.creator.username}}</a></div>
-    <span class="badge bg-warning">Пройдёт через: {{event.expires_after}}</span>
+    <div>🆓 Свободных мест: {{event.available_slots}}</div>
+    {% if event.expires_after == -1 %}
+        <span>🕜️ Событие уже закончилось</span>
+    {% else %}
+        <span>🕜️ Пройдёт через: {{event.expires_after}}</span>
+    {% endif %}
+    {% if user.is_authenticated and user != event.creator %}
+        {% if user in event.participants.all %}
+            <div class="alert alert-success">
+                ✅ Вы участник этого события
+            </div>
+        {% else %}
+            {% if event.expires_after != -1 %}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+                    Записаться на событие
+                </button>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 </div>
+
+<div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestModalLabel">Запрос на участие</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{% url "events:send_request_to_event" event.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Отправить запрос создателю события <strong>{{event.creator.username}}</strong></p>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Сообщение (необязательно):</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" maxlength="500" placeholder="Расскажите о себе или почему хотите участвовать..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Отправить запрос</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
