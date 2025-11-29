@@ -15,8 +15,8 @@ from django.utils import timezone
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import Friendship, Profile, User
-from users.utils import send_tg_message_sync
 from users.utils import q_search
+from users.utils import send_tg_message_sync
 
 
 def signup_view(request):
@@ -74,8 +74,10 @@ def user_list_view(request):
     if query:
         users_list = q_search(query)
     else:
-        users_list = User.objects.filter(is_active=True).select_related("profile")
-    
+        users_list = User.objects.filter(
+            is_active=True,
+        ).select_related("profile")
+
     if maybe_familiar:
         users_list = request.user.friends_of_friends
 
@@ -265,13 +267,13 @@ def remove_friend_view(request, friend_id):
     friend = get_object_or_404(User, id=friend_id)
 
     Friendship.objects.filter(
-        Q(from_user=request.user, to_user=friend, status="accepted") |
-        Q(from_user=friend, to_user=request.user, status="accepted"),
+        Q(from_user=request.user, to_user=friend, status="accepted")
+        | Q(from_user=friend, to_user=request.user, status="accepted"),
     ).delete()
 
     messages.success(
-            request,
-            f"Вы удалили {friend.username} из друзей",
-        )
+        request,
+        f"Вы удалили {friend.username} из друзей",
+    )
 
     return redirect("users:friends_list")

@@ -99,16 +99,18 @@ class User(CustomUser):
         ).values_list("from_user", flat=True)
 
         return User.objects.filter(id__in=list(sent) + list(received))
-    
+
     @property
     def friends_of_friends(self):
-        friend_ids = (
-            Friendship.objects.filter(from_user=self, status="accepted")
-            .values_list("to_user_id", flat=True)
-        )
+        friend_ids = Friendship.objects.filter(
+            from_user=self,
+            status="accepted",
+        ).values_list("to_user_id", flat=True)
         friend_ids = friend_ids.union(
-            Friendship.objects.filter(to_user=self, status="accepted")
-            .values_list("from_user_id", flat=True)
+            Friendship.objects.filter(
+                to_user=self,
+                status="accepted",
+            ).values_list("from_user_id", flat=True),
         )
 
         if not friend_ids:

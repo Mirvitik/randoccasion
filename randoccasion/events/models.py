@@ -103,16 +103,19 @@ class Event(models.Model):
         return self.participants.count() >= self.max_participants
 
     def can_join(self, user):
-        if (not user.is_authenticated
+        if (
+            not user.is_authenticated
             or self.creator == user
             or not self.is_active
-            or self.expires_at <= timezone.now()):
+            or self.expires_at <= timezone.now()
+        ):
             return False
 
         return (
-        not self.is_full() 
-        and not self.participants.filter(id=user.id).exists()
+            not self.is_full()
+            and not self.participants.filter(id=user.id).exists()
         )
+
 
 class EventRequest(models.Model):
     STATUS_CHOICES = [
@@ -120,7 +123,7 @@ class EventRequest(models.Model):
         ("accepted", _("Принят")),
         ("rejected", _("Отклонен")),
     ]
-    
+
     event = models.ForeignKey(
         Event,
         related_name="requests",
@@ -159,7 +162,7 @@ class EventRequest(models.Model):
             models.constraints.UniqueConstraint(
                 fields=("event", "user"),
                 name="unique_constraint_event_user",
-            )
+            ),
         ]
         ordering = ["-created_at"]
         verbose_name = _("Запрос на событие")

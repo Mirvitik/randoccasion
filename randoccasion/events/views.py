@@ -1,10 +1,10 @@
 __all__ = ()
 
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, View
-from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from events.models import Event, EventRequest
 from events.utils import q_search
@@ -32,13 +32,14 @@ class EventIndexView(ListView):
             events = Event.objects.is_active()
         else:
             events = super().get_queryset()
-        
+
         if only_friends:
             friends = cur_user.friends
             events = events.filter(
-                Q(who_can_see="all", creator__in=friends) |
-                Q(who_can_see="only_friends", creator__in=friends)).exclude(creator=cur_user)
-        
+                Q(who_can_see="all", creator__in=friends)
+                | Q(who_can_see="only_friends", creator__in=friends),
+            ).exclude(creator=cur_user)
+
         if only_my:
             events = events.filter(creator=cur_user)
 
@@ -88,20 +89,27 @@ class EventDetailView(DetailView):
 
         return context
 
+
 class EventSendRequestView(LoginRequiredMixin, View):
     def post(self, request, event_id):
         event = get_object_or_404(Event, id=event_id)
         user = request.user
 
         if not event.can_join(user):
-            messages.warning(request, message="По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже участвуете/событие неактивно")
+            messages.warning(
+                request,
+                message=(
+                    "По какой-то из причин вы не можете участвовать: "
+                    "нет свободных мест/вы уже участвуете/событие неактивно"
+                ),
+            )
             return redirect("events:event-detail", pk=event_id)
 
         existing = EventRequest.objects.filter(
             event=event,
             user=user,
         ).first()
-        
+
         if existing:
             if existing.status == "pending":
                 messages.info(request, "Ваш запрос уже был отправлен")
@@ -116,9 +124,13 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 user=user,
                 message=message_text,
             )
-            messages.success(request, "Запрос на участие отправлен создателю события!")
-        
+            messages.success(
+                request,
+                "Запрос на участие отправлен создателю события!",
+            )
+
         return redirect("events:event-detail", pk=event_id)
+
 
 class MyEventsRequests(LoginRequiredMixin, ListView):
     template_name = "events/my_events_requests.html"
@@ -149,8 +161,12 @@ class EventAcceptRequestView(LoginRequiredMixin, View):
             messages.info(request, message="Заявка одобрена!")
             return redirect("events:my_events_requests")
 
-        messages.warning(request, message="Достигнуто максимальное количество участников")
+        messages.warning(
+            request,
+            message="Достигнуто максимальное количество участников",
+        )
         return redirect("events:my_events_requests")
+
 
 class EventRejectRequestView(LoginRequiredMixin, View):
     def post(self, request, request_id):

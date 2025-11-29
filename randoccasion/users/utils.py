@@ -30,9 +30,9 @@ def q_search(query):
         user = User.objects.by_mail(query)
         if user:
             return User.objects.filter(id=user.id)
-        
+
         return User.objects.none()
-    
+
     keywords = [word for word in query.split() if word]
 
     q_objects = Q()
