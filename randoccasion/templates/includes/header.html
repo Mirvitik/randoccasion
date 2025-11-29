@@ -27,6 +27,11 @@
                   <a href="{% url 'events:all_events' %}" class="nav-link">{% translate "События" %}</a>
               {% endif %}
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'events:my_events' %}">
+              Мои события
+            </a>
+          </li>
 
           <!-- ССЫЛКИ ДЛЯ USERS -->
           {% if user.is_authenticated %}

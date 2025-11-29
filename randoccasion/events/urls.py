@@ -27,4 +27,9 @@ urlpatterns = [
         views.EventRejectRequestView.as_view(),
         name="reject_event_request",
     ),
+    path(
+        "my-events/",
+        views.MyEventsView.as_view(),
+        name="my_events",
+    ),
 ]

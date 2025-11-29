@@ -2,12 +2,11 @@ __all__ = ()
 
 import asyncio
 
+from django.db.models import Q
 from telegram import Bot
 
-from django.db.models import Q
-
-from users.models import User
 from randoccasion.settings import TELEGRAM_BOT_TOKEN
+from users.models import User
 
 
 async def send_tg_message(tg_id, message):

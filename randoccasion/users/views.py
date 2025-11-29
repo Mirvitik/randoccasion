@@ -109,8 +109,8 @@ def user_detail_view(request, pk):
     )
     received_request_obj = None
     if (
-            request.user.is_authenticated
-            and request.user.has_received_request_from(user)
+        request.user.is_authenticated
+        and request.user.has_received_request_from(user)
     ):
         received_request_obj = Friendship.objects.get(
             from_user=user,
@@ -194,7 +194,8 @@ def send_friend_request(request, user_id):
         if to_user.profile.telegram_id is not None:
             if request.user.profile.tg_last_message_date is not None:
                 deltatime = (
-                        datetime.datetime.now() - request.user.profile.tg_last_message_date
+                    datetime.datetime.now()
+                    - request.user.profile.tg_last_message_date
                 )
                 if (deltatime.total_seconds() / 3600) >= 24:
                     request.user.profile.tg_messages_cnt = 0
@@ -206,7 +207,10 @@ def send_friend_request(request, user_id):
                     message=message,
                 )
                 request.user.profile.tg_messages_cnt += 1
-                request.user.profile.tg_last_message_date = datetime.datetime.now()
+                request.user.profile.tg_last_message_date = (
+                    datetime.datetime.now()
+                )
+
         request.user.profile.save()
         messages.success(request, "Заявка в друзья отправлена.")
 

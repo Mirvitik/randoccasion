@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
 from django.views.generic import DetailView, ListView, View
 
 from events.models import Event, EventRequest
@@ -182,3 +183,81 @@ class EventRejectRequestView(LoginRequiredMixin, View):
         messages.info(request, message="Заявка отклонена")
 
         return redirect("events:my_events_requests")
+
+
+class MyEventsView(LoginRequiredMixin, ListView):
+    template_name = "events/my_events.html"
+    context_object_name = "events"
+    paginate_by = 20
+
+    def get_queryset(self):
+        user = self.request.user
+        event_type = self.request.GET.get(
+            "type",
+            "created",
+        )
+
+        if event_type == "created":
+            events = Event.objects.filter(creator=user)
+        elif event_type == "participating":
+            events = Event.objects.filter(participants=user).exclude(
+                creator=user,
+            )
+        else:
+            events = Event.objects.filter(
+                Q(creator=user) | Q(participants=user),
+            ).distinct()
+
+        status = self.request.GET.get("status", "active")
+        if status == "active":
+            events = events.filter(
+                is_active=True,
+                expires_at__gt=timezone.now(),
+            )
+        elif status == "expired":
+            events = events.filter(
+                Q(is_active=False) | Q(expires_at__lte=timezone.now()),
+            )
+
+        sort_by = self.request.GET.get("sort_by", "-created_at")
+        if sort_by in [
+            "created_at",
+            "-created_at",
+            "expires_at",
+            "-expires_at",
+            "name",
+            "-name",
+        ]:
+            events = events.order_by(sort_by)
+
+        return events.select_related("creator").prefetch_related(
+            "participants",
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_type"] = self.request.GET.get("type", "created")
+        context["current_status"] = self.request.GET.get("status", "active")
+        context["current_sort"] = self.request.GET.get(
+            "sort_by",
+            "-created_at",
+        )
+
+        user = self.request.user
+        context["created_count"] = Event.objects.filter(creator=user).count()
+        context["participating_count"] = (
+            Event.objects.filter(participants=user)
+            .exclude(creator=user)
+            .count()
+        )
+        context["active_count"] = (
+            Event.objects.filter(
+                Q(creator=user) | Q(participants=user),
+                is_active=True,
+                expires_at__gt=timezone.now(),
+            )
+            .distinct()
+            .count()
+        )
+
+        return context

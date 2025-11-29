@@ -116,6 +116,9 @@ class Event(models.Model):
             and not self.participants.filter(id=user.id).exists()
         )
 
+    def pending_requests_count(self):
+        return self.requests.filter(status="pending").count()
+
 
 class EventRequest(models.Model):
     STATUS_CHOICES = [
