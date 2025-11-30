@@ -1,0 +1,344 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-30 16:52+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\events\apps.py:10 .\events\models.py:79
+#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
+msgid "События"
+msgstr "Events"
+
+#: .\events\models.py:15
+msgid "Все"
+msgstr "All"
+
+#: .\events\models.py:16
+msgid "Только друзья"
+msgstr "Only friends"
+
+#: .\events\models.py:17
+msgid "Только я"
+msgstr "Only me"
+
+#: .\events\models.py:20 .\events\models.py:78 .\events\models.py:134
+msgid "Событие"
+msgstr "Event"
+
+#: .\events\models.py:22
+msgid "Без названия"
+msgstr "Without name"
+
+#: .\events\models.py:25
+msgid "Тема события"
+msgstr "Theme of the event"
+
+#: .\events\models.py:35
+msgid "Активно"
+msgstr "Active"
+
+#: .\events\models.py:49
+msgid "Максимальное количество участников"
+msgstr "Max number of participants"
+
+#: .\events\models.py:53
+msgid "Примерное местоположение, город"
+msgstr "Approximate location, city"
+
+#: .\events\models.py:57 .\events\models.py:155
+msgid "Создано"
+msgstr "Created"
+
+#: .\events\models.py:62
+msgid "Истекает через (не ранее 15мин с этого момента)"
+msgstr "Expires in (no earlier than 15 minutes from now)"
+
+#: .\events\models.py:125
+msgid "В ожидании"
+msgstr "Waiting"
+
+#: .\events\models.py:126
+msgid "Принят"
+msgstr "Adopted"
+
+#: .\events\models.py:127
+msgid "Отклонен"
+msgstr "Rejected"
+
+#: .\events\models.py:140 .\users\models.py:69
+msgid "Пользователь"
+msgstr "User"
+
+#: .\events\models.py:146
+msgid "Статус"
+msgstr "Status"
+
+#: .\events\models.py:149
+msgid "Сообщение"
+msgstr "Message"
+
+#: .\events\models.py:159
+msgid "Обновлено"
+msgstr "Updated"
+
+#: .\events\models.py:171
+msgid "Запрос на событие"
+msgstr "Event Request"
+
+#: .\events\models.py:172
+msgid "Запросы на события"
+msgstr "Event Requests"
+
+#: .\randoccasion\settings.py:134
+msgid "Russian"
+msgstr "Russian"
+
+#: .\randoccasion\settings.py:135
+msgid "English"
+msgstr "English"
+
+#: .\templates\base.html:33
+msgid "Содержимое страницы недоступно"
+msgstr "The page content is unavailable"
+
+#: .\templates\base.html:41
+msgid "Raccoon"
+msgstr "Raccoon"
+
+#: .\templates\events\events.html:7 .\templates\users\profile.html:16
+msgid "Заявки на мои события"
+msgstr "Requests for my events"
+
+#: .\templates\includes\header.html:8
+msgid "Логотип"
+msgstr "Logo"
+
+#: .\templates\includes\header.html:10
+msgid "Встречалки"
+msgstr "Randoccasion"
+
+#: .\templates\includes\header.html:17 .\templates\includes\header.html:19
+msgid "Главная"
+msgstr "Main page"
+
+#: .\templates\includes\header.html:40 .\templates\includes\header.html:42
+#: .\users\apps.py:10 .\users\models.py:70
+msgid "Пользователи"
+msgstr "Users"
+
+#: .\templates\includes\header.html:47 .\templates\includes\header.html:49
+msgid "Мои друзья"
+msgstr "My friends"
+
+#: .\templates\includes\header.html:54 .\templates\includes\header.html:56
+msgid "Заявки в друзья"
+msgstr "Friend requests"
+
+#: .\templates\includes\header.html:61 .\templates\includes\header.html:63
+#: .\templates\users\profile.html:5
+msgid "Мой профиль"
+msgstr "My profile"
+
+#: .\templates\includes\header.html:70
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\templates\includes\header.html:100 .\templates\includes\header.html:102
+#: .\templates\users\login_form.html:59
+msgid "Войти"
+msgstr "Log in"
+
+#: .\templates\includes\header.html:109
+msgid "Панель администратора"
+msgstr "Admin panel"
+
+#: .\templates\users\friend_requests.html:5
+msgid "Входящие заявки в друзья"
+msgstr "Incoming friend requests"
+
+#: .\templates\users\friend_requests.html:16
+msgid "Принять"
+msgstr "Accept"
+
+#: .\templates\users\friend_requests.html:19
+msgid "Отклонить"
+msgstr "Reject"
+
+#: .\templates\users\friend_requests.html:26
+msgid "Нет входящих заявок."
+msgstr "There are no incoming requests."
+
+#: .\templates\users\login.html:10
+msgid "Вход в аккаунт"
+msgstr "Log in to your account"
+
+#: .\templates\users\login.html:17
+msgid "Забыли пароль?"
+msgstr "Forgot your password?"
+
+#: .\templates\users\login.html:20
+msgid "Нет аккаунта? Регистрация"
+msgstr "No account? Registration"
+
+#: .\templates\users\logout.html:8
+msgid "Выход"
+msgstr ""
+
+#: .\templates\users\logout.html:9
+msgid "Вы успешно вышли из системы."
+msgstr "You have successfully logged out."
+
+#: .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "Go to the main page"
+
+#: .\templates\users\password_change.html:5
+msgid "Смена пароля"
+msgstr "Password change"
+
+#: .\templates\users\password_change.html:9 .\templates\users\profile.html:13
+msgid "Сменить пароль"
+msgstr "Change password"
+
+#: .\templates\users\password_change_done.html:5
+msgid "Пароль изменен"
+msgstr "The password has been changed"
+
+#: .\templates\users\password_change_done.html:6
+msgid "Ваш пароль был успешно изменен."
+msgstr "Your password has been successfully changed."
+
+#: .\templates\users\password_reset.html:5
+msgid "Восстановление пароля"
+msgstr "Password Recovery"
+
+#: .\templates\users\password_reset.html:58
+msgid "Восстановить пароль"
+msgstr "Recover the password"
+
+#: .\templates\users\password_reset_complete.html:5
+msgid "Пароль восстановлен"
+msgstr "The password has been restored"
+
+#: .\templates\users\password_reset_complete.html:6
+msgid "Ваш пароль был успешно восстановлен."
+msgstr "Your password has been successfully restored."
+
+#: .\templates\users\password_reset_complete.html:7
+msgid "Войти с новым паролем"
+msgstr "Log in with a new password"
+
+#: .\templates\users\password_reset_confirm.html:5
+msgid "Ввод нового пароля"
+msgstr "Entering a new password"
+
+#: .\templates\users\password_reset_confirm.html:9
+msgid "Сохранить новый пароль"
+msgstr "Save new password"
+
+#: .\templates\users\password_reset_done.html:5
+msgid "Письмо отправлено"
+msgstr "The email has been sent"
+
+#: .\templates\users\password_reset_done.html:6
+msgid "Проверьте вашу почту для восстановления пароля."
+msgstr "Check your email to recover your password."
+
+#: .\templates\users\profile.html:9
+msgid "Сохранить"
+msgstr "Save"
+
+#: .\templates\users\signup.html:5
+msgid "Регистрация"
+msgstr "Sign up"
+
+#: .\templates\users\signup.html:25
+msgid "Зарегистрироваться"
+msgstr "Sign up"
+
+#: .\templates\users\user_detail.html:5
+msgid "Профиль пользователя"
+msgstr "Profile of user"
+
+#: .\templates\users\user_detail.html:20
+msgid "Нет аватарки"
+msgstr "There is no avatar"
+
+#: .\templates\users\user_detail.html:26
+msgid "Имя"
+msgstr "Name"
+
+#: .\templates\users\user_detail.html:30 .\templates\users\user_detail.html:38
+#: .\templates\users\user_detail.html:46
+msgid "не указано"
+msgstr "not stated"
+
+#: .\templates\users\user_detail.html:34
+msgid "Фамилия"
+msgstr "Surname"
+
+#: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:85
+msgid "День рождения:"
+msgstr "Date of birth:"
+
+#: .\templates\users\user_detail.html:50
+msgid "Интересы:"
+msgstr "Interests:"
+
+#: .\templates\users\user_detail.html:56
+msgid "не указаны"
+msgstr "not stated"
+
+#: .\templates\users\user_list.html:5
+msgid "Список пользователей"
+msgstr "List of users"
+
+#: .\templates\users\user_list.html:88
+msgid "Подробнее"
+msgstr "More detailed"
+
+#: .\users\models.py:180
+msgid "пользователь"
+msgstr "user"
+
+#: .\users\models.py:183
+msgid "день рождения"
+msgstr "date of birth"
+
+#: .\users\models.py:188
+msgid "аватарка"
+msgstr "avatar"
+
+#: .\users\models.py:195
+msgid "интересы"
+msgstr "interests"
+
+#: .\users\models.py:200
+msgid "telegram_id"
+msgstr "telegram_id"
+
+#: .\users\models.py:205
+msgid "Количество сообщений"
+msgstr "Number of messages"
+
+#: .\users\models.py:227
+msgid "профиль"
+msgstr "profile"
+
+#: .\users\models.py:228
+msgid "профили"
+msgstr "profiles"

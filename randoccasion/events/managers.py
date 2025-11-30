@@ -1,6 +1,6 @@
 __all__ = ()
 
-from django.db.models import F, Manager, Q
+from django.db.models import Manager
 from django.utils import timezone
 
 

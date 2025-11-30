@@ -116,20 +116,20 @@ class User(CustomUser):
         if not friend_ids:
             return User.objects.none()
 
+        fof_ids = Friendship.objects.filter(
+            Q(from_user_id__in=friend_ids) | Q(to_user_id__in=friend_ids),
+            status="accepted",
+        )
         fof_ids = (
-            Friendship.objects.filter(
-                Q(from_user_id__in=friend_ids) | Q(to_user_id__in=friend_ids),
-                status="accepted",
-            )
-            .exclude(from_user=self)
+            fof_ids.exclude(from_user=self)
             .exclude(to_user=self)
             .values_list("from_user_id", "to_user_id")
         )
 
         fof_set = set()
-        for a, b in fof_ids:
-            fof_set.add(a)
-            fof_set.add(b)
+        for el, el2 in fof_ids:
+            fof_set.add(el)
+            fof_set.add(el2)
 
         fof_set.discard(self.id)
         fof_set.difference_update(friend_ids)

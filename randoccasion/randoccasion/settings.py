@@ -4,20 +4,8 @@ import os
 from pathlib import Path
 
 from django.contrib.messages import constants as messages
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
-
-
-def load_value(name, default):
-    value = os.getenv(name, str(default))
-    return value in {
-        "true",
-        "True",
-        "yes",
-        "YES",
-        "1",
-        "y",
-    }
-
 
 load_dotenv()
 
@@ -59,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -112,23 +101,30 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".UserAttributeSimilarityValidator",
+                ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".MinimumLengthValidator",
+                ".MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".CommonPasswordValidator",
+                ".CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".NumericPasswordValidator",
+                ".NumericPasswordValidator",
     },
 ]
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru-RU")
+LANGUAGES = [
+    ("ru", _("Russian")),
+    ("en", _("English")),
+]
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 
 TIME_ZONE = "UTC"
 

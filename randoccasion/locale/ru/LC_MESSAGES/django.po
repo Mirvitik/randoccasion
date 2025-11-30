@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-30 16:52+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\events\apps.py:10 .\events\models.py:79
+#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
+msgid "События"
+msgstr "События"
+
+#: .\events\models.py:15
+msgid "Все"
+msgstr "Все"
+
+#: .\events\models.py:16
+msgid "Только друзья"
+msgstr "Только друзья"
+
+#: .\events\models.py:17
+msgid "Только я"
+msgstr "Только я"
+
+#: .\events\models.py:20 .\events\models.py:78 .\events\models.py:134
+msgid "Событие"
+msgstr "Событие"
+
+#: .\events\models.py:22
+msgid "Без названия"
+msgstr "Без названия"
+
+#: .\events\models.py:25
+msgid "Тема события"
+msgstr "Тема события"
+
+#: .\events\models.py:35
+msgid "Активно"
+msgstr "Активно"
+
+#: .\events\models.py:49
+msgid "Максимальное количество участников"
+msgstr "Максимальное количество участников"
+
+#: .\events\models.py:53
+msgid "Примерное местоположение, город"
+msgstr "Примерное местоположение, город"
+
+#: .\events\models.py:57 .\events\models.py:155
+msgid "Создано"
+msgstr "Создано"
+
+#: .\events\models.py:62
+msgid "Истекает через (не ранее 15мин с этого момента)"
+msgstr "Истекает через (не ранее 15мин с этого момента)"
+
+#: .\events\models.py:125
+msgid "В ожидании"
+msgstr "В ожидании"
+
+#: .\events\models.py:126
+msgid "Принят"
+msgstr "Принят"
+
+#: .\events\models.py:127
+msgid "Отклонен"
+msgstr "Отклонен"
+
+#: .\events\models.py:140 .\users\models.py:69
+msgid "Пользователь"
+msgstr "Пользователь"
+
+#: .\events\models.py:146
+msgid "Статус"
+msgstr "Статус"
+
+#: .\events\models.py:149
+msgid "Сообщение"
+msgstr "Сообщение"
+
+#: .\events\models.py:159
+msgid "Обновлено"
+msgstr "Обновлено"
+
+#: .\events\models.py:171
+msgid "Запрос на событие"
+msgstr "Запрос на событие"
+
+#: .\events\models.py:172
+msgid "Запросы на события"
+msgstr "Запросы на события"
+
+#: .\randoccasion\settings.py:134
+msgid "Russian"
+msgstr "Русский"
+
+#: .\randoccasion\settings.py:135
+msgid "English"
+msgstr "Английский"
+
+#: .\templates\base.html:33
+msgid "Содержимое страницы недоступно"
+msgstr "Содержимое страницы недоступно"
+
+#: .\templates\base.html:41
+msgid "Raccoon"
+msgstr "Енот"
+
+#: .\templates\events\events.html:7 .\templates\users\profile.html:16
+msgid "Заявки на мои события"
+msgstr "Заявки на мои события"
+
+#: .\templates\includes\header.html:8
+msgid "Логотип"
+msgstr "Логотип"
+
+#: .\templates\includes\header.html:10
+msgid "Встречалки"
+msgstr "Встречалки"
+
+#: .\templates\includes\header.html:17 .\templates\includes\header.html:19
+msgid "Главная"
+msgstr "Главная"
+
+#: .\templates\includes\header.html:40 .\templates\includes\header.html:42
+#: .\users\apps.py:10 .\users\models.py:70
+msgid "Пользователи"
+msgstr "Пользователи"
+
+#: .\templates\includes\header.html:47 .\templates\includes\header.html:49
+msgid "Мои друзья"
+msgstr "Мои друзья"
+
+#: .\templates\includes\header.html:54 .\templates\includes\header.html:56
+msgid "Заявки в друзья"
+msgstr "Заявки в друзья"
+
+#: .\templates\includes\header.html:61 .\templates\includes\header.html:63
+#: .\templates\users\profile.html:5
+msgid "Мой профиль"
+msgstr "Мой профиль"
+
+#: .\templates\includes\header.html:70
+msgid "Выйти"
+msgstr "Выйти"
+
+#: .\templates\includes\header.html:100 .\templates\includes\header.html:102
+#: .\templates\users\login_form.html:59
+msgid "Войти"
+msgstr "Войти"
+
+#: .\templates\includes\header.html:109
+msgid "Панель администратора"
+msgstr "Панель администратора"
+
+#: .\templates\users\friend_requests.html:5
+msgid "Входящие заявки в друзья"
+msgstr "Входящие заявки в друзья"
+
+#: .\templates\users\friend_requests.html:16
+msgid "Принять"
+msgstr "Принять"
+
+#: .\templates\users\friend_requests.html:19
+msgid "Отклонить"
+msgstr "Отклонить"
+
+#: .\templates\users\friend_requests.html:26
+msgid "Нет входящих заявок."
+msgstr "Нет входящих заявок."
+
+#: .\templates\users\login.html:10
+msgid "Вход в аккаунт"
+msgstr "Вход в аккаунт"
+
+#: .\templates\users\login.html:17
+msgid "Забыли пароль?"
+msgstr "Забыли пароль?"
+
+#: .\templates\users\login.html:20
+msgid "Нет аккаунта? Регистрация"
+msgstr "Нет аккаунта? Регистрация"
+
+#: .\templates\users\logout.html:8
+msgid "Выход"
+msgstr "Выход"
+
+#: .\templates\users\logout.html:9
+msgid "Вы успешно вышли из системы."
+msgstr "Вы успешно вышли из системы."
+
+#: .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "На главную"
+
+#: .\templates\users\password_change.html:5
+msgid "Смена пароля"
+msgstr "Смена пароля"
+
+#: .\templates\users\password_change.html:9 .\templates\users\profile.html:13
+msgid "Сменить пароль"
+msgstr "Сменить пароль"
+
+#: .\templates\users\password_change_done.html:5
+msgid "Пароль изменен"
+msgstr "Пароль изменен"
+
+#: .\templates\users\password_change_done.html:6
+msgid "Ваш пароль был успешно изменен."
+msgstr "Ваш пароль был успешно изменен."
+
+#: .\templates\users\password_reset.html:5
+msgid "Восстановление пароля"
+msgstr "Восстановление пароля"
+
+#: .\templates\users\password_reset.html:58
+msgid "Восстановить пароль"
+msgstr "Восстановить пароль"
+
+#: .\templates\users\password_reset_complete.html:5
+msgid "Пароль восстановлен"
+msgstr "Пароль восстановлен"
+
+#: .\templates\users\password_reset_complete.html:6
+msgid "Ваш пароль был успешно восстановлен."
+msgstr "Ваш пароль был успешно восстановлен."
+
+#: .\templates\users\password_reset_complete.html:7
+msgid "Войти с новым паролем"
+msgstr "Войти с новым паролем"
+
+#: .\templates\users\password_reset_confirm.html:5
+msgid "Ввод нового пароля"
+msgstr "Ввод нового пароля"
+
+#: .\templates\users\password_reset_confirm.html:9
+msgid "Сохранить новый пароль"
+msgstr "Сохранить новый пароль"
+
+#: .\templates\users\password_reset_done.html:5
+msgid "Письмо отправлено"
+msgstr "Письмо отправлен"
+
+#: .\templates\users\password_reset_done.html:6
+msgid "Проверьте вашу почту для восстановления пароля."
+msgstr "Проверьте вашу почту для восстановления пароля."
+
+#: .\templates\users\profile.html:9
+msgid "Сохранить"
+msgstr "Сохранить"
+
+#: .\templates\users\signup.html:5
+msgid "Регистрация"
+msgstr "Регистрация"
+
+#: .\templates\users\signup.html:25
+msgid "Зарегистрироваться"
+msgstr "Зарегистрироваться"
+
+#: .\templates\users\user_detail.html:5
+msgid "Профиль пользователя"
+msgstr "Профиль пользователя"
+
+#: .\templates\users\user_detail.html:20
+msgid "Нет аватарки"
+msgstr "Нет аватарки"
+
+#: .\templates\users\user_detail.html:26
+msgid "Имя"
+msgstr "Имя"
+
+#: .\templates\users\user_detail.html:30 .\templates\users\user_detail.html:38
+#: .\templates\users\user_detail.html:46
+msgid "не указано"
+msgstr "не указано"
+
+#: .\templates\users\user_detail.html:34
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:85
+msgid "День рождения:"
+msgstr "День рождения:"
+
+#: .\templates\users\user_detail.html:50
+msgid "Интересы:"
+msgstr "Интересы:"
+
+#: .\templates\users\user_detail.html:56
+msgid "не указаны"
+msgstr "не указаны"
+
+#: .\templates\users\user_list.html:5
+msgid "Список пользователей"
+msgstr "Список пользователей"
+
+#: .\templates\users\user_list.html:88
+msgid "Подробнее"
+msgstr "Подробнее"
+
+#: .\users\models.py:180
+msgid "пользователь"
+msgstr "пользователь"
+
+#: .\users\models.py:183
+msgid "день рождения"
+msgstr "день рождения"
+
+#: .\users\models.py:188
+msgid "аватарка"
+msgstr "аватарка"
+
+#: .\users\models.py:195
+msgid "интересы"
+msgstr "интересы"
+
+#: .\users\models.py:200
+msgid "telegram_id"
+msgstr "telegram_id"
+
+#: .\users\models.py:205
+msgid "Количество сообщений"
+msgstr "Количество сообщений"
+
+#: .\users\models.py:227
+msgid "профиль"
+msgstr "профиль"
+
+#: .\users\models.py:228
+msgid "профили"
+msgstr "профили"

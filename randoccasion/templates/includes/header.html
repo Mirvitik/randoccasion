@@ -1,93 +1,116 @@
 {% load static %}
 {% load i18n %}
 <div class="header-container">
-  <div class="container"> 
-    <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-      <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <a href="{% url 'homepage:main' %}" class="text-decoration-none">
-          <img src="{% static 'img/logogo.png' %}" width="110" height="80" alt="{% translate 'Логотип' %}">
-        </a>
-        <span class="fs-4 ms-2">{% translate "Встречалки" %}</span>
-      </div>
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <a href="{% url 'homepage:main' %}" class="text-decoration-none">
+                    <img src="{% static 'img/logogo.png' %}" width="110" height="80" alt="{% translate 'Логотип' %}">
+                </a>
+                <span class="fs-4 ms-2">{% translate "Встречалки" %}</span>
+            </div>
 
-      {% with request.resolver_match.view_name as view_name %}
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            {% if view_name == 'homepage' %}
-              <span class="nav-link active" aria-current="page">{% translate "Главная" %}</span>
-            {% else %}
-              <a href="{% url 'homepage:main' %}" class="nav-link">{% translate "Главная" %}</a>
-            {% endif %}
-          </li>
-          
-          <li class="nav-item">
-              {% if view_name == 'events:all_events' %}
-                  <span class="nav-link active" aria-current="page">{% translate "События" %}</span>
-              {% else %}
-                  <a href="{% url 'events:all_events' %}" class="nav-link">{% translate "События" %}</a>
-              {% endif %}
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'events:my_events' %}">
-              Мои события
-            </a>
-          </li>
+            {% with request.resolver_match.view_name as view_name %}
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    {% if view_name == 'homepage' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Главная" %}</span>
+                    {% else %}
+                    <a href="{% url 'homepage:main' %}" class="nav-link">{% translate "Главная" %}</a>
+                    {% endif %}
+                </li>
 
-          <!-- ССЫЛКИ ДЛЯ USERS -->
-          {% if user.is_authenticated %}
-            <li class="nav-item">
-              {% if view_name == 'users:user_list' %}
-                <span class="nav-link active" aria-current="page">{% translate "Пользователи" %}</span>
-              {% else %}
-                <a href="{% url 'users:user_list' %}" class="nav-link">{% translate "Пользователи" %}</a>
-              {% endif %}
-            </li>
-            <li class="nav-item">
-        {% if view_name == 'users:friends_list' %}
-            <span class="nav-link active" aria-current="page">{% translate "Мои друзья" %}</span>
-        {% else %}
-            <a href="{% url 'users:friends_list' %}" class="nav-link">{% translate "Мои друзья" %}</a>
-        {% endif %}
-    </li>
-    <li class="nav-item">
-        {% if view_name == 'users:friend_requests' %}
-            <span class="nav-link active" aria-current="page">{% translate "Заявки в друзья" %}</span>
-        {% else %}
-            <a href="{% url 'users:friend_requests' %}" class="nav-link">{% translate "Заявки в друзья" %}</a>
-        {% endif %}
-    </li>
-            <li class="nav-item">
-              {% if view_name == 'users:profile' %}
-                <span class="nav-link active" aria-current="page">{% translate "Мой профиль" %}</span>
-              {% else %}
-                <a href="{% url 'users:profile' %}" class="nav-link">{% translate "Мой профиль" %}</a>
-              {% endif %}
-            </li>
-            <li class="nav-item">
-    <form method="post" action="{% url 'users:logout' %}" class="d-inline">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link nav-link p-2 border-0 text-start w-100">
-            {% translate "Выйти" %}
-        </button>
-    </form>
-</li>
-          {% else %}
-            <li class="nav-item">
-              {% if view_name == 'users:login' %}
-                <span class="nav-link active" aria-current="page">{% translate "Войти" %}</span>
-              {% else %}
-                <a href="{% url 'users:login' %}" class="nav-link">{% translate "Войти" %}</a>
-              {% endif %}
-            </li>
-          {% endif %}
-          
-          {% if user.is_staff %}
-            <li class="nav-item">
-              <a href="{% url 'admin:index' %}" class="nav-link">{% translate "Панель администратора" %}</a>
-            </li>
-          {% endif %}
-        </ul>
-      {% endwith %}
+                <li class="nav-item">
+                    {% if view_name == 'events:all_events' %}
+                    <span class="nav-link active" aria-current="page">{% translate "События" %}</span>
+                    {% else %}
+                    <a href="{% url 'events:all_events' %}" class="nav-link">{% translate "События" %}</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'events:my_events' %}">
+                        Мои события
+                    </a>
+                </li>
+
+                <!-- ССЫЛКИ ДЛЯ USERS -->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    {% if view_name == 'users:user_list' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Пользователи" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:user_list' %}" class="nav-link">{% translate "Пользователи" %}</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if view_name == 'users:friends_list' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Мои друзья" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:friends_list' %}" class="nav-link">{% translate "Мои друзья" %}</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if view_name == 'users:friend_requests' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Заявки в друзья" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:friend_requests' %}" class="nav-link">{% translate "Заявки в друзья" %}</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if view_name == 'users:profile' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Мой профиль" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:profile' %}" class="nav-link">{% translate "Мой профиль" %}</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <form method="post" action="{% url 'users:logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link p-2 border-0 text-start w-100">
+                            {% translate "Выйти" %}
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                            <select name="language" class="form-select">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                <option value="{{ language.code }}"
+                                        {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Go</button>
+                            <i class="bi bi-check-lg"></i>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    {% if view_name == 'users:login' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Войти" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:login' %}" class="nav-link">{% translate "Войти" %}</a>
+                    {% endif %}
+                </li>
+                {% endif %}
+
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a href="{% url 'admin:index' %}" class="nav-link">{% translate "Панель администратора" %}</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endwith %}
+        </div>
     </div>
-  </div>
 </div>

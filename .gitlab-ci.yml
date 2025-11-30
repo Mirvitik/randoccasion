@@ -1,0 +1,26 @@
+image: python:3.11
+
+stages:
+  - lint
+  - test
+
+flake8:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - pip install -r requirements/test.txt
+    - flake8 --verbose
+
+black:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/black:latest
+  script:
+    - black --check .
+
+
+django:
+  stage: test
+  script:
+    - pip install -r requirements/test.txt
+    - cd lyceum
+    - python3 manage.py test
