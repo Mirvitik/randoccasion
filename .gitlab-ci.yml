@@ -22,5 +22,5 @@ django:
   stage: test
   script:
     - pip install -r requirements/test.txt
-    - cd lyceum
+    - cd randoccasion
     - python3 manage.py test
