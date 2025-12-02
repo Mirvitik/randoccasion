@@ -82,7 +82,11 @@ def user_list_view(request):
         users_list = request.user.friends_of_friends
 
     if sort_by_alpha == "desc":
-        users_list = users_list.order_by("-first_name", "-last_name", "-username")
+        users_list = users_list.order_by(
+            "-first_name",
+            "-last_name",
+            "-username",
+        )
     elif sort_by_alpha == "asc":
         users_list = users_list.order_by("first_name", "last_name", "username")
 
@@ -109,8 +113,8 @@ def user_detail_view(request, pk):
     )
     received_request_obj = None
     if (
-            request.user.is_authenticated
-            and request.user.has_received_request_from(user)
+        request.user.is_authenticated
+        and request.user.has_received_request_from(user)
     ):
         received_request_obj = Friendship.objects.get(
             from_user=user,
@@ -194,8 +198,8 @@ def send_friend_request(request, user_id):
         if to_user.profile.telegram_id is not None:
             if request.user.profile.tg_last_message_date is not None:
                 deltatime = (
-                        datetime.datetime.now()
-                        - request.user.profile.tg_last_message_date
+                    datetime.datetime.now()
+                    - request.user.profile.tg_last_message_date
                 )
                 if (deltatime.total_seconds() / 3600) >= 24:
                     request.user.profile.tg_messages_cnt = 0
