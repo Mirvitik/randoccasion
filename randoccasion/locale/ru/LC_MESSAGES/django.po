@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 16:52+0300\n"
+"POT-Creation-Date: 2025-12-02 21:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,11 +105,11 @@ msgstr "Запрос на событие"
 msgid "Запросы на события"
 msgstr "Запросы на события"
 
-#: .\randoccasion\settings.py:134
+#: .\randoccasion\settings.py:122
 msgid "Russian"
 msgstr "Русский"
 
-#: .\randoccasion\settings.py:135
+#: .\randoccasion\settings.py:123
 msgid "English"
 msgstr "Английский"
 
@@ -136,6 +136,10 @@ msgstr "Встречалки"
 #: .\templates\includes\header.html:17 .\templates\includes\header.html:19
 msgid "Главная"
 msgstr "Главная"
+
+#: .\templates\includes\header.html:32
+msgid "Мои события"
+msgstr "Мои события"
 
 #: .\templates\includes\header.html:40 .\templates\includes\header.html:42
 #: .\users\apps.py:10 .\users\models.py:70
