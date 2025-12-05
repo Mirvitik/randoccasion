@@ -32,4 +32,9 @@ urlpatterns = [
         views.MyEventsView.as_view(),
         name="my_events",
     ),
+    path(
+        "my-events/create/",
+        views.EventCreateView.as_view(),
+        name="create_event",
+    ),
 ]

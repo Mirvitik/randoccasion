@@ -28,9 +28,11 @@
                     {% endif %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'events:my_events' %}">
-                        {% translate "Мои события" %}
-                    </a>
+                    {% if view_name == 'events:my_events' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Мои события" %}</span>
+                    {% else %}
+                    <a href="{% url 'events:my_events' %}" class="nav-link">{% translate "Мои события" %}</a>
+                    {% endif %}
                 </li>
 
 

@@ -1,12 +1,17 @@
 __all__ = ()
 
+import uuid
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import DetailView, ListView, View
+from django.utils.text import slugify
+from django.views.generic import CreateView, DetailView, ListView, View
 
+from events.forms import EventCreateForm
 from events.models import Event, EventRequest
 from events.utils import q_search
 
@@ -261,3 +266,31 @@ class MyEventsView(LoginRequiredMixin, ListView):
         )
 
         return context
+
+
+class EventCreateView(LoginRequiredMixin, CreateView):
+    form_class = EventCreateForm
+    template_name = "events/create_event.html"
+    success_url = reverse_lazy("events:my_events")
+
+    def form_valid(self, form):
+        event = form.save(commit=False)
+        event.creator = self.request.user
+        name = event.name if event.name != "Без названия" else "without-name"
+        event.slug = f"{slugify(name)}-{uuid.uuid4().hex[:8]}"
+
+        event.save()
+        event.participants.add(self.request.user)
+
+        messages.success(
+            self.request,
+            "Событие успешно создано!",
+        )
+        return redirect(self.success_url)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            "Пожалуйста, исправьте ошибки в форме.",
+        )
+        return super().form_invalid(form)

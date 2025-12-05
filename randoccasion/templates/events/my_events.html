@@ -10,6 +10,11 @@
 
 {% block content %}
 <div class="container mt-4">
+    {% if user.is_authenticated %}
+        <a href="{% url 'events:create_event' %}" class="btn btn-success">
+            {% translate "Создать событие" %}<span class="ms-1 fw-bolder">+</span>
+        </a>
+    {% endif %}
     <h1>Мои события</h1>
     <div class="card mb-4">
         <div class="card-body">
@@ -83,8 +88,8 @@
                                 {{ event.name }}
                             </a>
                         </h5>
-                        <span class="badge {% if event.is_active and event.expires_at > now %}bg-success{% else %}bg-secondary{% endif %}">
-                            {% if event.is_active and event.expires_at > now %}
+                        <span class="badge {% if event.is_active and event.expires_after != -1 %}bg-success{% else %}bg-secondary{% endif %}">
+                            {% if event.is_active and event.expires_after != -1 %}
                                 Активно ({{ event.expires_after }})
                             {% else %}
                                 Завершено
