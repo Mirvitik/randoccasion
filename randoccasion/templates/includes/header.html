@@ -1,5 +1,8 @@
 {% load static %}
 {% load i18n %}
+
+<link href='{% static "css/theme.css" %}' rel="stylesheet">
+
 <div class="header-container">
     <div class="container">
         <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -8,6 +11,11 @@
                     <img src="{% static 'img/logogo.png' %}" width="110" height="80" alt="{% translate 'Логотип' %}">
                 </a>
                 <span class="fs-4 ms-2">{% translate "Встречалки" %}</span>
+                <li class="nav-item d-flex align-items-center">
+                    <button id="theme-toggle" class="theme-toggle nav-link" aria-label="Переключить тему">
+                        <span class="theme-icon"></span>
+                    </button>
+                </li>
             </div>
 
             {% with request.resolver_match.view_name as view_name %}

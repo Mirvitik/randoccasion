@@ -1,0 +1,235 @@
+.theme-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  color: inherit;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  display: inline-block;
+}
+
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-bs-theme="dark"] body {
+  background-color: #212529;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6 {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .nav-link {
+  color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .nav-link:hover {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .nav-link.active {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .fs-4 {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .header-container {
+  background-color: #212529;
+  border-bottom-color: #495057;
+}
+
+[data-bs-theme="dark"] .footer-container {
+  background-color: #1a1d20;
+  border-top: 1px solid #495057;
+  color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .footer-container h6 {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .card {
+  background-color: #2c3034;
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .card-title {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .card-header {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .card-footer {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .card-body {
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .text-dark {
+  color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .border-bottom {
+  border-color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .border-top {
+  border-color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .list-group-item {
+  background-color: #2c3034;
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .list-group-item a {
+  color: #6ea8fe;
+}
+
+[data-bs-theme="dark"] .list-group-item a:hover {
+  color: #8bb9fe;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+  color: #6c757d;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  background-color: #343a40;
+  border-color: #0d6efd;
+  color: #dee2e6;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+[data-bs-theme="dark"] .form-label {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .form-text {
+  color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .dropdown-menu {
+  background-color: #2c3034;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .dropdown-item {
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .dropdown-item:hover,
+[data-bs-theme="dark"] .dropdown-item:focus {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .dropdown-divider {
+  border-top-color: #495057;
+}
+
+[data-bs-theme="dark"] .badge {
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .input-group-text {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .btn-link {
+  color: #6ea8fe;
+}
+
+[data-bs-theme="dark"] .btn-link:hover {
+  color: #8bb9fe;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary {
+  color: #adb5bd;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary:hover {
+  background-color: #495057;
+  border-color: #495057;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] main {
+  background-color: #212529;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .container {
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] p {
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] span {
+  color: inherit;
+}
+
+[data-bs-theme="dark"] strong {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .wrapper {
+  background-color: #212529;
+}
+
+[data-bs-theme="dark"] .event-card {
+  background-color: #2c3034;
+}
+
+[data-bs-theme="dark"] .location-text,
+[data-bs-theme="dark"] .event-info {
+  color: #adb5bd;
+}
