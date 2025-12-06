@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Подтверждение аккаунта в телеграме
-Страница дорабатывается
+<form method="POST">
+    {% csrf_token %}
+    <input
+        type="text"
+        id="six-digit-code"
+        name="code"
+        pattern="[0-9]{6}"
+        maxlength="6"
+        placeholder="123456"
+        required
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+    >
+    <button type="submit">Отправить код</button>
+</form>
 {% endblock %}
