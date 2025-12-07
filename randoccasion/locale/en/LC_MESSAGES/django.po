@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-02 21:44+0300\n"
+"POT-Creation-Date: 2025-12-07 17:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\events\apps.py:10 .\events\models.py:79
-#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
+#: .\templates\includes\header.html:33 .\templates\includes\header.html:35
 msgid "События"
 msgstr "Events"
+
+#: .\events\forms.py:63
+#, fuzzy
+#| msgid "Тема события"
+msgid "Название события"
+msgstr "Theme of the event"
+
+#: .\events\forms.py:64
+msgid "Тема"
+msgstr "Theme"
+
+#: .\events\forms.py:65
+msgid "Кто может видеть"
+msgstr "Who can see"
+
+#: .\events\forms.py:66
+msgid "Описание"
+msgstr "Description"
+
+#: .\events\forms.py:67
+#, fuzzy
+#| msgid "Максимальное количество участников"
+msgid "Максимум участников"
+msgstr "Max number of participants"
+
+#: .\events\forms.py:68
+#, fuzzy
+#| msgid "Примерное местоположение, город"
+msgid "Местоположение"
+msgstr "Approximate location, city"
+
+#: .\events\forms.py:69
+msgid "Истекает"
+msgstr "Expires"
+
+#: .\events\forms.py:72
+msgid "Время для записи участников. Минимум 15 минут"
+msgstr "Time for registration of participants. At least 15 minutes"
+
+#: .\events\forms.py:73
+msgid "Минимум 1 участник"
+msgstr "Minimum 1 participant"
+
+#: .\events\forms.py:89
+msgid "Событие должно истекать не ранее чем через 15 минут"
+msgstr "The event must expire no earlier than 15 minutes later"
+
+#: .\events\forms.py:97
+msgid "Должен быть хотя бы один участник"
+msgstr "There must be at least one participant"
 
 #: .\events\models.py:15
 msgid "Все"
@@ -119,54 +169,67 @@ msgstr "The page content is unavailable"
 msgid "Raccoon"
 msgstr "Raccoon"
 
+#: .\templates\events\create_event.html:13
+#, fuzzy
+#| msgid "Тема события"
+msgid "Создать новое событие"
+msgstr "Theme of the event"
+
 #: .\templates\events\events.html:7 .\templates\users\profile.html:16
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
 
-#: .\templates\includes\header.html:8
+#: .\templates\events\events.html:12 .\templates\events\my_events.html:15
+#, fuzzy
+#| msgid "Тема события"
+msgid "Создать событие"
+msgstr "Theme of the event"
+
+#: .\templates\includes\header.html:11
 msgid "Логотип"
 msgstr "Logo"
 
-#: .\templates\includes\header.html:10
+#: .\templates\includes\header.html:13
 msgid "Встречалки"
 msgstr "Randoccasion"
 
-#: .\templates\includes\header.html:17 .\templates\includes\header.html:19
+#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\includes\header.html:32
+#: .\templates\includes\header.html:40 .\templates\includes\header.html:42
 msgid "Мои события"
 msgstr "My events"
 
-#: .\templates\includes\header.html:40 .\templates\includes\header.html:42
+#: .\templates\includes\header.html:50 .\templates\includes\header.html:52
 #: .\users\apps.py:10 .\users\models.py:70
 msgid "Пользователи"
 msgstr "Users"
 
-#: .\templates\includes\header.html:47 .\templates\includes\header.html:49
+#: .\templates\includes\header.html:57 .\templates\includes\header.html:59
+#: .\templates\users\friends_list.html:4
 msgid "Мои друзья"
 msgstr "My friends"
 
-#: .\templates\includes\header.html:54 .\templates\includes\header.html:56
+#: .\templates\includes\header.html:64 .\templates\includes\header.html:66
 msgid "Заявки в друзья"
 msgstr "Friend requests"
 
-#: .\templates\includes\header.html:61 .\templates\includes\header.html:63
+#: .\templates\includes\header.html:71 .\templates\includes\header.html:73
 #: .\templates\users\profile.html:5
 msgid "Мой профиль"
 msgstr "My profile"
 
-#: .\templates\includes\header.html:70
+#: .\templates\includes\header.html:80
 msgid "Выйти"
 msgstr "Logout"
 
-#: .\templates\includes\header.html:100 .\templates\includes\header.html:102
+#: .\templates\includes\header.html:110 .\templates\includes\header.html:112
 #: .\templates\users\login_form.html:59
 msgid "Войти"
 msgstr "Log in"
 
-#: .\templates\includes\header.html:109
+#: .\templates\includes\header.html:119
 msgid "Панель администратора"
 msgstr "Admin panel"
 
@@ -185,6 +248,14 @@ msgstr "Reject"
 #: .\templates\users\friend_requests.html:26
 msgid "Нет входящих заявок."
 msgstr "There are no incoming requests."
+
+#: .\templates\users\friends_list.html:17
+msgid "Удалить из друзей"
+msgstr "Delete from Friends"
+
+#: .\templates\users\friends_list.html:24
+msgid "У вас пока нет друзей."
+msgstr "You don't have any friends yet."
 
 #: .\templates\users\login.html:10
 msgid "Вход в аккаунт"
@@ -331,18 +402,38 @@ msgstr "avatar"
 msgid "интересы"
 msgstr "interests"
 
-#: .\users\models.py:200
+#: .\users\models.py:200 .\users\models.py:246
 msgid "telegram_id"
 msgstr "telegram_id"
 
-#: .\users\models.py:205
+#: .\users\models.py:205 .\users\models.py:256
+msgid "telephone"
+msgstr "telephone"
+
+#: .\users\models.py:210 .\users\models.py:261
+msgid "code"
+msgstr "code"
+
+#: .\users\models.py:215
 msgid "Количество сообщений"
 msgstr "Number of messages"
 
-#: .\users\models.py:227
+#: .\users\models.py:237
 msgid "профиль"
 msgstr "profile"
 
-#: .\users\models.py:228
+#: .\users\models.py:238
 msgid "профили"
 msgstr "profiles"
+
+#: .\users\models.py:251
+msgid "username"
+msgstr "username"
+
+#: .\users\models.py:267
+msgid "TelegramPhoneVerify"
+msgstr "TelegramPhoneVerify"
+
+#: .\users\models.py:268
+msgid "TelegramPhoneVerifies"
+msgstr "TelegramPhoneVerifies"
