@@ -163,7 +163,7 @@ class EventAcceptRequestView(LoginRequiredMixin, View):
         if event.available_slots() > 0:
             event_request.status = "accepted"
             event_request.save()
-            event.participants.add(request.user)
+            event.participants.add(event_request.user)
             messages.info(request, message="Заявка одобрена!")
             return redirect("events:my_events_requests")
 
