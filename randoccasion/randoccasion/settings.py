@@ -171,6 +171,8 @@ EMAIL_FILE_PATH = BASE_DIR / "send_mail/"
 DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 DEFAULT_FROM_EMAIL = DJANGO_MAIL
 
+YMAPS_API = os.getenv("YANDEX_MAPS_API_TOKEN")
+
 AUTHENTICATION_BACKENDS = [
     "users.backends.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",

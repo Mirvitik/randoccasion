@@ -2,6 +2,7 @@ __all__ = ()
 
 import uuid
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -294,3 +295,8 @@ class EventCreateView(LoginRequiredMixin, CreateView):
             "Пожалуйста, исправьте ошибки в форме.",
         )
         return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["ymaps_api"] = settings.YMAPS_API
+        return context
