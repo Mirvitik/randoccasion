@@ -12,6 +12,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fake")
+print(SECRET_KEY)
 
 
 def load_bool_env(name, default):
@@ -101,19 +102,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".UserAttributeSimilarityValidator",
+                ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".MinimumLengthValidator",
+                ".MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".CommonPasswordValidator",
+                ".CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".NumericPasswordValidator",
+                ".NumericPasswordValidator",
     },
 ]
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -165,11 +166,14 @@ CKEDITOR_5_CONFIGS = {
 CKEDITOR_5_CUSTOM_CSS = "css/ckeditor5/admin_dark.css"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 
-DJANGO_MAIL = os.getenv("DJANGO_MAIL", "fake@example.com")
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "send_mail/"
-DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-DEFAULT_FROM_EMAIL = DJANGO_MAIL
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv('DJANGO_EMAIL_HOST', 'smtp.yandex.ru')
+EMAIL_HOST_USER = os.getenv('DJANGO_MAIL')
+EMAIL_HOST_PASSWORD = os.getenv('DJANGO_EMAIL_PASSWORD')
+EMAIL_PORT = os.getenv('DJANGO_EMAIL_PORT', 465)
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
+SERVER_EMAIL = os.getenv('DJANGO_MAIL')
 
 YMAPS_API = os.getenv("YANDEX_MAPS_API_TOKEN")
 
