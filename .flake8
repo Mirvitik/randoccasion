@@ -1,5 +1,5 @@
 [flake8]
-application-import-names = core,events,homepage,randoccasion,users
+application-import-names = events,homepage,randoccasion,users
 exclude = .git,__pycache__,venv,*/migrations/
 import-order-style = google
 inline-quotes = double

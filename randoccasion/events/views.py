@@ -295,7 +295,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
             "Пожалуйста, исправьте ошибки в форме.",
         )
         return super().form_invalid(form)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["ymaps_api"] = settings.YMAPS_API
