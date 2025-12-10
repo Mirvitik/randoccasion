@@ -281,6 +281,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         event.slug = f"{slugify(name)}-{uuid.uuid4().hex[:8]}"
 
         event.save()
+        form.save_m2m()
         event.participants.add(self.request.user)
 
         messages.success(
