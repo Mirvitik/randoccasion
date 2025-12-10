@@ -37,4 +37,9 @@ urlpatterns = [
         views.EventCreateView.as_view(),
         name="create_event",
     ),
+    path(
+        "recommended/",
+        views.RecommendedEventsView.as_view(),
+        name="recommended-events",
+    ),
 ]

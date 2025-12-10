@@ -19,6 +19,7 @@ class EventCreateForm(forms.ModelForm):
             "max_participants",
             "location",
             "expires_at",
+            "interests",
         ]
         widgets = {
             "name": forms.TextInput(
@@ -58,6 +59,7 @@ class EventCreateForm(forms.ModelForm):
                 },
                 format="%Y-%m-%dT%H:%M",
             ),
+            "interests": forms.CheckboxSelectMultiple(),
         }
         labels = {
             "name": _("Название события"),

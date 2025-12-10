@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 
 from events.managers import EventManager
-from users.models import User
+from users.models import Interest, User
 
 
 class Event(models.Model):
@@ -64,6 +64,12 @@ class Event(models.Model):
         validators=[
             MinValueValidator(timezone.now() + timezone.timedelta(minutes=15)),
         ],
+    )
+    interests = models.ManyToManyField(
+        Interest,
+        blank=True,
+        related_name="events",
+        verbose_name="Интересы",
     )
 
     objects = EventManager()

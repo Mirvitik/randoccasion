@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block content %}
+<h1>{% translate "Рекомендованные события" %}</h1>
+<ul>
+  {% for event in events %}
+    <li>
+      <a href="{% url 'events:event-detail' event.id %}">{{ event.name }}</a>
+      - {{ event.available_slots }} свободных мест
+    </li>
+  {% empty %}
+    <li>{% translate "Нет рекомендаций для вас" %}</li>
+  {% endfor %}
+</ul>
+{% endblock content %}

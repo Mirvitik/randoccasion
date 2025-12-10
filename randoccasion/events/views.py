@@ -300,3 +300,13 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["ymaps_api"] = settings.YMAPS_API
         return context
+
+
+class RecommendedEventsView(ListView):
+    template_name = "events/recommended_events.html"
+    context_object_name = "events"
+    paginate_by = 20
+
+    def get_queryset(self):
+        user = self.request.user
+        return Event.objects.recommended_events_for_user(user)
