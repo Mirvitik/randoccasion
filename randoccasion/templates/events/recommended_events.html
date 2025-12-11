@@ -2,15 +2,36 @@
 {% load i18n static %}
 
 {% block content %}
-<h1>{% translate "Рекомендованные события" %}</h1>
-<ul>
-  {% for event in events %}
-    <li>
-      <a href="{% url 'events:event-detail' event.id %}">{{ event.name }}</a>
-      - {{ event.available_slots }} свободных мест
-    </li>
-  {% empty %}
-    <li>{% translate "Нет рекомендаций для вас" %}</li>
-  {% endfor %}
-</ul>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">{% translate "Рекомендованные события" %}</h1>
+    </div>
+    {% if events %}
+        <div class="row g-3">
+            {% for event in events %}
+                {% include "includes/event_card.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <div class="mb-3">
+                <i class="fas fa-calendar-times fa-3x text-muted"></i>
+            </div>
+            <h4 class="text-muted mb-3">{% translate "Нет рекомендаций для вас" %}</h4>
+            <p class="text-muted mb-4">{% translate "Попробуйте изменить настройки профиля или создать свое событие" %}</p>
+            <div class="d-flex gap-2 justify-content-center">
+                <a href="{% url 'events:all_events' %}" class="btn btn-primary">
+                    <i class="fas fa-search me-1"></i>
+                    {% translate "Посмотреть все события" %}
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'events:create_event' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-plus me-1"></i>
+                        {% translate "Создать событие" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
 {% endblock content %}
