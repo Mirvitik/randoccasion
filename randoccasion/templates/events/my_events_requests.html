@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container py-4">
-    <h1>Заявки на мои события</h1>
+    <h1>{% translate "Заявки на мои события" %}</h1>
     {% if requests %}
     <div class="row g-3">
         {% for request in page_obj %}
@@ -15,41 +16,41 @@
                             <div class="col-md-8">
                                 <div class="col-md-4 d-flex flex-column align-items-start">
                                     {% if request.status == 'pending' %}
-                                        <span class="badge bg-warning text-dark mb-2">Ожидает</span>
+                                        <span class="badge bg-warning text-dark mb-2">{% translate "Ожидает" %}</span>
                                         <div class="btn-group" role="group">
                                             <form method="post" action="{% url 'events:accept_event_request' request.id %}" class="d-inline">
                                                 {% csrf_token %}
-                                                <button type="submit" class="btn btn-success btn-sm">Принять</button>
+                                                <button type="submit" class="btn btn-success btn-sm">{% translate "Принять" %}</button>
                                             </form>
                                             <form method="post" action="{% url 'events:reject_event_request' request.id %}" class="d-inline">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Вы уверены что хотите отклонить заявку?')"
-                                                >Отклонить</button>
+                                                >{% translate "Отклонить" %}</button>
                                             </form>
                                         </div>
                                     {% elif request.status == 'accepted' %}
-                                        <span class="badge bg-success">Принят</span>
+                                        <span class="badge bg-success">{% translate "Принят" %}</span>
                                     {% else %}
-                                        <span class="badge bg-danger">Отклонен</span>
+                                        <span class="badge bg-danger">{% translate "Отклонен" %}</span>
                                     {% endif %}
                                 </div>
                                 <h5 class="card-title">
-                                    Пользователь: <a href="{% url 'users:user_detail' request.user.id %}" class="text-decoration-none">
+                                    {% translate "Пользователь: " %}<a href="{% url 'users:user_detail' request.user.id %}" class="text-decoration-none">
                                         {{ request.user.username }} 
                                     </a>
                                 </h5>
                                 <p class="card-text">
-                                    <strong>Событие:</strong> 
+                                    <strong>{% translate "Событие: " %}</strong> 
                                     <a href="{% url 'events:event-detail' request.event.id %}">{{ request.event.name }}</a>
                                 </p>
                                 {% if request.message %}
                                     <p class="card-text">
-                                        <strong>Сообщение:</strong> {{ request.message }}
+                                        <strong>{% translate "Сообщение: " %}</strong> {{ request.message }}
                                     </p>
                                 {% endif %}
                                 <p class="card-text">
-                                    <small class="text-muted">Отправлено: {{ request.created_at|date:"d.m.Y H:i" }}</small>
+                                    <small class="text-muted">{% translate "Отправлено: " %} {{ request.created_at|date:"d.m.Y H:i" }}</small>
                                 </p>
                             </div>
                         </div>
@@ -58,7 +59,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <span>Нет активных заявок. Главное - верьте, что кто-то точно объявится...</span>
+        <span>{% translate "Нет активных заявок. Главное - верьте, что кто-то точно объявится..." %}</span>
     {% endif %}
     </div>
 </div>

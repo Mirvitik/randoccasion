@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-11 19:04+0300\n"
+"POT-Creation-Date: 2025-12-11 19:24+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,10 +24,8 @@ msgid "События"
 msgstr "Events"
 
 #: .\events\forms.py:65
-#, fuzzy
-#| msgid "Тема события"
 msgid "Название события"
-msgstr "Theme of the event"
+msgstr "Event name"
 
 #: .\events\forms.py:66 .\templates\includes\event_card.html:9
 msgid "Тема"
@@ -93,6 +91,10 @@ msgstr "Event"
 msgid "Без названия"
 msgstr "Without name"
 
+#: .\events\models.py:25 #: .\events\forms.py:65
+msgid "Тема события"
+msgstr "Event topic"
+
 #: .\events\models.py:35
 msgid "Активно"
 msgstr "Active"
@@ -117,11 +119,11 @@ msgstr "Expires in (no earlier than 15 minutes from now)"
 msgid "В ожидании"
 msgstr "Waiting"
 
-#: .\events\models.py:132
+#: .\events\models.py:132 .\templates\events\my_events_requests.html:33
 msgid "Принят"
 msgstr "Adopted"
 
-#: .\events\models.py:133
+#: .\events\models.py:133 .\templates\events\my_events_requests.html:35
 msgid "Отклонен"
 msgstr "Rejected"
 
@@ -165,13 +167,12 @@ msgstr "The page content is unavailable"
 msgid "Raccoon"
 msgstr "Raccoon"
 
-#: .\templates\events\create_event.html:4 .\templates\events\create_event.html:152 .\templates\events\events.html:13 .\templates\events\my_events.html:15 .\templates\events\recommended_events.html:30
+#: .\templates\events\create_event.html:4
+#: .\templates\events\create_event.html:152 .\templates\events\events.html:13
+#: .\templates\events\my_events.html:15
+#: .\templates\events\recommended_events.html:30
 msgid "Создать событие"
 msgstr "Create an event"
-
-#: .\templates\events\create_event.html:23 .\templates\events\recommended_events.html:30 .\templates\events\my_events.html:15 .\templates\events\create_event.html:152 .\templates\events\events.html:13 .\templates\events\create_event.html:4 .\events\models.py:25
-msgid "Тема события"
-msgstr "Event topic"
 
 #: .\templates\events\create_event.html:23
 msgid "Создать новое событие"
@@ -275,9 +276,55 @@ msgstr "Message (optional):"
 msgid "Отправить запрос"
 msgstr "Change password"
 
-#: .\templates\events\events.html:8 .\templates\users\profile.html:16
+#: .\templates\events\events.html:8
+#: .\templates\events\my_events_requests.html:6
+#: .\templates\users\profile.html:16
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
+
+#: .\templates\events\my_events_requests.html:19
+#, fuzzy
+#| msgid "В ожидании"
+msgid "Ожидает"
+msgstr "Waiting"
+
+#: .\templates\events\my_events_requests.html:23
+#: .\templates\users\friend_requests.html:50
+msgid "Принять"
+msgstr "Accept"
+
+#: .\templates\events\my_events_requests.html:29
+#: .\templates\users\friend_requests.html:55
+msgid "Отклонить"
+msgstr "Reject"
+
+#: .\templates\events\my_events_requests.html:39
+#, fuzzy
+#| msgid "Пользователь"
+msgid "Пользователь: "
+msgstr "User"
+
+#: .\templates\events\my_events_requests.html:44
+#, fuzzy
+#| msgid "Событие"
+msgid "Событие: "
+msgstr "Event"
+
+#: .\templates\events\my_events_requests.html:49
+#, fuzzy
+#| msgid "Сообщение"
+msgid "Сообщение: "
+msgstr "Message"
+
+#: .\templates\events\my_events_requests.html:53
+#, fuzzy
+#| msgid "Обновлено"
+msgid "Отправлено: "
+msgstr "Updated"
+
+#: .\templates\events\my_events_requests.html:62
+msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
+msgstr "There are no active applications. The main thing is to believe that someone will definitely show up..."
 
 #: .\templates\events\recommended_events.html:7
 #, fuzzy
@@ -380,14 +427,6 @@ msgstr "Incoming friend requests"
 #: .\templates\users\friend_requests.html:40
 msgid "назад"
 msgstr "back"
-
-#: .\templates\users\friend_requests.html:50
-msgid "Принять"
-msgstr "Accept"
-
-#: .\templates\users\friend_requests.html:55
-msgid "Отклонить"
-msgstr "Reject"
 
 #: .\templates\users\friend_requests.html:70
 msgid "Нет входящих заявок."
