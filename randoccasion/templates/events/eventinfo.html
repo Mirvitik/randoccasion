@@ -1,32 +1,33 @@
 {% extends "base.html" %}
+{% load i18n static %}
 
 {% block content %}
 <div class="container-fluid">
     <button type="button" class="btn btn-info">
-        <a class="text-decoration-none link-light" href="{% url "events:all_events" %}">К списку событий</a>
+        <a class="text-decoration-none link-light" href="{% url "events:all_events" %}">{% translate "К списку событий" %}</a>
     </button>
 </div>
 <div class="container py-4">
     <strong>{{event.name}}</strong>
     <div>{{event.topic}}</div>
     <p class="card-text">{{event.description|safe|truncatewords_html:150}}</p>
-    <div>🗺️ Место проведения:{{event.location}}</div>
-    <div>👤 Проводит: <a href="{% url "users:user_detail" event.creator.id %}">{{event.creator.username}}</a></div>
-    <div>🆓 Свободных мест: {{event.available_slots}}</div>
+    <div>{% translate "🗺️ Место проведения:" %} {{event.location}}</div>
+    <div>{% translate "👤 Проводит: " %}<a href="{% url "users:user_detail" event.creator.id %}">{{event.creator.username}}</a></div>
+    <div>{% translate "🆓 Свободных мест: " %} {{event.available_slots}}</div>
     {% if event.expires_after == -1 %}
-        <span>🕜️ Событие уже закончилось</span>
+        <span>{% translate "🕜️ Событие уже закончилось" %}</span>
     {% else %}
-        <span>🕜️ Пройдёт через: {{event.expires_after}}</span>
+        <span>{% translate "🕜️ Пройдёт через:" %}" {{event.expires_after}}</span>
     {% endif %}
     {% if user.is_authenticated and user != event.creator %}
         {% if user in event.participants.all %}
             <div class="alert alert-success">
-                ✅ Вы участник этого события
+                {% translate "✅ Вы участник этого события" %}
             </div>
         {% else %}
             {% if event.expires_after != -1 %}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
-                    Записаться на событие
+                    {% translate "Записаться на событие" %}
                 </button>
             {% endif %}
         {% endif %}
@@ -37,21 +38,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="requestModalLabel">Запрос на участие</h5>
+                <h5 class="modal-title" id="requestModalLabel">{% translate "Запрос на участие" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="{% url "events:send_request_to_event" event.id %}">
                 {% csrf_token %}
                 <div class="modal-body">
-                    <p>Отправить запрос создателю события <strong>{{event.creator.username}}</strong></p>
+                    <p>{% translate "Отправить запрос создателю события" %} <strong>{{event.creator.username}}</strong></p>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Сообщение (необязательно):</label>
+                        <label for="message" class="form-label">{% translate "Сообщение (необязательно):" %}</label>
                         <textarea class="form-control" id="message" name="message" rows="3" maxlength="500" placeholder="Расскажите о себе или почему хотите участвовать..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary">Отправить запрос</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Отмена" %}</button>
+                    <button type="submit" class="btn btn-primary">{% translate "Отправить запрос" %}</button>
                 </div>
             </form>
         </div>

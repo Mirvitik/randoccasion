@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}Создать событие{% endblock %}
+{% block title %} {% translate "Создать событие" %} {% endblock %}
 
 {% block content %}
 <script src="https://api-maps.yandex.ru/2.1/?apikey={{ymaps_api}}&lang=ru_RU" type="text/javascript"></script>
@@ -62,7 +62,7 @@
                             </label>
                             {{ form.who_can_see }}
                             <small class="form-text text-muted d-block mt-1">
-                                Выберите, кто сможет увидеть ваше событие
+                                {% translate "Выберите, кто сможет увидеть ваше событие" %}
                             </small>
                             {% if form.who_can_see.errors %}
                                 <div class="invalid-feedback d-block">
@@ -98,7 +98,7 @@
                             <div class="input-group">
                                 {{ form.location }}
                                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
-                                    <i class="bi bi-geo-alt"></i> Выбрать на карте
+                                    <i class="bi bi-geo-alt"></i> {% translate "Выбрать на карте" %}
                                 </button>
                             </div>
                             {% if form.location.errors %}
@@ -146,10 +146,10 @@
 
                         <div class="d-flex gap-2 justify-content-end mt-4">
                             <a href="{% url 'events:all_events' %}" class="btn btn-secondary">
-                                <i class="bi bi-x-circle"></i> Отмена
+                                <i class="bi bi-x-circle"></i> {% translate "Отмена" %}
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle"></i> Создать событие
+                                <i class="bi bi-check-circle"></i> {% translate "Создать событие" %}
                             </button>
                         </div>
                     </form>
@@ -161,18 +161,18 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Выберите местоположение на карте</h5>
+                <h5 class="modal-title" id="mapModalLabel"> {% translate "Выберите местоположение на карте" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="map"></div>
                 <div class="mt-2">
-                    <small class="text-muted">Кликните на карту, чтобы выбрать точное местоположение</small>
+                    <small class="text-muted">{% translate "Кликните на карту, чтобы выбрать точное местоположение" %}</small>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" id="confirmLocation">Подтвердить</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Отмена" %}</button>
+                <button type="button" class="btn btn-primary" id="confirmLocation">{% translate "Подтвердить" %}</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-07 17:34+0300\n"
+"POT-Creation-Date: 2025-12-11 19:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\events\apps.py:10 .\events\models.py:79
+#: .\events\apps.py:10 .\events\models.py:85
 #: .\templates\includes\header.html:33 .\templates\includes\header.html:35
 msgid "События"
 msgstr "Events"
 
-#: .\events\forms.py:63
+#: .\events\forms.py:65
 #, fuzzy
 #| msgid "Тема события"
 msgid "Название события"
 msgstr "Theme of the event"
 
-#: .\events\forms.py:64
+#: .\events\forms.py:66 .\templates\includes\event_card.html:9
 msgid "Тема"
 msgstr "Theme"
 
-#: .\events\forms.py:65
+#: .\events\forms.py:67
 msgid "Кто может видеть"
 msgstr "Who can see"
 
-#: .\events\forms.py:66
+#: .\events\forms.py:68
 msgid "Описание"
 msgstr "Description"
 
-#: .\events\forms.py:67
+#: .\events\forms.py:69
 #, fuzzy
 #| msgid "Максимальное количество участников"
 msgid "Максимум участников"
 msgstr "Max number of participants"
 
-#: .\events\forms.py:68
+#: .\events\forms.py:70
 #, fuzzy
 #| msgid "Примерное местоположение, город"
 msgid "Местоположение"
 msgstr "Approximate location, city"
 
-#: .\events\forms.py:69
+#: .\events\forms.py:71
 msgid "Истекает"
 msgstr "Expires"
 
-#: .\events\forms.py:72
+#: .\events\forms.py:74
 msgid "Время для записи участников. Минимум 15 минут"
 msgstr "Time for registration of participants. At least 15 minutes"
 
-#: .\events\forms.py:73
+#: .\events\forms.py:75
 msgid "Минимум 1 участник"
 msgstr "Minimum 1 participant"
 
-#: .\events\forms.py:89
+#: .\events\forms.py:91
 msgid "Событие должно истекать не ранее чем через 15 минут"
 msgstr "The event must expire no earlier than 15 minutes later"
 
-#: .\events\forms.py:97
+#: .\events\forms.py:99
 msgid "Должен быть хотя бы один участник"
 msgstr "There must be at least one participant"
 
@@ -85,7 +85,7 @@ msgstr "Only friends"
 msgid "Только я"
 msgstr "Only me"
 
-#: .\events\models.py:20 .\events\models.py:78 .\events\models.py:134
+#: .\events\models.py:20 .\events\models.py:84 .\events\models.py:140
 msgid "Событие"
 msgstr "Event"
 
@@ -109,7 +109,7 @@ msgstr "Max number of participants"
 msgid "Примерное местоположение, город"
 msgstr "Approximate location, city"
 
-#: .\events\models.py:57 .\events\models.py:155
+#: .\events\models.py:57 .\events\models.py:161
 msgid "Создано"
 msgstr "Created"
 
@@ -117,39 +117,39 @@ msgstr "Created"
 msgid "Истекает через (не ранее 15мин с этого момента)"
 msgstr "Expires in (no earlier than 15 minutes from now)"
 
-#: .\events\models.py:125
+#: .\events\models.py:131
 msgid "В ожидании"
 msgstr "Waiting"
 
-#: .\events\models.py:126
+#: .\events\models.py:132
 msgid "Принят"
 msgstr "Adopted"
 
-#: .\events\models.py:127
+#: .\events\models.py:133
 msgid "Отклонен"
 msgstr "Rejected"
 
-#: .\events\models.py:140 .\users\models.py:69
+#: .\events\models.py:146 .\users\models.py:69
 msgid "Пользователь"
 msgstr "User"
 
-#: .\events\models.py:146
+#: .\events\models.py:152
 msgid "Статус"
 msgstr "Status"
 
-#: .\events\models.py:149
+#: .\events\models.py:155
 msgid "Сообщение"
 msgstr "Message"
 
-#: .\events\models.py:159
+#: .\events\models.py:165
 msgid "Обновлено"
 msgstr "Updated"
 
-#: .\events\models.py:171
+#: .\events\models.py:177
 msgid "Запрос на событие"
 msgstr "Event Request"
 
-#: .\events\models.py:172
+#: .\events\models.py:178
 msgid "Запросы на события"
 msgstr "Event Requests"
 
@@ -169,21 +169,168 @@ msgstr "The page content is unavailable"
 msgid "Raccoon"
 msgstr "Raccoon"
 
-#: .\templates\events\create_event.html:13
+#: .\templates\events\create_event.html:4
+#: .\templates\events\create_event.html:152 .\templates\events\events.html:13
+#: .\templates\events\my_events.html:15
+#: .\templates\events\recommended_events.html:30
+#, fuzzy
+#| msgid "Тема события"
+msgid "Создать событие"
+msgstr "Theme of the event"
+
+#: .\templates\events\create_event.html:23
 #, fuzzy
 #| msgid "Тема события"
 msgid "Создать новое событие"
 msgstr "Theme of the event"
 
-#: .\templates\events\events.html:7 .\templates\users\profile.html:16
+#: .\templates\events\create_event.html:65
+msgid "Выберите, кто сможет увидеть ваше событие"
+msgstr "Choose who can see your event"
+
+#: .\templates\events\create_event.html:74
+#, fuzzy
+#| msgid "Интересы:"
+msgid "Интересы"
+msgstr "Interests:"
+
+#: .\templates\events\create_event.html:101
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "Выбрать на карте"
+msgstr "Event Request"
+
+#: .\templates\events\create_event.html:149
+#: .\templates\events\create_event.html:174
+#: .\templates\events\eventinfo.html:54
+msgid "Отмена"
+msgstr "Cancel"
+
+#: .\templates\events\create_event.html:164
+#, fuzzy
+#| msgid "Примерное местоположение, город"
+msgid "Выберите местоположение на карте"
+msgstr "Approximate location, city"
+
+#: .\templates\events\create_event.html:170
+msgid "Кликните на карту, чтобы выбрать точное местоположение"
+msgstr "Click on the map to select the exact location"
+
+#: .\templates\events\create_event.html:175
+msgid "Подтвердить"
+msgstr "Confirm"
+
+#: .\templates\events\eventinfo.html:7
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "К списку событий"
+msgstr "Event Request"
+
+#: .\templates\events\eventinfo.html:14
+#, fuzzy
+#| msgid "Примерное местоположение, город"
+msgid "🗺️ Место проведения:"
+msgstr "Approximate location, city"
+
+#: .\templates\events\eventinfo.html:15
+msgid "👤 Проводит: "
+msgstr "👤 Conducts: "
+
+#: .\templates\events\eventinfo.html:16
+msgid "🆓 Свободных мест: "
+msgstr "🆓 Available seats: "
+
+#: .\templates\events\eventinfo.html:18 .\templates\includes\event_card.html:28
+msgid "🕜️ Событие уже закончилось"
+msgstr "🕜️ The event has already ended"
+
+#: .\templates\events\eventinfo.html:20
+msgid "🕜️ Пройдёт через:"
+msgstr "🕜️ Will pass through: "
+
+#: .\templates\events\eventinfo.html:25
+#, fuzzy
+#| msgid "Заявки на мои события"
+msgid "✅ Вы участник этого события"
+msgstr "Requests for my events"
+
+#: .\templates\events\eventinfo.html:30
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "Записаться на событие"
+msgstr "Event Request"
+
+#: .\templates\events\eventinfo.html:41
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "Запрос на участие"
+msgstr "Event Request"
+
+#: .\templates\events\eventinfo.html:47
+#, fuzzy
+#| msgid "Запросы на события"
+msgid "Отправить запрос создателю события"
+msgstr "Event Requests"
+
+#: .\templates\events\eventinfo.html:49
+msgid "Сообщение (необязательно):"
+msgstr "Message (optional):"
+
+#: .\templates\events\eventinfo.html:55
+#, fuzzy
+#| msgid "Сменить пароль"
+msgid "Отправить запрос"
+msgstr "Change password"
+
+#: .\templates\events\events.html:8 .\templates\users\profile.html:16
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
 
-#: .\templates\events\events.html:12 .\templates\events\my_events.html:15
+#: .\templates\events\recommended_events.html:7
 #, fuzzy
 #| msgid "Тема события"
-msgid "Создать событие"
+msgid "Рекомендованные события"
 msgstr "Theme of the event"
+
+#: .\templates\events\recommended_events.html:20
+msgid "Нет рекомендаций для вас"
+msgstr "There are no recommendations for you"
+
+#: .\templates\events\recommended_events.html:21
+msgid "Попробуйте изменить настройки профиля или создать свое событие"
+msgstr "Try changing your profile settings or creating your own event"
+
+#: .\templates\events\recommended_events.html:25
+#, fuzzy
+#| msgid "Запросы на события"
+msgid "Посмотреть все события"
+msgstr "Event Requests"
+
+#: .\templates\homepage\main.html:5
+msgid "Главная страница"
+msgstr "Main page"
+
+#: .\templates\includes\event_card.html:19
+msgid "🗺️ Место: "
+msgstr "🗺️ Location: "
+
+#: .\templates\includes\event_card.html:23
+#, fuzzy
+#| msgid "Пользователь"
+msgid "👤 Создатель: "
+msgstr "👤 User: "
+
+#: .\templates\includes\event_card.html:30
+msgid "🕜️ Пройдёт через: "
+msgstr "🕜️ Will pass through:"
+
+#: .\templates\includes\event_card.html:35
+msgid "Вы записаны"
+msgstr "You're signed up"
+
+#: .\templates\includes\event_card.html:41 .\templates\users\user_list.html:88
+msgid "Подробнее"
+msgstr "More detailed"
 
 #: .\templates\includes\header.html:11
 msgid "Логотип"
@@ -207,7 +354,7 @@ msgid "Пользователи"
 msgstr "Users"
 
 #: .\templates\includes\header.html:57 .\templates\includes\header.html:59
-#: .\templates\users\friends_list.html:4
+#: .\templates\users\friends_list.html:5
 msgid "Мои друзья"
 msgstr "My friends"
 
@@ -237,23 +384,44 @@ msgstr "Admin panel"
 msgid "Входящие заявки в друзья"
 msgstr "Incoming friend requests"
 
-#: .\templates\users\friend_requests.html:16
+#: .\templates\users\friend_requests.html:40
+msgid "назад"
+msgstr "back"
+
+#: .\templates\users\friend_requests.html:50
 msgid "Принять"
 msgstr "Accept"
 
-#: .\templates\users\friend_requests.html:19
+#: .\templates\users\friend_requests.html:55
 msgid "Отклонить"
 msgstr "Reject"
 
-#: .\templates\users\friend_requests.html:26
+#: .\templates\users\friend_requests.html:70
 msgid "Нет входящих заявок."
 msgstr "There are no incoming requests."
 
-#: .\templates\users\friends_list.html:17
+#: .\templates\users\friend_requests.html:73
+#: .\templates\users\friends_list.html:73
+#, fuzzy
+#| msgid "Удалить из друзей"
+msgid "Найти друзей"
+msgstr "Delete from Friends"
+
+#: .\templates\users\friends_list.html:53
+msgid "Вы уверены, что хотите удалить"
+msgstr "Are you sure you want to delete"
+
+#: .\templates\users\friends_list.html:53
+#, fuzzy
+#| msgid "Удалить из друзей"
+msgid "из друзей?"
+msgstr "Delete from Friends"
+
+#: .\templates\users\friends_list.html:55
 msgid "Удалить из друзей"
 msgstr "Delete from Friends"
 
-#: .\templates\users\friends_list.html:24
+#: .\templates\users\friends_list.html:70
 msgid "У вас пока нет друзей."
 msgstr "You don't have any friends yet."
 
@@ -381,10 +549,6 @@ msgstr "not stated"
 #: .\templates\users\user_list.html:5
 msgid "Список пользователей"
 msgstr "List of users"
-
-#: .\templates\users\user_list.html:88
-msgid "Подробнее"
-msgstr "More detailed"
 
 #: .\users\models.py:180
 msgid "пользователь"
