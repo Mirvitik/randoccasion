@@ -93,10 +93,6 @@ msgstr "Event"
 msgid "Без названия"
 msgstr "Without name"
 
-#: .\events\models.py:25
-msgid "Тема события"
-msgstr "Theme of the event"
-
 #: .\events\models.py:35
 msgid "Активно"
 msgstr "Active"
@@ -169,20 +165,17 @@ msgstr "The page content is unavailable"
 msgid "Raccoon"
 msgstr "Raccoon"
 
-#: .\templates\events\create_event.html:4
-#: .\templates\events\create_event.html:152 .\templates\events\events.html:13
-#: .\templates\events\my_events.html:15
-#: .\templates\events\recommended_events.html:30
-#, fuzzy
-#| msgid "Тема события"
+#: .\templates\events\create_event.html:4 .\templates\events\create_event.html:152 .\templates\events\events.html:13 .\templates\events\my_events.html:15 .\templates\events\recommended_events.html:30
 msgid "Создать событие"
-msgstr "Theme of the event"
+msgstr "Create an event"
+
+#: .\templates\events\create_event.html:23 .\templates\events\recommended_events.html:30 .\templates\events\my_events.html:15 .\templates\events\create_event.html:152 .\templates\events\events.html:13 .\templates\events\create_event.html:4 .\events\models.py:25
+msgid "Тема события"
+msgstr "Event topic"
 
 #: .\templates\events\create_event.html:23
-#, fuzzy
-#| msgid "Тема события"
 msgid "Создать новое событие"
-msgstr "Theme of the event"
+msgstr "Create a new event"
 
 #: .\templates\events\create_event.html:65
 msgid "Выберите, кто сможет увидеть ваше событие"
