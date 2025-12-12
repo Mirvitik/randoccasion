@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}Мои события{% endblock %}
+{% block title %}{% translate "Мои события" %}{% endblock %}
 
 {% block extra_head %}
     <script src="{% static 'js/my_events_filter.js' %}" defer></script>
@@ -15,26 +15,26 @@
             {% translate "Создать событие" %}<span class="ms-1 fw-bolder">+</span>
         </a>
     {% endif %}
-    <h1>Мои события</h1>
+    <h1>{% translate "Мои события" %}</h1>
     <div class="card mb-4">
         <div class="card-body">
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
                     <a class="nav-link {% if current_type == 'created' %}active{% endif %}" 
                        href="?type=created&status={{ current_status }}&sort_by={{ current_sort }}">
-                        Созданные мной ({{ created_count }})
+                        {% translate "Созданные мной " %} ({{ created_count }})
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if current_type == 'participating' %}active{% endif %}" 
                        href="?type=participating&status={{ current_status }}&sort_by={{ current_sort }}">
-                        Участвую ({{ participating_count }})
+                        {% translate "Участвую " %} ({{ participating_count }})
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if current_type == 'all' %}active{% endif %}" 
                        href="?type=all&status={{ current_status }}&sort_by={{ current_sort }}">
-                        Все мои события ({{ active_count }})
+                        {% translate "Все мои события " %} ({{ active_count }})
                     </a>
                 </li>
             </ul>
@@ -43,32 +43,32 @@
                 <div class="col-md-6">
                     <select class="form-select" onchange="updateStatusFilter(this.value)">
                         <option value="active" {% if current_status == 'active' %}selected{% endif %}>
-                            Активные события
+                            {% translate "Активные события" %}
                         </option>
                         <option value="expired" {% if current_status == 'expired' %}selected{% endif %}>
-                            Завершенные события
+                            {% translate "Завершенные события" %}
                         </option>
                         <option value="all" {% if current_status == 'all' %}selected{% endif %}>
-                            Все события
+                            {% translate "Все события" %}
                         </option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <select class="form-select" onchange="updateSortFilter(this.value)">
                         <option value="-created_at" {% if current_sort == '-created_at' %}selected{% endif %}>
-                            Сначала новые
+                            {% translate "Сначала новые" %}
                         </option>
                         <option value="created_at" {% if current_sort == 'created_at' %}selected{% endif %}>
-                            Сначала старые
+                            {% translate "Сначала старые" %}
                         </option>
                         <option value="-expires_at" {% if current_sort == '-expires_at' %}selected{% endif %}>
-                            Скоро истекают
+                            {% translate "Скоро истекают" %}
                         </option>
                         <option value="name" {% if current_sort == 'name' %}selected{% endif %}>
-                            По названию (А-Я)
+                            {% translate "А-Я" %}
                         </option>
                         <option value="-name" {% if current_sort == '-name' %}selected{% endif %}>
-                            По названию (Я-А)
+                            {% translate "Я-А" %}
                         </option>
                     </select>
                 </div>
@@ -90,41 +90,41 @@
                         </h5>
                         <span class="badge {% if event.is_active and event.expires_after != -1 %}bg-success{% else %}bg-secondary{% endif %}">
                             {% if event.is_active and event.expires_after != -1 %}
-                                Активно ({{ event.expires_after }})
+                                {% translate "Активно" %} ({{ event.expires_after }})
                             {% else %}
-                                Завершено
+                                {% translate "Завершено" %}
                             {% endif %}
                         </span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            <strong>Тема:</strong> {{ event.topic }}<br>
-                            <strong>Место:</strong> {{ event.location }}<br>
-                            <strong>Участники:</strong> {{ event.participants.count }}/{{ event.max_participants }}<br>
-                            <strong>Создано:</strong> {{ event.created_at|date:"d.m.Y H:i" }}<br>
-                            <strong>Истекает:</strong> {{ event.expires_at|date:"d.m.Y H:i" }}
+                            <strong>{% translate "Тема" %}:</strong> {{ event.topic }}<br>
+                            <strong>{% translate "Место:" %}</strong> {{ event.location }}<br>
+                            <strong>{% translate "Участники:" %}</strong> {{ event.participants.count }}/{{ event.max_participants }}<br>
+                            <strong>{% translate "Создано" %}:</strong> {{ event.created_at|date:"d.m.Y H:i" }}<br>
+                            <strong>{% translate "Истекает" %}:</strong> {{ event.expires_at|date:"d.m.Y H:i" }}
                         </p>
                         
                         {% if event.creator == request.user %}
-                            <span class="badge bg-primary">Я создатель</span>
+                            <span class="badge bg-primary">{% translate "Я создатель" %}</span>
                         {% else %}
-                            <span class="badge bg-info">Я участник</span>
+                            <span class="badge bg-info">{% translate "Я участник" %}</span>
                         {% endif %}
                         
                         {% if event.who_can_see == "only_for_me" %}
-                            <span class="badge bg-warning">Только для меня</span>
+                            <span class="badge bg-warning">{% translate "Только для меня" %}</span>
                         {% elif event.who_can_see == "only_friends" %}
-                            <span class="badge bg-info">Только друзья</span>
+                            <span class="badge bg-info">{% translate "Только друзья" %}</span>
                         {% endif %}
                     </div>
                     <div class="card-footer">
                         <a href="{% url 'events:event-detail' event.pk %}" class="btn btn-sm btn-outline-primary">
-                            Подробнее
+                            {% translate "Подробнее" %}
                         </a>
                         {% if event.creator == request.user %}
                             <a href="{% url 'events:my_events_requests' %}?event={{ event.id }}" 
                                class="btn btn-sm btn-outline-success">
-                                Запросы ({{ event.pending_requests_count }})
+                                {% translate "Запросы" %} ({{ event.pending_requests_count }})
                             </a>
                         {% endif %}
                     </div>
@@ -138,23 +138,23 @@
             <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page=1&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">Первая</a>
+                        <a class="page-link" href="?page=1&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">{% translate "Первая" %}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">Назад</a>
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">{% translate "Назад" %}</a>
                     </li>
                 {% endif %}
 
                 <li class="page-item active">
-                    <span class="page-link">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+                    <span class="page-link">{% translate "Страница" %} {{ page_obj.number }} {% translate "из" %} {{ page_obj.paginator.num_pages }}</span>
                 </li>
 
                 {% if page_obj.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">Вперед</a>
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">{% translate "Вперед" %}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">Последняя</a>
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&type={{ current_type }}&status={{ current_status }}&sort_by={{ current_sort }}">{% translate "Последняя" %}</a>
                     </li>
                 {% endif %}
             </ul>
@@ -163,9 +163,9 @@
 
     {% else %}
         <div class="alert alert-info">
-            <h4>Событий не найдено</h4>
-            <p>Попробуйте изменить фильтры или создать новое событие.</p>
-            <a href="{% url 'events:all_events' %}" class="btn btn-primary">Найти события</a>
+            <h4>{% translate "Событий не найдено" %}</h4>
+            <p>{% translate "Попробуйте изменить фильтры или создать новое событие." %}</p>
+            <a href="{% url 'events:all_events' %}" class="btn btn-primary">{% translate "Найти события" %}</a>
         </div>
     {% endif %}
 </div>
