@@ -29,7 +29,7 @@
   </div>
   <div class="dropdown">
       <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        Фильтры
+        {% translate "Фильтры" %}
       </button>
       <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="filterDropdown" style="min-width: 320px;">
         <form action="{% url "events:all_events" %}" method="get" onclick="event.stopPropagation()">
@@ -37,16 +37,16 @@
             <input type="hidden" name="q" value="{{ request.GET.q }}">
           {% endif %}
 
-          <h6 class="dropdown-header px-0">Фильтрация событий</h6>
+          <h6 class="dropdown-header px-0">{% translate "Фильтрация событий" %}</h6>
           
           <div class="mb-3">
-            <label for="date_from" class="form-label small">Дата создания с:</label>
+            <label for="date_from" class="form-label small">{% translate "Дата создания с:" %}</label>
             <input type="date" class="form-control form-control-sm" id="date_from" name="date_from" value="{{ request.GET.date_from }}"
             {% if request.GET.date_to %}max="{{ request.GET.date_to }}"{% endif %}>
           </div>
 
           <div class="mb-3">
-            <label for="date_to" class="form-label small">Дата создания по:</label>
+            <label for="date_to" class="form-label small">{% translate "Дата создания по:" %}</label>
             <input type="date" class="form-control form-control-sm" id="date_to" name="date_to" value="{{ request.GET.date_to }}"
             {% if request.GET.date_from %}min="{{ request.GET.date_from }}"{% endif %}>
           </div>
@@ -56,7 +56,7 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" name="only_active" id="only_active" value="true" {% if request.GET.only_active %}checked{% endif %}>
             <label class="form-check-label small" for="only_active">
-              Только активные события
+              {% translate "Только активные события" %}
             </label>
           </div>
           {% if user.is_authenticated %}
@@ -64,83 +64,83 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="only_friends" id="only_friends" value="true" {% if request.GET.only_friends %}checked{% endif %}>
               <label class="form-check-label small" for="only_friends">
-                События друзей
+                {% translate "События друзей" %}
               </label>
             </div>
 
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="only_my" id="only_my" value="true" {% if request.GET.only_my %}checked{% endif %}>
               <label class="form-check-label small" for="only_my">
-                Мои события
+                {% translate "Мои события" %}
               </label>
             </div>
           </div>
           {% endif %}
           <div class="mb-3">
-            <label class="form-label small fw-bold">Сортировка</label>
+            <label class="form-label small fw-bold">{% translate "Сортировка" %}</label>
   
             <div class="mb-2">
-              <small class="text-muted d-block mb-1">По дате публикации:</small>
+              <small class="text-muted d-block mb-1">{% translate "По дате публикации:" %}</small>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_published" id="sort_date_published_desc" value="desc" {% if request.GET.sort_published == "desc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_date_published_desc">
-                  Сначала новые
+                  {% translate "Сначала новые" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_published" id="sort_date_published_asc" value="asc" {% if request.GET.sort_published == "asc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_date_published_asc">
-                  Сначала старые
+                  {% translate "Сначала старые" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_published" id="sort_published_none" value="" {% if not request.GET.sort_published %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_published_none">
-                  Не использовать
+                  {% translate "Не использовать" %}
                 </label>
               </div>
             </div>
 
             <div class="mb-2">
-              <small class="text-muted d-block mb-1">По дате истечения:</small>
+              <small class="text-muted d-block mb-1">{% translate "По дате истечения:" %}</small>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_expiry" id="sort_date_expiry_asc" value="asc" {% if request.GET.sort_expiry == "asc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_date_expiry_asc">
-                  Сначала ближайшие
+                  {% translate "Сначала ближайшие" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_expiry" id="sort_date_expiry_desc" value="desc" {% if request.GET.sort_expiry == "desc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_date_expiry_desc">
-                  Сначала отдалённые
+                  {% translate "Сначала отдалённые" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_expiry" id="sort_expiry_none" value="" {% if not request.GET.sort_expiry %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_expiry_none">
-                  Не использовать
+                  {% translate "Не использовать" %}
                 </label>
               </div>
             </div>
 
             <div class="mb-2">
-              <small class="text-muted d-block mb-1">По алфавиту:</small>
+              <small class="text-muted d-block mb-1">{% translate "По алфавиту:" %}</small>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_asc" value="asc" {% if request.GET.sort_alpha == "asc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_alpha_asc">
-                  А-Я
+                  {% translate "А-Я" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_desc" value="desc" {% if request.GET.sort_alpha == "desc" %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_alpha_desc">
-                  Я-А
+                  {% translate "Я-А" %}
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="sort_alpha" id="sort_alpha_none" value="" {% if not request.GET.sort_alpha %}checked{% endif %}>
                 <label class="form-check-label small" for="sort_alpha_none">
-                  Не использовать
+                  {% translate "Не использовать" %}
                 </label>
               </div>
             </div>
@@ -149,8 +149,8 @@
           <hr class="dropdown-divider">
 
           <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary btn-sm flex-grow-1">Применить</button>
-            <a href="{% url "events:all_events" %}" class="btn btn-outline-secondary btn-sm">Сбросить</a>
+            <button type="submit" class="btn btn-primary btn-sm flex-grow-1">{% translate "Применить" %}</button>
+            <a href="{% url "events:all_events" %}" class="btn btn-outline-secondary btn-sm">{% translate "Сбросить" %}</a>
           </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
 
 <div class="container py-4">
     {% if request.GET.q %}
-      <h3 class="mt-4">Результаты поиска по запросу <strong>{{ request.GET.q }}</strong></h3>
+      <h3 class="mt-4">{% translate "Результаты поиска по запросу" %} <strong>{{ request.GET.q }}</strong></h3>
     {% endif %}
     
     <div class="row g-3">
@@ -169,14 +169,14 @@
       
       {% empty %}
     </div>
-    <h6>Кажется здесь ничего нет...</h6>
+    <h6>{% translate "Кажется здесь ничего нет..." %}</h6>
     {% endfor %}
     
     <nav aria-label="pg-navigation" class="d-flex justify-content-center">
       <ul class="pagination">
         {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page=1">&laquo; В начало</a></li>
-          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo; {% translate "В начало" %}</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{% translate "Предыдущая" %}</a></li>
         {% endif %}
 
         {% for page in page_obj.paginator.page_range %}
@@ -188,8 +188,8 @@
         {% endfor %}
 
         {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{% translate "Следующая" %}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{% translate "Последняя" %} &raquo;</a></li>
         {% endif %}
       </ul>
     </nav>

@@ -8,7 +8,7 @@
         <div class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <a href="{% url 'homepage:main' %}" class="text-decoration-none">
-                    <img src="{% static 'img/logogo.png' %}" width="110" height="80" alt="{% translate 'Логотип' %}">
+                    <img src="{% static 'img/logogo.png' %}" width="100" height="80" alt="{% translate 'Логотип' %}">
                 </a>
                 <span class="fs-4 ms-2">{% translate "Встречалки" %}</span>
                 <li class="nav-item d-flex align-items-center">
@@ -54,9 +54,9 @@
                 </li>
                 <li class="nav-item">
                     {% if view_name == 'users:friends_list' %}
-                    <span class="nav-link active" aria-current="page">{% translate "Мои друзья" %}</span>
+                    <span class="nav-link active" aria-current="page">{% translate "Друзья" %}</span>
                     {% else %}
-                    <a href="{% url 'users:friends_list' %}" class="nav-link">{% translate "Мои друзья" %}</a>
+                    <a href="{% url 'users:friends_list' %}" class="nav-link">{% translate "Друзья" %}</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
@@ -68,9 +68,9 @@
                 </li>
                 <li class="nav-item">
                     {% if view_name == 'users:profile' %}
-                    <span class="nav-link active" aria-current="page">{% translate "Мой профиль" %}</span>
+                    <span class="nav-link active" aria-current="page">{% translate "Профиль" %}</span>
                     {% else %}
-                    <a href="{% url 'users:profile' %}" class="nav-link">{% translate "Мой профиль" %}</a>
+                    <a href="{% url 'users:profile' %}" class="nav-link">{% translate "Профиль" %}</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">

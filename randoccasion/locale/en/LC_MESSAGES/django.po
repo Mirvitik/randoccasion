@@ -395,8 +395,8 @@ msgstr "Users"
 
 #: .\templates\includes\header.html:57 .\templates\includes\header.html:59
 #: .\templates\users\friends_list.html:5
-msgid "Мои друзья"
-msgstr "My friends"
+msgid "Друзья"
+msgstr "Friends"
 
 #: .\templates\includes\header.html:64 .\templates\includes\header.html:66
 msgid "Заявки в друзья"
@@ -404,8 +404,8 @@ msgstr "Friend requests"
 
 #: .\templates\includes\header.html:71 .\templates\includes\header.html:73
 #: .\templates\users\profile.html:5
-msgid "Мой профиль"
-msgstr "My profile"
+msgid "Профиль"
+msgstr "Profile"
 
 #: .\templates\includes\header.html:80
 msgid "Выйти"
