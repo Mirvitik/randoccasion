@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-11 19:24+0300\n"
+"POT-Creation-Date: 2025-12-12 22:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,11 +87,7 @@ msgstr "Only me"
 msgid "Событие"
 msgstr "Event"
 
-#: .\events\models.py:22
-msgid "Без названия"
-msgstr "Without name"
-
-#: .\events\models.py:25 #: .\events\forms.py:65
+#: .\events\models.py:25
 msgid "Тема события"
 msgstr "Event topic"
 
@@ -142,10 +138,6 @@ msgstr "Message"
 #: .\events\models.py:165
 msgid "Обновлено"
 msgstr "Updated"
-
-#: .\events\models.py:177
-msgid "Запрос на событие"
-msgstr "Event Request"
 
 #: .\events\models.py:178
 msgid "Запросы на события"
@@ -249,16 +241,12 @@ msgid "✅ Вы участник этого события"
 msgstr "Requests for my events"
 
 #: .\templates\events\eventinfo.html:30
-#, fuzzy
-#| msgid "Запрос на событие"
 msgid "Записаться на событие"
-msgstr "Event Request"
+msgstr "Sign up for an event"
 
 #: .\templates\events\eventinfo.html:41
-#, fuzzy
-#| msgid "Запрос на событие"
 msgid "Запрос на участие"
-msgstr "Event Request"
+msgstr "Request for participation"
 
 #: .\templates\events\eventinfo.html:47
 #, fuzzy
@@ -282,6 +270,129 @@ msgstr "Change password"
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
 
+#: .\templates\events\events.html:32
+msgid "Фильтры"
+msgstr "Filters"
+
+#: .\templates\events\events.html:40 .\events\models.py:177
+msgid "Запрос на событие"
+msgstr "Event Request"
+
+#: .\templates\events\events.html:40
+msgid "Фильтрация событий"
+msgstr "Filtering events"
+
+#: .\templates\events\events.html:43 .\events\models.py:22
+msgid "Без названия"
+msgstr "Without name"
+
+#: .\templates\events\events.html:43
+msgid "Дата создания с:"
+msgstr "Date of creation from:"
+
+#: .\templates\events\events.html:49
+msgid "Дата создания по:"
+msgstr "Software creation date:"
+
+#: .\templates\events\events.html:59
+#, fuzzy
+#| msgid "Тема события"
+msgid "Только активные события"
+msgstr "Theme of the event"
+
+#: .\templates\events\events.html:67
+#, fuzzy
+#| msgid "Удалить из друзей"
+msgid "События друзей"
+msgstr "Delete from Friends"
+
+#: .\templates\events\events.html:74 .\templates\includes\header.html:40
+#: .\templates\includes\header.html:42
+msgid "Мои события"
+msgstr "My events"
+
+#: .\templates\events\events.html:80
+msgid "Сортировка"
+msgstr "Sort"
+
+#: .\templates\events\events.html:83
+msgid "По дате публикации:"
+msgstr "By publication date:"
+
+#: .\templates\events\events.html:87
+msgid "Сначала новые"
+msgstr "New ones first"
+
+#: .\templates\events\events.html:93
+msgid "Сначала старые"
+msgstr "The old ones first"
+
+#: .\templates\events\events.html:99 .\templates\events\events.html:121
+#: .\templates\events\events.html:143 .\users\models.py:180
+msgid "пользователь"
+msgstr "user"
+
+#: .\templates\events\events.html:143
+msgid "Не использовать"
+msgstr "Don't use"
+
+#: .\templates\events\events.html:105
+msgid "По дате истечения:"
+msgstr "By expiration date:"
+
+#: .\templates\events\events.html:109
+msgid "Сначала ближайшие"
+msgstr "The nearest ones first"
+
+#: .\templates\events\events.html:115
+msgid "Сначала отдалённые"
+msgstr "At first, the remote ones"
+
+#: .\templates\events\events.html:127
+msgid "По алфавиту:"
+msgstr "Alphabetically:"
+
+#: .\templates\events\events.html:131
+msgid "А-Я"
+msgstr "A-Z"
+
+#: .\templates\events\events.html:137
+msgid "Я-А"
+msgstr "Z-A"
+
+
+#: .\templates\events\events.html:152
+msgid "Применить"
+msgstr "Apply"
+
+#: .\templates\events\events.html:153
+msgid "Сбросить"
+msgstr "Throw off"
+
+#: .\templates\events\events.html:163
+msgid "Результаты поиска по запросу"
+msgstr "Search results for the query"
+
+#: .\templates\events\events.html:172
+msgid "Кажется здесь ничего нет..."
+msgstr "There doesn't seem to be anything here..."
+
+#: .\templates\events\events.html:178
+msgid "В начало"
+msgstr "To the beginning"
+
+#: .\templates\events\events.html:179
+msgid "Предыдущая"
+msgstr "Previous"
+
+#: .\templates\events\events.html:191
+msgid "Следующая"
+msgstr "Next"
+
+#: .\templates\events\events.html:192
+msgid "Последняя"
+msgstr "Last"
+
 #: .\templates\events\my_events_requests.html:19
 #, fuzzy
 #| msgid "В ожидании"
@@ -294,7 +405,7 @@ msgid "Принять"
 msgstr "Accept"
 
 #: .\templates\events\my_events_requests.html:29
-#: .\templates\users\friend_requests.html:55
+#: .\templates\users\friend_requests.html:55 .\templates\events\events.html:152
 msgid "Отклонить"
 msgstr "Reject"
 
@@ -324,7 +435,9 @@ msgstr "Updated"
 
 #: .\templates\events\my_events_requests.html:62
 msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
-msgstr "There are no active applications. The main thing is to believe that someone will definitely show up..."
+msgstr ""
+"There are no active applications. The main thing is to believe that someone "
+"will definitely show up..."
 
 #: .\templates\events\recommended_events.html:7
 #, fuzzy
@@ -384,17 +497,12 @@ msgstr "Randoccasion"
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\includes\header.html:40 .\templates\includes\header.html:42
-msgid "Мои события"
-msgstr "My events"
-
 #: .\templates\includes\header.html:50 .\templates\includes\header.html:52
 #: .\users\apps.py:10 .\users\models.py:70
 msgid "Пользователи"
 msgstr "Users"
 
 #: .\templates\includes\header.html:57 .\templates\includes\header.html:59
-#: .\templates\users\friends_list.html:5
 msgid "Друзья"
 msgstr "Friends"
 
@@ -403,7 +511,6 @@ msgid "Заявки в друзья"
 msgstr "Friend requests"
 
 #: .\templates\includes\header.html:71 .\templates\includes\header.html:73
-#: .\templates\users\profile.html:5
 msgid "Профиль"
 msgstr "Profile"
 
@@ -438,6 +545,12 @@ msgstr "There are no incoming requests."
 #| msgid "Удалить из друзей"
 msgid "Найти друзей"
 msgstr "Delete from Friends"
+
+#: .\templates\users\friends_list.html:5
+#, fuzzy
+#| msgid "Только друзья"
+msgid "Мои друзья"
+msgstr "Only friends"
 
 #: .\templates\users\friends_list.html:53
 msgid "Вы уверены, что хотите удалить"
@@ -533,6 +646,12 @@ msgstr "The email has been sent"
 msgid "Проверьте вашу почту для восстановления пароля."
 msgstr "Check your email to recover your password."
 
+#: .\templates\users\profile.html:5
+#, fuzzy
+#| msgid "профиль"
+msgid "Мой профиль"
+msgstr "profile"
+
 #: .\templates\users\profile.html:9
 msgid "Сохранить"
 msgstr "Save"
@@ -582,9 +701,6 @@ msgstr "not stated"
 msgid "Список пользователей"
 msgstr "List of users"
 
-#: .\users\models.py:180
-msgid "пользователь"
-msgstr "user"
 
 #: .\users\models.py:183
 msgid "день рождения"
