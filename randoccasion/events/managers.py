@@ -31,6 +31,5 @@ class EventManager(Manager):
 
         queryset = queryset.annotate(num_participants=Count("participants"))
         queryset = queryset.filter(num_participants__lt=F("max_participants"))
-        queryset = queryset.distinct()
 
-        return queryset
+        return queryset.distinct()

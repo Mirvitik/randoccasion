@@ -22,8 +22,6 @@ class UserChangeForm(auth.forms.UserChangeForm):
             User.first_name.field.name,
             User.last_name.field.name,
             User.email.field.name,
-        ]
-        exclude = [
             User.password.field.name,
         ]
         model = User
@@ -73,10 +71,12 @@ class ProfileUpdateForm(forms.ModelForm):
     telephone = forms.IntegerField(
         label="Телефон",
         disabled=True,
+        required=False,
     )
     telegram_id = forms.IntegerField(
         label="Telegram ID",
         disabled=True,
+        required=False,
     )
     first_name = forms.CharField(label="Имя", required=False, max_length=40)
     last_name = forms.CharField(label="Фамилия", required=False, max_length=40)
