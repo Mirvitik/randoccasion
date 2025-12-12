@@ -303,7 +303,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class RecommendedEventsView(ListView):
+class RecommendedEventsView(LoginRequiredMixin, ListView):
     template_name = "events/recommended_events.html"
     context_object_name = "events"
     paginate_by = 20
