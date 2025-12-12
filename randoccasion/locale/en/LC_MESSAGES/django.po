@@ -97,10 +97,6 @@ msgstr "Only me"
 msgid "Событие"
 msgstr "Event"
 
-#: .\events\models.py:25
-msgid "Тема события"
-msgstr "Event topic"
-
 #: .\events\models.py:35 .\templates\events\my_events.html:14
 msgid "Активно"
 msgstr "Active"
@@ -301,17 +297,17 @@ msgstr "Date of creation from:"
 msgid "Дата создания по:"
 msgstr "Software creation date:"
 
-#: .\templates\events\events.html:59
-#, fuzzy
-#| msgid "Тема события"
-msgid "Только активные события"
+#: .\templates\events\events.html:59  .\events\models.py:25
+msgid "Тема события"
 msgstr "Theme of the event"
 
-#: .\templates\events\events.html:67
-#, fuzzy
-#| msgid "Удалить из друзей"
+#: .\templates\events\events.html:59
+msgid "Только активные события"
+msgstr "Active events only"
+
+#: .\templates\events\events.html:59
 msgid "События друзей"
-msgstr "Delete from Friends"
+msgstr "Friends' Events"
 
 #: .\templates\events\events.html:74 .\templates\includes\header.html:40 .\templates\includes\header.html:42 .\templates\events\my_events.html:5
 msgid "Мои события"
@@ -514,10 +510,8 @@ msgstr ""
 "will definitely show up..."
 
 #: .\templates\events\recommended_events.html:7
-#, fuzzy
-#| msgid "Тема события"
 msgid "Рекомендованные события"
-msgstr "Theme of the event"
+msgstr "Recommended events"
 
 #: .\templates\events\recommended_events.html:20
 msgid "Нет рекомендаций для вас"
@@ -615,10 +609,8 @@ msgstr "There are no incoming requests."
 
 #: .\templates\users\friend_requests.html:73
 #: .\templates\users\friends_list.html:73
-#, fuzzy
-#| msgid "Удалить из друзей"
 msgid "Найти друзей"
-msgstr "Delete from Friends"
+msgstr "Find Friends"
 
 #: .\templates\users\friends_list.html:5
 #, fuzzy
@@ -631,12 +623,10 @@ msgid "Вы уверены, что хотите удалить"
 msgstr "Are you sure you want to delete"
 
 #: .\templates\users\friends_list.html:53
-#, fuzzy
-#| msgid "Удалить из друзей"
 msgid "из друзей?"
-msgstr "Delete from Friends"
+msgstr "from Friends"
 
-#: .\templates\users\friends_list.html:55
+#: .\templates\users\friends_list.html:55 .\templates\events\events.html:67 .\templates\users\friends_list.html:53
 msgid "Удалить из друзей"
 msgstr "Delete from Friends"
 
