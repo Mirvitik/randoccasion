@@ -169,6 +169,14 @@ msgstr "The page content is unavailable"
 msgid "Raccoon"
 msgstr "Raccoon"
 
+#: .\templates\base.html:57
+msgid "км"
+msgstr "km"
+
+#: .\templates\base.html:57
+msgid "м"
+msgstr "m"
+
 #: .\templates\events\create_event.html:4
 #: .\templates\events\create_event.html:152 .\templates\events\events.html:13
 #: .\templates\events\my_events.html:15

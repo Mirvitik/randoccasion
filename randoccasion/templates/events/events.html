@@ -3,6 +3,8 @@
 
 
 {% block content %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ymaps_api}}&lang=ru_RU" type="text/javascript"></script>
+
 <div class="container d-flex" style="margin-bottom: 20px">
   <a href="{% url 'events:my_events_requests' %}" class="btn btn-info mt-3" style="margin-right: 5px;">
     {% translate "Заявки на мои события" %}

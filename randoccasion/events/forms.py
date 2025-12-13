@@ -9,6 +9,9 @@ from events.models import Event
 
 
 class EventCreateForm(forms.ModelForm):
+    latitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    longitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
+
     class Meta:
         model = Event
         fields = [
@@ -20,6 +23,8 @@ class EventCreateForm(forms.ModelForm):
             "location",
             "expires_at",
             "interests",
+            "latitude",
+            "longitude",
         ]
         widgets = {
             "name": forms.TextInput(

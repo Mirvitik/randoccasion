@@ -53,6 +53,13 @@ class Event(models.Model):
         verbose_name=_("Примерное местоположение, город"),
         default="Не указано",
     )
+    latitude = models.FloatField(
+        verbose_name=_("Широта"), blank=True, null=True,
+    )
+    longitude = models.FloatField(
+        verbose_name=_("Долгота"), blank=True, null=True,
+    )
+
     created_at = models.DateTimeField(
         verbose_name=_("Создано"),
         auto_now_add=True,

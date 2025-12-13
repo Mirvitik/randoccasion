@@ -100,6 +100,8 @@
                                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
                                     <i class="bi bi-geo-alt"></i> {% translate "Выбрать на карте" %}
                                 </button>
+                                {{ form.latitude }}
+                                {{ form.longitude }}
                             </div>
                             {% if form.location.errors %}
                                 <div class="invalid-feedback d-block">
@@ -182,7 +184,10 @@
     let myMap;
     let myPlacemark;
     let selectedAddress = '';
+    let selectedCoords = null;
     const locationInputId = '{{ form.location.id_for_label }}';
+    const latInputId = '{{ form.latitude.id_for_label }}';
+    const lonInputId = '{{ form.longitude.id_for_label }}';
 
     document.getElementById('mapModal').addEventListener('shown.bs.modal', function () {
         if (!myMap) {
@@ -229,6 +234,8 @@
                     iconCaption: selectedAddress,
                     balloonContent: selectedAddress
                 });
+                document.getElementById('{{ form.latitude.id_for_label }}').value = coords[0];
+                document.getElementById('{{ form.longitude.id_for_label }}').value = coords[1];
             });
 
             myPlacemark.events.add('dragend', function() {
@@ -240,6 +247,8 @@
                         iconCaption: selectedAddress,
                         balloonContent: selectedAddress
                     });
+                    document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
+                    document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
                 });
             });
         });
@@ -272,6 +281,8 @@
                             iconCaption: selectedAddress,
                             balloonContent: selectedAddress
                         });
+                        document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
+                        document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
                     });
                 });
             });
