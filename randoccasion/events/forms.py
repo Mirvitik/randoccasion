@@ -44,7 +44,7 @@ class EventCreateForm(forms.ModelForm):
             "image": forms.ClearableFileInput(
                 attrs={
                     "class": "form-control",
-                }
+                },
             ),
             "who_can_see": forms.Select(
                 attrs={

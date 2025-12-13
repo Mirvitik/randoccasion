@@ -1,6 +1,6 @@
 {% load static %}
-{% load i18n static %}
-
+{% load static %}
+{% load i18n static l10n %}
 <div class="col-12 col-md-6 col-lg-4">
     <div class="card h-100 shadow-sm event-card">
         <div class="card-header bg-transparent border-bottom-0 pb-0">
@@ -17,6 +17,9 @@
                 <div class="d-flex align-items-center text-muted mb-2">
                     <i class="bi bi-geo-alt me-2"></i>
                     <span class="location-text">{% translate "🗺️ Место: " %} {{event.location}}</span>
+                    <span class="distance-to"
+                          data-event-lat="{{ event.latitude|unlocalize }}"
+                          data-event-lon="{{ event.longitude|unlocalize }}"></span>
                 </div>
                 <div class="d-flex align-items-center text-muted mb-2">
                     <i class="bi bi-person me-2"></i>

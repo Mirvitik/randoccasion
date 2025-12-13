@@ -64,10 +64,14 @@ class Event(models.Model):
         default="Не указано",
     )
     latitude = models.FloatField(
-        verbose_name=_("Широта"), blank=True, null=True,
+        verbose_name=_("Широта"),
+        blank=True,
+        null=True,
     )
     longitude = models.FloatField(
-        verbose_name=_("Долгота"), blank=True, null=True,
+        verbose_name=_("Долгота"),
+        blank=True,
+        null=True,
     )
 
     created_at = models.DateTimeField(
@@ -138,16 +142,16 @@ class Event(models.Model):
 
     def can_join(self, user):
         if (
-                not user.is_authenticated
-                or self.creator == user
-                or not self.is_active
-                or self.expires_at <= timezone.now()
+            not user.is_authenticated
+            or self.creator == user
+            or not self.is_active
+            or self.expires_at <= timezone.now()
         ):
             return False
 
         return (
-                not self.is_full()
-                and not self.participants.filter(id=user.id).exists()
+            not self.is_full()
+            and not self.participants.filter(id=user.id).exists()
         )
 
     def pending_requests_count(self):
