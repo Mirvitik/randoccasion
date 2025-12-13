@@ -194,7 +194,7 @@ class EventRejectRequestView(LoginRequiredMixin, View):
 class MyEventsView(LoginRequiredMixin, ListView):
     template_name = "events/my_events.html"
     context_object_name = "events"
-    paginate_by = 10
+    paginate_by = 20
 
     def get_queryset(self):
         user = self.request.user
