@@ -5,12 +5,16 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
+from sorl.thumbnail import get_thumbnail
 
 from events.managers import EventManager
 from users.models import Interest, User
 
 
 class Event(models.Model):
+    def get_upload_path(self, filename):
+        return f"uploads_events/{self.id}/{filename}"
+
     WHO_CAN_SEE_CHOICES = [
         ("all", _("Все")),
         ("only_friends", _("Только друзья")),
@@ -29,6 +33,12 @@ class Event(models.Model):
         verbose_name="Кто может видеть публикацию",
         choices=WHO_CAN_SEE_CHOICES,
         default=WHO_CAN_SEE_CHOICES[0],
+    )
+    image = models.ImageField(
+        verbose_name=_("картинка"),
+        upload_to=get_upload_path,
+        null=True,
+        blank=True,
     )
     slug = models.SlugField(unique=True)
     description = CKEditor5Field("Описание", blank=True)
@@ -102,6 +112,17 @@ class Event(models.Model):
 
         return f"{minutes} мин."
 
+    def get_image_300x300(self):
+        if self.image:
+            return get_thumbnail(
+                self.image,
+                "300x300",
+                crop="center",
+                quality=99,
+            )
+
+        return None
+
     def available_slots(self):
         return self.max_participants - self.participants.count()
 
@@ -110,16 +131,16 @@ class Event(models.Model):
 
     def can_join(self, user):
         if (
-            not user.is_authenticated
-            or self.creator == user
-            or not self.is_active
-            or self.expires_at <= timezone.now()
+                not user.is_authenticated
+                or self.creator == user
+                or not self.is_active
+                or self.expires_at <= timezone.now()
         ):
             return False
 
         return (
-            not self.is_full()
-            and not self.participants.filter(id=user.id).exists()
+                not self.is_full()
+                and not self.participants.filter(id=user.id).exists()
         )
 
     def pending_requests_count(self):

@@ -20,19 +20,19 @@
         <div class="card-body">
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'created' %}active{% endif %}" 
+                    <a class="nav-link {% if current_type == 'created' %}active{% endif %}"
                        href="?type=created&status={{ current_status }}&sort_by={{ current_sort }}">
                         {% translate "Созданные мной " %} ({{ created_count }})
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'participating' %}active{% endif %}" 
+                    <a class="nav-link {% if current_type == 'participating' %}active{% endif %}"
                        href="?type=participating&status={{ current_status }}&sort_by={{ current_sort }}">
                         {% translate "Участвую " %} ({{ participating_count }})
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'all' %}active{% endif %}" 
+                    <a class="nav-link {% if current_type == 'all' %}active{% endif %}"
                        href="?type=all&status={{ current_status }}&sort_by={{ current_sort }}">
                         {% translate "Все мои события " %} ({{ active_count }})
                     </a>
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-   
+
     {% if events %}
         <div class="row">
             {% for event in events %}
@@ -97,6 +97,9 @@
                         </span>
                     </div>
                     <div class="card-body">
+                        <div>
+                            <img src="{{event.get_image_300x300.url}}">
+                        </div>
                         <p class="card-text">
                             <strong>{% translate "Тема" %}:</strong> {{ event.topic }}<br>
                             <strong>{% translate "Место:" %}</strong> {{ event.location }}<br>
@@ -104,13 +107,13 @@
                             <strong>{% translate "Создано" %}:</strong> {{ event.created_at|date:"d.m.Y H:i" }}<br>
                             <strong>{% translate "Истекает" %}:</strong> {{ event.expires_at|date:"d.m.Y H:i" }}
                         </p>
-                        
+
                         {% if event.creator == request.user %}
                             <span class="badge bg-primary">{% translate "Я создатель" %}</span>
                         {% else %}
                             <span class="badge bg-info">{% translate "Я участник" %}</span>
                         {% endif %}
-                        
+
                         {% if event.who_can_see == "only_for_me" %}
                             <span class="badge bg-warning">{% translate "Только для меня" %}</span>
                         {% elif event.who_can_see == "only_friends" %}
@@ -122,7 +125,7 @@
                             {% translate "Подробнее" %}
                         </a>
                         {% if event.creator == request.user %}
-                            <a href="{% url 'events:my_events_requests' %}?event={{ event.id }}" 
+                            <a href="{% url 'events:my_events_requests' %}?event={{ event.id }}"
                                class="btn btn-sm btn-outline-success">
                                 {% translate "Запросы" %} ({{ event.pending_requests_count }})
                             </a>

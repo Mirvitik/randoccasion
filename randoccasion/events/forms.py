@@ -13,6 +13,7 @@ class EventCreateForm(forms.ModelForm):
         model = Event
         fields = [
             "name",
+            "image",
             "topic",
             "who_can_see",
             "description",
@@ -34,6 +35,11 @@ class EventCreateForm(forms.ModelForm):
                     "class": "form-control",
                     "placeholder": "Отдых на природе",
                 },
+            ),
+            "image": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-control",
+                }
             ),
             "who_can_see": forms.Select(
                 attrs={
@@ -63,6 +69,7 @@ class EventCreateForm(forms.ModelForm):
         }
         labels = {
             "name": _("Название события"),
+            "image": _("Картинка"),
             "topic": _("Тема"),
             "who_can_see": _("Кто может видеть"),
             "description": _("Описание"),

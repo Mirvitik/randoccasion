@@ -13,6 +13,9 @@
             <div class="card-text description-content mb-3">
                 {{event.description|striptags|truncatechars_html:150}}
             </div>
+            <div>
+                <img src="{{event.get_image_300x300.url}}">
+            </div>
             <div class="event-info mb-3">
                 <div class="d-flex align-items-center text-muted mb-2">
                     <i class="bi bi-geo-alt me-2"></i>
@@ -25,21 +28,22 @@
                 <div class="d-flex align-items-center text-muted">
                     <i class="bi bi-clock me-2"></i>
                     {% if event.expires_after == -1 %}
-                        <span>{% translate "🕜️ Событие уже закончилось" %}</span>
+                    <span>{% translate "🕜️ Событие уже закончилось" %}</span>
                     {% else %}
-                        <span>{% translate "🕜️ Пройдёт через: " %} {{event.expires_after}}</span>
+                    <span>{% translate "🕜️ Пройдёт через: " %} {{event.expires_after}}</span>
                     {% endif %}
                 </div>
                 {% if user.is_authenticated %}
-                    {% if user in event.participants.all %}
-                        <span class="badge bg-success rounded-pill flex-shrink-0">{% translate "Вы записаны" %}</span>
-                    {% endif %}
+                {% if user in event.participants.all %}
+                <span class="badge bg-success rounded-pill flex-shrink-0">{% translate "Вы записаны" %}</span>
+                {% endif %}
                 {% endif %}
             </div>
             <div class="mt-auto pt-2">
-                <a href="{% url "events:event-detail" event.id %}" class="btn btn-primary btn-sm w-100 d-flex align-items-center justify-content-center">
-                    {% translate "Подробнее" %}
-                    <i class="bi bi-arrow-right ms-1"></i>
+                <a href="{% url "events:event-detail" event.id %}" class="btn btn-primary btn-sm w-100 d-flex
+                align-items-center justify-content-center">
+                {% translate "Подробнее" %}
+                <i class="bi bi-arrow-right ms-1"></i>
                 </a>
             </div>
         </div>
