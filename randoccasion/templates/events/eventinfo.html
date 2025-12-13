@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static l10n %}
 
 {% block content %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ymaps_api}}&lang=ru_RU" type="text/javascript"></script>
+
 <div class="container-fluid">
     <button type="button" class="btn btn-info">
         <a class="text-decoration-none link-light" href="{% url "events:all_events" %}">{% translate "К списку событий" %}</a>
@@ -11,7 +13,12 @@
     <strong>{{event.name}}</strong>
     <div>{{event.topic}}</div>
     <p class="card-text">{{event.description|safe|truncatewords_html:150}}</p>
-    <div>{% translate "🗺️ Место проведения:" %} {{event.location}}</div>
+    <div>
+        {% translate "🗺️ Место проведения:" %} {{event.location}}
+        <span class="distance-to" 
+            data-event-lat="{{ event.latitude|unlocalize }}" 
+            data-event-lon="{{ event.longitude|unlocalize }}"></span>
+    </div>
     <div>{% translate "👤 Проводит: " %}<a href="{% url "users:user_detail" event.creator.id %}">{{event.creator.username}}</a></div>
     <div>{% translate "🆓 Свободных мест: " %} {{event.available_slots}}</div>
     {% if event.expires_after == -1 %}

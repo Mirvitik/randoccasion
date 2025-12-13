@@ -56,9 +56,16 @@
         <div class="footer-container">
             {% include "includes/footer.html" %}
         </div>
-    </footer>
-</div>
-</body>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/theme.js' %}"></script>
+      </footer>
+    </div>
+    <div id="distance-translations" 
+        data-km="{% translate 'км' %}" 
+        data-m="{% translate 'м' %}"
+        data-not-defined="{% translate 'не определено' %}"
+        style="display: none;">
+    </div>
+  </body>
+  <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "js/theme.js" %}"></script>
+  <script src="{% static 'js/distance_calculator.js' %}"></script>
 </html>
