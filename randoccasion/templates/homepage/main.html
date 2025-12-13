@@ -2,5 +2,16 @@
 {% load i18n static %}
 
 {% block content %}
-{% translate "Главная страница" %}
+<div align="center"><h1>{% translate "Ивенты, которые могут Вам понравиться:" %}</h1></div>
+{% if events %}
+<div class="row g-3">
+    {% for event in events %}
+    {% include "includes/event_card.html" %}
+    {% endfor %}
+</div>
+<div align="center"><a class="btn btn-primary" href="{% url 'events:recommended-events' %}">Посмотреть
+    больше
+    мероприятий</a>
+</div>
+{% endif %}
 {% endblock %}

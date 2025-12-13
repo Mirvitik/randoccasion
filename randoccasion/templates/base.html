@@ -2,58 +2,63 @@
 {% load static %}
 {% load i18n %}
 <html lang="ru">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{% block title %}Встречалки{% endblock %}</title>
+    {% if title %}
+    <title>Встречалки | {{title}}</title>
+    {% else %}
+    <title>Встречалки</title>
+    {% endif %}
     <link rel="icon" href='{% static "img/favicon.ico" %}' type="image/x-icon">
     <link href='{% static "bootstrap/bootstrap.min.css" %}' rel="stylesheet">
     <link href='{% static "css/styles.css" %}' rel="stylesheet">
-  </head>
-  {% if messages %}
-    {% for message in messages %}
-        <div class="alert {% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-  {% endif %}
+</head>
+{% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 
-  <body>
-    <div class="wrapper">
-      <header>
+<body>
+<div class="wrapper">
+    <header>
         <div class="header-container">
-          {% include "includes/header.html" %}
+            {% include "includes/header.html" %}
         </div>
-      </header>
+    </header>
 
-      <main>
+    <main>
         <div class="container">
-          {% block content %}
+            {% block content %}
             <h1>{% translate "Содержимое страницы недоступно" %}</h1>
-          {% endblock %}
+            {% endblock %}
 
-          <div class="row justify-content-center">
-              {% with request.resolver_match.view_name as view_name %}
+            <div class="row justify-content-center">
+                {% with request.resolver_match.view_name as view_name %}
                 {% if view_name == 'homepage:homepage' %}
-                  <div class="row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-9 col-md-6 col-xl-3 pt-5 text-center">
-                      <img src="{% static 'img/racoon.jpg' %}" class="img-fluid rounded-4 shadow-sm" alt="{% translate 'Raccoon' %}">
+                        <img src="{% static 'img/racoon.jpg' %}" class="img-fluid rounded-4 shadow-sm"
+                             alt="{% translate 'Raccoon' %}">
                     </div>
-                  </div>
+                </div>
                 {% endif %}
-              {% endwith %}
-          </div>
+                {% endwith %}
+            </div>
         </div>
-      </main>
-      
-      <footer>
+    </main>
+
+    <footer>
         <div class="footer-container">
-          {% include "includes/footer.html" %}
+            {% include "includes/footer.html" %}
         </div>
-      </footer>
-    </div>
-  </body>
-  <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
-  <script src="{% static "js/theme.js" %}"></script>
+    </footer>
+</div>
+</body>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
 </html>
