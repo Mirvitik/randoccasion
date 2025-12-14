@@ -6,12 +6,15 @@ from datetime import timedelta
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import FormView
 from django.core import signing
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
+from django.views.generic import DetailView, UpdateView
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import Friendship, Profile, User
@@ -19,35 +22,55 @@ from users.utils import q_search
 from users.utils import send_tg_message_sync
 
 
-def signup_view(request):
+class SignUpView(FormView):
     template_name = "users/signup.html"
-    form = SignUpForm(request.POST or None)
+    form_class = SignUpForm
+    success_url = reverse_lazy("users:login")
 
-    if form.is_valid() and request.method == "POST":
+    def form_valid(self, form):
         user = form.save(commit=False)
         user.is_active = settings.DEFAULT_USER_IS_ACTIVE
         user.save()
 
         Profile.objects.create(user=user)
+
         if not settings.DEFAULT_USER_IS_ACTIVE:
-            activate_link = request.build_absolute_uri(
-                reverse("users:activate", kwargs={"username": user.username}),
+            self._send_activation_email(user)
+            messages.warning(
+                self.request,
+                "Проверьте почту для активации аккаунта",
             )
-            send_mail(
-                subject="Активация профиля",
-                message=f"Для активации перейдите по ссылке: {activate_link}",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-                fail_silently=False,
-            )
-            messages.warning(request, "Проверьте почту для активации")
         else:
-            messages.success(request, "Регистрация успешна")
+            messages.success(
+                self.request,
+                f"Добро пожаловать, {user.username}!",
+            )
 
-        return redirect("users:login")
+        return super().form_valid(form)
 
-    context = {"form": form}
-    return render(request, template_name, context)
+    def _send_activation_email(self, user):
+        activate_link = self.request.build_absolute_uri(
+            reverse("users:activate", kwargs={"username": user.username}),
+        )
+
+        send_mail(
+            subject="Активация профиля на сайте",
+            message=f"""
+            Здравствуйте, {user.username}!
+
+            Для активации вашего аккаунта перейдите по ссылке:
+            {activate_link}
+
+            Ссылка действительна 24 часа.
+            """,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Исправьте ошибки в форме регистрации")
+        return super().form_invalid(form)
 
 
 def activate_user_view(request, username):
@@ -98,59 +121,73 @@ def verify_tg(request):
     return render(request, "users/verify_tg.html")
 
 
-@login_required
-def user_detail_view(request, pk):
-    user = get_object_or_404(User, pk=pk, is_active=True)
-    are_friends = (
-        request.user.is_friends_with(user)
-        if request.user.is_authenticated
-        else False
-    )
-    sent_request = (
-        request.user.has_sent_request_to(user)
-        if request.user.is_authenticated
-        else False
-    )
-    received_request_obj = None
-    if (
-        request.user.is_authenticated
-        and request.user.has_received_request_from(user)
-    ):
-        received_request_obj = Friendship.objects.get(
-            from_user=user,
-            to_user=request.user,
-            status="pending",
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "users/user_detail.html"
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=True)
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(self.get_queryset(), pk=pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        request_user = self.request.user
+
+        are_friends = (
+            request_user.is_friends_with(user)
+            if request_user.is_authenticated
+            else False
         )
 
-    context = {
-        "user": user,
-        "are_friends": are_friends,
-        "sent_request": sent_request,
-        "received_request": received_request_obj,
-    }
-    return render(request, "users/user_detail.html", context)
-
-
-@login_required
-def profile_view(request):
-    if request.method == "POST":
-        profile_form = ProfileUpdateForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile,
+        sent_request = (
+            request_user.has_sent_request_to(user)
+            if request_user.is_authenticated
+            else False
         )
-        if profile_form.is_valid():
-            profile_form.save()
-            messages.success(request, "PROFILE: Профиль обновлен")
-            return redirect("users:profile")
-    else:
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
 
-    return render(
-        request,
-        "users/profile.html",
-        {"profile_form": profile_form},
-    )
+        received_request_obj = None
+        if (
+            request_user.is_authenticated
+            and request_user.has_received_request_from(user)
+        ):
+            received_request_obj = Friendship.objects.get(
+                from_user=user,
+                to_user=request_user,
+                status="pending",
+            )
+
+        context.update(
+            {
+                "are_friends": are_friends,
+                "sent_request": sent_request,
+                "received_request": received_request_obj,
+            },
+        )
+
+        return context
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    form_class = ProfileUpdateForm
+    template_name = "users/profile.html"
+    success_url = reverse_lazy("users:profile")
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "PROFILE: Профиль обновлен")
+        return redirect(self.success_url)
+
+    def form_invalid(self, form):
+        first_error = list(form.errors.values())[0][0]
+        messages.warning(self.request, f"PROFILE: Ошибка - {first_error}")
+        return super().form_invalid(form)
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
 
 
 def reactivate_account(request, signed_username):
