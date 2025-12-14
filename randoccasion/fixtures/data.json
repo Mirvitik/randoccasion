@@ -1,0 +1,58 @@
+[
+  {
+    "model": "users.interest",
+    "pk": 1,
+    "fields": {
+      "name": "music",
+      "slug": "music"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 2,
+    "fields": {
+      "name": "video games",
+      "slug": "video-games"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 3,
+    "fields": {
+      "name": "chess",
+      "slug": "chess"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 4,
+    "fields": {
+      "name": "football",
+      "slug": "football"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 5,
+    "fields": {
+      "name": "basketball",
+      "slug": "basketball"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 6,
+    "fields": {
+      "name": "coworking",
+      "slug": "coworking"
+    }
+  },
+  {
+    "model": "users.interest",
+    "pk": 7,
+    "fields": {
+      "name": "singing",
+      "slug": "singing"
+    }
+  }
+]

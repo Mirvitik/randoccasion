@@ -14,7 +14,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import Friendship, Profile, User
@@ -114,11 +114,6 @@ def user_list_view(request):
         users_list = users_list.order_by("first_name", "last_name", "username")
 
     return render(request, "users/user_list.html", {"user_list": users_list})
-
-
-@login_required
-def verify_tg(request):
-    return render(request, "users/verify_tg.html")
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -258,67 +253,84 @@ def send_friend_request(request, user_id):
     return redirect("users:user_detail", pk=user_id)
 
 
-@login_required
-def accept_friend_request(request, request_id):
-    fr = get_object_or_404(
-        Friendship,
-        id=request_id,
-        to_user=request.user,
-        status="pending",
-    )
-    fr.status = "accepted"
-    fr.save()
+class AcceptFriendRequest(LoginRequiredMixin, RedirectView):
+    pattern_name = "users:friend_requests"
+    permanent = False
 
-    messages.success(request, "Заявка принята!")
-    return redirect("users:friend_requests")
+    def get_redirect_url(self, *args, **kwargs):
+        request_id = kwargs.get("request_id")
+        fr = get_object_or_404(
+            Friendship,
+            id=request_id,
+            to_user=self.request.user,
+            status="pending",
+        )
+        fr.status = "accepted"
+        fr.save()
 
-
-@login_required
-def reject_friend_request(request, request_id):
-    fr = get_object_or_404(
-        Friendship,
-        id=request_id,
-        to_user=request.user,
-        status="pending",
-    )
-    fr.status = "rejected"
-    fr.save()
-
-    messages.info(request, "Заявка отклонена.")
-    return redirect("users:friend_requests")
+        messages.success(self.request, "Заявка принята!")
+        return reverse(self.pattern_name)
 
 
-@login_required
-def friends_list_view(request):
-    friends = request.user.friends.order_by("username")
-    return render(request, "users/friends_list.html", {"friends": friends})
+class RejectFriendRequest(LoginRequiredMixin, RedirectView):
+    pattern_name = "users:friend_requests"
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        request_id = kwargs.get("request_id")
+        fr = get_object_or_404(
+            Friendship,
+            id=request_id,
+            to_user=self.request.user,
+            status="pending",
+        )
+        fr.status = "rejected"
+        fr.save()
+
+        messages.info(self.request, "Заявка отклонена.")
+        return reverse(self.pattern_name)
 
 
-@login_required
-def friend_requests_view(request):
-    friend_requests = Friendship.objects.filter(
-        to_user=request.user,
-        status="pending",
-    )
-    return render(
-        request,
-        "users/friend_requests.html",
-        {"friend_requests": friend_requests},
-    )
+class FriendsListView(LoginRequiredMixin, ListView):
+    model = User
+    template_name = "users/friends_list.html"
+    context_object_name = "friends"
+
+    def get_queryset(self):
+        return self.request.user.friends.order_by("username")
 
 
-@login_required
-def remove_friend_view(request, friend_id):
-    friend = get_object_or_404(User, id=friend_id)
+class FriendRequestsView(LoginRequiredMixin, ListView):
+    model = Friendship
+    template_name = "users/friend_requests.html"
+    context_object_name = "friend_requests"
 
-    Friendship.objects.filter(
-        Q(from_user=request.user, to_user=friend, status="accepted")
-        | Q(from_user=friend, to_user=request.user, status="accepted"),
-    ).delete()
+    def get_queryset(self):
+        return Friendship.objects.filter(
+            to_user=self.request.user,
+            status="pending",
+        )
 
-    messages.success(
-        request,
-        f"Вы удалили {friend.username} из друзей",
-    )
 
-    return redirect("users:friends_list")
+class RemoveFriendView(LoginRequiredMixin, RedirectView):
+    pattern_name = "users:friends_list"
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        friend_id = kwargs.get("friend_id")
+        friend = get_object_or_404(User, id=friend_id)
+
+        Friendship.objects.filter(
+            Q(from_user=self.request.user, to_user=friend, status="accepted")
+            | Q(
+                from_user=friend,
+                to_user=self.request.user,
+                status="accepted",
+            ),
+        ).delete()
+
+        messages.success(
+            self.request,
+            f"Вы удалили {friend.username} из друзей",
+        )
+        return reverse_lazy(self.pattern_name)

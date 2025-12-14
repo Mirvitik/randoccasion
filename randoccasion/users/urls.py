@@ -99,32 +99,27 @@ urlpatterns = [
     ),
     path(
         "friend/accept/<int:request_id>/",
-        views.accept_friend_request,
+        views.AcceptFriendRequest.as_view(),
         name="accept_friend_request",
     ),
     path(
         "friend/reject/<int:request_id>/",
-        views.reject_friend_request,
+        views.RejectFriendRequest.as_view(),
         name="reject_friend_request",
     ),
     path(
         "friends/",
-        views.friends_list_view,
+        views.FriendsListView.as_view(),
         name="friends_list",
     ),
     path(
         "friend/requests/",
-        views.friend_requests_view,
+        views.FriendRequestsView.as_view(),
         name="friend_requests",
     ),
     path(
         "friend/remove/<int:friend_id>/",
-        views.remove_friend_view,
+        views.RemoveFriendView.as_view(),
         name="remove_friend",
-    ),
-    path(
-        "verify-tg/",
-        views.verify_tg,
-        name="verify-tg",
     ),
 ]
