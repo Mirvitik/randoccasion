@@ -12,7 +12,7 @@ from users.models import User
 async def send_tg_message(tg_id, message):
     bot = Bot(TELEGRAM_BOT_TOKEN)
     try:
-        await bot.send_message(chat_id=tg_id, text=message)
+        await bot.send_message(chat_id=tg_id, text=message, parse_mode="HTML")
     except Exception:
         pass
 

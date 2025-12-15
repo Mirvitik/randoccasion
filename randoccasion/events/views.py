@@ -14,6 +14,8 @@ from django.views.generic import CreateView, DetailView, ListView, View
 from events.forms import EventCreateForm
 from events.models import Event, EventRequest
 from events.utils import q_search
+from users.models import User
+from users.utils import send_tg_message_sync
 
 
 class EventIndexView(ListView):
@@ -130,6 +132,30 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 user=user,
                 message=message_text,
             )
+            msg = (
+                f"У Вас новая заявка на участие в событии от {user.username}\n"
+            )
+            if user.last_name or user.last_name:
+                msg += f"Имя: {request.user.last_name} {user.first_name}\n"
+            else:
+                msg += "Имя: не указано\n"
+
+            if request.user.profile.birthday:
+                msg += f"День рождения: {user.profile.birthday}\n"
+            else:
+                msg += "День рождения: не указан\n"
+
+            msg += (
+                "Сообщение от пользователя: <blockquote>"
+                f"{message_text}</blockquote>\n"
+            )
+            msg += (
+                f"Зайдите на https://{request.get_host()}/events/"
+                "my-events-requests/\n"
+                "для более детального осмотра анкеты"
+            )
+            user_to = User.objects.get(pk=event.creator_id)
+            send_tg_message_sync(user_to.profile.telegram_id, msg)
             messages.success(
                 request,
                 "Запрос на участие отправлен создателю события!",
@@ -164,6 +190,9 @@ class EventAcceptRequestView(LoginRequiredMixin, View):
             event_request.status = "accepted"
             event_request.save()
             event.participants.add(event_request.user)
+            user = User.objects.get(pk=event_request.user.id)
+            msg = f"Ура! Вас приняли на событие {event.name}\n"
+            send_tg_message_sync(user.profile.telegram_id, msg)
             messages.info(request, message="Заявка одобрена!")
             return redirect("events:my_events_requests")
 

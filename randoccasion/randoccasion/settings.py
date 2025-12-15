@@ -87,9 +87,9 @@ LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/auth/login/"
 
-DEFAULT_USER_IS_ACTIVE = os.getenv(
+DEFAULT_USER_IS_ACTIVE = load_bool_env(
     "DJANGO_DEFAULT_USER_IS_ACTIVE",
-    default=DEBUG,
+    DEBUG,
 )
 
 DATABASES = {
