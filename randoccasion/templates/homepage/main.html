@@ -9,9 +9,7 @@
     {% include "includes/event_card.html" %}
     {% endfor %}
 </div>
-<div align="center"><a class="btn btn-primary" href="{% url 'events:recommended-events' %}">Посмотреть
-    больше
-    мероприятий</a>
+<div align="center"><a class="btn btn-primary" href="{% url 'events:recommended-events' %}">{% translate "Посмотреть больше мероприятий" %}</a>
 </div>
 {% endif %}
 {% endblock %}

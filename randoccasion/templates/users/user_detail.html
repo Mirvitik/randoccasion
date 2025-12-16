@@ -63,29 +63,29 @@
 
         {% if are_friends %}
             <span class="text-success fw-bold">
-                ✓ Вы друзья
+                {% translate "✓ Вы друзья" %}
             </span>
 
         {% elif sent_request %}
             <span class="text-warning">
-                Заявка отправлена
+                {% translate "Заявка отправлена" %}
             </span>
 
         {% elif received_request %}
             <a href="{% url 'users:accept_friend_request' received_request.id %}"
                class="btn btn-success btn-sm me-2">
-               Принять заявку
+               {% translate "Принять заявку" %}
             </a>
 
             <a href="{% url 'users:reject_friend_request' received_request.id %}"
                class="btn btn-danger btn-sm">
-               Отклонить
+               {% translate "Отклонить" %}
             </a>
 
         {% else %}
             <a href="{% url 'users:send_friend_request' user.id %}"
                class="btn btn-primary btn-sm">
-               Добавить в друзья
+               {% translate "Добавить в друзья" %}
             </a>
         {% endif %}
 

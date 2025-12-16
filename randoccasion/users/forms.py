@@ -5,6 +5,7 @@ from datetime import date
 from django import forms
 from django.contrib import auth
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from users.models import Interest, Profile, User
 
@@ -69,7 +70,7 @@ class SignUpForm(auth.forms.UserCreationForm):
 class ProfileUpdateForm(forms.ModelForm):
     email = forms.EmailField(label="Email")
     telephone = forms.IntegerField(
-        label="Телефон",
+        label=_("Телефон"),
         disabled=True,
         required=False,
     )
@@ -78,13 +79,17 @@ class ProfileUpdateForm(forms.ModelForm):
         disabled=True,
         required=False,
     )
-    first_name = forms.CharField(label="Имя", required=False, max_length=40)
-    last_name = forms.CharField(label="Фамилия", required=False, max_length=40)
+    first_name = forms.CharField(label=_("Имя"), required=False, max_length=40)
+    last_name = forms.CharField(
+        label=_("Фамилия"),
+        required=False,
+        max_length=40,
+    )
     interests = forms.ModelMultipleChoiceField(
         queryset=Interest.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False,
-        label="Интересы",
+        label=_("Интересы"),
     )
 
     def __init__(self, *args, **kwargs):

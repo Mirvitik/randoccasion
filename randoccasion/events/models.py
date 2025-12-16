@@ -35,10 +35,10 @@ class Event(models.Model):
     )
     topic = models.CharField(
         verbose_name=_("Тема события"),
-        default="Без темы",
+        default=_("Без темы"),
     )
     who_can_see = models.CharField(
-        verbose_name="Кто может видеть публикацию",
+        verbose_name=_("Кто может видеть публикацию"),
         choices=WHO_CAN_SEE_CHOICES,
         default=WHO_CAN_SEE_CHOICES[0],
     )
@@ -49,7 +49,7 @@ class Event(models.Model):
         blank=True,
     )
     slug = models.SlugField(unique=True)
-    description = CKEditor5Field("Описание", blank=True)
+    description = CKEditor5Field(_("Описание"), blank=True)
     is_active = models.BooleanField(verbose_name=_("Активно"), default=True)
     creator = models.ForeignKey(
         to=User,
@@ -61,7 +61,7 @@ class Event(models.Model):
         User,
         blank=True,
         related_name="events_participating",
-        verbose_name="Участники",
+        verbose_name=_("Участники"),
     )
     max_participants = models.PositiveSmallIntegerField(
         verbose_name=_("Максимальное количество участников"),
@@ -69,7 +69,7 @@ class Event(models.Model):
     )
     location = models.CharField(
         verbose_name=_("Примерное местоположение, город"),
-        default="Не указано",
+        default=_("Не указано"),
     )
     latitude = models.FloatField(
         verbose_name=_("Широта"),
@@ -98,7 +98,7 @@ class Event(models.Model):
         Interest,
         blank=True,
         related_name="events",
-        verbose_name="Интересы",
+        verbose_name=_("Интересы"),
     )
 
     objects = EventManager()

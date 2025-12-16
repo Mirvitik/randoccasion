@@ -35,7 +35,7 @@ msgstr "Theme"
 msgid "Кто может видеть"
 msgstr "Who can see"
 
-#: .\events\forms.py:68
+#: .\events\forms.py:68 .\events\models.py:68
 msgid "Описание"
 msgstr "Description"
 
@@ -73,7 +73,7 @@ msgstr "There must be at least one participant"
 msgid "Все"
 msgstr "All"
 
-#: .\events\models.py:16 .\templates\events\my_events.html:14
+#: .\events\models.py:16 .\templates\events\my_events.html:14 \templates\users\friends_list.html:5
 msgid "Только друзья"
 msgstr "Only friends"
 
@@ -116,6 +116,18 @@ msgstr "Created"
 #: .\events\models.py:57 .\events\models.py:161 .\templates\events\my_events.html:20
 msgid "Участники:"
 msgstr "Participants:"
+
+#: .\events\models.py:57
+msgid "Участники"
+msgstr "Participants"
+
+#: .\events\models.py:57
+msgid "Широта"
+msgstr "Width"
+
+#: .\events\models.py:57
+msgid "Долгота"
+msgstr "Longitude"
 
 #: .\events\models.py:62
 msgid "Истекает через (не ранее 15мин с этого момента)"
@@ -192,11 +204,9 @@ msgstr "Create a new event"
 msgid "Выберите, кто сможет увидеть ваше событие"
 msgstr "Choose who can see your event"
 
-#: .\templates\events\create_event.html:74
-#, fuzzy
-#| msgid "Интересы:"
+#: .\templates\events\create_event.html:74 .\users\models.py:70 .\users\forms.py:70 .\events\models.py:70
 msgid "Интересы"
-msgstr "Interests:"
+msgstr "Interests"
 
 #: .\templates\events\create_event.html:101
 msgid "Выбрать на карте"
@@ -281,9 +291,17 @@ msgstr "Change password"
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
 
-#: .\templates\events\events.html:32
+#: .\templates\events\events.html:32 .\templates\users\user_list.html:32
 msgid "Фильтры"
 msgstr "Filters"
+
+#:  .\templates\users\user_list.html:32
+msgid "Фильтрация пользователей"
+msgstr "Filtering users"
+
+#:  .\templates\users\user_list.html:32
+msgid "Возможно вам знакомы"
+msgstr "You may be familiar with"
 
 #: .\templates\events\events.html:40 .\events\models.py:177 .\templates\events\create_event.html:101
 msgid "Запрос на событие"
@@ -361,7 +379,7 @@ msgstr "Completed events"
 msgid "Все события"
 msgstr "All events"
 
-#: .\templates\events\events.html:80
+#: .\templates\events\events.html:80 .\templates\users\user_list.html:80
 msgid "Сортировка"
 msgstr "Sort"
 
@@ -402,7 +420,7 @@ msgstr "from"
 msgid "пользователь"
 msgstr "user"
 
-#: .\templates\events\events.html:143
+#: .\templates\events\events.html:143 .\templates\users\user_list.html:143
 msgid "Не использовать"
 msgstr "Don't use"
 
@@ -418,26 +436,54 @@ msgstr "The nearest ones first"
 msgid "Сначала отдалённые"
 msgstr "At first, the remote ones"
 
-#: .\templates\events\events.html:127
+#: .\templates\events\events.html:127 .\templates\users\user_list.html:127
 msgid "По алфавиту:"
 msgstr "Alphabetically:"
 
-#: .\templates\events\events.html:131 .\templates\events\my_events.html:131
+#: .\templates\events\events.html:131 .\templates\events\my_events.html:131 .\templates\users\user_list.html:127
 msgid "А-Я"
 msgstr "A-Z"
 
-#: .\templates\events\events.html:137 .\templates\events\my_events.html:131
+#: .\templates\events\events.html:137 .\templates\events\my_events.html:131 .\templates\users\user_list.html:127
 msgid "Я-А"
 msgstr "Z-A"
 
 
-#: .\templates\events\events.html:152
+#: .\templates\events\events.html:152 .\templates\users\user_list.html:143
 msgid "Применить"
 msgstr "Apply"
 
-#: .\templates\events\events.html:153
+#: .\templates\events\events.html:153 .\templates\users\user_list.html:143
 msgid "Сбросить"
 msgstr "Throw off"
+
+#: .\templates\users\user_detail.html:143
+msgid "✓ Вы друзья"
+msgstr "✓ You are friends"
+
+#: .\templates\users\user_detail.html:143
+msgid "Добавить в друзья"
+msgstr "Add to Friends"
+
+#: .\templates\homepage\main.html:143
+msgid "Ивенты, которые могут Вам понравиться:"
+msgstr "Events that you might like:"
+
+#: .\templates\homepage\main.html:143
+msgid "Посмотреть больше мероприятий"
+msgstr "View more events"
+
+#: .\users/forms.py:123
+msgid "Телефон"
+msgstr "Phone"
+
+#: .\templates\users\user_detail.html:143
+msgid "Заявка отправлена"
+msgstr "The application has been sent"
+
+#: .\templates\users\user_detail.html:143
+msgid "Принять заявку"
+msgstr "Accept the application"
 
 #: .\templates\events\events.html:163
 msgid "Результаты поиска по запросу"
@@ -483,7 +529,7 @@ msgid "Принять"
 msgstr "Accept"
 
 #: .\templates\events\my_events_requests.html:29
-#: .\templates\users\friend_requests.html:55 .\templates\events\events.html:152
+#: .\templates\users\friend_requests.html:55 .\templates\events\events.html:152 .\templates\users\user_detail.html:55
 msgid "Отклонить"
 msgstr "Reject"
 
@@ -620,11 +666,10 @@ msgstr "There are no incoming requests."
 msgid "Найти друзей"
 msgstr "Find Friends"
 
+
 #: .\templates\users\friends_list.html:5
-#, fuzzy
-#| msgid "Только друзья"
 msgid "Мои друзья"
-msgstr "Only friends"
+msgstr "My friends"
 
 #: .\templates\users\friends_list.html:53
 msgid "Вы уверены, что хотите удалить"
@@ -750,7 +795,7 @@ msgstr "Profile of user"
 msgid "Нет аватарки"
 msgstr "There is no avatar"
 
-#: .\templates\users\user_detail.html:26
+#: .\templates\users\user_detail.html:26 .\users\forms.py:26
 msgid "Имя"
 msgstr "Name"
 
@@ -760,21 +805,41 @@ msgid "не указано"
 msgstr "not stated"
 
 #: .\templates\users\user_detail.html:30 .\templates\users\user_detail.html:38
-#: .\templates\users\user_detail.html:46
+#: .\templates\users\user_detail.html:46 .\events\models.py:46
 msgid "Не указано"
 msgstr "Not stated"
 
-#: .\templates\users\user_detail.html:34
+#:  .\events\models.py:46
+msgid "картинка"
+msgstr "Image"
+
+#:  .\events\models.py:46
+msgid "Без темы"
+msgstr "Without theme"
+
+#: .\templates\users\user_detail.html:34 .\users\forms.py:34
 msgid "Фамилия"
 msgstr "Surname"
+
+#: .\templates\users\user_list.html:34
+msgid "Это вы"
+msgstr "It's you"
 
 #: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:85
 msgid "День рождения:"
 msgstr "Date of birth:"
 
-#: .\templates\users\user_detail.html:50
+#: .\templates\users\user_detail.html:50 .\users\forms.py:88 .\users\models.py:88 .\events\models.py:88
 msgid "Интересы:"
 msgstr "Interests:"
+
+#: .\users\models.py:88
+msgid "Интерес"
+msgstr "Interest"
+
+#: .\events\models.py:88
+msgid "Кто может видеть публикацию"
+msgstr "Who can see the post"
 
 #: .\templates\users\user_detail.html:56
 msgid "не указаны"

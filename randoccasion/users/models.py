@@ -167,8 +167,8 @@ class Interest(models.Model):
     slug = models.SlugField(max_length=120, unique=True)
 
     class Meta:
-        verbose_name = "Интерес"
-        verbose_name_plural = "Интересы"
+        verbose_name = _("Интерес")
+        verbose_name_plural = _("Интересы")
 
     def __str__(self):
         return self.name
