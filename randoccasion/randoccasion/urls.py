@@ -11,6 +11,7 @@ urlpatterns = (
     ]
     + i18n_patterns(
         path("admin/", admin.site.urls),
+        path("api/v1/", include("api.urls")),
         path("auth/", include("users.urls", namespace="users")),
         path("auth/", include("django.contrib.auth.urls")),
         path("", include("homepage.urls")),
