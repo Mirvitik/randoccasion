@@ -1,7 +1,9 @@
 __all__ = ()
 
+from datetime import timedelta
 import sys
 
+from django.conf import settings
 from django.contrib.auth.models import (
     AbstractUser,
     UserManager as DjangoUserManager,
@@ -9,6 +11,8 @@ from django.contrib.auth.models import (
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.db.models import Q
+from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from sorl.thumbnail import get_thumbnail
 
@@ -304,3 +308,26 @@ class Friendship(models.Model):
 
     def __str__(self):
         return f"{self.from_user} → {self.to_user} ({self.status})"
+
+
+class ActivationToken(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    token = models.CharField(max_length=64, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_valid(self):
+        return (
+            not self.is_used
+            and timezone.now() - self.created_at < timedelta(hours=24)
+        )
+
+    @classmethod
+    def create_for_user(cls, user):
+        cls.objects.filter(user=user).delete()
+
+        token = get_random_string(64)
+        return cls.objects.create(user=user, token=token)

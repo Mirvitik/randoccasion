@@ -1,7 +1,6 @@
 __all__ = ()
 
 import datetime
-from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
@@ -13,11 +12,10 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils import timezone
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from users.forms import ProfileUpdateForm, SignUpForm
-from users.models import Friendship, Profile, User
+from users.models import ActivationToken, Friendship, Profile, User
 from users.utils import q_search
 from users.utils import send_tg_message_sync
 
@@ -49,8 +47,13 @@ class SignUpView(FormView):
         return super().form_valid(form)
 
     def _send_activation_email(self, user):
+        activation_token = ActivationToken.create_for_user(user)
+
         activate_link = self.request.build_absolute_uri(
-            reverse("users:activate", kwargs={"username": user.username}),
+            reverse(
+                "users:activate",
+                kwargs={"token": activation_token.token},
+            ),
         )
 
         send_mail(
@@ -73,20 +76,29 @@ class SignUpView(FormView):
         return super().form_invalid(form)
 
 
-def activate_user_view(request, username):
+def activate_user_view(request, token):
     try:
-        user = User.objects.get(username=username)
-        time_limit = user.date_joined + timedelta(hours=12)
-        if timezone.now() <= time_limit:
-            user.is_active = True
-            user.save()
-            messages.success(request, "Аккаунт активирован!")
-        else:
-            messages.error(request, "Ссылка активации просрочена")
-    except User.DoesNotExist:
-        messages.error(request, "Пользователь не найден")
+        activation_token = ActivationToken.objects.get(
+            token=token,
+            is_used=False,
+        )
+        if not activation_token.is_valid():
+            messages.error(request, "Срок действия ссылки истек")
+            return redirect("login")
 
-    return redirect("users:login")
+        user = activation_token.user
+        user.is_active = True
+        user.save()
+
+        activation_token.is_used = True
+        activation_token.save()
+
+        messages.success(request, "Аккаунт успешно активирован!")
+        return redirect("login")
+
+    except ActivationToken.DoesNotExist:
+        messages.error(request, "Неверная ссылка активации")
+        return redirect("login")
 
 
 @login_required

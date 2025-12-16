@@ -68,7 +68,7 @@ urlpatterns = [
         name="signup",
     ),
     path(
-        "activate/<str:username>/",
+        "activate/<str:token>/",
         views.activate_user_view,
         name="activate",
     ),
