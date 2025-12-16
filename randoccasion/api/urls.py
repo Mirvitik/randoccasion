@@ -1,6 +1,7 @@
 from django.urls import path
 
 from api.views import (
+    APIKeyCreate,
     EventDetail,
     EventListCreate,
     InterestDetail,
@@ -8,6 +9,8 @@ from api.views import (
     UserDetail,
     UserListCreate,
 )
+
+app_name = "api"
 
 urlpatterns = [
     path("users/", UserListCreate.as_view(), name="user-list"),
@@ -19,5 +22,10 @@ urlpatterns = [
         "interests/<int:pk>/",
         InterestDetail.as_view(),
         name="interest-detail",
+    ),
+    path(
+        "apikey-create/",
+        APIKeyCreate.as_view(),
+        name="apikey-create",
     ),
 ]

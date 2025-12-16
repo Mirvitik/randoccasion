@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "rest_framework",
-    "api",
+    "rest_framework_api_key",
+    "api.apps.ApiConfig",
     "homepage.apps.HomepageConfig",
     "sorl.thumbnail",
     "events.apps.EventsConfig",
@@ -194,4 +195,13 @@ MESSAGE_TAGS = {
     messages.SUCCESS: "alert-success",
     messages.WARNING: "alert-warning",
     messages.ERROR: "alert-danger",
+}
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ],
 }

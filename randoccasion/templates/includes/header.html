@@ -118,6 +118,15 @@
                 <li class="nav-item">
                     <a href="{% url 'admin:index' %}" class="nav-link">{% translate "Панель администратора" %}</a>
                 </li>
+                {% if view_name == 'api:apikey-create' %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'api:apikey-create' %}">{% translate "Создать API-ключ" %}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'api:apikey-create' %}" class="nav-link">{% translate "Создать API-ключ" %}</a>
+                </li>
+                {% endif %}
                 {% endif %}
             </ul>
             {% endwith %}
