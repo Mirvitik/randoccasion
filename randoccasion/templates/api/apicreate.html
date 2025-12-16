@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0">{% translate "Регистрация API ключа" %}</h2>
+            </div>
+
+            <div class="card-body">
+                {% if key %}
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">{% translate "Ключ создан! Сохраните его в безопасном месте" %}</h4>
+                    <hr>
+                    <p>{{ key }}</p>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'api:apikey-create' %}" class="btn btn-outline-primary">
+                        {% translate "Создать ещё один ключ" %}
+                    </a>
+                </div>
+                {% else %}
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Поле name -->
+                    <div class="mb-4">
+                        <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">
+                            {{ form.name.label }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ form.name }}
+                        {% if form.name.help_text %}
+                        <div class="form-text text-muted">
+                            <small>{{ form.name.help_text }}</small>
+                        </div>
+                        {% endif %}
+                        {% if form.name.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.name.errors %}
+                            <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле expiry_date с улучшенным выбором даты -->
+                    <div class="mb-4">
+                        <label for="{{ form.expiry_date.id_for_label }}" class="form-label fw-bold">
+                            {{ form.expiry_date.label }}
+                            <span class="text-danger">*</span>
+                        </label>
+
+                        <div class="row g-2 mb-3">
+                            <!-- Выбор даты -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar"></i>
+                                    </span>
+                                    <input type="date"
+                                           id="date_input"
+                                           class="form-control"
+                                           min="{{ today|date:'Y-m-d' }}"
+                                           required>
+                                </div>
+                            </div>
+
+                            <!-- Выбор времени -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-clock"></i>
+                                    </span>
+                                    <input type="time"
+                                           id="time_input"
+                                           class="form-control"
+                                           value="23:59"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Скрытое поле для отправки данных -->
+                        {{ form.expiry_date }}
+
+                        <!-- Быстрый выбор срока действия -->
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2">{% translate "Быстрый выбор:" %}</small>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="1">
+                                    {% translate "1 день" %}
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="7">
+                                    {% translate "1 неделя" %}
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm quick-date"
+                                        data-days="30">
+                                    {% translate "1 месяц" %}
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm quick-date"
+                                        data-days="90">
+                                    {% translate "3 месяца" %}
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm quick-date"
+                                        data-days="365">
+                                    {% translate "1 год" %}
+                                </button>
+                            </div>
+                        </div>
+
+                        {% if form.expiry_date.help_text %}
+                        <div class="form-text text-muted">
+                            <small>{{ form.expiry_date.help_text }}</small>
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-2">
+                            <small class="text-info">
+                                <i class="bi bi-info-circle me-1"></i>
+                                {% translate "Выбрано: " %}<span
+                                    id="selected_datetime">{% translate "Не выбрано" %}</span>
+                            </small>
+                        </div>
+
+                        {% if form.expiry_date.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.expiry_date.errors %}
+                            <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-key me-2"></i>{% translate "Создать ключ" %}
+                        </button>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+
+            {% if not key %}
+            <div class="card-footer bg-light">
+                <small class="text-muted">
+                    <i class="bi bi-info-circle me-1"></i>
+                    {% translate "Все поля обязательны для заполнения" %}
+                </small>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-select {
+        border-radius: 0.375rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid #dee2e6;
+    }
+
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .input-group-text {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+
+    .font-monospace {
+        font-family: 'Courier New', monospace;
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        word-break: break-all;
+    }
+
+    #selected_datetime {
+        font-weight: 500;
+        color: #0d6efd;
+    }
+
+    .quick-date.active {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Добавляем классы Bootstrap к полям формы
+        const nameField = document.getElementById('{{ form.name.id_for_label }}');
+        const expiryField = document.getElementById('{{ form.expiry_date.id_for_label }}');
+
+        if (nameField) nameField.classList.add('form-control');
+
+        // Скрываем оригинальное поле expiry_date
+        if (expiryField) {
+            expiryField.style.display = 'none';
+        }
+
+        // Получаем элементы для раздельного ввода
+        const dateInput = document.getElementById('date_input');
+        const timeInput = document.getElementById('time_input');
+        const selectedDatetimeSpan = document.getElementById('selected_datetime');
+
+        // Устанавливаем минимальную дату - сегодня
+        const today = new Date();
+        const todayFormatted = today.toISOString().split('T')[0];
+        if (dateInput && !dateInput.value) {
+            dateInput.value = todayFormatted;
+            dateInput.min = todayFormatted;
+        }
+
+        // Функция обновления скрытого поля и отображения
+        function updateDateTime() {
+            if (!dateInput.value || !timeInput.value) return;
+
+            // Создаем дату в формате, который понимает Django
+            const dateTimeString = `${dateInput.value}T${timeInput.value}:00`;
+            const localDate = new Date(dateTimeString);
+
+            // Преобразуем в формат для Django (YYYY-MM-DD HH:MM:SS)
+            const djangoFormat = localDate.toISOString().replace('T', ' ').substring(0, 19);
+
+            // Обновляем скрытое поле
+            if (expiryField) {
+                expiryField.value = djangoFormat;
+            }
+
+            // Форматируем для отображения пользователю
+            const displayDate = localDate.toLocaleDateString('ru-RU', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            selectedDatetimeSpan.textContent = displayDate;
+        }
+
+        // Обработчики изменений
+        if (dateInput) {
+            dateInput.addEventListener('change', updateDateTime);
+        }
+
+        if (timeInput) {
+            timeInput.addEventListener('change', updateDateTime);
+        }
+
+        // Инициализация при загрузке
+        updateDateTime();
+
+        // Обработчики для быстрого выбора срока
+        document.querySelectorAll('.quick-date').forEach(button => {
+            button.addEventListener('click', function() {
+                const days = parseInt(this.getAttribute('data-days'));
+                const futureDate = new Date();
+                futureDate.setDate(futureDate.getDate() + days);
+
+                // Устанавливаем дату
+                dateInput.value = futureDate.toISOString().split('T')[0];
+
+                // Устанавливаем время на конец дня
+                timeInput.value = "23:59";
+
+                // Обновляем UI
+                updateDateTime();
+
+                // Подсвечиваем активную кнопку
+                document.querySelectorAll('.quick-date').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Валидация формы
+        const form = document.querySelector('.needs-validation');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    // Проверяем, выбрана ли дата
+                    if (!dateInput.value || !timeInput.value) {
+                        if (!dateInput.value) {
+                            dateInput.classList.add('is-invalid');
+                        }
+                        if (!timeInput.value) {
+                            timeInput.classList.add('is-invalid');
+                        }
+                    }
+                } else {
+                    // Убеждаемся, что скрытое поле заполнено
+                    if (!expiryField.value) {
+                        updateDateTime();
+                    }
+                }
+                form.classList.add('was-validated');
+            }, false);
+        }
+
+        // Убираем класс is-invalid при вводе
+        [dateInput, timeInput].forEach(input => {
+            if (input) {
+                input.addEventListener('input', function() {
+                    this.classList.remove('is-invalid');
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}
