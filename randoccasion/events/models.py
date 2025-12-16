@@ -11,6 +11,14 @@ from events.managers import EventManager
 from users.models import Interest, User
 
 
+def default_expires_at():
+    return timezone.now() + timezone.timedelta(hours=3)
+
+
+def min_expires_at():
+    return timezone.now() + timezone.timedelta(minutes=15)
+
+
 class Event(models.Model):
     def get_upload_path(self, filename):
         return f"uploads_events/{self.id}/{filename}"
@@ -81,9 +89,9 @@ class Event(models.Model):
     )
     expires_at = models.DateTimeField(
         verbose_name=_("Истекает через (не ранее 15мин с этого момента)"),
-        default=timezone.now() + timezone.timedelta(hours=3),
+        default=default_expires_at,
         validators=[
-            MinValueValidator(timezone.now() + timezone.timedelta(minutes=15)),
+            MinValueValidator(min_expires_at),
         ],
     )
     interests = models.ManyToManyField(
