@@ -317,12 +317,10 @@ class ActivationToken(models.Model):
     )
     token = models.CharField(max_length=64, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    is_used = models.BooleanField(default=False)
 
     def is_valid(self):
         return (
-            not self.is_used
-            and timezone.now() - self.created_at < timedelta(hours=24)
+            timezone.now() - self.created_at < timedelta(hours=24),
         )
 
     @classmethod

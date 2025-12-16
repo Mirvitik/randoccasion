@@ -80,7 +80,6 @@ def activate_user_view(request, token):
     try:
         activation_token = ActivationToken.objects.get(
             token=token,
-            is_used=False,
         )
         if not activation_token.is_valid():
             messages.error(request, "Срок действия ссылки истек")
@@ -90,8 +89,7 @@ def activate_user_view(request, token):
         user.is_active = True
         user.save()
 
-        activation_token.is_used = True
-        activation_token.save()
+        activation_token.delete()
 
         messages.success(request, "Аккаунт успешно активирован!")
         return redirect("login")
