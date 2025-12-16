@@ -4,13 +4,12 @@ import datetime
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import FormView
 from django.core import signing
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
@@ -76,54 +75,63 @@ class SignUpView(FormView):
         return super().form_invalid(form)
 
 
-def activate_user_view(request, token):
-    try:
-        activation_token = ActivationToken.objects.get(
-            token=token,
-        )
-        if not activation_token.is_valid():
-            messages.error(request, "Срок действия ссылки истек")
-            return redirect("login")
+class ActivateUserView(RedirectView):
+    pattern_name = "users:login"
 
-        user = activation_token.user
-        user.is_active = True
-        user.save()
+    def get_redirect_url(self, *args, **kwargs):
+        token = self.kwargs.get("token")
+        try:
+            activation_token = ActivationToken.objects.get(token=token)
 
-        activation_token.delete()
+            if not activation_token.is_valid():
+                messages.error(self.request, "Срок действия ссылки истек")
+                return super().get_redirect_url(*args, **kwargs)
 
-        messages.success(request, "Аккаунт успешно активирован!")
-        return redirect("login")
+            user = activation_token.user
+            user.is_active = True
+            user.save()
 
-    except ActivationToken.DoesNotExist:
-        messages.error(request, "Неверная ссылка активации")
-        return redirect("login")
+            activation_token.delete()
+
+            messages.success(self.request, "Аккаунт успешно активирован!")
+
+        except ActivationToken.DoesNotExist:
+            messages.error(self.request, "Неверная ссылка активации")
+
+        return super().get_redirect_url(*args, **kwargs)
 
 
-@login_required
-def user_list_view(request):
-    query = request.GET.get("q")
-    maybe_familiar = request.GET.get("maybe_familiar")
-    sort_by_alpha = request.GET.get("sort_alpha")
-    if query:
-        users_list = q_search(query)
-    else:
-        users_list = User.objects.filter(
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    template_name = "users/user_list.html"
+    context_object_name = "user_list"
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = User.objects.filter(
             is_active=True,
         ).select_related("profile")
 
-    if maybe_familiar:
-        users_list = request.user.friends_of_friends
+        query = self.request.GET.get("q")
+        maybe_familiar = self.request.GET.get("maybe_familiar")
+        sort_by_alpha = self.request.GET.get("sort_alpha")
 
-    if sort_by_alpha == "desc":
-        users_list = users_list.order_by(
-            "-first_name",
-            "-last_name",
-            "-username",
-        )
-    elif sort_by_alpha == "asc":
-        users_list = users_list.order_by("first_name", "last_name", "username")
+        if query:
+            queryset = q_search(query)
 
-    return render(request, "users/user_list.html", {"user_list": users_list})
+        if maybe_familiar:
+            queryset = self.request.user.friends_of_friends
+
+        if sort_by_alpha == "desc":
+            queryset = queryset.order_by(
+                "-first_name",
+                "-last_name",
+                "-username",
+            )
+        elif sort_by_alpha == "asc":
+            queryset = queryset.order_by("first_name", "last_name", "username")
+
+        return queryset
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -195,72 +203,83 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user.profile
 
 
-def reactivate_account(request, signed_username):
-    try:
-        signer = signing.TimestampSigner()
-        username = signer.unsign(signed_username, max_age=3600 * 24 * 7)
-        user = User.objects.get(username=username)
+class ReactivateAccountView(RedirectView):
+    pattern_name = "users:login"
 
-        user.is_active = True
-        user.attempts_count = 0
-        user.save()
+    def get(self, request, *args, **kwargs):
+        signed_username = self.kwargs.get("signed_username")
 
-        messages.success(request, "Ваш аккаунт успешно активирован!")
+        try:
+            signer = signing.TimestampSigner()
+            username = signer.unsign(signed_username, max_age=3600 * 24 * 7)
+            user = User.objects.get(username=username)
 
-    except signing.SignatureExpired:
-        messages.error(request, "Ссылка для активации устарела.")
+            user.is_active = True
+            user.attempts_count = 0
+            user.save()
 
-    except (signing.BadSignature, User.DoesNotExist):
-        messages.error(request, "Неверная ссылка для активации.")
+            messages.success(request, "Ваш аккаунт успешно активирован!")
 
-    return redirect("users:login")
+        except signing.SignatureExpired:
+            messages.error(request, "Ссылка для активации устарела.")
+
+        except (signing.BadSignature, User.DoesNotExist):
+            messages.error(request, "Неверная ссылка для активации.")
+
+        return super().get(request, *args, **kwargs)
 
 
-@login_required
-def send_friend_request(request, user_id):
-    to_user = get_object_or_404(User, id=user_id)
+class SendFriendRequestView(LoginRequiredMixin, RedirectView):
+    pattern_name = "users:user_detail"
+    permanent = False
 
-    if to_user == request.user:
-        messages.error(request, "Вы не можете добавить самого себя.")
-        return redirect("users:user_detail", pk=user_id)
+    def get_redirect_url(self, *args, **kwargs):
+        user_id = self.kwargs.get("user_id")
+        to_user = get_object_or_404(User, id=user_id)
 
-    fr, created = Friendship.objects.get_or_create(
-        from_user=request.user,
-        to_user=to_user,
-        defaults={"status": "pending"},
-    )
+        if to_user == self.request.user:
+            messages.error(self.request, "Вы не можете добавить самого себя.")
+            return reverse(self.pattern_name, kwargs={"pk": user_id})
 
-    if not created:
-        messages.info(request, "Заявка уже отправлена.")
-    else:
-        message = (
-            f"Вам пришла новая заявка в друзья от {request.user.username}!\n"
-            f"Зайдите на сайт и проверьте её"
+        fr, created = Friendship.objects.get_or_create(
+            from_user=self.request.user,
+            to_user=to_user,
+            defaults={"status": "pending"},
         )
-        if to_user.profile.telegram_id is not None:
-            if request.user.profile.tg_last_message_date is not None:
-                deltatime = (
-                    datetime.datetime.now()
-                    - request.user.profile.tg_last_message_date
-                )
-                if (deltatime.total_seconds() / 3600) >= 24:
-                    request.user.profile.tg_messages_cnt = 0
-                    request.user.profile.tg_last_message_date = None
 
-            if request.user.profile.tg_messages_cnt < 10:
-                send_tg_message_sync(
-                    tg_id=to_user.profile.telegram_id,
-                    message=message,
-                )
-                request.user.profile.tg_messages_cnt += 1
-                request.user.profile.tg_last_message_date = (
-                    datetime.datetime.now()
-                )
+        if not created:
+            messages.info(self.request, "Заявка уже отправлена.")
+        else:
+            message = (
+                f"Вам пришла новая заявка в друзья "
+                f"от {self.request.user.username}!\n"
+                f"Зайдите на сайт и проверьте её"
+            )
 
-        request.user.profile.save()
-        messages.success(request, "Заявка в друзья отправлена.")
+            if to_user.profile.telegram_id is not None:
+                if self.request.user.profile.tg_last_message_date is not None:
+                    deltatime = (
+                        datetime.datetime.now()
+                        - self.request.user.profile.tg_last_message_date
+                    )
+                    if (deltatime.total_seconds() / 3600) >= 24:
+                        self.request.user.profile.tg_messages_cnt = 0
+                        self.request.user.profile.tg_last_message_date = None
 
-    return redirect("users:user_detail", pk=user_id)
+                if self.request.user.profile.tg_messages_cnt < 10:
+                    send_tg_message_sync(
+                        tg_id=to_user.profile.telegram_id,
+                        message=message,
+                    )
+                    self.request.user.profile.tg_messages_cnt += 1
+                    self.request.user.profile.tg_last_message_date = (
+                        datetime.datetime.now()
+                    )
+
+            self.request.user.profile.save()
+            messages.success(self.request, "Заявка в друзья отправлена.")
+
+        return reverse(self.pattern_name, kwargs={"pk": user_id})
 
 
 class AcceptFriendRequest(LoginRequiredMixin, RedirectView):

@@ -69,12 +69,12 @@ urlpatterns = [
     ),
     path(
         "activate/<str:token>/",
-        views.activate_user_view,
+        views.ActivateUserView.as_view(),
         name="activate",
     ),
     path(
-        "user_list/",
-        views.user_list_view,
+        "users/",
+        views.UserListView.as_view(),
         name="user_list",
     ),
     path(
@@ -88,13 +88,13 @@ urlpatterns = [
         name="profile",
     ),
     path(
-        "reactivate_account/<signed_username>/",
-        views.reactivate_account,
-        name="reactivate_account",
+        "reactivate/<str:signed_username>/",
+        views.ReactivateAccountView.as_view(),
+        name="reactivate",
     ),
     path(
-        "friend/request/<int:user_id>/",
-        views.send_friend_request,
+        "send_friend_request/<int:user_id>/",
+        views.SendFriendRequestView.as_view(),
         name="send_friend_request",
     ),
     path(
