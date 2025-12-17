@@ -1,0 +1,1175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-17 20:42+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: .\events\apps.py:10 .\events\models.py:114
+#: .\templates\includes\header.html:33 .\templates\includes\header.html:35
+msgid "События"
+msgstr "Veranstaltungen"
+
+#: .\events\forms.py:76
+msgid "Название события"
+msgstr "Name der Veranstaltung"
+
+#: .\events\forms.py:77
+msgid "Картинка"
+msgstr "Bild"
+
+#: .\events\forms.py:78 .\templates\events\my_events.html:104
+#: .\templates\includes\event_card.html:9
+msgid "Тема"
+msgstr "Thema"
+
+#: .\events\forms.py:79
+msgid "Кто может видеть"
+msgstr "Wer kann sehen"
+
+#: .\events\forms.py:80 .\events\models.py:52
+msgid "Описание"
+msgstr "Beschreibung"
+
+#: .\events\forms.py:81
+msgid "Максимум участников"
+msgstr "Maximale Teilnehmerzahl"
+
+#: .\events\forms.py:82
+msgid "Местоположение"
+msgstr "Standort"
+
+#: .\events\forms.py:83 .\templates\events\my_events.html:108
+msgid "Истекает"
+msgstr "Läuft ab"
+
+#: .\events\forms.py:86
+msgid "Время для записи участников. Минимум 15 минут"
+msgstr "Zeit für Teilnehmerregistrierung. Mindestens 15 Minuten"
+
+#: .\events\forms.py:87
+msgid "Минимум 1 участник"
+msgstr "Mindestens 1 Teilnehmer"
+
+#: .\events\forms.py:103
+msgid "Событие должно истекать не ранее чем через 15 минут"
+msgstr "Die Veranstaltung muss frühestens in 15 Minuten ablaufen"
+
+#: .\events\forms.py:111
+msgid "Должен быть хотя бы один участник"
+msgstr "Es muss mindestens ein Teilnehmer geben"
+
+#: .\events\models.py:27
+msgid "Все"
+msgstr "Alle"
+
+#: .\events\models.py:28 .\templates\events\my_events.html:120
+msgid "Только друзья"
+msgstr "Nur Freunde"
+
+#: .\events\models.py:29
+msgid "Только я"
+msgstr "Nur ich"
+
+#: .\events\models.py:32 .\events\models.py:113 .\events\models.py:180
+msgid "Событие"
+msgstr "Veranstaltung"
+
+#: .\events\models.py:34
+msgid "Без названия"
+msgstr "Ohne Namen"
+
+#: .\events\models.py:37
+msgid "Тема события"
+msgstr "Thema der Veranstaltung"
+
+#: .\events\models.py:38
+msgid "Без темы"
+msgstr "Ohne Thema"
+
+#: .\events\models.py:41
+msgid "Кто может видеть публикацию"
+msgstr "Wer kann den Beitrag sehen"
+
+#: .\events\models.py:46
+msgid "картинка"
+msgstr "Bild"
+
+#: .\events\models.py:53 .\templates\events\my_events.html:93
+msgid "Активно"
+msgstr "Aktiv"
+
+#: .\events\models.py:64
+msgid "Участники"
+msgstr "Teilnehmer"
+
+#: .\events\models.py:67
+msgid "Максимальное количество участников"
+msgstr "Maximale Anzahl der Teilnehmer"
+
+#: .\events\models.py:71
+msgid "Примерное местоположение, город"
+msgstr "Ungefährer Standort, Stadt"
+
+#: .\events\models.py:72
+msgid "Не указано"
+msgstr "Nicht angegeben"
+
+#: .\events\models.py:75
+msgid "Широта"
+msgstr "Breitengrad"
+
+#: .\events\models.py:80
+msgid "Долгота"
+msgstr "Längengrad"
+
+#: .\events\models.py:86 .\events\models.py:201
+#: .\templates\events\my_events.html:107
+msgid "Создано"
+msgstr "Erstellt"
+
+#: .\events\models.py:91
+msgid "Истекает через (не ранее 15мин с этого момента)"
+msgstr "Läuft ab in (frühestens 15 Minuten ab jetzt)"
+
+#: .\events\models.py:101 .\templates\events\create_event.html:74
+#: .\users\forms.py:92 .\users\models.py:171
+msgid "Интересы"
+msgstr "Interessen"
+
+#: .\events\models.py:171
+msgid "В ожидании"
+msgstr "Ausstehend"
+
+#: .\events\models.py:172 .\templates\events\my_events_requests.html:33
+msgid "Принят"
+msgstr "Akzeptiert"
+
+#: .\events\models.py:173 .\templates\events\my_events_requests.html:35
+msgid "Отклонен"
+msgstr "Abgelehnt"
+
+#: .\events\models.py:186 .\users\models.py:73
+msgid "Пользователь"
+msgstr "Benutzer"
+
+#: .\events\models.py:192
+msgid "Статус"
+msgstr "Status"
+
+#: .\events\models.py:195
+msgid "Сообщение"
+msgstr "Nachricht"
+
+#: .\events\models.py:205
+msgid "Обновлено"
+msgstr "Aktualisiert"
+
+#: .\events\models.py:217
+msgid "Запрос на событие"
+msgstr "Anfrage für Veranstaltung"
+
+#: .\events\models.py:218
+msgid "Запросы на события"
+msgstr "Anfragen für Veranstaltungen"
+
+#: .\randoccasion\settings.py:126
+msgid "Russian"
+msgstr "Russisch"
+
+#: .\randoccasion\settings.py:127
+msgid "English"
+msgstr "Englisch"
+
+#: .\randoccasion\settings.py:128
+msgid "German"
+msgstr "Deutsch"
+
+#: .\randoccasion\settings.py:129
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: .\randoccasion\settings.py:130
+msgid "French"
+msgstr "Französisch"
+
+#: .\templates\api\apicreate.html:9
+msgid "Регистрация API ключа"
+msgstr "Registrierung des API-Schlüssels"
+
+#: .\templates\api\apicreate.html:15
+msgid "Ключ создан! Сохраните его в безопасном месте"
+msgstr "Schlüssel erstellt! Bewahren Sie ihn an einem sicheren Ort auf"
+
+#: .\templates\api\apicreate.html:21
+msgid "Создать ещё один ключ"
+msgstr "Weiteren Schlüssel erstellen"
+
+#: .\templates\api\apicreate.html:91
+msgid "Быстрый выбор:"
+msgstr "Schnellauswahl:"
+
+#: .\templates\api\apicreate.html:94
+msgid "1 день"
+msgstr "1 Tag"
+
+#: .\templates\api\apicreate.html:97
+msgid "1 неделя"
+msgstr "1 Woche"
+
+#: .\templates\api\apicreate.html:101
+msgid "1 месяц"
+msgstr "1 Monat"
+
+#: .\templates\api\apicreate.html:105
+msgid "3 месяца"
+msgstr "3 Monate"
+
+#: .\templates\api\apicreate.html:109
+msgid "1 год"
+msgstr "1 Jahr"
+
+#: .\templates\api\apicreate.html:123
+msgid "Выбрано: "
+msgstr "Ausgewählt: "
+
+#: .\templates\api\apicreate.html:124
+msgid "Не выбрано"
+msgstr "Nicht ausgewählt"
+
+#: .\templates\api\apicreate.html:139
+msgid "Создать ключ"
+msgstr "Schlüssel erstellen"
+
+#: .\templates\api\apicreate.html:150
+msgid "Все поля обязательны для заполнения"
+msgstr "Alle Felder sind Pflichtfelder"
+
+#: .\templates\base.html:43
+msgid "Содержимое страницы недоступно"
+msgstr "Seiteninhalt nicht verfügbar"
+
+#: .\templates\base.html:52
+msgid "Raccoon"
+msgstr "Waschbär"
+
+#: .\templates\base.html:68
+msgid "км"
+msgstr "km"
+
+#: .\templates\base.html:69
+msgid "м"
+msgstr "m"
+
+#: .\templates\base.html:70
+msgid "не определено"
+msgstr "nicht definiert"
+
+#: .\templates\events\create_event.html:4
+#: .\templates\events\create_event.html:154 .\templates\events\events.html:15
+#: .\templates\events\my_events.html:15
+#: .\templates\events\recommended_events.html:30
+msgid "Создать событие"
+msgstr "Veranstaltung erstellen"
+
+#: .\templates\events\create_event.html:23
+msgid "Создать новое событие"
+msgstr "Neue Veranstaltung erstellen"
+
+#: .\templates\events\create_event.html:65
+msgid "Выберите, кто сможет увидеть ваше событие"
+msgstr "Wählen Sie, wer Ihre Veranstaltung sehen kann"
+
+#: .\templates\events\create_event.html:101
+msgid "Выбрать на карте"
+msgstr "Auf der Karte auswählen"
+
+#: .\templates\events\create_event.html:151
+#: .\templates\events\create_event.html:176
+#: .\templates\events\eventinfo.html:61
+msgid "Отмена"
+msgstr "Abbrechen"
+
+#: .\templates\events\create_event.html:166
+msgid "Выберите местоположение на карте"
+msgstr "Wählen Sie einen Standort auf der Karte"
+
+#: .\templates\events\create_event.html:172
+msgid "Кликните на карту, чтобы выбрать точное местоположение"
+msgstr "Klicken Sie auf die Karte, um den genauen Standort auszuwählen"
+
+#: .\templates\events\create_event.html:177
+msgid "Подтвердить"
+msgstr "Bestätigen"
+
+#: .\templates\events\eventinfo.html:9
+msgid "К списку событий"
+msgstr "Zur Veranstaltungsliste"
+
+#: .\templates\events\eventinfo.html:17
+msgid "🗺️ Место проведения:"
+msgstr "🗺️ Veranstaltungsort:"
+
+#: .\templates\events\eventinfo.html:22
+msgid "👤 Проводит: "
+msgstr "👤 Organisiert von: "
+
+#: .\templates\events\eventinfo.html:23
+msgid "🆓 Свободных мест: "
+msgstr "🆓 Freie Plätze: "
+
+#: .\templates\events\eventinfo.html:25 .\templates\includes\event_card.html:31
+msgid "🕜️ Событие уже закончилось"
+msgstr "🕜️ Die Veranstaltung ist bereits beendet"
+
+#: .\templates\events\eventinfo.html:27
+msgid "🕜️ Пройдёт через:"
+msgstr "🕜️ Findet statt in:"
+
+#: .\templates\events\eventinfo.html:32
+msgid "✅ Вы участник этого события"
+msgstr "✅ Sie sind Teilnehmer dieser Veranstaltung"
+
+#: .\templates\events\eventinfo.html:37
+msgid "Записаться на событие"
+msgstr "Für Veranstaltung anmelden"
+
+#: .\templates\events\eventinfo.html:48
+msgid "Запрос на участие"
+msgstr "Teilnahmeanfrage"
+
+#: .\templates\events\eventinfo.html:54
+msgid "Отправить запрос создателю события"
+msgstr "Anfrage an Veranstaltungsersteller senden"
+
+#: .\templates\events\eventinfo.html:56
+msgid "Сообщение (необязательно):"
+msgstr "Nachricht (optional):"
+
+#: .\templates\events\eventinfo.html:62
+msgid "Отправить запрос"
+msgstr "Anfrage senden"
+
+#: .\templates\events\events.html:10
+#: .\templates\events\my_events_requests.html:6
+#: .\templates\users\profile.html:16
+msgid "Заявки на мои события"
+msgstr "Anfragen für meine Veranstaltungen"
+
+#: .\templates\events\events.html:34 .\templates\users\user_list.html:23
+msgid "Фильтры"
+msgstr "Filter"
+
+#: .\templates\events\events.html:42
+msgid "Фильтрация событий"
+msgstr "Veranstaltungsfilterung"
+
+#: .\templates\events\events.html:45
+msgid "Дата создания с:"
+msgstr "Erstellungsdatum von:"
+
+#: .\templates\events\events.html:51
+msgid "Дата создания по:"
+msgstr "Erstellungsdatum bis:"
+
+#: .\templates\events\events.html:61
+msgid "Только активные события"
+msgstr "Nur aktive Veranstaltungen"
+
+#: .\templates\events\events.html:69
+msgid "События друзей"
+msgstr "Veranstaltungen von Freunden"
+
+#: .\templates\events\events.html:76 .\templates\events\my_events.html:5
+#: .\templates\events\my_events.html:18 .\templates\includes\header.html:40
+#: .\templates\includes\header.html:42
+msgid "Мои события"
+msgstr "Meine Veranstaltungen"
+
+#: .\templates\events\events.html:82 .\templates\users\user_list.html:43
+msgid "Сортировка"
+msgstr "Sortierung"
+
+#: .\templates\events\events.html:85
+msgid "По дате публикации:"
+msgstr "Nach Veröffentlichungsdatum:"
+
+#: .\templates\events\events.html:89 .\templates\events\my_events.html:59
+msgid "Сначала новые"
+msgstr "Neueste zuerst"
+
+#: .\templates\events\events.html:95 .\templates\events\my_events.html:62
+msgid "Сначала старые"
+msgstr "Älteste zuerst"
+
+#: .\templates\events\events.html:101 .\templates\events\events.html:123
+#: .\templates\events\events.html:145 .\templates\users\user_list.html:66
+msgid "Не использовать"
+msgstr "Nicht verwenden"
+
+#: .\templates\events\events.html:107
+msgid "По дате истечения:"
+msgstr "Nach Ablaufdatum:"
+
+#: .\templates\events\events.html:111
+msgid "Сначала ближайшие"
+msgstr "Nächste zuerst"
+
+#: .\templates\events\events.html:117
+msgid "Сначала отдалённые"
+msgstr "Entfernteste zuerst"
+
+#: .\templates\events\events.html:129 .\templates\users\user_list.html:45
+msgid "По алфавиту:"
+msgstr "Alphabetisch:"
+
+#: .\templates\events\events.html:133 .\templates\events\my_events.html:68
+#: .\templates\users\user_list.html:51
+msgid "А-Я"
+msgstr "A-Z"
+
+#: .\templates\events\events.html:139 .\templates\events\my_events.html:71
+#: .\templates\users\user_list.html:59
+msgid "Я-А"
+msgstr "Z-A"
+
+#: .\templates\events\events.html:154 .\templates\users\user_list.html:75
+msgid "Применить"
+msgstr "Anwenden"
+
+#: .\templates\events\events.html:155 .\templates\users\user_list.html:76
+msgid "Сбросить"
+msgstr "Zurücksetzen"
+
+#: .\templates\events\events.html:165
+msgid "Результаты поиска по запросу"
+msgstr "Suchergebnisse für die Anfrage"
+
+#: .\templates\events\events.html:174
+msgid "Кажется здесь ничего нет..."
+msgstr "Scheint, hier gibt es nichts..."
+
+#: .\templates\events\events.html:180
+msgid "В начало"
+msgstr "Zum Anfang"
+
+#: .\templates\events\events.html:181
+msgid "Предыдущая"
+msgstr "Vorherige"
+
+#: .\templates\events\events.html:193
+msgid "Следующая"
+msgstr "Nächste"
+
+#: .\templates\events\events.html:194 .\templates\events\my_events.html:160
+msgid "Последняя"
+msgstr "Letzte"
+
+#: .\templates\events\my_events.html:25
+msgid "Созданные мной "
+msgstr "Von mir erstellt"
+
+#: .\templates\events\my_events.html:31
+msgid "Участвую "
+msgstr "Ich nehme teil"
+
+#: .\templates\events\my_events.html:37
+msgid "Все мои события "
+msgstr "Alle meine Veranstaltungen"
+
+#: .\templates\events\my_events.html:46
+msgid "Активные события"
+msgstr "Aktive Veranstaltungen"
+
+#: .\templates\events\my_events.html:49
+msgid "Завершенные события"
+msgstr "Abgeschlossene Veranstaltungen"
+
+#: .\templates\events\my_events.html:52
+msgid "Все события"
+msgstr "Alle Veranstaltungen"
+
+#: .\templates\events\my_events.html:65
+msgid "Скоро истекают"
+msgstr "Läuft bald ab"
+
+#: .\templates\events\my_events.html:95
+msgid "Завершено"
+msgstr "Abgeschlossen"
+
+#: .\templates\events\my_events.html:105
+msgid "Место:"
+msgstr "Ort:"
+
+#: .\templates\events\my_events.html:106
+msgid "Участники:"
+msgstr "Teilnehmer:"
+
+#: .\templates\events\my_events.html:112
+msgid "Я создатель"
+msgstr "Ich bin Ersteller"
+
+#: .\templates\events\my_events.html:114
+msgid "Я участник"
+msgstr "Ich bin Teilnehmer"
+
+#: .\templates\events\my_events.html:118
+msgid "Только для меня"
+msgstr "Nur für mich"
+
+#: .\templates\events\my_events.html:125
+#: .\templates\includes\event_card.html:44 .\templates\users\user_list.html:98
+msgid "Подробнее"
+msgstr "Details"
+
+#: .\templates\events\my_events.html:130
+msgid "Запросы"
+msgstr "Anfragen"
+
+#: .\templates\events\my_events.html:144
+msgid "Первая"
+msgstr "Erste"
+
+#: .\templates\events\my_events.html:147
+msgid "Назад"
+msgstr "Zurück"
+
+#: .\templates\events\my_events.html:152
+msgid "Страница"
+msgstr "Seite"
+
+#: .\templates\events\my_events.html:152
+msgid "из"
+msgstr "von"
+
+#: .\templates\events\my_events.html:157
+msgid "Вперед"
+msgstr "Weiter"
+
+#: .\templates\events\my_events.html:169
+msgid "Событий не найдено"
+msgstr "Keine Veranstaltungen gefunden"
+
+#: .\templates\events\my_events.html:170
+msgid "Попробуйте изменить фильтры или создать новое событие."
+msgstr "Versuchen Sie, die Filter zu ändern oder eine neue Veranstaltung zu erstellen."
+
+#: .\templates\events\my_events.html:171
+msgid "Найти события"
+msgstr "Veranstaltungen finden"
+
+#: .\templates\events\my_events_requests.html:19
+msgid "Ожидает"
+msgstr "Ausstehend"
+
+#: .\templates\events\my_events_requests.html:23
+#: .\templates\users\friend_requests.html:50
+msgid "Принять"
+msgstr "Akzeptieren"
+
+#: .\templates\events\my_events_requests.html:29
+#: .\templates\users\friend_requests.html:55
+#: .\templates\users\user_detail.html:82
+msgid "Отклонить"
+msgstr "Ablehnen"
+
+#: .\templates\events\my_events_requests.html:39
+msgid "Пользователь: "
+msgstr "Benutzer: "
+
+#: .\templates\events\my_events_requests.html:44
+msgid "Событие: "
+msgstr "Veranstaltung: "
+
+#: .\templates\events\my_events_requests.html:49
+msgid "Сообщение: "
+msgstr "Nachricht: "
+
+#: .\templates\events\my_events_requests.html:53
+msgid "Отправлено: "
+msgstr "Gesendet: "
+
+#: .\templates\events\my_events_requests.html:62
+msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
+msgstr "Keine aktiven Anfragen. Hauptsache, glauben Sie, dass sich jemand bestimmt melden wird..."
+
+#: .\templates\events\recommended_events.html:7
+msgid "Рекомендованные события"
+msgstr "Empfohlene Veranstaltungen"
+
+#: .\templates\events\recommended_events.html:20
+msgid "Нет рекомендаций для вас"
+msgstr "Keine Empfehlungen für Sie"
+
+#: .\templates\events\recommended_events.html:21
+msgid "Попробуйте изменить настройки профиля или создать свое событие"
+msgstr "Versuchen Sie, Ihre Profileinstellungen zu ändern oder Ihre eigene Veranstaltung zu erstellen"
+
+#: .\templates\events\recommended_events.html:25
+msgid "Посмотреть все события"
+msgstr "Alle Veranstaltungen ansehen"
+
+#: .\templates\homepage\guest_main.html:7
+msgid "Сервис «Встречалки»"
+msgstr "Service «Randoccasion»"
+
+#: .\templates\homepage\guest_main.html:12
+msgid "Создавайте и находите интересные мероприятия"
+msgstr "Erstellen und finden Sie interessante Veranstaltungen"
+
+#: .\templates\homepage\guest_main.html:18
+msgid "Что можно делать на сервисе:"
+msgstr "Was Sie auf dem Service tun können:"
+
+#: .\templates\homepage\guest_main.html:20
+msgid "Создавайте мероприятия"
+msgstr "Erstellen Sie Veranstaltungen"
+
+#: .\templates\homepage\guest_main.html:20
+msgid "любые события и встречи"
+msgstr "beliebige Veranstaltungen und Treffen"
+
+#: .\templates\homepage\guest_main.html:21
+msgid "Приглашайте друзей"
+msgstr "Laden Sie Freunde ein"
+
+#: .\templates\homepage\guest_main.html:21
+msgid "делитесь своими ивентами"
+msgstr "teilen Sie Ihre Events"
+
+#: .\templates\homepage\guest_main.html:22
+msgid "Ищите мероприятия по интересам"
+msgstr "Suchen Sie Veranstaltungen nach Interessen"
+
+#: .\templates\homepage\guest_main.html:22
+msgid "находите то, что вам нравится"
+msgstr "finden Sie, was Ihnen gefällt"
+
+#: .\templates\homepage\guest_main.html:23
+msgid "Присоединяйтесь к событиям"
+msgstr "Nehmen Sie an Veranstaltungen teil"
+
+#: .\templates\homepage\guest_main.html:23
+msgid "участвуйте в интересных активностях"
+msgstr "beteiligen Sie sich an interessanten Aktivitäten"
+
+#: .\templates\homepage\guest_main.html:24
+msgid "Общайтесь с участниками"
+msgstr "Kommunizieren Sie mit Teilnehmern"
+
+#: .\templates\homepage\guest_main.html:24
+msgid "обсуждайте детали мероприятий"
+msgstr "besprechen Sie Veranstaltungsdetails"
+
+#: .\templates\homepage\guest_main.html:25
+msgid "Получайте уведомления"
+msgstr "Erhalten Sie Benachrichtigungen"
+
+#: .\templates\homepage\guest_main.html:25
+msgid "будьте в курсе всех событий"
+msgstr "bleiben Sie über alle Ereignisse informiert"
+
+#: .\templates\homepage\guest_main.html:30
+msgid "Как это работает:"
+msgstr "Wie es funktioniert:"
+
+#: .\templates\homepage\guest_main.html:32
+msgid "Регистрируйтесь"
+msgstr "Registrieren Sie sich"
+
+#: .\templates\homepage\guest_main.html:32
+msgid "на сайте"
+msgstr "auf der Website"
+
+#: .\templates\homepage\guest_main.html:33
+msgid "Указывайте свои интересы"
+msgstr "Geben Sie Ihre Interessen an"
+
+#: .\templates\homepage\guest_main.html:33
+msgid "в профиле"
+msgstr "im Profil"
+
+#: .\templates\homepage\guest_main.html:34
+msgid "Создавайте мероприятие"
+msgstr "Erstellen Sie eine Veranstaltung"
+
+#: .\templates\homepage\guest_main.html:34
+msgid "или ищите существующие"
+msgstr "oder suchen Sie nach bestehenden"
+
+#: .\templates\homepage\guest_main.html:35
+msgid "Приглашайте участников"
+msgstr "Laden Sie Teilnehmer ein"
+
+#: .\templates\homepage\guest_main.html:35
+msgid "или присоединяйтесь сами"
+msgstr "oder nehmen Sie selbst teil"
+
+#: .\templates\homepage\guest_main.html:36
+msgid "Встречайтесь и общайтесь"
+msgstr "Treffen Sie sich und kommunizieren Sie"
+
+#: .\templates\homepage\guest_main.html:36
+msgid "в реальной жизни"
+msgstr "im realen Leben"
+
+#: .\templates\homepage\guest_main.html:44
+msgid "Типы мероприятий, которые можно создать:"
+msgstr "Arten von Veranstaltungen, die erstellt werden können:"
+
+#: .\templates\homepage\guest_main.html:48
+msgid "Встречи друзей"
+msgstr "Freundestreffen"
+
+#: .\templates\homepage\guest_main.html:49
+msgid "Спортивные события"
+msgstr "Sportveranstaltungen"
+
+#: .\templates\homepage\guest_main.html:50
+msgid "Тематические вечеринки"
+msgstr "Themenpartys"
+
+#: .\templates\homepage\guest_main.html:51
+msgid "Образовательные мероприятия"
+msgstr "Bildungsveranstaltungen"
+
+#: .\templates\homepage\guest_main.html:54
+msgid "Кино, кафе, прогулки"
+msgstr "Kino, Cafés, Spaziergänge"
+
+#: .\templates\homepage\guest_main.html:55
+msgid "Футбол, йога, бег"
+msgstr "Fußball, Yoga, Laufen"
+
+#: .\templates\homepage\guest_main.html:56
+msgid "Квизы, игры, праздники"
+msgstr "Quizzes, Spiele, Feiertage"
+
+#: .\templates\homepage\guest_main.html:57
+msgid "Лекции, мастер-классы"
+msgstr "Vorträge, Workshops"
+
+#: .\templates\homepage\guest_main.html:65
+msgid "Почему выбирают «Встречалки»:"
+msgstr "Warum «Randoccasion» wählen:"
+
+#: .\templates\homepage\guest_main.html:70
+msgid "👥 Сообщество"
+msgstr "👥 Community"
+
+#: .\templates\homepage\guest_main.html:71
+msgid "Дружелюбное сообщество"
+msgstr "Eine freundliche Community"
+
+#: .\templates\homepage\guest_main.html:72
+msgid "Реальные встречи и знакомства"
+msgstr "Echte Treffen und Bekanntschaften"
+
+#: .\templates\homepage\guest_main.html:75
+msgid "🎯 По интересам"
+msgstr "🎯 Nach Interessen"
+
+#: .\templates\homepage\guest_main.html:76
+msgid "Персональные рекомендации"
+msgstr "Persönliche Empfehlungen"
+
+#: .\templates\homepage\guest_main.html:77
+msgid "Поиск по категориям"
+msgstr "Suche nach Kategorien"
+
+#: .\templates\homepage\guest_main.html:80
+msgid "📱 Удобство"
+msgstr "📱 Bequemlichkeit"
+
+#: .\templates\homepage\guest_main.html:81
+msgid "Простой интерфейс"
+msgstr "Einfache Oberfläche"
+
+#: .\templates\homepage\guest_main.html:82
+msgid "Мгновенные уведомления"
+msgstr "Sofortige Benachrichtigungen"
+
+#: .\templates\homepage\guest_main.html:93
+msgid "Быстрый старт:"
+msgstr "Schnellstart:"
+
+#: .\templates\homepage\guest_main.html:98
+msgid "Для новых пользователей:"
+msgstr "Für neue Benutzer:"
+
+#: .\templates\homepage\guest_main.html:99
+msgid "1. Зарегистрируйтесь"
+msgstr "1. Registrieren Sie sich"
+
+#: .\templates\homepage\guest_main.html:100
+msgid "2. Заполните профиль"
+msgstr "2. Füllen Sie Ihr Profil aus"
+
+#: .\templates\homepage\guest_main.html:101
+msgid "3. Укажите интересы"
+msgstr "3. Geben Sie Ihre Interessen an"
+
+#: .\templates\homepage\guest_main.html:102
+msgid "4. Найдите первое мероприятие"
+msgstr "4. Finden Sie Ihre erste Veranstaltung"
+
+#: .\templates\homepage\guest_main.html:105
+msgid "Для организаторов:"
+msgstr "Für Organisatoren:"
+
+#: .\templates\homepage\guest_main.html:106
+msgid "1. Создайте мероприятие"
+msgstr "1. Erstellen Sie eine Veranstaltung"
+
+#: .\templates\homepage\guest_main.html:107
+msgid "2. Опишите детали"
+msgstr "2. Beschreiben Sie die Details"
+
+#: .\templates\homepage\guest_main.html:108
+msgid "3. Пригласите участников"
+msgstr "3. Laden Sie Teilnehmer ein"
+
+#: .\templates\homepage\guest_main.html:120
+msgid "Присоединяйтесь к пользователям, которые уже нашли новых друзей"
+msgstr "Schließen Sie sich den Benutzern an, die bereits neue Freunde gefunden haben"
+
+#: .\templates\homepage\guest_main.html:121
+msgid "и интересные мероприятия через наш сервис «Встречалки»"
+msgstr "und interessante Veranstaltungen durch unseren Service «Randoccasion»"
+
+#: .\templates\homepage\main.html:5
+msgid "Ивенты, которые могут Вам понравиться:"
+msgstr "Events, die Ihnen gefallen könnten:"
+
+#: .\templates\homepage\main.html:12
+msgid "Посмотреть больше мероприятий"
+msgstr "Mehr Veranstaltungen ansehen"
+
+#: .\templates\includes\event_card.html:19
+msgid "🗺️ Место: "
+msgstr "🗺️ Ort: "
+
+#: .\templates\includes\event_card.html:26
+msgid "👤 Создатель: "
+msgstr "👤 Ersteller: "
+
+#: .\templates\includes\event_card.html:33
+msgid "🕜️ Пройдёт через: "
+msgstr "🕜️ Findet statt in: "
+
+#: .\templates\includes\event_card.html:38
+msgid "Вы записаны"
+msgstr "Sie sind angemeldet"
+
+#: .\templates\includes\header.html:11
+msgid "Логотип"
+msgstr "Logo"
+
+#: .\templates\includes\header.html:13
+msgid "Встречалки"
+msgstr "Randoccasion"
+
+#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
+msgid "Главная"
+msgstr "Startseite"
+
+#: .\templates\includes\header.html:50 .\templates\includes\header.html:52
+#: .\users\apps.py:10 .\users\models.py:74
+msgid "Пользователи"
+msgstr "Benutzer"
+
+#: .\templates\includes\header.html:57 .\templates\includes\header.html:59
+msgid "Друзья"
+msgstr "Freunde"
+
+#: .\templates\includes\header.html:64 .\templates\includes\header.html:66
+msgid "Заявки в друзья"
+msgstr "Freundschaftsanfragen"
+
+#: .\templates\includes\header.html:71 .\templates\includes\header.html:73
+msgid "Профиль"
+msgstr "Profil"
+
+#: .\templates\includes\header.html:80
+msgid "Выйти"
+msgstr "Abmelden"
+
+#: .\templates\includes\header.html:87 .\templates\includes\header.html:89
+#: .\templates\users\login_form.html:59
+msgid "Войти"
+msgstr "Anmelden"
+
+#: .\templates\includes\header.html:118
+msgid "Панель администратора"
+msgstr "Administrator-Panel"
+
+#: .\templates\includes\header.html:122 .\templates\includes\header.html:126
+msgid "Создать API-ключ"
+msgstr "API-Schlüssel erstellen"
+
+#: .\templates\users\friend_requests.html:5
+msgid "Входящие заявки в друзья"
+msgstr "Eingehende Freundschaftsanfragen"
+
+#: .\templates\users\friend_requests.html:40
+msgid "назад"
+msgstr "zurück"
+
+#: .\templates\users\friend_requests.html:70
+msgid "Нет входящих заявок."
+msgstr "Keine eingehenden Anfragen."
+
+#: .\templates\users\friend_requests.html:73
+#: .\templates\users\friends_list.html:73
+msgid "Найти друзей"
+msgstr "Freunde finden"
+
+#: .\templates\users\friends_list.html:5
+msgid "Мои друзья"
+msgstr "Meine Freunde"
+
+#: .\templates\users\friends_list.html:53
+msgid "Вы уверены, что хотите удалить"
+msgstr "Sind Sie sicher, dass Sie"
+
+#: .\templates\users\friends_list.html:53
+msgid "из друзей?"
+msgstr "aus Freunden entfernen möchten?"
+
+#: .\templates\users\friends_list.html:55
+msgid "Удалить из друзей"
+msgstr "Aus Freunden entfernen"
+
+#: .\templates\users\friends_list.html:70
+msgid "У вас пока нет друзей."
+msgstr "Sie haben noch keine Freunde."
+
+#: .\templates\users\login.html:10
+msgid "Вход в аккаунт"
+msgstr "Kontoanmeldung"
+
+#: .\templates\users\login.html:17
+msgid "Забыли пароль?"
+msgstr "Passwort vergessen?"
+
+#: .\templates\users\login.html:20
+msgid "Нет аккаунта? Регистрация"
+msgstr "Kein Konto? Registrierung"
+
+#: .\templates\users\logout.html:8
+msgid "Выход"
+msgstr "Abmeldung"
+
+#: .\templates\users\logout.html:9
+msgid "Вы успешно вышли из системы."
+msgstr "Sie haben sich erfolgreich abgemeldet."
+
+#: .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "Zur Startseite"
+
+#: .\templates\users\password_change.html:5
+msgid "Смена пароля"
+msgstr "Passwortänderung"
+
+#: .\templates\users\password_change.html:9 .\templates\users\profile.html:13
+msgid "Сменить пароль"
+msgstr "Passwort ändern"
+
+#: .\templates\users\password_change_done.html:5
+msgid "Пароль изменен"
+msgstr "Passwort geändert"
+
+#: .\templates\users\password_change_done.html:6
+msgid "Ваш пароль был успешно изменен."
+msgstr "Ihr Passwort wurde erfolgreich geändert."
+
+#: .\templates\users\password_reset.html:5
+msgid "Восстановление пароля"
+msgstr "Passwortwiederherstellung"
+
+#: .\templates\users\password_reset.html:58
+msgid "Восстановить пароль"
+msgstr "Passwort wiederherstellen"
+
+#: .\templates\users\password_reset_complete.html:5
+msgid "Пароль восстановлен"
+msgstr "Passwort wiederhergestellt"
+
+#: .\templates\users\password_reset_complete.html:6
+msgid "Ваш пароль был успешно восстановлен."
+msgstr "Ihr Passwort wurde erfolgreich wiederhergestellt."
+
+#: .\templates\users\password_reset_complete.html:7
+msgid "Войти с новым паролем"
+msgstr "Mit neuem Passwort anmelden"
+
+#: .\templates\users\password_reset_confirm.html:5
+msgid "Ввод нового пароля"
+msgstr "Neues Passwort eingeben"
+
+#: .\templates\users\password_reset_confirm.html:9
+msgid "Сохранить новый пароль"
+msgstr "Neues Passwort speichern"
+
+#: .\templates\users\password_reset_done.html:5
+msgid "Письмо отправлено"
+msgstr "E-Mail gesendet"
+
+#: .\templates\users\password_reset_done.html:6
+msgid "Проверьте вашу почту для восстановления пароля."
+msgstr "Überprüfen Sie Ihre E-Mail zur Passwortwiederherstellung."
+
+#: .\templates\users\profile.html:5
+msgid "Мой профиль"
+msgstr "Mein Profil"
+
+#: .\templates\users\profile.html:9
+msgid "Сохранить"
+msgstr "Speichern"
+
+#: .\templates\users\signup.html:5
+msgid "Регистрация"
+msgstr "Registrierung"
+
+#: .\templates\users\signup.html:25
+msgid "Зарегистрироваться"
+msgstr "Registrieren"
+
+#: .\templates\users\user_detail.html:5
+msgid "Профиль пользователя"
+msgstr "Benutzerprofil"
+
+#: .\templates\users\user_detail.html:20
+msgid "Нет аватарки"
+msgstr "Kein Avatar"
+
+#: .\templates\users\user_detail.html:26 .\users\forms.py:82
+msgid "Имя"
+msgstr "Vorname"
+
+#: .\templates\users\user_detail.html:30 .\templates\users\user_detail.html:38
+#: .\templates\users\user_detail.html:46
+msgid "не указано"
+msgstr "nicht angegeben"
+
+#: .\templates\users\user_detail.html:34 .\users\forms.py:84
+msgid "Фамилия"
+msgstr "Nachname"
+
+#: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:95
+msgid "День рождения:"
+msgstr "Geburtstag:"
+
+#: .\templates\users\user_detail.html:50
+msgid "Интересы:"
+msgstr "Interessen:"
+
+#: .\templates\users\user_detail.html:56
+msgid "не указаны"
+msgstr "nicht angegeben"
+
+#: .\templates\users\user_detail.html:66
+msgid "✓ Вы друзья"
+msgstr "✓ Sie sind Freunde"
+
+#: .\templates\users\user_detail.html:71
+msgid "Заявка отправлена"
+msgstr "Anfrage gesendet"
+
+#: .\templates\users\user_detail.html:77
+msgid "Принять заявку"
+msgstr "Anfrage annehmen"
+
+#: .\templates\users\user_detail.html:88
+msgid "Добавить в друзья"
+msgstr "Zu Freunden hinzufügen"
+
+#: .\templates\users\user_list.html:5
+msgid "Список пользователей"
+msgstr "Benutzerliste"
+
+#: .\templates\users\user_list.html:31
+msgid "Фильтрация пользователей"
+msgstr "Benutzerfilterung"
+
+#: .\templates\users\user_list.html:39
+msgid "Возможно вам знакомы"
+msgstr "Vielleicht kennen Sie"
+
+#: .\templates\users\user_list.html:91
+msgid "Это вы"
+msgstr "Das sind Sie"
+
+#: .\users\forms.py:73
+msgid "Телефон"
+msgstr "Telefon"
+
+#: .\users\models.py:170
+msgid "Интерес"
+msgstr "Interesse"
+
+#: .\users\models.py:184
+msgid "пользователь"
+msgstr "Benutzer"
+
+#: .\users\models.py:187
+msgid "день рождения"
+msgstr "Geburtstag"
+
+#: .\users\models.py:192
+msgid "аватарка"
+msgstr "Avatar"
+
+#: .\users\models.py:199
+msgid "интересы"
+msgstr "Interessen"
+
+#: .\users\models.py:204 .\users\models.py:250
+msgid "telegram_id"
+msgstr "telegram_id"
+
+#: .\users\models.py:209 .\users\models.py:260
+msgid "telephone"
+msgstr "Telefon"
+
+#: .\users\models.py:214 .\users\models.py:265
+msgid "code"
+msgstr "Code"
+
+#: .\users\models.py:219
+msgid "Количество сообщений"
+msgstr "Anzahl der Nachrichten"
+
+#: .\users\models.py:241
+msgid "профиль"
+msgstr "Profil"
+
+#: .\users\models.py:242
+msgid "профили"
+msgstr "Profile"
+
+#: .\users\models.py:255
+msgid "username"
+msgstr "Benutzername"
+
+#: .\users\models.py:271
+msgid "TelegramPhoneVerify"
+msgstr "Telegram-Telefonüberprüfung"
+
+#: .\users\models.py:272
+msgid "TelegramPhoneVerifies"
+msgstr "Telegram-Telefonüberprüfungen"

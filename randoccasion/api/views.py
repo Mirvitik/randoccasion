@@ -1,7 +1,10 @@
 __all__ = ()
 
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import FormView
 from rest_framework import generics
 from rest_framework_api_key.models import APIKey
@@ -49,7 +52,8 @@ class InterestDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (HasAPIKey,)
 
 
-class APIKeyCreate(FormView):
+@method_decorator(staff_member_required, name="dispatch")
+class APIKeyCreate(LoginRequiredMixin, FormView):
     form_class = APICreateForm
     template_name = "api/apicreate.html"
     success_url = reverse_lazy("api:apikey-create")
@@ -64,7 +68,8 @@ class APIKeyCreate(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if "key" in self.request.session:
+            context["key"] = self.request.session["key"]
 
-        context["key"] = self.request.session["key"]
         self.request.session["key"] = None
         return context

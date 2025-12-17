@@ -1,11 +1,15 @@
 __all__ = ()
 
 from django.forms import CharField, DateTimeField, Form
+from django.utils.translation import gettext_lazy as _
 
 
 class APICreateForm(Form):
-    name = CharField(label="Имя ключа", help_text="Придумайте имя для ключа")
+    name = CharField(
+        label=_("Имя ключа"),
+        help_text=_("Придумайте имя для ключа"),
+    )
     expiry_date = DateTimeField(
-        label="Дата окончания действия",
-        help_text="Введите дату прекращения действия ключа",
+        label=_("Дата окончания действия"),
+        help_text=_("Введите дату прекращения действия ключа"),
     )

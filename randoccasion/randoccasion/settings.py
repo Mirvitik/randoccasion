@@ -125,6 +125,9 @@ LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru-RU")
 LANGUAGES = [
     ("ru", _("Russian")),
     ("en", _("English")),
+    ("de", _("German")),
+    ("es", _("Spanish")),
+    ("fr", _("French")),
 ]
 LOCALE_PATHS = [
     BASE_DIR / "locale",
