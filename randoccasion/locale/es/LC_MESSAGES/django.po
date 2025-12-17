@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-17 20:42+0300\n"
+"POT-Creation-Date: 2025-12-17 22:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: .\api\forms.py:9
+msgid "Имя ключа"
+msgstr "Nombre de la clave"
+
+#: .\api\forms.py:10
+msgid "Придумайте имя для ключа"
+msgstr "Invente un nombre para la clave"
+
+#: .\api\forms.py:13
+msgid "Дата окончания действия"
+msgstr "Fecha de caducidad"
+
+#: .\api\forms.py:14
+msgid "Введите дату прекращения действия ключа"
+msgstr "Introduzca la fecha de caducidad de la clave"
 
 #: .\events\apps.py:10 .\events\models.py:114
 #: .\templates\includes\header.html:33 .\templates\includes\header.html:35
@@ -185,6 +201,46 @@ msgstr "Solicitud para evento"
 #: .\events\models.py:218
 msgid "Запросы на события"
 msgstr "Solicitudes para eventos"
+
+#: .\events\views.py:111
+msgid ""
+"По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
+"участвуете/событие неактивно"
+msgstr ""
+"Por alguna razón no puedes participar: no hay asientos disponibles / ya estás "
+"participar / evento inactivo"
+
+#: .\events\views.py:124
+msgid "Ваш запрос уже был отправлен"
+msgstr "Su solicitud ya ha sido enviada"
+
+#: .\events\views.py:126
+msgid "Ваш запрос был отклонен"
+msgstr "Su solicitud ha sido rechazada"
+
+#: .\events\views.py:128
+msgid "Запрос уже обработан"
+msgstr "Solicitud ya procesada"
+
+#: .\events\views.py:162
+msgid "Запрос на участие отправлен создателю события!"
+msgstr "¡Se envía una solicitud de participación al creador del evento!"
+
+#: .\events\views.py:202
+msgid "Достигнуто максимальное количество участников"
+msgstr "Número máximo de participantes alcanzado"
+
+#: .\events\views.py:218
+msgid "Заявка отклонена"
+msgstr "Solicitud rechazada"
+
+#: .\events\views.py:318
+msgid "Событие успешно создано!"
+msgstr "Evento creado con éxito!"
+
+#: .\events\views.py:325
+msgid "Пожалуйста, исправьте ошибки в форме."
+msgstr "Por favor, corrija los errores en el formulario."
 
 #: .\randoccasion\settings.py:126
 msgid "Russian"
@@ -604,7 +660,9 @@ msgstr "Enviado: "
 
 #: .\templates\events\my_events_requests.html:62
 msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
-msgstr "No hay solicitudes activas. Lo principal es creer que alguien definitivamente aparecerá..."
+msgstr ""
+"No hay solicitudes activas. Lo principal es creer que alguien "
+"definitivamente aparecerá..."
 
 #: .\templates\events\recommended_events.html:7
 msgid "Рекомендованные события"

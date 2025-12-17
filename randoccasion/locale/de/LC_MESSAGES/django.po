@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-17 20:42+0300\n"
+"POT-Creation-Date: 2025-12-17 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: .\api\forms.py:9
+msgid "Имя ключа"
+msgstr "Name des Schlüssels"
+
+#: .\api\forms.py:10
+msgid "Придумайте имя для ключа"
+msgstr "Erfinden Sie einen Namen für den Schlüssel"
+
+#: .\api\forms.py:13
+msgid "Дата окончания действия"
+msgstr "Ablaufdatum"
+
+#: .\api\forms.py:14
+msgid "Введите дату прекращения действия ключа"
+msgstr "Geben Sie das Datum ein, an dem der Schlüssel abläuft"
 
 #: .\events\apps.py:10 .\events\models.py:114
 #: .\templates\includes\header.html:33 .\templates\includes\header.html:35
@@ -185,6 +201,46 @@ msgstr "Anfrage für Veranstaltung"
 #: .\events\models.py:218
 msgid "Запросы на события"
 msgstr "Anfragen für Veranstaltungen"
+
+#: .\events\views.py:111
+msgid ""
+"По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
+"участвуете/событие неактивно"
+msgstr ""
+"Aus irgendeinem Grund können Sie nicht teilnehmen: Es gibt keine freien Plätze/Sie sind bereits da "
+"teilnehmen/Ereignis ist inaktiv"
+
+#: .\events\views.py:124
+msgid "Ваш запрос уже был отправлен"
+msgstr "Ihre Anfrage wurde bereits gesendet"
+
+#: .\events\views.py:126
+msgid "Ваш запрос был отклонен"
+msgstr "Ihre Anfrage wurde abgelehnt"
+
+#: .\events\views.py:128
+msgid "Запрос уже обработан"
+msgstr "Die Anfrage wurde bereits bearbeitet"
+
+#: .\events\views.py:162
+msgid "Запрос на участие отправлен создателю события!"
+msgstr "Die Anfrage zur Teilnahme wurde an den Ersteller der Veranstaltung gesendet!"
+
+#: .\events\views.py:202
+msgid "Достигнуто максимальное количество участников"
+msgstr "Maximale Teilnehmerzahl erreicht"
+
+#: .\events\views.py:218
+msgid "Заявка отклонена"
+msgstr "Antrag abgelehnt"
+
+#: .\events\views.py:318
+msgid "Событие успешно создано!"
+msgstr "Das Ereignis wurde erfolgreich erstellt!"
+
+#: .\events\views.py:325
+msgid "Пожалуйста, исправьте ошибки в форме."
+msgstr "Bitte beheben Sie Fehler in Form."
 
 #: .\randoccasion\settings.py:126
 msgid "Russian"
@@ -565,7 +621,9 @@ msgstr "Keine Veranstaltungen gefunden"
 
 #: .\templates\events\my_events.html:170
 msgid "Попробуйте изменить фильтры или создать новое событие."
-msgstr "Versuchen Sie, die Filter zu ändern oder eine neue Veranstaltung zu erstellen."
+msgstr ""
+"Versuchen Sie, die Filter zu ändern oder eine neue Veranstaltung zu "
+"erstellen."
 
 #: .\templates\events\my_events.html:171
 msgid "Найти события"
@@ -604,7 +662,9 @@ msgstr "Gesendet: "
 
 #: .\templates\events\my_events_requests.html:62
 msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
-msgstr "Keine aktiven Anfragen. Hauptsache, glauben Sie, dass sich jemand bestimmt melden wird..."
+msgstr ""
+"Keine aktiven Anfragen. Hauptsache, glauben Sie, dass sich jemand bestimmt "
+"melden wird..."
 
 #: .\templates\events\recommended_events.html:7
 msgid "Рекомендованные события"
@@ -616,7 +676,9 @@ msgstr "Keine Empfehlungen für Sie"
 
 #: .\templates\events\recommended_events.html:21
 msgid "Попробуйте изменить настройки профиля или создать свое событие"
-msgstr "Versuchen Sie, Ihre Profileinstellungen zu ändern oder Ihre eigene Veranstaltung zu erstellen"
+msgstr ""
+"Versuchen Sie, Ihre Profileinstellungen zu ändern oder Ihre eigene "
+"Veranstaltung zu erstellen"
 
 #: .\templates\events\recommended_events.html:25
 msgid "Посмотреть все события"
@@ -844,7 +906,8 @@ msgstr "3. Laden Sie Teilnehmer ein"
 
 #: .\templates\homepage\guest_main.html:120
 msgid "Присоединяйтесь к пользователям, которые уже нашли новых друзей"
-msgstr "Schließen Sie sich den Benutzern an, die bereits neue Freunde gefunden haben"
+msgstr ""
+"Schließen Sie sich den Benutzern an, die bereits neue Freunde gefunden haben"
 
 #: .\templates\homepage\guest_main.html:121
 msgid "и интересные мероприятия через наш сервис «Встречалки»"

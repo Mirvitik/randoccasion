@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DetailView, ListView, View
 
 from events.forms import EventCreateForm
@@ -106,7 +107,7 @@ class EventSendRequestView(LoginRequiredMixin, View):
         if not event.can_join(user):
             messages.warning(
                 request,
-                message=(
+                message=_(
                     "По какой-то из причин вы не можете участвовать: "
                     "нет свободных мест/вы уже участвуете/событие неактивно"
                 ),
@@ -120,11 +121,11 @@ class EventSendRequestView(LoginRequiredMixin, View):
 
         if existing:
             if existing.status == "pending":
-                messages.info(request, "Ваш запрос уже был отправлен")
+                messages.info(request, _("Ваш запрос уже был отправлен"))
             elif existing.status == "rejected":
-                messages.error(request, "Ваш запрос был отклонен")
+                messages.error(request, _("Ваш запрос был отклонен"))
             else:
-                messages.info(request, "Запрос уже обработан")
+                messages.info(request, _("Запрос уже обработан"))
         else:
             message_text = request.POST.get("message", "")
             EventRequest.objects.create(
@@ -158,7 +159,7 @@ class EventSendRequestView(LoginRequiredMixin, View):
             send_tg_message_sync(user_to.profile.telegram_id, msg)
             messages.success(
                 request,
-                "Запрос на участие отправлен создателю события!",
+                _("Запрос на участие отправлен создателю события!"),
             )
 
         return redirect("events:event-detail", pk=event_id)
@@ -198,7 +199,7 @@ class EventAcceptRequestView(LoginRequiredMixin, View):
 
         messages.warning(
             request,
-            message="Достигнуто максимальное количество участников",
+            message=_("Достигнуто максимальное количество участников"),
         )
         return redirect("events:my_events_requests")
 
@@ -214,7 +215,7 @@ class EventRejectRequestView(LoginRequiredMixin, View):
 
         event_request.status = "rejected"
         event_request.save()
-        messages.info(request, message="Заявка отклонена")
+        messages.info(request, message=_("Заявка отклонена"))
 
         return redirect("events:my_events_requests")
 
@@ -314,14 +315,14 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
         messages.success(
             self.request,
-            "Событие успешно создано!",
+            _("Событие успешно создано!"),
         )
         return redirect(self.success_url)
 
     def form_invalid(self, form):
         messages.error(
             self.request,
-            "Пожалуйста, исправьте ошибки в форме.",
+            _("Пожалуйста, исправьте ошибки в форме."),
         )
         return super().form_invalid(form)
 

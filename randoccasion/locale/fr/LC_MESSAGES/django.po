@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-17 20:33+0300\n"
+"POT-Creation-Date: 2025-12-17 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\api\forms.py:9
+msgid "Имя ключа"
+msgstr "Nom de la clé"
+
+#: .\api\forms.py:10
+msgid "Придумайте имя для ключа"
+msgstr "Trouver un nom pour la clé"
+
+#: .\api\forms.py:13
+msgid "Дата окончания действия"
+msgstr "Date d & apos; expiration"
+
+#: .\api\forms.py:14
+msgid "Введите дату прекращения действия ключа"
+msgstr "Entrez la date d'expiration de la clé"
 
 #: .\events\apps.py:10 .\events\models.py:114
 #: .\templates\includes\header.html:33 .\templates\includes\header.html:35
@@ -190,6 +206,46 @@ msgstr "Demande d'événement"
 msgid "Запросы на события"
 msgstr "Demandes d'événements"
 
+#: .\events\views.py:111
+msgid ""
+"По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
+"участвуете/событие неактивно"
+msgstr ""
+"Pour une raison quelconque, vous ne pouvez pas participer: pas de places libres/vous êtes déjà "
+"participer / événement inactif"
+
+#: .\events\views.py:124
+msgid "Ваш запрос уже был отправлен"
+msgstr "Votre demande a déjà été soumise"
+
+#: .\events\views.py:126
+msgid "Ваш запрос был отклонен"
+msgstr "Votre demande a été rejetée"
+
+#: .\events\views.py:128
+msgid "Запрос уже обработан"
+msgstr "Demande déjà traitée"
+
+#: .\events\views.py:162
+msgid "Запрос на участие отправлен создателю события!"
+msgstr "Demande de participation envoyée au créateur de l'événement!"
+
+#: .\events\views.py:202
+msgid "Достигнуто максимальное количество участников"
+msgstr "Nombre maximum de participants atteint"
+
+#: .\events\views.py:218
+msgid "Заявка отклонена"
+msgstr "Demande rejetée"
+
+#: .\events\views.py:318
+msgid "Событие успешно создано!"
+msgstr "Événement créé avec succès!"
+
+#: .\events\views.py:325
+msgid "Пожалуйста, исправьте ошибки в форме."
+msgstr "Veuillez corriger les erreurs de formulaire."
+
 #: .\randoccasion\settings.py:126
 msgid "Russian"
 msgstr "Russe"
@@ -197,6 +253,18 @@ msgstr "Russe"
 #: .\randoccasion\settings.py:127
 msgid "English"
 msgstr "Anglais"
+
+#: .\randoccasion\settings.py:128
+msgid "German"
+msgstr "Allemand"
+
+#: .\randoccasion\settings.py:129
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: .\randoccasion\settings.py:130
+msgid "French"
+msgstr "Français"
 
 #: .\templates\api\apicreate.html:9
 msgid "Регистрация API ключа"
@@ -426,7 +494,7 @@ msgstr "Par date d'expiration :"
 msgid "Сначала ближайшие"
 msgstr "Les plus proches d'abord"
 
-#: .templates\events\events.html:117
+#: .\templates\events\events.html:117
 msgid "Сначала отдалённые"
 msgstr "Les plus éloignés d'abord"
 
@@ -604,7 +672,9 @@ msgstr "Envoyé : "
 
 #: .\templates\events\my_events_requests.html:62
 msgid "Нет активных заявок. Главное - верьте, что кто-то точно объявится..."
-msgstr "Aucune demande active. L'essentiel est de croire que quelqu'un apparaîtra certainement..."
+msgstr ""
+"Aucune demande active. L'essentiel est de croire que quelqu'un apparaîtra "
+"certainement..."
 
 #: .\templates\events\recommended_events.html:7
 msgid "Рекомендованные события"
@@ -616,7 +686,9 @@ msgstr "Aucune recommandation pour vous"
 
 #: .\templates\events\recommended_events.html:21
 msgid "Попробуйте изменить настройки профиля или создать свое событие"
-msgstr "Essayez de modifier les paramètres de votre profil ou de créer votre propre événement"
+msgstr ""
+"Essayez de modifier les paramètres de votre profil ou de créer votre propre "
+"événement"
 
 #: .\templates\events\recommended_events.html:25
 msgid "Посмотреть все события"

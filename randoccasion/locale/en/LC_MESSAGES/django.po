@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-17 20:33+0300\n"
+"POT-Creation-Date: 2025-12-17 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\api\forms.py:9
+msgid "Имя ключа"
+msgstr "Key name"
+
+#: .\api\forms.py:10
+msgid "Придумайте имя для ключа"
+msgstr "Come up with a name for the key"
+
+#: .\api\forms.py:13
+msgid "Дата окончания действия"
+msgstr "Expiration date"
+
+#: .\api\forms.py:14
+msgid "Введите дату прекращения действия ключа"
+msgstr "Enter the key expiration date"
 
 #: .\events\apps.py:10 .\events\models.py:114
 #: .\templates\includes\header.html:33 .\templates\includes\header.html:35
@@ -190,6 +206,46 @@ msgstr "Event Request"
 msgid "Запросы на события"
 msgstr "Event Requests"
 
+#: .\events\views.py:111
+msgid ""
+"По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
+"участвуете/событие неактивно"
+msgstr ""
+"For some reason you cannot participate: there are no available seats/you are already "
+"participating/the event is inactive"
+
+#: .\events\views.py:124
+msgid "Ваш запрос уже был отправлен"
+msgstr "Your request has already been sent"
+
+#: .\events\views.py:126
+msgid "Ваш запрос был отклонен"
+msgstr "Your request has been rejected"
+
+#: .\events\views.py:128
+msgid "Запрос уже обработан"
+msgstr "The request has already been processed"
+
+#: .\events\views.py:162
+msgid "Запрос на участие отправлен создателю события!"
+msgstr "The participation request has been sent to the creator of the event!"
+
+#: .\events\views.py:202
+msgid "Достигнуто максимальное количество участников"
+msgstr "The maximum number of participants has been reached"
+
+#: .\events\views.py:218
+msgid "Заявка отклонена"
+msgstr "Application rejected"
+
+#: .\events\views.py:318
+msgid "Событие успешно создано!"
+msgstr "The event was successfully created!"
+
+#: .\events\views.py:325
+msgid "Пожалуйста, исправьте ошибки в форме."
+msgstr "Please correct the errors in the form."
+
 #: .\randoccasion\settings.py:126
 msgid "Russian"
 msgstr "Russian"
@@ -197,6 +253,18 @@ msgstr "Russian"
 #: .\randoccasion\settings.py:127
 msgid "English"
 msgstr "English"
+
+#: .\randoccasion\settings.py:128
+msgid "German"
+msgstr ""
+
+#: .\randoccasion\settings.py:129
+msgid "Spanish"
+msgstr ""
+
+#: .\randoccasion\settings.py:130
+msgid "French"
+msgstr ""
 
 #: .\templates\api\apicreate.html:9
 #, fuzzy
