@@ -123,15 +123,13 @@ class UserListView(LoginRequiredMixin, ListView):
             queryset = self.request.user.friends_of_friends
 
         if sort_by_alpha == "desc":
-            queryset = queryset.order_by(
+            return queryset.order_by(
                 "-first_name",
                 "-last_name",
                 "-username",
             )
-        elif sort_by_alpha == "asc":
-            queryset = queryset.order_by("first_name", "last_name", "username")
 
-        return queryset
+        return queryset.order_by("first_name", "last_name", "username")
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
