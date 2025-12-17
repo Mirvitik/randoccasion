@@ -81,6 +81,15 @@
                         </button>
                     </form>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                    {% if view_name == 'users:login' %}
+                    <span class="nav-link active" aria-current="page">{% translate "Войти" %}</span>
+                    {% else %}
+                    <a href="{% url 'users:login' %}" class="nav-link">{% translate "Войти" %}</a>
+                    {% endif %}
+                </li>
+                {% endif %}
                 <li>
                     <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center">
                         {% csrf_token %}
@@ -103,16 +112,6 @@
                         </div>
                     </form>
                 </li>
-
-                {% else %}
-                <li class="nav-item">
-                    {% if view_name == 'users:login' %}
-                    <span class="nav-link active" aria-current="page">{% translate "Войти" %}</span>
-                    {% else %}
-                    <a href="{% url 'users:login' %}" class="nav-link">{% translate "Войти" %}</a>
-                    {% endif %}
-                </li>
-                {% endif %}
 
                 {% if user.is_staff %}
                 <li class="nav-item">
