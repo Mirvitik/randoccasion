@@ -109,7 +109,7 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 request,
                 message=_(
                     "По какой-то из причин вы не можете участвовать: "
-                    "нет свободных мест/вы уже участвуете/событие неактивно"
+                    "нет свободных мест/вы уже участвуете/событие неактивно",
                 ),
             )
             return redirect("events:event-detail", pk=event_id)
