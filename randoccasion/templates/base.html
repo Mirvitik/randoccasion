@@ -13,6 +13,12 @@
     <link rel="icon" href='{% static "favicons/favicon.ico" %}' type="image/x-icon">
     <link href='{% static "bootstrap/bootstrap.min.css" %}' rel="stylesheet">
     <link href='{% static "css/styles.css" %}' rel="stylesheet">
+    <style>
+        .ck-editor__editable {
+        background-color: gray !important;
+        color: white !important;
+    }
+    </style>
 </head>
 {% if messages %}
 {% for message in messages %}
@@ -56,16 +62,18 @@
         <div class="footer-container">
             {% include "includes/footer.html" %}
         </div>
-      </footer>
-    </div>
-    <div id="distance-translations"
-        data-km="{% translate 'км' %}"
-        data-m="{% translate 'м' %}"
-        data-not-defined="{% translate 'не определено' %}"
-        style="display: none;">
-    </div>
-  </body>
-  <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
-  <script src="{% static "js/theme.js" %}"></script>
-  <script src="{% static 'js/distance_calculator.js' %}"></script>
+    </footer>
+</div>
+<div id="distance-translations"
+     data-km="{% translate 'км' %}"
+     data-m="{% translate 'м' %}"
+     data-not-defined="{% translate 'не определено' %}"
+     style="display: none;">
+</div>
+</body>
+<script src="{% static " js
+/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static " js
+/theme.js" %}"></script>
+<script src="{% static 'js/distance_calculator.js' %}"></script>
 </html>

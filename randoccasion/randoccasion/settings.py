@@ -105,19 +105,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".UserAttributeSimilarityValidator",
+                ".UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".MinimumLengthValidator",
+                ".MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".CommonPasswordValidator",
+                ".CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation"
-        ".NumericPasswordValidator",
+                ".NumericPasswordValidator",
     },
 ]
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -145,27 +145,21 @@ MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
 
 CKEDITOR_5_CONFIGS = {
-    "default": {
-        "toolbar": [
-            "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "bulletedList",
-            "numberedList",
-            "blockQuote",
-            "imageUpload",
-            "fontColor",
-            "fontBackgroundColor",
-            "bulletedList",
-            "numberedList",
-            "todoList",
-            "outdent",
-            "indent",
+    'default': {
+        'toolbar': [
+            'bold', 'italic', '|',
+            'fontColor', 'fontBackgroundColor', '|',
+            'link', 'bulletedList', 'numberedList'
         ],
-    },
+        'content': {
+            'styles': [
+                'color: #000000',
+                'background-color: transparent'
+            ]
+        }
+    }
 }
+
 CKEDITOR_5_CUSTOM_CSS = "css/ckeditor5/admin_dark.css"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 
