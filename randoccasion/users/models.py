@@ -210,11 +210,6 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
-    code = models.PositiveIntegerField(
-        verbose_name=_("code"),
-        blank=True,
-        null=True,
-    )
     tg_messages_cnt = models.PositiveIntegerField(
         verbose_name=_("Количество сообщений"),
         blank=True,
@@ -240,36 +235,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _("профиль")
         verbose_name_plural = _("профили")
-
-    def __str__(self):
-        return f"{self.user.username} - Профиль"
-
-
-class TelegramPhoneVerify(models.Model):
-    telegram_id = models.PositiveIntegerField(
-        verbose_name=_("telegram_id"),
-        blank=True,
-        null=True,
-    )
-    username = models.CharField(
-        verbose_name=_("username"),
-        blank=True,
-        null=True,
-    )
-    telephone = models.PositiveIntegerField(
-        verbose_name=_("telephone"),
-        blank=True,
-        null=True,
-    )
-    code = models.PositiveIntegerField(
-        verbose_name=_("code"),
-        blank=True,
-        null=True,
-    )
-
-    class Meta:
-        verbose_name = _("TelegramPhoneVerify")
-        verbose_name_plural = _("TelegramPhoneVerifies")
 
     def __str__(self):
         return f"{self.user.username} - Профиль"
