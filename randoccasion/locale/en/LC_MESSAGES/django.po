@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-17 22:38+0300\n"
+"POT-Creation-Date: 2025-12-18 20:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,56 +39,56 @@ msgstr "Enter the key expiration date"
 msgid "События"
 msgstr "Events"
 
-#: .\events\forms.py:76
+#: .\events\forms.py:75
 msgid "Название события"
 msgstr "Event name"
 
-#: .\events\forms.py:77
+#: .\events\forms.py:76
 #, fuzzy
 #| msgid "картинка"
 msgid "Картинка"
 msgstr "Image"
 
-#: .\events\forms.py:78 .\templates\events\my_events.html:104
+#: .\events\forms.py:77 .\templates\events\my_events.html:120
 #: .\templates\includes\event_card.html:9
 msgid "Тема"
 msgstr "Theme"
 
-#: .\events\forms.py:79
+#: .\events\forms.py:78
 msgid "Кто может видеть"
 msgstr "Who can see"
 
-#: .\events\forms.py:80 .\events\models.py:52
+#: .\events\forms.py:79 .\events\models.py:52
 msgid "Описание"
 msgstr "Description"
 
-#: .\events\forms.py:81
+#: .\events\forms.py:80
 #, fuzzy
 #| msgid "Максимальное количество участников"
 msgid "Максимум участников"
 msgstr "Max number of participants"
 
-#: .\events\forms.py:82
+#: .\events\forms.py:81
 msgid "Местоположение"
 msgstr "Location"
 
-#: .\events\forms.py:83 .\templates\events\my_events.html:108
+#: .\events\forms.py:82 .\templates\events\my_events.html:124
 msgid "Истекает"
 msgstr "Expires"
 
-#: .\events\forms.py:86
+#: .\events\forms.py:85
 msgid "Время для записи участников. Минимум 15 минут"
 msgstr "Time for registration of participants. At least 15 minutes"
 
-#: .\events\forms.py:87
+#: .\events\forms.py:86
 msgid "Минимум 1 участник"
 msgstr "Minimum 1 participant"
 
-#: .\events\forms.py:103
+#: .\events\forms.py:102
 msgid "Событие должно истекать не ранее чем через 15 минут"
 msgstr "The event must expire no earlier than 15 minutes later"
 
-#: .\events\forms.py:111
+#: .\events\forms.py:110
 msgid "Должен быть хотя бы один участник"
 msgstr "There must be at least one participant"
 
@@ -96,7 +96,7 @@ msgstr "There must be at least one participant"
 msgid "Все"
 msgstr "All"
 
-#: .\events\models.py:28 .\templates\events\my_events.html:120
+#: .\events\models.py:28 .\templates\events\my_events.html:136
 msgid "Только друзья"
 msgstr "Only friends"
 
@@ -128,7 +128,7 @@ msgstr "Who can see the post"
 msgid "картинка"
 msgstr "Image"
 
-#: .\events\models.py:53 .\templates\events\my_events.html:93
+#: .\events\models.py:53 .\templates\events\my_events.html:109
 msgid "Активно"
 msgstr "Active"
 
@@ -157,7 +157,7 @@ msgid "Долгота"
 msgstr "Longitude"
 
 #: .\events\models.py:86 .\events\models.py:201
-#: .\templates\events\my_events.html:107
+#: .\templates\events\my_events.html:123
 msgid "Создано"
 msgstr "Created"
 
@@ -206,43 +206,43 @@ msgstr "Event Request"
 msgid "Запросы на события"
 msgstr "Event Requests"
 
-#: .\events\views.py:111
+#: .\events\views.py:108
 msgid ""
 "По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
 "участвуете/событие неактивно"
 msgstr ""
-"For some reason you cannot participate: there are no available seats/you are already "
-"participating/the event is inactive"
+"For some reason you cannot participate: there are no available seats/you are "
+"already participating/the event is inactive"
 
-#: .\events\views.py:124
+#: .\events\views.py:121
 msgid "Ваш запрос уже был отправлен"
 msgstr "Your request has already been sent"
 
-#: .\events\views.py:126
+#: .\events\views.py:123
 msgid "Ваш запрос был отклонен"
 msgstr "Your request has been rejected"
 
-#: .\events\views.py:128
+#: .\events\views.py:125
 msgid "Запрос уже обработан"
 msgstr "The request has already been processed"
 
-#: .\events\views.py:162
+#: .\events\views.py:160
 msgid "Запрос на участие отправлен создателю события!"
 msgstr "The participation request has been sent to the creator of the event!"
 
-#: .\events\views.py:202
+#: .\events\views.py:200
 msgid "Достигнуто максимальное количество участников"
 msgstr "The maximum number of participants has been reached"
 
-#: .\events\views.py:218
+#: .\events\views.py:216
 msgid "Заявка отклонена"
 msgstr "Application rejected"
 
-#: .\events\views.py:318
+#: .\events\views.py:316
 msgid "Событие успешно создано!"
 msgstr "The event was successfully created!"
 
-#: .\events\views.py:325
+#: .\events\views.py:323
 msgid "Пожалуйста, исправьте ошибки в форме."
 msgstr "Please correct the errors in the form."
 
@@ -347,7 +347,7 @@ msgid "не определено"
 msgstr "The email has been sent"
 
 #: .\templates\events\create_event.html:4
-#: .\templates\events\create_event.html:154 .\templates\events\events.html:15
+#: .\templates\events\create_event.html:163 .\templates\events\events.html:14
 #: .\templates\events\my_events.html:15
 #: .\templates\events\recommended_events.html:30
 msgid "Создать событие"
@@ -361,25 +361,25 @@ msgstr "Create a new event"
 msgid "Выберите, кто сможет увидеть ваше событие"
 msgstr "Choose who can see your event"
 
-#: .\templates\events\create_event.html:101
+#: .\templates\events\create_event.html:102
 msgid "Выбрать на карте"
 msgstr "Choose on the map"
 
-#: .\templates\events\create_event.html:151
-#: .\templates\events\create_event.html:176
+#: .\templates\events\create_event.html:160
+#: .\templates\events\create_event.html:186
 #: .\templates\events\eventinfo.html:61
 msgid "Отмена"
 msgstr "Cancel"
 
-#: .\templates\events\create_event.html:166
+#: .\templates\events\create_event.html:176
 msgid "Выберите местоположение на карте"
 msgstr "Select a location on the map"
 
-#: .\templates\events\create_event.html:172
+#: .\templates\events\create_event.html:182
 msgid "Кликните на карту, чтобы выбрать точное местоположение"
 msgstr "Click on the map to select the exact location"
 
-#: .\templates\events\create_event.html:177
+#: .\templates\events\create_event.html:188
 msgid "Подтвердить"
 msgstr "Confirm"
 
@@ -443,205 +443,218 @@ msgstr "Change password"
 msgid "Заявки на мои события"
 msgstr "Requests for my events"
 
-#: .\templates\events\events.html:34 .\templates\users\user_list.html:23
+#: .\templates\events\events.html:23"
+msgid "Искать событие..."
+msgstr "To search for an event.."
+
+#: .\templates\events\events.html:33 .\templates\users\user_list.html:23
 msgid "Фильтры"
 msgstr "Filters"
 
-#: .\templates\events\events.html:42
+#: .\templates\events\events.html:41
 msgid "Фильтрация событий"
 msgstr "Filtering events"
 
-#: .\templates\events\events.html:45
+#: .\templates\events\events.html:44
 msgid "Дата создания с:"
 msgstr "Date of creation from:"
 
-#: .\templates\events\events.html:51
+#: .\templates\events\events.html:50
 msgid "Дата создания по:"
 msgstr "Software creation date:"
 
-#: .\templates\events\events.html:61
+#: .\templates\events\events.html:60
 msgid "Только активные события"
 msgstr "Active events only"
 
-#: .\templates\events\events.html:69
+#: .\templates\events\events.html:68
 msgid "События друзей"
 msgstr "Friends' Events"
 
-#: .\templates\events\events.html:76 .\templates\events\my_events.html:5
-#: .\templates\events\my_events.html:18 .\templates\includes\header.html:40
-#: .\templates\includes\header.html:42
+#: .\templates\events\events.html:75 .\templates\events\my_events.html:5
+#: .\templates\events\my_events.html:18 .\templates\includes\header.html:43
+#: .\templates\includes\header.html:45
 msgid "Мои события"
 msgstr "My events"
 
-#: .\templates\events\events.html:82 .\templates\users\user_list.html:43
+#: .\templates\events\events.html:81 .\templates\users\user_list.html:43
 msgid "Сортировка"
 msgstr "Sort"
 
-#: .\templates\events\events.html:85
+#: .\templates\events\events.html:84
 msgid "По дате публикации:"
 msgstr "By publication date:"
 
-#: .\templates\events\events.html:89 .\templates\events\my_events.html:59
+#: .\templates\events\events.html:88 .\templates\events\my_events.html:69
 msgid "Сначала новые"
 msgstr "New ones first"
 
-#: .\templates\events\events.html:95 .\templates\events\my_events.html:62
+#: .\templates\events\events.html:94 .\templates\events\my_events.html:72
 msgid "Сначала старые"
 msgstr "The old ones first"
 
-#: .\templates\events\events.html:101 .\templates\events\events.html:123
-#: .\templates\events\events.html:145 .\templates\users\user_list.html:66
+#: .\templates\events\events.html:100 .\templates\events\events.html:122
+#: .\templates\events\events.html:144 .\templates\users\user_list.html:66
 msgid "Не использовать"
 msgstr "Don't use"
 
-#: .\templates\events\events.html:107
+#: .\templates\events\events.html:106
 msgid "По дате истечения:"
 msgstr "By expiration date:"
 
-#: .\templates\events\events.html:111
+#: .\templates\events\events.html:110
 msgid "Сначала ближайшие"
 msgstr "The nearest ones first"
 
-#: .\templates\events\events.html:117
+#: .\templates\events\events.html:116
 msgid "Сначала отдалённые"
 msgstr "At first, the remote ones"
 
-#: .\templates\events\events.html:129 .\templates\users\user_list.html:45
+#: .\templates\events\events.html:128 .\templates\users\user_list.html:45
 msgid "По алфавиту:"
 msgstr "Alphabetically:"
 
-#: .\templates\events\events.html:133 .\templates\events\my_events.html:68
+#: .\templates\events\events.html:132 .\templates\events\my_events.html:78
 #: .\templates\users\user_list.html:51
 msgid "А-Я"
 msgstr "A-Z"
 
-#: .\templates\events\events.html:139 .\templates\events\my_events.html:71
+#: .\templates\events\events.html:138 .\templates\events\my_events.html:81
 #: .\templates\users\user_list.html:59
 msgid "Я-А"
 msgstr "Z-A"
 
-#: .\templates\events\events.html:154 .\templates\users\user_list.html:75
+#: .\templates\events\events.html:153 .\templates\users\user_list.html:75
 msgid "Применить"
 msgstr "Apply"
 
-#: .\templates\events\events.html:155 .\templates\users\user_list.html:76
+#: .\templates\events\events.html:154 .\templates\events\my_events.html:89
+#: .\templates\users\user_list.html:76
 msgid "Сбросить"
 msgstr "Throw off"
 
-#: .\templates\events\events.html:165
+#: .\templates\events\events.html:164
 msgid "Результаты поиска по запросу"
 msgstr "Search results for the query"
 
-#: .\templates\events\events.html:174
+#: .\templates\events\events.html:173
 msgid "Кажется здесь ничего нет..."
 msgstr "There doesn't seem to be anything here..."
 
-#: .\templates\events\events.html:180
+#: .\templates\events\events.html:179
+#: .\templates\events\my_events_requests.html:68
+#: .\templates\users\user_list.html:107
 msgid "В начало"
 msgstr "To the beginning"
 
-#: .\templates\events\events.html:181
+#: .\templates\events\events.html:180
+#: .\templates\events\my_events_requests.html:69
+#: .\templates\users\user_list.html:108
 msgid "Предыдущая"
 msgstr "Previous"
 
-#: .\templates\events\events.html:193
+#: .\templates\events\events.html:192
+#: .\templates\events\my_events_requests.html:81
+#: .\templates\users\user_list.html:120
 msgid "Следующая"
 msgstr "Next"
 
-#: .\templates\events\events.html:194 .\templates\events\my_events.html:160
+#: .\templates\events\events.html:193 .\templates\events\my_events.html:176
+#: .\templates\events\my_events_requests.html:82
+#: .\templates\users\user_list.html:121
 msgid "Последняя"
 msgstr "Last"
 
-#: .\templates\events\my_events.html:25
+#: .\templates\events\my_events.html:33
 msgid "Созданные мной "
 msgstr "Created by me"
 
-#: .\templates\events\my_events.html:31
+#: .\templates\events\my_events.html:40
 msgid "Участвую "
 msgstr "Participating"
 
-#: .\templates\events\my_events.html:37
+#: .\templates\events\my_events.html:47
 msgid "Все мои события "
 msgstr "All my events"
 
-#: .\templates\events\my_events.html:46
+#: .\templates\events\my_events.html:56
 msgid "Активные события"
 msgstr "Active events"
 
-#: .\templates\events\my_events.html:49
+#: .\templates\events\my_events.html:59
 msgid "Завершенные события"
 msgstr "Completed events"
 
-#: .\templates\events\my_events.html:52
+#: .\templates\events\my_events.html:62
 msgid "Все события"
 msgstr "All events"
 
-#: .\templates\events\my_events.html:65
+#: .\templates\events\my_events.html:75
 msgid "Скоро истекают"
 msgstr "About to expire"
 
-#: .\templates\events\my_events.html:95
+#: .\templates\events\my_events.html:111
 msgid "Завершено"
 msgstr "Completed"
 
-#: .\templates\events\my_events.html:105
+#: .\templates\events\my_events.html:121
 msgid "Место:"
 msgstr "Location:"
 
-#: .\templates\events\my_events.html:106
+#: .\templates\events\my_events.html:122
 msgid "Участники:"
 msgstr "Participants:"
 
-#: .\templates\events\my_events.html:112
+#: .\templates\events\my_events.html:128
 msgid "Я создатель"
 msgstr "I am a creator"
 
-#: .\templates\events\my_events.html:114
+#: .\templates\events\my_events.html:130
 msgid "Я участник"
 msgstr "I am a participant"
 
-#: .\templates\events\my_events.html:118
+#: .\templates\events\my_events.html:134
 msgid "Только для меня"
 msgstr "Just for me"
 
-#: .\templates\events\my_events.html:125
+#: .\templates\events\my_events.html:141
 #: .\templates\includes\event_card.html:44 .\templates\users\user_list.html:98
 msgid "Подробнее"
 msgstr "More detailed"
 
-#: .\templates\events\my_events.html:130
+#: .\templates\events\my_events.html:146
 msgid "Запросы"
 msgstr "Requests"
 
-#: .\templates\events\my_events.html:144
+#: .\templates\events\my_events.html:160
 msgid "Первая"
 msgstr "First"
 
-#: .\templates\events\my_events.html:147
+#: .\templates\events\my_events.html:163
 msgid "Назад"
 msgstr "Back"
 
-#: .\templates\events\my_events.html:152
+#: .\templates\events\my_events.html:168
 msgid "Страница"
 msgstr "Page"
 
-#: .\templates\events\my_events.html:152
+#: .\templates\events\my_events.html:168
 msgid "из"
 msgstr "from"
 
-#: .\templates\events\my_events.html:157
+#: .\templates\events\my_events.html:173
 msgid "Вперед"
 msgstr "Next"
 
-#: .\templates\events\my_events.html:169
+#: .\templates\events\my_events.html:185
 msgid "Событий не найдено"
 msgstr "No events found"
 
-#: .\templates\events\my_events.html:170
+#: .\templates\events\my_events.html:186
 msgid "Попробуйте изменить фильтры или создать новое событие."
 msgstr "Try changing the filters or creating a new event."
 
-#: .\templates\events\my_events.html:171
+#: .\templates\events\my_events.html:187
 msgid "Найти события"
 msgstr "Find Events"
 
@@ -1192,6 +1205,10 @@ msgstr "Add to Friends"
 msgid "Список пользователей"
 msgstr "List of users"
 
+#: .\templates\users\user_list.html:10
+msgid "Введите имя, интересы, id, username или email пользователя"
+msgstr "Enter the user's name, interests, id, username, or email"
+
 #: .\templates\users\user_list.html:31
 msgid "Фильтрация пользователей"
 msgstr "Filtering users"
@@ -1228,41 +1245,37 @@ msgstr "avatar"
 msgid "интересы"
 msgstr "interests"
 
-#: .\users\models.py:204 .\users\models.py:250
+#: .\users\models.py:204
 msgid "telegram_id"
 msgstr "telegram_id"
 
-#: .\users\models.py:209 .\users\models.py:260
+#: .\users\models.py:209
 msgid "telephone"
 msgstr "telephone"
 
-#: .\users\models.py:214 .\users\models.py:265
-msgid "code"
-msgstr "code"
-
-#: .\users\models.py:219
+#: .\users\models.py:214
 msgid "Количество сообщений"
 msgstr "Number of messages"
 
-#: .\users\models.py:241
+#: .\users\models.py:236
 msgid "профиль"
 msgstr "profile"
 
-#: .\users\models.py:242
+#: .\users\models.py:237
 msgid "профили"
 msgstr "profiles"
 
-#: .\users\models.py:255
-msgid "username"
-msgstr "username"
+#~ msgid "code"
+#~ msgstr "code"
 
-#: .\users\models.py:271
-msgid "TelegramPhoneVerify"
-msgstr "TelegramPhoneVerify"
+#~ msgid "username"
+#~ msgstr "username"
 
-#: .\users\models.py:272
-msgid "TelegramPhoneVerifies"
-msgstr "TelegramPhoneVerifies"
+#~ msgid "TelegramPhoneVerify"
+#~ msgstr "TelegramPhoneVerify"
+
+#~ msgid "TelegramPhoneVerifies"
+#~ msgstr "TelegramPhoneVerifies"
 
 #~ msgid "Сервис "
 #~ msgstr "Service"

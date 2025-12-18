@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-18 16:53+0300\n"
+"POT-Creation-Date: 2025-12-18 20:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -488,6 +488,12 @@ msgstr "Сменить пароль"
 #: .\templates\users\profile.html:16
 msgid "Заявки на мои события"
 msgstr "Заявки на мои события"
+
+#: .\templates\events\events.html:23
+#, fuzzy
+#| msgid "Тема события"
+msgid "Искать событие..."
+msgstr "Тема события"
 
 #: .\templates\events\events.html:33 .\templates\users\user_list.html:23
 msgid "Фильтры"
@@ -1353,6 +1359,10 @@ msgstr "Заявки в друзья"
 msgid "Список пользователей"
 msgstr "Список пользователей"
 
+#: .\templates\users\user_list.html:10
+msgid "Введите имя, интересы, id, username или email пользователя"
+msgstr ""
+
 #: .\templates\users\user_list.html:31
 #, fuzzy
 #| msgid "Список пользователей"
@@ -1393,41 +1403,37 @@ msgstr "аватарка"
 msgid "интересы"
 msgstr "интересы"
 
-#: .\users\models.py:204 .\users\models.py:250
+#: .\users\models.py:204
 msgid "telegram_id"
 msgstr "telegram_id"
 
-#: .\users\models.py:209 .\users\models.py:260
+#: .\users\models.py:209
 msgid "telephone"
 msgstr "telephone"
 
-#: .\users\models.py:214 .\users\models.py:265
-msgid "code"
-msgstr "code"
-
-#: .\users\models.py:219
+#: .\users\models.py:214
 msgid "Количество сообщений"
 msgstr "Количество сообщений"
 
-#: .\users\models.py:241
+#: .\users\models.py:236
 msgid "профиль"
 msgstr "профиль"
 
-#: .\users\models.py:242
+#: .\users\models.py:237
 msgid "профили"
 msgstr "профили"
 
-#: .\users\models.py:255
-msgid "username"
-msgstr "username"
+#~ msgid "code"
+#~ msgstr "code"
 
-#: .\users\models.py:271
-msgid "TelegramPhoneVerify"
-msgstr "TelegramPhoneVerify"
+#~ msgid "username"
+#~ msgstr "username"
 
-#: .\users\models.py:272
-msgid "TelegramPhoneVerifies"
-msgstr "TelegramPhoneVerifies"
+#~ msgid "TelegramPhoneVerify"
+#~ msgstr "TelegramPhoneVerify"
+
+#~ msgid "TelegramPhoneVerifies"
+#~ msgstr "TelegramPhoneVerifies"
 
 #~ msgid "Сервис "
 #~ msgstr "Сервис "
