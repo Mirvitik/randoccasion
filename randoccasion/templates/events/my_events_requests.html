@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n events_tags %}
 
 {% block content %}
 <div class="container py-4">
@@ -61,6 +61,29 @@
     {% else %}
         <span>{% translate "Нет активных заявок. Главное - верьте, что кто-то точно объявится..." %}</span>
     {% endif %}
+    
+    <nav aria-label="pg-navigation" class="d-flex justify-content-center">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo; {% translate "В начало" %}</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{% translate "Предыдущая" %}</a></li>
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+          {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+            <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+              <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{% translate "Следующая" %}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{% translate "Последняя" %} &raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
     </div>
 </div>
 

@@ -11,7 +11,11 @@ from rest_framework_api_key.models import APIKey
 from rest_framework_api_key.permissions import HasAPIKey
 
 from api.forms import APICreateForm
-from api.serializers import EventSerializer, InterestSerializer, UserSerializer
+from api.serializers import (
+    EventSerializer,
+    InterestSerializer,
+    UserSerializer,
+)
 from events.models import Event
 from users.models import Interest, User
 

@@ -69,9 +69,9 @@ class EventIndexView(ListView):
             ordering.append("created_at")
 
         if sort_expiry == "desc":
-            ordering.append("created_at")
+            ordering.append("-expires_at")
         elif sort_expiry == "asc":
-            ordering.append("-created_at")
+            ordering.append("expires_at")
 
         if sort_alphabet == "desc":
             ordering.append("-name")
@@ -79,7 +79,7 @@ class EventIndexView(ListView):
             ordering.append("name")
 
         if len(ordering) > 0:
-            events.order_by(*ordering)
+            events = events.order_by(*ordering)
 
         return events
 
@@ -134,7 +134,8 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 message=message_text,
             )
             msg = (
-                f"У Вас новая заявка на участие в событии от {user.username}\n"
+                f"У Вас новая заявка на участие в событии "
+                f"от {user.username}\n"
             )
             if user.last_name or user.last_name:
                 msg += f"Имя: {request.user.last_name} {user.first_name}\n"
