@@ -23,13 +23,13 @@
                     <h3 class="mb-0">{% translate "Создать новое событие" %}</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{% url 'events:create_event' %}">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'events:create_event' %}">
                         {% csrf_token %}
                         {{ form.media }}
                         {% if form.non_field_errors %}
-                            <div class="alert alert-danger" role="alert">
-                                {{ form.non_field_errors }}
-                            </div>
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.non_field_errors }}
+                        </div>
                         {% endif %}
 
                         <div class="mb-3">
@@ -38,9 +38,9 @@
                             </label>
                             {{ form.name }}
                             {% if form.name.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.name.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.name.errors }}
+                            </div>
                             {% endif %}
                         </div>
 
@@ -50,9 +50,9 @@
                             </label>
                             {{ form.topic }}
                             {% if form.topic.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.topic.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.topic.errors }}
+                            </div>
                             {% endif %}
                         </div>
 
@@ -65,18 +65,18 @@
                                 {% translate "Выберите, кто сможет увидеть ваше событие" %}
                             </small>
                             {% if form.who_can_see.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.who_can_see.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.who_can_see.errors }}
+                            </div>
                             {% endif %}
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">{% translate "Интересы" %}</label>
                             {{ form.interests }}
                             {% if form.interests.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.interests.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.interests.errors }}
+                            </div>
                             {% endif %}
                         </div>
                         <div class="mb-3">
@@ -85,9 +85,9 @@
                             </label>
                             {{ form.description }}
                             {% if form.description.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.description.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.description.errors }}
+                            </div>
                             {% endif %}
                         </div>
 
@@ -97,18 +97,27 @@
                             </label>
                             <div class="input-group">
                                 {{ form.location }}
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapModal">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#mapModal">
                                     <i class="bi bi-geo-alt"></i> {% translate "Выбрать на карте" %}
                                 </button>
                                 {{ form.latitude }}
                                 {{ form.longitude }}
                             </div>
                             {% if form.location.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.location.errors }}
-                                </div>
+                            <div class="invalid-feedback d-block">
+                                {{ form.location.errors }}
+                            </div>
                             {% endif %}
                         </div>
+                        <label for="{{ form.image.id_for_label }}" class="form-label fw-bold">
+                            {{ form.image.label }}
+                        </label>
+                        <input type="file"
+                               name="{{ form.image.name }}"
+                               id="{{ form.image.id_for_label }}"
+                               class="form-control"
+                               accept="image/*">
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -117,14 +126,14 @@
                                 </label>
                                 {{ form.max_participants }}
                                 {% if form.max_participants.help_text %}
-                                    <small class="form-text text-muted d-block mt-1">
-                                        {{ form.max_participants.help_text }}
-                                    </small>
+                                <small class="form-text text-muted d-block mt-1">
+                                    {{ form.max_participants.help_text }}
+                                </small>
                                 {% endif %}
                                 {% if form.max_participants.errors %}
-                                    <div class="invalid-feedback d-block">
-                                        {{ form.max_participants.errors }}
-                                    </div>
+                                <div class="invalid-feedback d-block">
+                                    {{ form.max_participants.errors }}
+                                </div>
                                 {% endif %}
                             </div>
 
@@ -134,14 +143,14 @@
                                 </label>
                                 {{ form.expires_at }}
                                 {% if form.expires_at.help_text %}
-                                    <small class="form-text text-muted d-block mt-1">
-                                        {{ form.expires_at.help_text }}
-                                    </small>
+                                <small class="form-text text-muted d-block mt-1">
+                                    {{ form.expires_at.help_text }}
+                                </small>
                                 {% endif %}
                                 {% if form.expires_at.errors %}
-                                    <div class="invalid-feedback d-block">
-                                        {{ form.expires_at.errors }}
-                                    </div>
+                                <div class="invalid-feedback d-block">
+                                    {{ form.expires_at.errors }}
+                                </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -159,152 +168,155 @@
             </div>
 
 
-<div class="modal fade map-modal" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel"> {% translate "Выберите местоположение на карте" %}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="map"></div>
-                <div class="mt-2">
-                    <small class="text-muted">{% translate "Кликните на карту, чтобы выбрать точное местоположение" %}</small>
+            <div class="modal fade map-modal" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mapModalLabel"> {% translate "Выберите местоположение на карте" %}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="map"></div>
+                            <div class="mt-2">
+                                <small class="text-muted">{% translate "Кликните на карту, чтобы выбрать точное местоположение" %}</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Отмена" %}
+                            </button>
+                            <button type="button" class="btn btn-primary" id="confirmLocation">{% translate "Подтвердить" %}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% translate "Отмена" %}</button>
-                <button type="button" class="btn btn-primary" id="confirmLocation">{% translate "Подтвердить" %}</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script type="text/javascript">
-    let myMap;
-    let myPlacemark;
-    let selectedAddress = '';
-    let selectedCoords = null;
-    const locationInputId = '{{ form.location.id_for_label }}';
-    const latInputId = '{{ form.latitude.id_for_label }}';
-    const lonInputId = '{{ form.longitude.id_for_label }}';
+            <script type="text/javascript">
+                let myMap;
+                let myPlacemark;
+                let selectedAddress = '';
+                let selectedCoords = null;
+                const locationInputId = '{{ form.location.id_for_label }}';
+                const latInputId = '{{ form.latitude.id_for_label }}';
+                const lonInputId = '{{ form.longitude.id_for_label }}';
 
-    document.getElementById('mapModal').addEventListener('shown.bs.modal', function () {
-        if (!myMap) {
-            ymaps.ready(initMap);
-        }
-    });
-
-    function initMap() {
-        myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 10,
-            controls: ['zoomControl', 'searchControl', 'typeSelector', 'fullscreenControl']
-        });
-
-        ymaps.geolocation.get({
-            provider: 'yandex',
-            mapStateAutoApply: true
-        }).then(function (result) {
-            myMap.setCenter(result.geoObjects.position, 12);
-        }).catch(function(err) {
-            console.log('Геолокация недоступна');
-        });
-
-        myMap.events.add('click', function (e) {
-            let coords = e.get('coords');
-
-            if (myPlacemark) {
-                myMap.geoObjects.remove(myPlacemark);
-            }
-
-            myPlacemark = new ymaps.Placemark(coords, {
-                iconCaption: 'Загрузка...'
-            }, {
-                preset: 'islands#redDotIconWithCaption',
-                draggable: true
-            });
-
-            myMap.geoObjects.add(myPlacemark);
-
-            ymaps.geocode(coords).then(function (res) {
-                let firstGeoObject = res.geoObjects.get(0);
-                selectedAddress = firstGeoObject.getAddressLine();
-                myPlacemark.properties.set({
-                    iconCaption: selectedAddress,
-                    balloonContent: selectedAddress
+                document.getElementById('mapModal').addEventListener('shown.bs.modal', function () {
+                    if (!myMap) {
+                        ymaps.ready(initMap);
+                    }
                 });
-                document.getElementById('{{ form.latitude.id_for_label }}').value = coords[0];
-                document.getElementById('{{ form.longitude.id_for_label }}').value = coords[1];
-            });
 
-            myPlacemark.events.add('dragend', function() {
-                let newCoords = myPlacemark.geometry.getCoordinates();
-                ymaps.geocode(newCoords).then(function(res) {
-                    let firstGeoObject = res.geoObjects.get(0);
-                    selectedAddress = firstGeoObject.getAddressLine();
-                    myPlacemark.properties.set({
-                        iconCaption: selectedAddress,
-                        balloonContent: selectedAddress
+                function initMap() {
+                    myMap = new ymaps.Map("map", {
+                        center: [55.76, 37.64],
+                        zoom: 10,
+                        controls: ['zoomControl', 'searchControl', 'typeSelector', 'fullscreenControl']
                     });
-                    document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
-                    document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
-                });
-            });
-        });
 
-        myMap.controls.get('searchControl').events.add('resultselect', function(e) {
-            let index = e.get('index');
-            myMap.controls.get('searchControl').getResult(index).then(function(res) {
-                selectedAddress = res.properties.get('name');
-                if (myPlacemark) {
-                    myMap.geoObjects.remove(myPlacemark);
-                }
+                    ymaps.geolocation.get({
+                        provider: 'yandex',
+                        mapStateAutoApply: true
+                    }).then(function (result) {
+                        myMap.setCenter(result.geoObjects.position, 12);
+                    }).catch(function(err) {
+                        console.log('Геолокация недоступна');
+                    });
 
-                let coords = res.geometry.getCoordinates();
-                myPlacemark = new ymaps.Placemark(coords, {
-                    iconCaption: selectedAddress,
-                    balloonContent: selectedAddress
-                }, {
-                    preset: 'islands#redDotIconWithCaption',
-                    draggable: true
-                });
+                    myMap.events.add('click', function (e) {
+                        let coords = e.get('coords');
 
-                myMap.geoObjects.add(myPlacemark);
+                        if (myPlacemark) {
+                            myMap.geoObjects.remove(myPlacemark);
+                        }
 
-                myPlacemark.events.add('dragend', function() {
-                    let newCoords = myPlacemark.geometry.getCoordinates();
-                    ymaps.geocode(newCoords).then(function(res) {
-                        let firstGeoObject = res.geoObjects.get(0);
-                        selectedAddress = firstGeoObject.getAddressLine();
-                        myPlacemark.properties.set({
-                            iconCaption: selectedAddress,
-                            balloonContent: selectedAddress
+                        myPlacemark = new ymaps.Placemark(coords, {
+                            iconCaption: 'Загрузка...'
+                        }, {
+                            preset: 'islands#redDotIconWithCaption',
+                            draggable: true
                         });
-                        document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
-                        document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
-                    });
-                });
-            });
-        });
-    }
 
-    document.getElementById('confirmLocation').addEventListener('click', function() {
-        if (selectedAddress) {
-            const locationInput = document.getElementById(locationInputId);
-            if (locationInput) {
-                locationInput.value = selectedAddress;
-                const modalElement = document.getElementById('mapModal');
-                const modal = bootstrap.Modal.getInstance(modalElement);
-                if (modal) {
-                    modal.hide();
+                        myMap.geoObjects.add(myPlacemark);
+
+                        ymaps.geocode(coords).then(function (res) {
+                            let firstGeoObject = res.geoObjects.get(0);
+                            selectedAddress = firstGeoObject.getAddressLine();
+                            myPlacemark.properties.set({
+                                iconCaption: selectedAddress,
+                                balloonContent: selectedAddress
+                            });
+                            document.getElementById('{{ form.latitude.id_for_label }}').value = coords[0];
+                            document.getElementById('{{ form.longitude.id_for_label }}').value = coords[1];
+                        });
+
+                        myPlacemark.events.add('dragend', function() {
+                            let newCoords = myPlacemark.geometry.getCoordinates();
+                            ymaps.geocode(newCoords).then(function(res) {
+                                let firstGeoObject = res.geoObjects.get(0);
+                                selectedAddress = firstGeoObject.getAddressLine();
+                                myPlacemark.properties.set({
+                                    iconCaption: selectedAddress,
+                                    balloonContent: selectedAddress
+                                });
+                                document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
+                                document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
+                            });
+                        });
+                    });
+
+                    myMap.controls.get('searchControl').events.add('resultselect', function(e) {
+                        let index = e.get('index');
+                        myMap.controls.get('searchControl').getResult(index).then(function(res) {
+                            selectedAddress = res.properties.get('name');
+                            if (myPlacemark) {
+                                myMap.geoObjects.remove(myPlacemark);
+                            }
+
+                            let coords = res.geometry.getCoordinates();
+                            myPlacemark = new ymaps.Placemark(coords, {
+                                iconCaption: selectedAddress,
+                                balloonContent: selectedAddress
+                            }, {
+                                preset: 'islands#redDotIconWithCaption',
+                                draggable: true
+                            });
+
+                            myMap.geoObjects.add(myPlacemark);
+
+                            myPlacemark.events.add('dragend', function() {
+                                let newCoords = myPlacemark.geometry.getCoordinates();
+                                ymaps.geocode(newCoords).then(function(res) {
+                                    let firstGeoObject = res.geoObjects.get(0);
+                                    selectedAddress = firstGeoObject.getAddressLine();
+                                    myPlacemark.properties.set({
+                                        iconCaption: selectedAddress,
+                                        balloonContent: selectedAddress
+                                    });
+                                    document.getElementById('{{ form.latitude.id_for_label }}').value = newCoords[0];
+                                    document.getElementById('{{ form.longitude.id_for_label }}').value = newCoords[1];
+                                });
+                            });
+                        });
+                    });
                 }
-            } else {
-                alert('Ошибка: поле местоположения не найдено');
-            }
-        } else {
-            alert('Пожалуйста, выберите местоположение на карте');
-        }
-    });
-</script>
-{% endblock content %}
+
+                document.getElementById('confirmLocation').addEventListener('click', function() {
+                    if (selectedAddress) {
+                        const locationInput = document.getElementById(locationInputId);
+                        if (locationInput) {
+                            locationInput.value = selectedAddress;
+                            const modalElement = document.getElementById('mapModal');
+                            const modal = bootstrap.Modal.getInstance(modalElement);
+                            if (modal) {
+                                modal.hide();
+                            }
+                        } else {
+                            alert('Ошибка: поле местоположения не найдено');
+                        }
+                    } else {
+                        alert('Пожалуйста, выберите местоположение на карте');
+                    }
+                });
+            </script>
+            {% endblock content %}

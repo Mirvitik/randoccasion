@@ -16,32 +16,42 @@
         </a>
     {% endif %}
     <h1>{% translate "Мои события" %}</h1>
+    <form class="d-flex" role="search" action="{% url 'events:my_events' %}" method="get">
     <div class="card mb-4">
         <div class="card-body">
+            <!-- Скрытые поля для сохранения текущих параметров -->
+            <input type="hidden" name="type" value="{{ current_type }}">
+            <input type="hidden" name="status" id="statusField" value="{{ current_status }}">
+            <input type="hidden" name="sort_by" id="sortByField" value="{{ current_sort }}">
+
+            <!-- Табы (они теперь обновляют скрытые поля через JS) -->
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'created' %}active{% endif %}"
-                       href="?type=created&status={{ current_status }}&sort_by={{ current_sort }}">
+                    <button type="button"
+                            class="nav-link btn btn-link {% if current_type == 'created' %}active{% endif %}"
+                            onclick="document.querySelector('[name=type]').value='created'; this.closest('form').submit()">
                         {% translate "Созданные мной " %} ({{ created_count }})
-                    </a>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'participating' %}active{% endif %}"
-                       href="?type=participating&status={{ current_status }}&sort_by={{ current_sort }}">
+                    <button type="button"
+                            class="nav-link btn btn-link {% if current_type == 'participating' %}active{% endif %}"
+                            onclick="document.querySelector('[name=type]').value='participating'; this.closest('form').submit()">
                         {% translate "Участвую " %} ({{ participating_count }})
-                    </a>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_type == 'all' %}active{% endif %}"
-                       href="?type=all&status={{ current_status }}&sort_by={{ current_sort }}">
+                    <button type="button"
+                            class="nav-link btn btn-link {% if current_type == 'all' %}active{% endif %}"
+                            onclick="document.querySelector('[name=type]').value='all'; this.closest('form').submit()">
                         {% translate "Все мои события " %} ({{ active_count }})
-                    </a>
+                    </button>
                 </li>
             </ul>
 
             <div class="row">
-                <div class="col-md-6">
-                    <select class="form-select" onchange="updateStatusFilter(this.value)">
+                <div class="col-md-6 mb-3">
+                    <select class="form-select" name="status" onchange="this.form.submit()">
                         <option value="active" {% if current_status == 'active' %}selected{% endif %}>
                             {% translate "Активные события" %}
                         </option>
@@ -53,8 +63,8 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <select class="form-select" onchange="updateSortFilter(this.value)">
+                <div class="col-md-6 mb-3">
+                    <select class="form-select" name="sort_by" onchange="this.form.submit()">
                         <option value="-created_at" {% if current_sort == '-created_at' %}selected{% endif %}>
                             {% translate "Сначала новые" %}
                         </option>
@@ -73,9 +83,15 @@
                     </select>
                 </div>
             </div>
+
+            <div class="d-flex gap-2">
+                <a href="{% url 'events:my_events' %}" class="btn btn-outline-secondary btn-sm">
+                    {% translate "Сбросить" %}
+                </a>
+            </div>
         </div>
     </div>
-
+</form>
 
     {% if events %}
         <div class="row">
