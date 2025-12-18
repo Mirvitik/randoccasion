@@ -157,7 +157,7 @@ class EventSerializer(serializers.ModelSerializer):
             "latitude",
             "longitude",
             "expires_at",
-            "creator",
+            "creator_id",
             "participants",
             "interests",
         )
