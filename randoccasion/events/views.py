@@ -78,10 +78,7 @@ class EventIndexView(ListView):
         elif sort_alphabet == "asc":
             ordering.append("name")
 
-        if len(ordering) > 0:
-            events = events.order_by(*ordering)
-
-        return events
+        return events.order_by(*ordering)
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)

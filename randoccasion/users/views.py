@@ -167,8 +167,8 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
         received_request_obj = None
         if (
-                request_user.is_authenticated
-                and request_user.has_received_request_from(user)
+            request_user.is_authenticated
+            and request_user.has_received_request_from(user)
         ):
             received_request_obj = Friendship.objects.get(
                 from_user=user,
@@ -262,8 +262,8 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
             if to_user.profile.telegram_id is not None:
                 if self.request.user.profile.tg_last_message_date is not None:
                     deltatime = (
-                            datetime.datetime.now()
-                            - self.request.user.profile.tg_last_message_date
+                        datetime.datetime.now()
+                        - self.request.user.profile.tg_last_message_date
                     )
                     if (deltatime.total_seconds() / 3600) >= 24:
                         self.request.user.profile.tg_messages_cnt = 0
