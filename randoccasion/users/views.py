@@ -11,7 +11,12 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import (
+    DetailView,
+    ListView,
+    RedirectView,
+    UpdateView,
+)
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import ActivationToken, Friendship, Profile, User

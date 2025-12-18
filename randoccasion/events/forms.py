@@ -2,10 +2,9 @@ __all__ = ()
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from events.models import Event
+from events.models import default_expires_at, Event, min_expires_at
 
 
 class EventCreateForm(forms.ModelForm):
@@ -89,7 +88,7 @@ class EventCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        min_datetime = timezone.now() + timezone.timedelta(hours=3)
+        min_datetime = default_expires_at()
         self.fields["expires_at"].widget.attrs["min"] = min_datetime.strftime(
             "%Y-%m-%dT%H:%M",
         )
@@ -97,7 +96,7 @@ class EventCreateForm(forms.ModelForm):
     def clean_expires_at(self):
         expires_at = self.cleaned_data.get("expires_at")
         if expires_at:
-            min_time = timezone.now() + timezone.timedelta(minutes=15)
+            min_time = min_expires_at()
             if expires_at < min_time:
                 raise ValidationError(
                     _("Событие должно истекать не ранее чем через 15 минут"),
