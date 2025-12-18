@@ -134,7 +134,8 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 message=message_text,
             )
             msg = (
-              f"У Вас новая заявка на участие в событии от {user.username}\n",
+                f"У Вас новая заявка на участие в событии "
+                f"от {user.username}\n"
             )
             if user.last_name or user.last_name:
                 msg += f"Имя: {request.user.last_name} {user.first_name}\n"
