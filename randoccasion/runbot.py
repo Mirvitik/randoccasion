@@ -4,6 +4,7 @@ import logging
 import os
 
 from asgiref.sync import sync_to_async
+from botconstants import INTERTEXTS
 import django
 from django.contrib.auth.hashers import check_password
 from telegram import (
@@ -21,8 +22,6 @@ from telegram.ext import (
     filters,
     MessageHandler,
 )
-
-from botconstants import INTERTEXTS
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "randoccasion.settings")
 django.setup()
@@ -165,7 +164,7 @@ async def language_callback(update, context: ContextTypes.DEFAULT_TYPE):
         "en": "English",
         "fr": "Français",
         "es": "Español",
-        "de": "Deutsch"
+        "de": "Deutsch",
     }
 
     await query.edit_message_text(
