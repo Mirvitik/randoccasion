@@ -14,6 +14,7 @@ from api.forms import APICreateForm
 from api.serializers import (
     EventSerializer,
     InterestSerializer,
+    UserRegisterSerializer,
     UserSerializer,
 )
 from events.models import Event
@@ -24,6 +25,21 @@ class UserListCreate(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (HasAPIKey,)
+
+
+class RegisterView(generics.CreateAPIView):
+    permission_classes = (HasAPIKey,)
+    serializer_class = UserRegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+
+        response.data = {
+            "message": "User was created. Check email.",
+            "user_id": response.data.get("id"),
+            "username": response.data.get("username"),
+        }
+        return response
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
