@@ -1,12 +1,16 @@
 __all__ = ()
 
+
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework_api_key.models import APIKey
 from rest_framework_api_key.permissions import HasAPIKey
 
@@ -14,6 +18,7 @@ from api.forms import APICreateForm
 from api.serializers import (
     EventSerializer,
     InterestSerializer,
+    UserLoginSerializer,
     UserRegisterSerializer,
     UserSerializer,
 )
@@ -40,6 +45,33 @@ class RegisterView(generics.CreateAPIView):
             "username": response.data.get("username"),
         }
         return response
+
+
+class LoginView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = UserLoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            user = serializer.validated_data["user"]
+
+            login(request, user)
+
+            return Response(
+                {
+                    "message": "Успешный вход",
+                    "user_id": user.id,
+                    "username": user.username,
+                    "email": user.email,
+                    "first_name": user.first_name,
+                    "last_name": user.last_name,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

@@ -6,6 +6,7 @@ from api.views import (
     EventListCreate,
     InterestDetail,
     InterestListCreate,
+    LoginView,
     RegisterView,
     UserDetail,
     UserListCreate,
@@ -14,6 +15,7 @@ from api.views import (
 app_name = "api"
 
 urlpatterns = [
+    path("login/", LoginView.as_view(), name="login"),
     path("users/", UserListCreate.as_view(), name="user-list"),
     path("register/", RegisterView.as_view(), name="register"),
     path("users/<int:pk>/", UserDetail.as_view(), name="user-detail"),

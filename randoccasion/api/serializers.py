@@ -1,6 +1,7 @@
 __all__ = ()
 
 from django.conf import settings
+from django.contrib.auth import authenticate
 from django.core.mail import send_mail
 from django.urls import reverse
 from rest_framework import serializers
@@ -94,6 +95,51 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         )
 
 
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={"input_type": "password"},
+    )
+
+    def validate(self, data):
+        username = data.get("username")
+        password = data.get("password")
+
+        if not username or not password:
+            raise serializers.ValidationError(
+                "Необходимо указать имя пользователя и пароль",
+            )
+
+        user_by_username = authenticate(username=username, password=password)
+
+        if user_by_username is None:
+            try:
+                user_by_name = User.objects.get(username=username)
+                user = authenticate(
+                    username=user_by_name.username,
+                    password=password,
+                )
+            except User.DoesNotExist:
+                user = None
+        else:
+            user = user_by_username
+
+        if user is None:
+            raise serializers.ValidationError(
+                "Неверное имя пользователя или пароль",
+            )
+
+        if not user.is_active:
+            raise serializers.ValidationError(
+                "Аккаунт не активирован. Проверьте ваш email.",
+            )
+
+        data["user"] = user
+        return data
+
+
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
@@ -115,6 +161,15 @@ class EventSerializer(serializers.ModelSerializer):
             "participants",
             "interests",
         )
+
+    def get_queryset(self):
+        queryset = Event.objects.filter(who_can_see="all", is_active=True)
+
+        interest_id = self.request.query_params.get("interest")
+        if interest_id:
+            queryset = queryset.filter(interests__id=interest_id)
+
+        return queryset.order_by("-created_at")
 
 
 class InterestSerializer(serializers.ModelSerializer):
