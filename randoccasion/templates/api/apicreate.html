@@ -25,7 +25,6 @@
                 <form method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
 
-                    <!-- Поле name -->
                     <div class="mb-4">
                         <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">
                             {{ form.name.label }}
@@ -46,7 +45,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- Поле expiry_date с улучшенным выбором даты -->
                     <div class="mb-4">
                         <label for="{{ form.expiry_date.id_for_label }}" class="form-label fw-bold">
                             {{ form.expiry_date.label }}
@@ -54,7 +52,6 @@
                         </label>
 
                         <div class="row g-2 mb-3">
-                            <!-- Выбор даты -->
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <span class="input-group-text">
@@ -68,7 +65,6 @@
                                 </div>
                             </div>
 
-                            <!-- Выбор времени -->
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <span class="input-group-text">
@@ -83,10 +79,8 @@
                             </div>
                         </div>
 
-                        <!-- Скрытое поле для отправки данных -->
                         {{ form.expiry_date }}
 
-                        <!-- Быстрый выбор срока действия -->
                         <div class="mb-3">
                             <small class="text-muted d-block mb-2">{% translate "Быстрый выбор:" %}</small>
                             <div class="d-flex flex-wrap gap-2">
@@ -194,23 +188,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Добавляем классы Bootstrap к полям формы
+
         const nameField = document.getElementById('{{ form.name.id_for_label }}');
         const expiryField = document.getElementById('{{ form.expiry_date.id_for_label }}');
 
         if (nameField) nameField.classList.add('form-control');
 
-        // Скрываем оригинальное поле expiry_date
+
         if (expiryField) {
             expiryField.style.display = 'none';
         }
 
-        // Получаем элементы для раздельного ввода
+
         const dateInput = document.getElementById('date_input');
         const timeInput = document.getElementById('time_input');
         const selectedDatetimeSpan = document.getElementById('selected_datetime');
 
-        // Устанавливаем минимальную дату - сегодня
+
         const today = new Date();
         const todayFormatted = today.toISOString().split('T')[0];
         if (dateInput && !dateInput.value) {
@@ -218,23 +212,22 @@
             dateInput.min = todayFormatted;
         }
 
-        // Функция обновления скрытого поля и отображения
+
         function updateDateTime() {
             if (!dateInput.value || !timeInput.value) return;
 
-            // Создаем дату в формате, который понимает Django
+
             const dateTimeString = `${dateInput.value}T${timeInput.value}:00`;
             const localDate = new Date(dateTimeString);
 
-            // Преобразуем в формат для Django (YYYY-MM-DD HH:MM:SS)
             const djangoFormat = localDate.toISOString().replace('T', ' ').substring(0, 19);
 
-            // Обновляем скрытое поле
+
             if (expiryField) {
                 expiryField.value = djangoFormat;
             }
 
-            // Форматируем для отображения пользователю
+
             const displayDate = localDate.toLocaleDateString('ru-RU', {
                 weekday: 'long',
                 year: 'numeric',
@@ -247,7 +240,7 @@
             selectedDatetimeSpan.textContent = displayDate;
         }
 
-        // Обработчики изменений
+
         if (dateInput) {
             dateInput.addEventListener('change', updateDateTime);
         }
@@ -256,26 +249,26 @@
             timeInput.addEventListener('change', updateDateTime);
         }
 
-        // Инициализация при загрузке
+
         updateDateTime();
 
-        // Обработчики для быстрого выбора срока
+
         document.querySelectorAll('.quick-date').forEach(button => {
             button.addEventListener('click', function() {
                 const days = parseInt(this.getAttribute('data-days'));
                 const futureDate = new Date();
                 futureDate.setDate(futureDate.getDate() + days);
 
-                // Устанавливаем дату
+
                 dateInput.value = futureDate.toISOString().split('T')[0];
 
-                // Устанавливаем время на конец дня
+
                 timeInput.value = "23:59";
 
-                // Обновляем UI
+
                 updateDateTime();
 
-                // Подсвечиваем активную кнопку
+
                 document.querySelectorAll('.quick-date').forEach(btn => {
                     btn.classList.remove('active');
                 });
@@ -283,7 +276,7 @@
             });
         });
 
-        // Валидация формы
+
         const form = document.querySelector('.needs-validation');
         if (form) {
             form.addEventListener('submit', function(event) {
@@ -291,7 +284,7 @@
                     event.preventDefault();
                     event.stopPropagation();
 
-                    // Проверяем, выбрана ли дата
+
                     if (!dateInput.value || !timeInput.value) {
                         if (!dateInput.value) {
                             dateInput.classList.add('is-invalid');
@@ -301,7 +294,7 @@
                         }
                     }
                 } else {
-                    // Убеждаемся, что скрытое поле заполнено
+
                     if (!expiryField.value) {
                         updateDateTime();
                     }
@@ -310,7 +303,6 @@
             }, false);
         }
 
-        // Убираем класс is-invalid при вводе
         [dateInput, timeInput].forEach(input => {
             if (input) {
                 input.addEventListener('input', function() {
