@@ -16,8 +16,8 @@ app_name = "api"
 
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
-    path("users/", UserListCreate.as_view(), name="user-list"),
     path("register/", RegisterView.as_view(), name="register"),
+    path("users/", UserListCreate.as_view(), name="user-list"),
     path("users/<int:pk>/", UserDetail.as_view(), name="user-detail"),
     path("events/", EventListCreate.as_view(), name="event-list"),
     path("events/<int:pk>/", EventDetail.as_view(), name="event-detail"),

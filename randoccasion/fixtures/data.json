@@ -1,5 +1,147 @@
 [
   {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "name": "Концерт",
+      "topic": "Без темы",
+      "who_can_see": "all",
+      "image": "",
+      "slug": "-4e1fd070",
+      "description": "<p>&nbsp;</p>",
+      "is_active": true,
+      "creator": 2,
+      "max_participants": 5,
+      "location": "Не указано",
+      "latitude": null,
+      "longitude": null,
+      "created_at": "2025-12-19T13:54:43.713Z",
+      "expires_at": "9999-12-31T23:59:00Z",
+      "participants": [
+        2
+      ],
+      "interests": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "name": "Футбол",
+      "topic": "Без темы",
+      "who_can_see": "all",
+      "image": "",
+      "slug": "-7a851225",
+      "description": "<p>&nbsp;</p>",
+      "is_active": true,
+      "creator": 2,
+      "max_participants": 5,
+      "location": "Не указано",
+      "latitude": null,
+      "longitude": null,
+      "created_at": "2025-12-19T13:55:56.921Z",
+      "expires_at": "9999-12-31T23:59:00Z",
+      "participants": [
+        2
+      ],
+      "interests": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "name": "Йога",
+      "topic": "Без темы",
+      "who_can_see": "all",
+      "image": "",
+      "slug": "-19ccb380",
+      "description": "<p>&nbsp;</p>",
+      "is_active": true,
+      "creator": 2,
+      "max_participants": 1,
+      "location": "Не указано",
+      "latitude": null,
+      "longitude": null,
+      "created_at": "2025-12-19T13:57:34.894Z",
+      "expires_at": "9999-12-31T23:59:00Z",
+      "participants": [
+        2
+      ],
+      "interests": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 4,
+    "fields": {
+      "name": "Выставка",
+      "topic": "Без темы",
+      "who_can_see": "all",
+      "image": "",
+      "slug": "-1b2a27ae",
+      "description": "<p>&nbsp;</p>",
+      "is_active": true,
+      "creator": 2,
+      "max_participants": 5,
+      "location": "Не указано",
+      "latitude": null,
+      "longitude": null,
+      "created_at": "2025-12-19T13:58:48.742Z",
+      "expires_at": "9999-12-31T23:59:00Z",
+      "participants": [
+        2
+      ],
+      "interests": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$VrVNGZthT1y5lwz0QgPrCm$wpxSsr2alLWDMFApIiicpe1X60d9skKByU6WC6Rms+8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "user1",
+      "first_name": "",
+      "last_name": "",
+      "email": "user@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-12-19T13:37:12.784Z",
+      "attempts_count": 0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$Gzi7jh4G5HdY8L0Q1K6v0I$al/JAm3chhcRuQHz9qHXiaeNKWIK6WfQPRVg4H5uOAk=",
+      "last_login": "2025-12-19T13:52:35.007Z",
+      "is_superuser": false,
+      "username": "user2",
+      "first_name": "",
+      "last_name": "",
+      "email": "user2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-12-19T13:52:21.738Z",
+      "attempts_count": 0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
     "model": "users.interest",
     "pk": 1,
     "fields": {
@@ -53,6 +195,38 @@
     "fields": {
       "name": "singing",
       "slug": "singing"
+    }
+  },
+  {
+    "model": "users.profile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "birthday": null,
+      "image": "",
+      "telegram_id": null,
+      "telephone": null,
+      "tg_messages_cnt": 0,
+      "tg_last_message_date": null,
+      "interests": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "users.profile",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "birthday": null,
+      "image": "",
+      "telegram_id": null,
+      "telephone": null,
+      "tg_messages_cnt": 0,
+      "tg_last_message_date": null,
+      "interests": [
+        4
+      ]
     }
   }
 ]

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.core.mail import send_mail
 from django.urls import reverse
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
 
 from events.models import Event, Interest
 from users.models import ActivationToken, User
@@ -141,13 +142,14 @@ class UserLoginSerializer(serializers.Serializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
+    permission_classes = (IsAuthenticated,)
+
     class Meta:
         model = Event
         fields = (
             "id",
             "name",
             "topic",
-            "who_can_see",
             "image",
             "slug",
             "description",
@@ -158,7 +160,6 @@ class EventSerializer(serializers.ModelSerializer):
             "longitude",
             "expires_at",
             "creator_id",
-            "participants",
             "interests",
         )
 
@@ -173,6 +174,8 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class InterestSerializer(serializers.ModelSerializer):
+    permission_classes = (IsAuthenticated,)
+
     class Meta:
         model = Interest
         fields = "__all__"
