@@ -204,22 +204,17 @@ python runbot.py
 
 Пути для работы с API:
 
-```/api/v1/register/``` POST-запрос, в body запроса укажите username, email, password и password_confirm для регистрации
-
-```/api/v1/login/``` POST-запрос, в body запроса укажите username и password для авторизации
-
 ```/api/v1/users/``` GET-запрос, возвращает информацию о пользователях
 
 ```/api/v1/users/<int:pk>/```  GET-запрос, получение информации о пользователе
 
-```/api/v1/register/``` POST-запрос, создание пользователя
 
-```/api/v1/events/``` GET, POST-запросы. Для GET возвращает события, которые доступны для просмотра всем. Для POST
+```/api/v1/events/``` GET. Для GET возвращает события, которые доступны для просмотра всем
 создаёт новое событие
 
 ```/api/v1/events/<int:pk>/``` GET-запрос, возвращает событие по id
 
-```/api/v1/interests/``` GET, POST-запросы. Для GET возвращает все интересы. Для POST создаёт новый интерес
+```/api/v1/interests/``` GET-запросы. Для GET возвращает все интересы
 
 ```/api/v1/interests/<int:pk>/``` GET-запрос, возвращает интерес по id
 
