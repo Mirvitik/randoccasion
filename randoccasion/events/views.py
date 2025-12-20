@@ -27,7 +27,7 @@ class EventIndexView(ListView):
 
     def get_queryset(self):
         cur_user = self.request.user
-        query = self.request.GET.get("q")
+        q_values = self.request.GET.getlist('q')
         date_from = self.request.GET.get("date_from")
         date_to = self.request.GET.get("date_to")
         only_active = self.request.GET.get("only_active")
@@ -52,8 +52,14 @@ class EventIndexView(ListView):
         if only_my:
             events = events.filter(creator=cur_user)
 
+        query = None
+        for value in q_values:
+            if value and value.strip():
+                query = value.strip()
+                break
+
         if query:
-            events = q_search(query)
+            return q_search(query)
 
         if date_from:
             events = events.filter(created_at__gte=date_from)
