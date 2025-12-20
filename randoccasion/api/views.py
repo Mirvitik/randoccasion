@@ -1,9 +1,9 @@
 __all__ = ()
 
-
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -23,6 +23,7 @@ from api.serializers import (
     UserSerializer,
 )
 from events.models import Event
+from events.utils import q_search
 from users.models import Interest, User
 
 
@@ -80,7 +81,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (HasAPIKey,)
 
 
-class EventListCreate(generics.ListCreateAPIView):
+class EventListCreate(generics.ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = (HasAPIKey,)
@@ -92,7 +93,7 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (HasAPIKey,)
 
 
-class InterestListCreate(generics.ListCreateAPIView):
+class InterestListCreate(generics.ListAPIView):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
     permission_classes = (HasAPIKey,)
@@ -125,3 +126,83 @@ class APIKeyCreate(LoginRequiredMixin, FormView):
 
         self.request.session["key"] = None
         return context
+
+
+class EventSearchAPIView(generics.ListAPIView):
+    serializer_class = EventSerializer
+    permission_classes = [HasAPIKey]
+    paginate_by = 100
+
+    def get_queryset(self):
+        cur_user = self.request.user
+        q_values = self.request.GET.getlist("q")
+        date_from = self.request.GET.get("date_from")
+        date_to = self.request.GET.get("date_to")
+        only_active = self.request.GET.get("only_active")
+        sort_published = self.request.GET.get("sort_published")
+        sort_expiry = self.request.GET.get("sort_expiry")
+        sort_alphabet = self.request.GET.get("sort_alpha")
+        only_friends = self.request.GET.get("only_friends")
+        only_my = self.request.GET.get("only_my")
+        interest_id = self.request.GET.get("interest")
+
+        if only_active:
+            events = Event.objects.is_active()
+        else:
+            events = Event.objects.filter(who_can_see="all")
+
+        if interest_id:
+            events = events.filter(interests__id=interest_id)
+
+        if only_friends and cur_user.is_authenticated:
+            friends = cur_user.friends.all()
+            events = events.filter(
+                Q(who_can_see="all", creator__in=friends)
+                | Q(who_can_see="only_friends", creator__in=friends),
+            ).exclude(creator=cur_user)
+
+        if only_my and cur_user.is_authenticated:
+            events = events.filter(creator=cur_user)
+
+        query = None
+        for value in q_values:
+            if value and value.strip():
+                query = value.strip()
+                break
+
+        if query:
+            try:
+
+                return q_search(query)
+            except ImportError:
+                events = events.filter(
+                    Q(name__icontains=query) | Q(description__icontains=query),
+                )
+
+        if date_from:
+            events = events.filter(created_at__gte=date_from)
+
+        if date_to:
+            events = events.filter(created_at__lte=date_to)
+
+        ordering = []
+
+        if sort_published == "desc":
+            ordering.append("-created_at")
+        elif sort_published == "asc":
+            ordering.append("created_at")
+
+        if sort_expiry == "desc":
+            ordering.append("-expires_at")
+        elif sort_expiry == "asc":
+            ordering.append("expires_at")
+
+        if sort_alphabet == "desc":
+            ordering.append("-name")
+        elif sort_alphabet == "asc":
+            ordering.append("name")
+
+        if not ordering:
+            ordering = ["-created_at"]
+
+        return events.order_by(*ordering)

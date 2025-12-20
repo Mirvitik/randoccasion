@@ -163,15 +163,6 @@ class EventSerializer(serializers.ModelSerializer):
             "interests",
         )
 
-    def get_queryset(self):
-        queryset = Event.objects.filter(who_can_see="all", is_active=True)
-
-        interest_id = self.request.query_params.get("interest")
-        if interest_id:
-            queryset = queryset.filter(interests__id=interest_id)
-
-        return queryset.order_by("-created_at")
-
 
 class InterestSerializer(serializers.ModelSerializer):
     permission_classes = (IsAuthenticated,)

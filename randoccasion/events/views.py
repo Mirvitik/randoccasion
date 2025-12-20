@@ -3,8 +3,9 @@ __all__ = ()
 import uuid
 
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -40,16 +41,25 @@ class EventIndexView(ListView):
         if only_active:
             events = Event.objects.is_active()
         else:
-            events = super().get_queryset()
+            events = Event.objects.all()
 
-        if only_friends:
-            friends = cur_user.friends
+        if only_friends and cur_user.is_authenticated:
+            friends = cur_user.friends.all()
             events = events.filter(
                 Q(who_can_see="all", creator__in=friends)
                 | Q(who_can_see="only_friends", creator__in=friends),
             ).exclude(creator=cur_user)
+        elif not only_my:
+            if cur_user.is_authenticated:
+                events = events.filter(
+                    Q(who_can_see="all")
+                    | Q(who_can_see="only_friends", creator__in=cur_user.friends.all())
+                    | Q(creator=cur_user)
+                )
+            else:
+                events = events.filter(who_can_see="all")
 
-        if only_my:
+        if only_my and cur_user.is_authenticated:
             events = events.filter(creator=cur_user)
 
         query = None
@@ -59,11 +69,10 @@ class EventIndexView(ListView):
                 break
 
         if query:
-            return q_search(query)
+            events = q_search(query)
 
         if date_from:
             events = events.filter(created_at__gte=date_from)
-
         if date_to:
             events = events.filter(created_at__lte=date_to)
 
@@ -84,10 +93,21 @@ class EventIndexView(ListView):
         elif sort_alphabet == "asc":
             ordering.append("name")
 
-        return events.order_by(*ordering)
+        if not ordering:
+            ordering = ["-created_at"]
+
+        events = events.select_related('creator').prefetch_related(
+            Prefetch(
+                'participants',
+                queryset=get_user_model().objects.select_related('profile')
+            )
+        ).order_by(*ordering)
+
+        return events
 
     def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class EventDetailView(DetailView):
