@@ -22,11 +22,12 @@ def load_bool_env(name, default):
 
 DEBUG = load_bool_env("DJANGO_DEBUG", False)
 
-ALLOWED_HOSTS_ENV = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+ALLOWED_HOSTS_ENV = os.getenv(
+    "DJANGO_ALLOWED_HOSTS",
+    "*",
+)
 if ALLOWED_HOSTS_ENV:
     ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_ENV.split(",")]
-else:
-    ALLOWED_HOSTS = ["localhost"] if DEBUG else [""]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -98,7 +99,7 @@ DEFAULT_USER_IS_ACTIVE = load_bool_env(
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / os.getenv("DJANGO_DB_NAME", "example_db.sqlite3"),
     },
 }
 
@@ -120,8 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
         ".NumericPasswordValidator",
     },
 ]
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru-RU")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "fake")
+LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE", "ru")
 LANGUAGES = [
     ("ru", _("Russian")),
     ("en", _("English")),
