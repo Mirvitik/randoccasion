@@ -80,7 +80,7 @@ pip install -r requirements/prod.txt
 писем, ```DJANGO_EMAIL_PASSWORD```-пароль для отправки писем
 
 Переименуйте папку media_example в media, а в файле .env
-поменяйте значение ```DJANGO_MEDIA``` на ```media```
+поменяйте значение ```DJANGO_MEDIA``` на ```media```, а ```DJANGO_DB_NAME``` поменяйте на ```db.sqlite3```
 
 **Для linux/MacOS**
 
