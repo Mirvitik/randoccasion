@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-5 fw-bold mb-3">
+                {% translate "Политика конфиденциальности сервиса «Встречалки»" %}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <section class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">
+                        <i class="bi bi-shield-check text-primary me-2"></i>
+                        {% translate "1. Общие положения" %}
+                    </h2>
+                    <p class="mb-0">
+                        {% blocktranslate %}
+                        Пользуясь сервисом «Встречалки», вы даёте согласие на обработку ваших персональных данных
+                        в соответствии с настоящей Политикой конфиденциальности и действующим законодательством.
+                        {% endblocktranslate %}
+                    </p>
+                </div>
+            </section>
+            <section class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">
+                        <i class="bi bi-person-badge text-primary me-2"></i>
+                        {% translate "2. Какие данные мы обрабатываем" %}
+                    </h2>
+                    <p class="mb-3">
+                        {% translate "Мы собираем и обрабатываем следующие персональные данные:" %}
+                    </p>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                                <i class="bi bi-person fs-4 text-primary me-3"></i>
+                                <div>
+                                    <h3 class="h6 fw-bold mb-1">{% translate "Основная информация" %}</h3>
+                                    <ul>
+                                        <li>{% translate "Фамилия и имя" %}</li>
+                                        <li>{% translate "Дата рождения" %}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                                <i class="bi bi-envelope fs-4 text-primary me-3"></i>
+                                <div>
+                                    <h3 class="h6 fw-bold mb-1">{% translate "Контактные данные" %}</h3>
+                                    <ul>
+                                        <li>{% translate "Электронная почта" %}</li>
+                                        <li>{% translate "Номер телефона" %}</li>
+                                        <li>{% translate "Telegram ID" %}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+            </section>
+            <section class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">
+                        <i class="bi bi-gear text-primary me-2"></i>
+                        {% translate "3. Цели обработки данных" %}
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0 px-0">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>{% translate "Предоставление услуг сервиса" %}</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0 px-0">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>{% translate "Улучшение качества сервиса" %}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0 px-0">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>{% translate "Обеспечение безопасности" %}</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0 px-0">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    <span>{% translate "Выполнение законодательных требований" %}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">
+                        <i class="bi bi-shield text-primary me-2"></i>
+                        {% translate "4. Ваши права" %}
+                    </h2>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        {% translate "Вы имеете право:" %}
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{% translate "Право" %}</th>
+                                    <th>{% translate "Описание" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{% translate "На исправление" %}</td>
+                                    <td>{% translate "Требовать исправления неточных данных" %}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% translate "На удаление" %}</td>
+                                    <td>{% translate "Требовать удаления ваших данных" %}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section class="card border-warning shadow-sm mb-4">
+                <div class="card-header bg-warning bg-opacity-10 border-warning">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                        {% translate "Важная информация" %}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning mb-0">
+                        <h3 class="h6">{% translate "Обратите внимание" %}</h3>
+                        <p class="mb-2">
+                            {% blocktranslate %}
+                            Мы не гарантируем точность и достоверность персональных данных,
+                            введённых вами самостоятельно. Вы несёте ответственность за
+                            актуальность предоставляемой информации.
+                            {% endblocktranslate %}
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+            </section>
+            <section class="card border-success shadow-sm">
+                <div class="card-header bg-success bg-opacity-10 border-success">
+                    <h2 class="h5 mb-0">
+                        <i class="bi bi-check-circle text-success me-2"></i>
+                        {% translate "Согласие на обработку данных" %}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="privacyAgreement" disabled checked>
+                        <label class="form-check-label" for="privacyAgreement">
+                            {% blocktranslate %}
+                            Продолжая использовать сервис «Встречалки»,
+                            вы подтверждаете, что ознакомились с настоящей Политикой конфиденциальности
+                            и соглашаетесь на обработку ваших персональных данных.
+                            {% endblocktranslate %}
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <div class="mt-4 text-center">
+                <a href="{% url 'homepage:main' %}" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-house me-1"></i>
+                    {% translate "На главную" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-print-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button onclick="window.print()" class="btn btn-outline-dark">
+                    <i class="bi bi-printer me-1"></i>
+                    {% translate "Распечатать" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

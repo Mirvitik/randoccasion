@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удаление аккаунта</h4>
+                </div>
+                <div class="card-body">
+                    <p class="alert alert-warning">
+                        <strong>Внимание!</strong> Это действие необратимо.
+                    </p>
+
+                    <p>Вы действительно хотите удалить аккаунт
+                    <strong>{{ object.username }}</strong>?</p>
+
+                    <p class="text-danger">
+                        Все данные будут удалены без возможности восстановления.
+                    </p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'users:profile' %}"
+                               class="btn btn-secondary">
+                                Отмена
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                Да, удалить аккаунт
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Перед удалением учтите:</h6>
+                    <ul class="mb-0">
+                        <li>Все ваши публикации будут удалены</li>
+                        <li>История активности будет очищена</li>
+                        <li>Это действие нельзя отменить</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

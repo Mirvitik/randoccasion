@@ -6,12 +6,12 @@
 <script src="https://api-maps.yandex.ru/2.1/?apikey={{ymaps_api}}&lang=ru_RU" type="text/javascript"></script>
 {% if user.is_authenticated %}
 <div class="container d-flex" style="margin-bottom: 20px">
-  <a href="{% url 'events:my_events_requests' %}" class="btn btn-info mt-3" style="margin-right: 5px;">
+  <a href="{% url 'events:my_events_requests' %}" class="btn btn-info mt-3">
     {% translate "Заявки на мои события" %}
   </a>
 
-    <a href="{% url 'events:create_event' %}" class="btn btn-success mt-3">
-      {% translate "Создать событие" %}<span class="ms-1 fw-bolder fs-3 lh-1">+</span>
+    <a href="{% url 'events:create_event' %}" class="btn btn-success mt-3" style="margin-left: 20px">
+      {% translate "Создать событие" %}
     </a>
 </div>
 {% endif %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-18 20:00+0300\n"
+"POT-Creation-Date: 2025-12-20 17:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,7 +202,7 @@ msgstr "Anfrage für Veranstaltung"
 msgid "Запросы на события"
 msgstr "Anfragen für Veranstaltungen"
 
-#: .\events\views.py:108
+#: .\events\views.py:143
 msgid ""
 "По какой-то из причин вы не можете участвовать: нет свободных мест/вы уже "
 "участвуете/событие неактивно"
@@ -210,36 +210,36 @@ msgstr ""
 "Aus irgendeinem Grund können Sie nicht teilnehmen: Es gibt keine freien "
 "Plätze/Sie sind bereits da teilnehmen/Ereignis ist inaktiv"
 
-#: .\events\views.py:121
+#: .\events\views.py:156
 msgid "Ваш запрос уже был отправлен"
 msgstr "Ihre Anfrage wurde bereits gesendet"
 
-#: .\events\views.py:123
+#: .\events\views.py:158
 msgid "Ваш запрос был отклонен"
 msgstr "Ihre Anfrage wurde abgelehnt"
 
-#: .\events\views.py:125
+#: .\events\views.py:160
 msgid "Запрос уже обработан"
 msgstr "Die Anfrage wurde bereits bearbeitet"
 
-#: .\events\views.py:160
+#: .\events\views.py:195
 msgid "Запрос на участие отправлен создателю события!"
 msgstr ""
 "Die Anfrage zur Teilnahme wurde an den Ersteller der Veranstaltung gesendet!"
 
-#: .\events\views.py:200
+#: .\events\views.py:235
 msgid "Достигнуто максимальное количество участников"
 msgstr "Maximale Teilnehmerzahl erreicht"
 
-#: .\events\views.py:216
+#: .\events\views.py:251
 msgid "Заявка отклонена"
 msgstr "Antrag abgelehnt"
 
-#: .\events\views.py:316
+#: .\events\views.py:351
 msgid "Событие успешно создано!"
 msgstr "Das Ereignis wurde erfolgreich erstellt!"
 
-#: .\events\views.py:323
+#: .\events\views.py:358
 msgid "Пожалуйста, исправьте ошибки в форме."
 msgstr "Bitte beheben Sie Fehler in Form."
 
@@ -275,43 +275,43 @@ msgstr "Schlüssel erstellt! Bewahren Sie ihn an einem sicheren Ort auf"
 msgid "Создать ещё один ключ"
 msgstr "Weiteren Schlüssel erstellen"
 
-#: .\templates\api\apicreate.html:91
+#: .\templates\api\apicreate.html:85
 msgid "Быстрый выбор:"
 msgstr "Schnellauswahl:"
 
-#: .\templates\api\apicreate.html:94
+#: .\templates\api\apicreate.html:88
 msgid "1 день"
 msgstr "1 Tag"
 
-#: .\templates\api\apicreate.html:97
+#: .\templates\api\apicreate.html:91
 msgid "1 неделя"
 msgstr "1 Woche"
 
-#: .\templates\api\apicreate.html:101
+#: .\templates\api\apicreate.html:95
 msgid "1 месяц"
 msgstr "1 Monat"
 
-#: .\templates\api\apicreate.html:105
+#: .\templates\api\apicreate.html:99
 msgid "3 месяца"
 msgstr "3 Monate"
 
-#: .\templates\api\apicreate.html:109
+#: .\templates\api\apicreate.html:103
 msgid "1 год"
 msgstr "1 Jahr"
 
-#: .\templates\api\apicreate.html:123
+#: .\templates\api\apicreate.html:117
 msgid "Выбрано: "
 msgstr "Ausgewählt: "
 
-#: .\templates\api\apicreate.html:124
+#: .\templates\api\apicreate.html:118
 msgid "Не выбрано"
 msgstr "Nicht ausgewählt"
 
-#: .\templates\api\apicreate.html:139
+#: .\templates\api\apicreate.html:133
 msgid "Создать ключ"
 msgstr "Schlüssel erstellen"
 
-#: .\templates\api\apicreate.html:150
+#: .\templates\api\apicreate.html:144
 msgid "Все поля обязательны для заполнения"
 msgstr "Alle Felder sind Pflichtfelder"
 
@@ -422,12 +422,14 @@ msgstr "Anfrage senden"
 
 #: .\templates\events\events.html:10
 #: .\templates\events\my_events_requests.html:6
-#: .\templates\users\profile.html:16
+#: .\templates\users\profile.html:27
 msgid "Заявки на мои события"
 msgstr "Anfragen für meine Veranstaltungen"
 
 #: .\templates\events\events.html:23
-msgid "Suche nach einem Ereignis..."
+#, fuzzy
+#| msgid "Создать событие"
+msgid "Искать событие..."
 msgstr "Veranstaltung erstellen"
 
 #: .\templates\events\events.html:33 .\templates\users\user_list.html:23
@@ -526,25 +528,25 @@ msgstr "Scheint, hier gibt es nichts..."
 
 #: .\templates\events\events.html:179
 #: .\templates\events\my_events_requests.html:68
-#: .\templates\users\user_list.html:107
+#: .\templates\users\user_list.html:113
 msgid "В начало"
 msgstr "Zum Anfang"
 
 #: .\templates\events\events.html:180
 #: .\templates\events\my_events_requests.html:69
-#: .\templates\users\user_list.html:108
+#: .\templates\users\user_list.html:114
 msgid "Предыдущая"
 msgstr "Vorherige"
 
 #: .\templates\events\events.html:192
 #: .\templates\events\my_events_requests.html:81
-#: .\templates\users\user_list.html:120
+#: .\templates\users\user_list.html:126
 msgid "Следующая"
 msgstr "Nächste"
 
 #: .\templates\events\events.html:193 .\templates\events\my_events.html:176
 #: .\templates\events\my_events_requests.html:82
-#: .\templates\users\user_list.html:121
+#: .\templates\users\user_list.html:127
 msgid "Последняя"
 msgstr "Letzte"
 
@@ -601,7 +603,7 @@ msgid "Только для меня"
 msgstr "Nur für mich"
 
 #: .\templates\events\my_events.html:141
-#: .\templates\includes\event_card.html:44 .\templates\users\user_list.html:98
+#: .\templates\includes\event_card.html:44 .\templates\users\user_list.html:104
 msgid "Подробнее"
 msgstr "Details"
 
@@ -927,13 +929,25 @@ msgstr ""
 msgid "и интересные мероприятия через наш сервис «Встречалки»"
 msgstr "und interessante Veranstaltungen durch unseren Service «Randoccasion»"
 
-#: .\templates\homepage\main.html:5
+#: .\templates\homepage\main.html:6
 msgid "Ивенты, которые могут Вам понравиться:"
 msgstr "Events, die Ihnen gefallen könnten:"
 
 #: .\templates\homepage\main.html:12
 msgid "Посмотреть больше мероприятий"
 msgstr "Mehr Veranstaltungen ansehen"
+
+#: .\templates\homepage\main.html:15
+#, fuzzy
+#| msgid "Ивенты, которые могут Вам понравиться:"
+msgid "Мы не нашли ивенты, которые Вам по душе :("
+msgstr "Events, die Ihnen gefallen könnten:"
+
+#: .\templates\homepage\privacy.html:5
+#, fuzzy
+#| msgid "Политика конфиденциальности"
+msgid "Политика конфиденциальности сервиса «Встречалки»:"
+msgstr "Datenschutzerklärung"
 
 #: .\templates\includes\event_card.html:19
 msgid "🗺️ Место: "
@@ -951,13 +965,17 @@ msgstr "🕜️ Findet statt in: "
 msgid "Вы записаны"
 msgstr "Sie sind angemeldet"
 
+#: .\templates\includes\footer.html:6 .\templates\includes\header.html:13
+msgid "Встречалки"
+msgstr "Randoccasion"
+
+#: .\templates\includes\footer.html:10
+msgid "Политика конфиденциальности"
+msgstr "Datenschutzerklärung"
+
 #: .\templates\includes\header.html:11
 msgid "Логотип"
 msgstr "Logo"
-
-#: .\templates\includes\header.html:13
-msgid "Встречалки"
-msgstr "Randoccasion"
 
 #: .\templates\includes\header.html:25 .\templates\includes\header.html:27
 msgid "Главная"
@@ -1010,7 +1028,7 @@ msgid "Нет входящих заявок."
 msgstr "Keine eingehenden Anfragen."
 
 #: .\templates\users\friend_requests.html:73
-#: .\templates\users\friends_list.html:73
+#: .\templates\users\friends_list.html:72
 msgid "Найти друзей"
 msgstr "Freunde finden"
 
@@ -1018,19 +1036,19 @@ msgstr "Freunde finden"
 msgid "Мои друзья"
 msgstr "Meine Freunde"
 
-#: .\templates\users\friends_list.html:53
+#: .\templates\users\friends_list.html:52
 msgid "Вы уверены, что хотите удалить"
 msgstr "Sind Sie sicher, dass Sie"
 
-#: .\templates\users\friends_list.html:53
+#: .\templates\users\friends_list.html:52
 msgid "из друзей?"
 msgstr "aus Freunden entfernen möchten?"
 
-#: .\templates\users\friends_list.html:55
+#: .\templates\users\friends_list.html:54
 msgid "Удалить из друзей"
 msgstr "Aus Freunden entfernen"
 
-#: .\templates\users\friends_list.html:70
+#: .\templates\users\friends_list.html:69
 msgid "У вас пока нет друзей."
 msgstr "Sie haben noch keine Freunde."
 
@@ -1062,7 +1080,7 @@ msgstr "Zur Startseite"
 msgid "Смена пароля"
 msgstr "Passwortänderung"
 
-#: .\templates\users\password_change.html:9 .\templates\users\profile.html:13
+#: .\templates\users\password_change.html:9 .\templates\users\profile.html:24
 msgid "Сменить пароль"
 msgstr "Passwort ändern"
 
@@ -1114,7 +1132,7 @@ msgstr "Überprüfen Sie Ihre E-Mail zur Passwortwiederherstellung."
 msgid "Мой профиль"
 msgstr "Mein Profil"
 
-#: .\templates\users\profile.html:9
+#: .\templates\users\profile.html:20
 msgid "Сохранить"
 msgstr "Speichern"
 
@@ -1130,10 +1148,6 @@ msgstr "Registrieren"
 msgid "Профиль пользователя"
 msgstr "Benutzerprofil"
 
-#: .\templates\users\user_detail.html:20
-msgid "Нет аватарки"
-msgstr "Kein Avatar"
-
 #: .\templates\users\user_detail.html:26 .\users\forms.py:82
 msgid "Имя"
 msgstr "Vorname"
@@ -1147,7 +1161,7 @@ msgstr "nicht angegeben"
 msgid "Фамилия"
 msgstr "Nachname"
 
-#: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:95
+#: .\templates\users\user_detail.html:42 .\templates\users\user_list.html:97
 msgid "День рождения:"
 msgstr "Geburtstag:"
 
@@ -1181,7 +1195,9 @@ msgstr "Benutzerliste"
 
 #: .\templates\users\user_list.html:10
 msgid "Введите имя, интересы, id, username или email пользователя"
-msgstr "Geben Sie den Namen, die Interessen, die ID, den Benutzernamen oder die E-Mail des Benutzers ein"
+msgstr ""
+"Geben Sie den Namen, die Interessen, die ID, den Benutzernamen oder die E-"
+"Mail des Benutzers ein"
 
 #: .\templates\users\user_list.html:31
 msgid "Фильтрация пользователей"
@@ -1191,9 +1207,13 @@ msgstr "Benutzerfilterung"
 msgid "Возможно вам знакомы"
 msgstr "Vielleicht kennen Sie"
 
-#: .\templates\users\user_list.html:91
+#: .\templates\users\user_list.html:93
 msgid "Это вы"
 msgstr "Das sind Sie"
+
+#: .\templates\users\user_list.html:101
+msgid "День рождения: не указан"
+msgstr "Geburtstag: Nicht angegeben"
 
 #: .\users\forms.py:73
 msgid "Телефон"
@@ -1238,6 +1258,108 @@ msgstr "Profil"
 #: .\users\models.py:237
 msgid "профили"
 msgstr "Profile"
+
+#: .\users\views.py:44
+msgid "Проверьте почту для активации аккаунта"
+msgstr "Überprüfen Sie Ihre E-Mails, um Ihr Konto zu aktivieren"
+
+#: .\users\views.py:49
+#, python-format
+msgid "Добро пожаловать, %s!"
+msgstr "Willkommen, %s!"
+
+#: .\users\views.py:65
+msgid "Активация профиля на сайте"
+msgstr "Aktivieren eines Profils auf der Website"
+
+#: .\users\views.py:67
+#, python-brace-format
+msgid ""
+"Здравствуйте, {username}!\n"
+"\n"
+"Для активации вашего аккаунта перейдите по ссылке:\n"
+"{activate_link}\n"
+"\n"
+"Ссылка действительна {hours} часа.\n"
+"\n"
+"Если вы не регистрировались, проигнорируйте это письмо."
+msgstr ""
+"Hallo, {username}!\n"
+"\n"
+"Um Ihr Konto zu aktivieren, klicken Sie auf den Link:\n"
+"{activate_link}\n"
+"\n"
+"Der Link ist {hours} Stunden gültig.\n"
+"\n"
+"Wenn Sie sich nicht registriert haben, ignorieren Sie diese E-Mail."
+
+#: .\users\views.py:83
+msgid "Исправьте ошибки в форме регистрации"
+msgstr "Korrigieren Sie die Fehler im Anmeldeformular"
+
+#: .\users\views.py:96
+msgid "Срок действия ссылки истек"
+msgstr "Der Link ist abgelaufen"
+
+#: .\users\views.py:105
+msgid "Аккаунт успешно активирован!"
+msgstr "Das Konto wurde erfolgreich aktiviert!"
+
+#: .\users\views.py:108
+msgid "Неверная ссылка активации"
+msgstr "Ungültiger Aktivierungslink"
+
+#: .\users\views.py:202
+msgid "PROFILE: Профиль обновлен"
+msgstr "PROFILE: Das Profil wurde aktualisiert"
+
+#: .\users\views.py:207
+#, python-format
+msgid "PROFILE: Ошибка - %s"
+msgstr "PROFILE: Fehler - %s"
+
+#: .\users\views.py:229
+msgid "Ваш аккаунт успешно активирован!"
+msgstr "Ihr Konto wurde erfolgreich aktiviert!"
+
+#: .\users\views.py:232
+msgid "Ссылка для активации устарела."
+msgstr "Der Aktivierungslink ist veraltet."
+
+#: .\users\views.py:235
+msgid "Неверная ссылка для активации."
+msgstr "Ungültiger Aktivierungslink."
+
+#: .\users\views.py:249
+msgid "Вы не можете добавить самого себя."
+msgstr "Du kannst dich nicht selbst hinzufügen."
+
+#: .\users\views.py:259
+msgid "Заявка уже отправлена."
+msgstr "Der Antrag wurde bereits eingereicht."
+
+#: .\users\views.py:288
+msgid "Заявка в друзья отправлена."
+msgstr "Der Antrag wurde bereits eingereicht."
+
+#: .\users\views.py:308
+msgid "Заявка принята!"
+msgstr "Antrag angenommen!"
+
+#: .\users\views.py:371
+#, python-format
+msgid "Вы удалили %s из друзей"
+msgstr "Sie haben %s von Freunden entfernt"
+
+#: .\users\views.py:387
+msgid "Аккаунт успешно удален"
+msgstr "Das Konto wurde erfolgreich gelöscht"
+
+#~ msgid "Suche nach einem Ereignis..."
+#~ msgstr "Veranstaltung erstellen"
+
+#~ msgid "Нет аватарки"
+#~ msgstr "Kein Avatar"
 
 #~ msgid "code"
 #~ msgstr "Code"

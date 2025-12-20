@@ -4,7 +4,7 @@ import datetime
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import FormView
 from django.core import signing
 from django.core.mail import send_mail
@@ -15,13 +15,14 @@ from django.views.generic import (
     DetailView,
     ListView,
     RedirectView,
-    UpdateView,
+    UpdateView, DeleteView,
 )
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import ActivationToken, Friendship, Profile, User
 from users.utils import q_search
 from users.utils import send_tg_message_sync
+from django.utils.translation import gettext_lazy as _
 
 
 class SignUpView(FormView):
@@ -40,12 +41,12 @@ class SignUpView(FormView):
             self._send_activation_email(user)
             messages.warning(
                 self.request,
-                "Проверьте почту для активации аккаунта",
+                _("Проверьте почту для активации аккаунта"),
             )
         else:
             messages.success(
                 self.request,
-                f"Добро пожаловать, {user.username}!",
+                _("Добро пожаловать, %s!") % user.username,
             )
 
         return super().form_valid(form)
@@ -61,22 +62,25 @@ class SignUpView(FormView):
         )
 
         send_mail(
-            subject="Активация профиля на сайте",
-            message=f"""
-            Здравствуйте, {user.username}!
-
-            Для активации вашего аккаунта перейдите по ссылке:
-            {activate_link}
-
-            Ссылка действительна 24 часа.
-            """,
+            subject=_("Активация профиля на сайте"),
+            message=_(
+                "Здравствуйте, {username}!\n\n"
+                "Для активации вашего аккаунта перейдите по ссылке:\n"
+                "{activate_link}\n\n"
+                "Ссылка действительна {hours} часа.\n\n"
+                "Если вы не регистрировались, проигнорируйте это письмо."
+            ).format(
+                username=user.username,
+                activate_link=activate_link,
+                hours=24
+            ),
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[user.email],
             fail_silently=False,
         )
 
     def form_invalid(self, form):
-        messages.error(self.request, "Исправьте ошибки в форме регистрации")
+        messages.error(self.request, _("Исправьте ошибки в форме регистрации"))
         return super().form_invalid(form)
 
 
@@ -89,7 +93,7 @@ class ActivateUserView(RedirectView):
             activation_token = ActivationToken.objects.get(token=token)
 
             if not activation_token.is_valid():
-                messages.error(self.request, "Срок действия ссылки истек")
+                messages.error(self.request, _("Срок действия ссылки истек"))
                 return super().get_redirect_url(*args, **kwargs)
 
             user = activation_token.user
@@ -98,10 +102,10 @@ class ActivateUserView(RedirectView):
 
             activation_token.delete()
 
-            messages.success(self.request, "Аккаунт успешно активирован!")
+            messages.success(self.request, _("Аккаунт успешно активирован!"))
 
         except ActivationToken.DoesNotExist:
-            messages.error(self.request, "Неверная ссылка активации")
+            messages.error(self.request, _("Неверная ссылка активации"))
 
         return reverse(self.pattern_name)
 
@@ -167,8 +171,8 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
         received_request_obj = None
         if (
-            request_user.is_authenticated
-            and request_user.has_received_request_from(user)
+                request_user.is_authenticated
+                and request_user.has_received_request_from(user)
         ):
             received_request_obj = Friendship.objects.get(
                 from_user=user,
@@ -195,12 +199,12 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, "PROFILE: Профиль обновлен")
+        messages.success(self.request, _("PROFILE: Профиль обновлен"))
         return redirect(self.success_url)
 
     def form_invalid(self, form):
         first_error = list(form.errors.values())[0][0]
-        messages.warning(self.request, f"PROFILE: Ошибка - {first_error}")
+        messages.warning(self.request, _("PROFILE: Ошибка - %s") % first_error)
         return super().form_invalid(form)
 
     def get_object(self, queryset=None):
@@ -222,13 +226,13 @@ class ReactivateAccountView(RedirectView):
             user.attempts_count = 0
             user.save()
 
-            messages.success(request, "Ваш аккаунт успешно активирован!")
+            messages.success(request, _("Ваш аккаунт успешно активирован!"))
 
         except signing.SignatureExpired:
-            messages.error(request, "Ссылка для активации устарела.")
+            messages.error(request, _("Ссылка для активации устарела."))
 
         except (signing.BadSignature, User.DoesNotExist):
-            messages.error(request, "Неверная ссылка для активации.")
+            messages.error(request, _("Неверная ссылка для активации."))
 
         return super().get(request, *args, **kwargs)
 
@@ -242,7 +246,7 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
         to_user = get_object_or_404(User, id=user_id)
 
         if to_user == self.request.user:
-            messages.error(self.request, "Вы не можете добавить самого себя.")
+            messages.error(self.request, _("Вы не можете добавить самого себя."))
             return reverse(self.pattern_name, kwargs={"pk": user_id})
 
         fr, created = Friendship.objects.get_or_create(
@@ -252,19 +256,19 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
         )
 
         if not created:
-            messages.info(self.request, "Заявка уже отправлена.")
+            messages.info(self.request, _("Заявка уже отправлена."))
         else:
             message = (
-                f"Вам пришла новая заявка в друзья "
+                "Вам пришла новая заявка в друзья "
                 f"от {self.request.user.username}!\n"
-                f"Зайдите на сайт и проверьте её"
+                "Зайдите на сайт и проверьте её"
             )
 
             if to_user.profile.telegram_id is not None:
                 if self.request.user.profile.tg_last_message_date is not None:
                     deltatime = (
-                        datetime.datetime.now()
-                        - self.request.user.profile.tg_last_message_date
+                            datetime.datetime.now()
+                            - self.request.user.profile.tg_last_message_date
                     )
                     if (deltatime.total_seconds() / 3600) >= 24:
                         self.request.user.profile.tg_messages_cnt = 0
@@ -281,7 +285,7 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
                     )
 
             self.request.user.profile.save()
-            messages.success(self.request, "Заявка в друзья отправлена.")
+            messages.success(self.request, _("Заявка в друзья отправлена."))
 
         return reverse(self.pattern_name, kwargs={"pk": user_id})
 
@@ -301,7 +305,7 @@ class AcceptFriendRequest(LoginRequiredMixin, RedirectView):
         fr.status = "accepted"
         fr.save()
 
-        messages.success(self.request, "Заявка принята!")
+        messages.success(self.request, _("Заявка принята!"))
         return reverse(self.pattern_name)
 
 
@@ -364,6 +368,21 @@ class RemoveFriendView(LoginRequiredMixin, RedirectView):
 
         messages.success(
             self.request,
-            f"Вы удалили {friend.username} из друзей",
+            _("Вы удалили %s из друзей") % friend.username,
         )
         return reverse_lazy(self.pattern_name)
+
+
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = User
+    template_name = 'users/user_confirm_delete.html'
+    success_url = reverse_lazy('homepage:main')
+
+    def test_func(self):
+        user_to_delete = self.get_object()
+        return (self.request.user == user_to_delete or
+                self.request.user.is_staff)
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, _('Аккаунт успешно удален'))
+        return super().delete(request, *args, **kwargs)

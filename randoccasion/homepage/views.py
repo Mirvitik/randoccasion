@@ -1,6 +1,6 @@
 __all__ = ()
 
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from events.models import Event
 
@@ -22,6 +22,27 @@ class MainView(ListView):
             )[:6]
 
         return None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            context["title"] = "Главная страница"
+            context["user"] = self.request.user
+            context["friends_count"] = self.request.user.friends.count()
+        else:
+            context["title"] = "Добро пожаловать"
+            context["events_count"] = Event.objects.filter(
+                is_active=True,
+            ).count()
+
+        return context
+
+
+class PrivacyView(TemplateView):
+    template_name = 'homepage/privacy.html'
+    context_object_name = "events"
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
