@@ -169,7 +169,7 @@ class EventSendRequestView(LoginRequiredMixin, View):
                 f"У Вас новая заявка на участие в событии "
                 f"от {user.username}\n"
             )
-            if user.last_name or user.last_name:
+            if user.last_name or user.first_name:
                 msg += f"Имя: {request.user.last_name} {user.first_name}\n"
             else:
                 msg += "Имя: не указано\n"

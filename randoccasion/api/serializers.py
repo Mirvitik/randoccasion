@@ -1,14 +1,11 @@
 __all__ = ()
 
-from django.conf import settings
-from django.contrib.auth import authenticate
-from django.core.mail import send_mail
-from django.urls import reverse
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 
 from events.models import Event, Interest
-from users.models import ActivationToken, User
+from users.models import User
+from users.utils import send_activation_email
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -66,84 +63,12 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         if not request:
             raise serializers.ValidationError("Request не найден в контексте")
 
-        self.send_activation_email(user, request)
+        send_activation_email(user, request)
 
         return user
 
-    def send_activation_email(self, user, request):
-        activation_token = ActivationToken.create_for_user(user)
-
-        activate_link = request.build_absolute_uri(
-            reverse(
-                "users:activate",
-                kwargs={"token": activation_token.token},
-            ),
-        )
-
-        send_mail(
-            subject="Активация профиля на сайте",
-            message=f"""
-                       Здравствуйте, {user.username}!
-
-                       Для активации вашего аккаунта перейдите по ссылке:
-                       {activate_link}
-
-                       Ссылка действительна 24 часа.
-                       """,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user.email],
-            fail_silently=False,
-        )
-
-
-class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(required=True)
-    password = serializers.CharField(
-        write_only=True,
-        required=True,
-        style={"input_type": "password"},
-    )
-
-    def validate(self, data):
-        username = data.get("username")
-        password = data.get("password")
-
-        if not username or not password:
-            raise serializers.ValidationError(
-                "Необходимо указать имя пользователя и пароль",
-            )
-
-        user_by_username = authenticate(username=username, password=password)
-
-        if user_by_username is None:
-            try:
-                user_by_name = User.objects.get(username=username)
-                user = authenticate(
-                    username=user_by_name.username,
-                    password=password,
-                )
-            except User.DoesNotExist:
-                user = None
-        else:
-            user = user_by_username
-
-        if user is None:
-            raise serializers.ValidationError(
-                "Неверное имя пользователя или пароль",
-            )
-
-        if not user.is_active:
-            raise serializers.ValidationError(
-                "Аккаунт не активирован. Проверьте ваш email.",
-            )
-
-        data["user"] = user
-        return data
-
 
 class EventSerializer(serializers.ModelSerializer):
-    permission_classes = (IsAuthenticated,)
-
     class Meta:
         model = Event
         fields = (

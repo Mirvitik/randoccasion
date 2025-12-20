@@ -1,7 +1,6 @@
 __all__ = ()
 
 from datetime import timedelta
-import sys
 
 from django.conf import settings
 from django.contrib.auth.models import (
@@ -65,6 +64,7 @@ class CustomUserManager(DjangoUserManager):
 
 
 class CustomUser(AbstractUser):
+    email = models.EmailField(_("email address"), unique=True)
     attempts_count = models.PositiveIntegerField(
         default=0,
     )
@@ -156,10 +156,6 @@ class User(CustomUser):
             to_user=self,
             status="pending",
         ).exists()
-
-
-if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
-    User._meta.get_field("email")._unique = True
 
 
 class Interest(models.Model):
@@ -267,7 +263,12 @@ class Friendship(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("from_user", "to_user")
+        constraints = (
+            models.UniqueConstraint(
+                fields=["from_user", "to_user"],
+                name="unique_friendship",
+            ),
+        )
         verbose_name = "Заявка в друзья"
         verbose_name_plural = "Заявки в друзья"
 
@@ -284,7 +285,7 @@ class ActivationToken(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def is_valid(self):
-        return (timezone.now() - self.created_at < timedelta(hours=24),)
+        return timezone.now() - self.created_at < timedelta(hours=24)
 
     @classmethod
     def create_for_user(cls, user):

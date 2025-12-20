@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static_dev",
 ]
 
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / os.getenv("DJANGO_MEDIA", "media")
 MEDIA_URL = "media/"
 
 CKEDITOR_5_CONFIGS = {

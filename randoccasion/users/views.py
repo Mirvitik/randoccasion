@@ -7,7 +7,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import FormView
 from django.core import signing
-from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -22,7 +21,7 @@ from django.views.generic import (
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import ActivationToken, Friendship, Profile, User
-from users.utils import q_search, send_tg_message_sync
+from users.utils import q_search, send_activation_email, send_tg_message_sync
 
 
 class SignUpView(FormView):
@@ -38,7 +37,7 @@ class SignUpView(FormView):
         Profile.objects.create(user=user)
 
         if not settings.DEFAULT_USER_IS_ACTIVE:
-            self._send_activation_email(user)
+            send_activation_email(user)
             messages.warning(
                 self.request,
                 _("Проверьте почту для активации аккаунта"),
@@ -50,34 +49,6 @@ class SignUpView(FormView):
             )
 
         return super().form_valid(form)
-
-    def _send_activation_email(self, user):
-        activation_token = ActivationToken.create_for_user(user)
-
-        activate_link = self.request.build_absolute_uri(
-            reverse(
-                "users:activate",
-                kwargs={"token": activation_token.token},
-            ),
-        )
-
-        send_mail(
-            subject=_("Активация профиля на сайте"),
-            message=_(
-                "Здравствуйте, {username}!\n\n"
-                "Для активации вашего аккаунта перейдите по ссылке:\n"
-                "{activate_link}\n\n"
-                "Ссылка действительна {hours} часа.\n\n"
-                "Если вы не регистрировались, проигнорируйте это письмо.",
-            ).format(
-                username=user.username,
-                activate_link=activate_link,
-                hours=24,
-            ),
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user.email],
-            fail_silently=False,
-        )
 
     def form_invalid(self, form):
         messages.error(self.request, _("Исправьте ошибки в форме регистрации"))
@@ -388,5 +359,8 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         )
 
     def delete(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.is_active = False
+        user.save()
         messages.success(request, _("Аккаунт успешно удален"))
         return super().delete(request, *args, **kwargs)

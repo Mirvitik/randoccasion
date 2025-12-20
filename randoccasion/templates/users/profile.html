@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 align="center">{% translate "Мой профиль" %}</h2>
-<p>Аватарка: </p>
+<p>{% translate "Аватарка:" %} </p>
 {% if user.profile.image %}
 <img src="{{ user.profile.get_image_300x300.url }}"
      class="rounded-circle me-3"
@@ -13,7 +13,7 @@
 <img src="{% static  'img/noavatar.jpg' %}" class="rounded-circle me-3" width="64" height="64"
      alt="{{ user.username }}">
 {% endif %}
-<p>Ваше имя пользователя: {{ user.username }}</p>
+<p>{% translate "Ваше имя пользователя:" %} {{ user.username }}</p>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
