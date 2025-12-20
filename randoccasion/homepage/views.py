@@ -40,9 +40,8 @@ class MainView(ListView):
 
 
 class PrivacyView(TemplateView):
-    template_name = 'homepage/privacy.html'
+    template_name = "homepage/privacy.html"
     context_object_name = "events"
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

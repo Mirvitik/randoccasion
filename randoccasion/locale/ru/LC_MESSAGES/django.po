@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-20 17:51+0300\n"
+"POT-Creation-Date: 2025-12-20 18:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,6 +65,7 @@ msgid "Кто может видеть"
 msgstr "Кто может видеть"
 
 #: .\events\forms.py:79 .\events\models.py:52
+#: .\templates\homepage\privacy.html:114
 msgid "Описание"
 msgstr "Описание"
 
@@ -1099,11 +1100,175 @@ msgstr "Посмотреть больше мероприятий"
 msgid "Мы не нашли ивенты, которые Вам по душе :("
 msgstr "Ивенты, которые могут Вам понравиться:"
 
-#: .\templates\homepage\privacy.html:5
+#: .\templates\homepage\privacy.html:9
 #, fuzzy
 #| msgid "Политика конфиденциальности"
-msgid "Политика конфиденциальности сервиса «Встречалки»:"
+msgid "Политика конфиденциальности сервиса «Встречалки»"
 msgstr "Политика конфиденциальности"
+
+#: .\templates\homepage\privacy.html:19
+#, fuzzy
+#| msgid "Примерное местоположение, город"
+msgid "1. Общие положения"
+msgstr "Примерное местоположение, город"
+
+#: .\templates\homepage\privacy.html:22
+msgid ""
+"\n"
+"                        Пользуясь сервисом «Встречалки», вы даёте согласие "
+"на обработку ваших персональных данных\n"
+"                        в соответствии с настоящей Политикой "
+"конфиденциальности и действующим законодательством.\n"
+"                        "
+msgstr ""
+
+#: .\templates\homepage\privacy.html:33
+msgid "2. Какие данные мы обрабатываем"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:36
+msgid "Мы собираем и обрабатываем следующие персональные данные:"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:43
+msgid "Основная информация"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:45
+#, fuzzy
+#| msgid "Фамилия"
+msgid "Фамилия и имя"
+msgstr "Фамилия"
+
+#: .\templates\homepage\privacy.html:46
+#, fuzzy
+#| msgid "День рождения:"
+msgid "Дата рождения"
+msgstr "День рождения:"
+
+#: .\templates\homepage\privacy.html:55
+#, fuzzy
+#| msgid "Создано"
+msgid "Контактные данные"
+msgstr "Создано"
+
+#: .\templates\homepage\privacy.html:57
+msgid "Электронная почта"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:58
+#, fuzzy
+#| msgid "Телефон"
+msgid "Номер телефона"
+msgstr "Телефон"
+
+#: .\templates\homepage\privacy.html:59
+#, fuzzy
+#| msgid "telegram_id"
+msgid "Telegram ID"
+msgstr "telegram_id"
+
+#: .\templates\homepage\privacy.html:69
+msgid "3. Цели обработки данных"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:76
+#, fuzzy
+#| msgid "Восстановление пароля"
+msgid "Предоставление услуг сервиса"
+msgstr "Восстановление пароля"
+
+#: .\templates\homepage\privacy.html:80
+msgid "Улучшение качества сервиса"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:88
+msgid "Обеспечение безопасности"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:92
+msgid "Выполнение законодательных требований"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:103
+msgid "4. Ваши права"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:107
+#, fuzzy
+#| msgid "Письмо отправлено"
+msgid "Вы имеете право:"
+msgstr "Письмо отправлен"
+
+#: .\templates\homepage\privacy.html:113
+msgid "Право"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:119
+#, fuzzy
+#| msgid "Письмо отправлено"
+msgid "На исправление"
+msgstr "Письмо отправлен"
+
+#: .\templates\homepage\privacy.html:120
+msgid "Требовать исправления неточных данных"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:123
+#, fuzzy
+#| msgid "Сообщение"
+msgid "На удаление"
+msgstr "Сообщение"
+
+#: .\templates\homepage\privacy.html:124
+msgid "Требовать удаления ваших данных"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:135
+msgid "Важная информация"
+msgstr ""
+
+#: .\templates\homepage\privacy.html:140
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "Обратите внимание"
+msgstr "Запрос на событие"
+
+#: .\templates\homepage\privacy.html:142
+msgid ""
+"\n"
+"                            Мы не гарантируем точность и достоверность "
+"персональных данных,\n"
+"                            введённых вами самостоятельно. Вы несёте "
+"ответственность за\n"
+"                            актуальность предоставляемой информации.\n"
+"                            "
+msgstr ""
+
+#: .\templates\homepage\privacy.html:156
+#, fuzzy
+#| msgid "Запрос на событие"
+msgid "Согласие на обработку данных"
+msgstr "Запрос на событие"
+
+#: .\templates\homepage\privacy.html:163
+msgid ""
+"\n"
+"                            Продолжая использовать сервис «Встречалки»,\n"
+"                            вы подтверждаете, что ознакомились с настоящей "
+"Политикой конфиденциальности\n"
+"                            и соглашаетесь на обработку ваших персональных "
+"данных.\n"
+"                            "
+msgstr ""
+
+#: .\templates\homepage\privacy.html:175 .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "На главную"
+
+#: .\templates\homepage\privacy.html:187
+msgid "Распечатать"
+msgstr ""
 
 #: .\templates\includes\event_card.html:19
 msgid "🗺️ Место: "
@@ -1239,10 +1404,6 @@ msgstr "Выход"
 #: .\templates\users\logout.html:9
 msgid "Вы успешно вышли из системы."
 msgstr "Вы успешно вышли из системы."
-
-#: .\templates\users\logout.html:11
-msgid "На главную"
-msgstr "На главную"
 
 #: .\templates\users\password_change.html:5
 msgid "Смена пароля"
@@ -1472,8 +1633,7 @@ msgstr ""
 "Для активации вашего аккаунта перейдите по ссылке:\n"
 "{activate_link}\n"
 "\n"
-"Ссылка действительна {hours} часа."
-"\n"
+"Ссылка действительна {hours} часа.\n"
 "Если вы не регистрировались, проигнорируйте это письмо."
 
 #: .\users\views.py:83
@@ -1513,28 +1673,28 @@ msgstr "Ссылка для активации устарела."
 msgid "Неверная ссылка для активации."
 msgstr "Неверная ссылка для активации."
 
-#: .\users\views.py:249
+#: .\users\views.py:251
 msgid "Вы не можете добавить самого себя."
 msgstr "Вы не можете добавить самого себя."
 
-#: .\users\views.py:259
+#: .\users\views.py:262
 msgid "Заявка уже отправлена."
 msgstr "Заявка уже отправлена."
 
-#: .\users\views.py:288
+#: .\users\views.py:291
 msgid "Заявка в друзья отправлена."
 msgstr "Заявка в друзья отправлена."
 
-#: .\users\views.py:308
+#: .\users\views.py:311
 msgid "Заявка принята!"
 msgstr "Заявка принята!"
 
-#: .\users\views.py:371
-#, python-brace-format
+#: .\users\views.py:374
+#, python-format
 msgid "Вы удалили %s из друзей"
 msgstr "Вы удалили %s из друзей"
 
-#: .\users\views.py:387
+#: .\users\views.py:391
 msgid "Аккаунт успешно удален"
 msgstr "Аккаунт успешно удален"
 

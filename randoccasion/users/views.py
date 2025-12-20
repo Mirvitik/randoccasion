@@ -11,18 +11,18 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import (
+    DeleteView,
     DetailView,
     ListView,
     RedirectView,
-    UpdateView, DeleteView,
+    UpdateView,
 )
 
 from users.forms import ProfileUpdateForm, SignUpForm
 from users.models import ActivationToken, Friendship, Profile, User
-from users.utils import q_search
-from users.utils import send_tg_message_sync
-from django.utils.translation import gettext_lazy as _
+from users.utils import q_search, send_tg_message_sync
 
 
 class SignUpView(FormView):
@@ -68,11 +68,11 @@ class SignUpView(FormView):
                 "Для активации вашего аккаунта перейдите по ссылке:\n"
                 "{activate_link}\n\n"
                 "Ссылка действительна {hours} часа.\n\n"
-                "Если вы не регистрировались, проигнорируйте это письмо."
+                "Если вы не регистрировались, проигнорируйте это письмо.",
             ).format(
                 username=user.username,
                 activate_link=activate_link,
-                hours=24
+                hours=24,
             ),
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[user.email],
@@ -171,8 +171,8 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
         received_request_obj = None
         if (
-                request_user.is_authenticated
-                and request_user.has_received_request_from(user)
+            request_user.is_authenticated
+            and request_user.has_received_request_from(user)
         ):
             received_request_obj = Friendship.objects.get(
                 from_user=user,
@@ -246,7 +246,10 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
         to_user = get_object_or_404(User, id=user_id)
 
         if to_user == self.request.user:
-            messages.error(self.request, _("Вы не можете добавить самого себя."))
+            messages.error(
+                self.request,
+                _("Вы не можете добавить самого себя."),
+            )
             return reverse(self.pattern_name, kwargs={"pk": user_id})
 
         fr, created = Friendship.objects.get_or_create(
@@ -267,8 +270,8 @@ class SendFriendRequestView(LoginRequiredMixin, RedirectView):
             if to_user.profile.telegram_id is not None:
                 if self.request.user.profile.tg_last_message_date is not None:
                     deltatime = (
-                            datetime.datetime.now()
-                            - self.request.user.profile.tg_last_message_date
+                        datetime.datetime.now()
+                        - self.request.user.profile.tg_last_message_date
                     )
                     if (deltatime.total_seconds() / 3600) >= 24:
                         self.request.user.profile.tg_messages_cnt = 0
@@ -375,14 +378,15 @@ class RemoveFriendView(LoginRequiredMixin, RedirectView):
 
 class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
-    template_name = 'users/user_confirm_delete.html'
-    success_url = reverse_lazy('homepage:main')
+    template_name = "users/user_confirm_delete.html"
+    success_url = reverse_lazy("homepage:main")
 
     def test_func(self):
         user_to_delete = self.get_object()
-        return (self.request.user == user_to_delete or
-                self.request.user.is_staff)
+        return (
+            self.request.user == user_to_delete or self.request.user.is_staff
+        )
 
     def delete(self, request, *args, **kwargs):
-        messages.success(request, _('Аккаунт успешно удален'))
+        messages.success(request, _("Аккаунт успешно удален"))
         return super().delete(request, *args, **kwargs)

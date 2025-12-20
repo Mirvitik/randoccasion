@@ -122,7 +122,9 @@ urlpatterns = [
         views.RemoveFriendView.as_view(),
         name="remove_friend",
     ),
-    path('delete/<int:pk>/',
-         views.UserDeleteView.as_view(),
-         name='user_delete'),
+    path(
+        "delete/<int:pk>/",
+        views.UserDeleteView.as_view(),
+        name="user_delete",
+    ),
 ]

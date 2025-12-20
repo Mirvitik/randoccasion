@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-20 17:51+0300\n"
+"POT-Creation-Date: 2025-12-20 19:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,6 +59,7 @@ msgid "Кто может видеть"
 msgstr "Qui peut voir"
 
 #: .\events\forms.py:79 .\events\models.py:52
+#: .\templates\homepage\privacy.html:114
 msgid "Описание"
 msgstr "Description"
 
@@ -951,11 +952,170 @@ msgstr "Voir plus d'événements"
 msgid "Мы не нашли ивенты, которые Вам по душе :("
 msgstr "Événements qui pourraient vous plaire :"
 
-#: .\templates\homepage\privacy.html:5
-#, fuzzy
-#| msgid "Политика конфиденциальности"
-msgid "Политика конфиденциальности сервиса «Встречалки»:"
-msgstr "Politique de confidentialité"
+#: .\templates\homepage\privacy.html:9
+msgid "Политика конфиденциальности сервиса «Встречалки»"
+msgstr "Politique de confidentialité du service «Randoccasion»"
+
+#: .\templates\homepage\privacy.html:19
+msgid "1. Общие положения"
+msgstr "1. Dispositions générales"
+
+#: .\templates\homepage\privacy.html:22
+msgid ""
+"\n"
+"                        Пользуясь сервисом «Встречалки», вы даёте согласие "
+"на обработку ваших персональных данных\n"
+"                        в соответствии с настоящей Политикой "
+"конфиденциальности и действующим законодательством.\n"
+"                        "
+msgstr ""
+"\n"
+"                        En utilisant le service «Randoccasion», vous "
+"consentez au traitement de vos données personnelles\n"
+"                        conformément à la présente Politique de "
+"Confidentialité et à la législation en vigueur.\n"
+"                        "
+
+#: .\templates\homepage\privacy.html:33
+msgid "2. Какие данные мы обрабатываем"
+msgstr "2. Quelles données nous traitons"
+
+#: .\templates\homepage\privacy.html:36
+msgid "Мы собираем и обрабатываем следующие персональные данные:"
+msgstr "Nous collectons et traitons les données personnelles suivantes :"
+
+#: .\templates\homepage\privacy.html:43
+msgid "Основная информация"
+msgstr "Informations de base"
+
+#: .\templates\homepage\privacy.html:45
+msgid "Фамилия и имя"
+msgstr "Nom et prénom"
+
+#: .\templates\homepage\privacy.html:46
+msgid "Дата рождения"
+msgstr "Date de naissance"
+
+#: .\templates\homepage\privacy.html:55
+msgid "Контактные данные"
+msgstr "Coordonnées"
+
+#: .\templates\homepage\privacy.html:57
+msgid "Электронная почта"
+msgstr "Adresse e-mail"
+
+#: .\templates\homepage\privacy.html:58
+msgid "Номер телефона"
+msgstr "Numéro de téléphone"
+
+#: .\templates\homepage\privacy.html:59
+msgid "Telegram ID"
+msgstr "ID Telegram"
+
+#: .\templates\homepage\privacy.html:69
+msgid "3. Цели обработки данных"
+msgstr "3. Objectifs du traitement des données"
+
+#: .\templates\homepage\privacy.html:76
+msgid "Предоставление услуг сервиса"
+msgstr "Fourniture des services de la plateforme"
+
+#: .\templates\homepage\privacy.html:80
+msgid "Улучшение качества сервиса"
+msgstr "Amélioration de la qualité du service"
+
+#: .\templates\homepage\privacy.html:88
+msgid "Обеспечение безопасности"
+msgstr "Garantie de la sécurité"
+
+#: .\templates\homepage\privacy.html:92
+msgid "Выполнение законодательных требований"
+msgstr "Respect des exigences légales"
+
+#: .\templates\homepage\privacy.html:103
+msgid "4. Ваши права"
+msgstr "4. Vos droits"
+
+#: .\templates\homepage\privacy.html:107
+msgid "Вы имеете право:"
+msgstr "Vous avez le droit de :"
+
+#: .\templates\homepage\privacy.html:113
+msgid "Право"
+msgstr "Droit"
+
+#: .\templates\homepage\privacy.html:119
+msgid "На исправление"
+msgstr "Rectification"
+
+#: .\templates\homepage\privacy.html:120
+msgid "Требовать исправления неточных данных"
+msgstr "Exiger la rectification de données inexactes"
+
+#: .\templates\homepage\privacy.html:123
+msgid "На удаление"
+msgstr "Suppression"
+
+#: .\templates\homepage\privacy.html:124
+msgid "Требовать удаления ваших данных"
+msgstr "Exiger la suppression de vos données"
+
+#: .\templates\homepage\privacy.html:135
+msgid "Важная информация"
+msgstr "Informations importantes"
+
+#: .\templates\homepage\privacy.html:140
+msgid "Обратите внимание"
+msgstr "Veuillez noter"
+
+#: .\templates\homepage\privacy.html:142
+msgid ""
+"\n"
+"                            Мы не гарантируем точность и достоверность "
+"персональных данных,\n"
+"                            введённых вами самостоятельно. Вы несёте "
+"ответственность за\n"
+"                            актуальность предоставляемой информации.\n"
+"                            "
+msgstr ""
+"\n"
+"                            Nous ne garantissons pas l'exactitude et la "
+"fiabilité des données personnelles\n"
+"                            que vous avez saisies vous-même. Vous êtes "
+"responsable de\n"
+"                            l'actualité des informations fournies.\n"
+"                            "
+
+#: .\templates\homepage\privacy.html:156
+msgid "Согласие на обработку данных"
+msgstr "Consentement au traitement des données"
+
+#: .\templates\homepage\privacy.html:163
+msgid ""
+"\n"
+"                            Продолжая использовать сервис «Встречалки»,\n"
+"                            вы подтверждаете, что ознакомились с настоящей "
+"Политикой конфиденциальности\n"
+"                            и соглашаетесь на обработку ваших персональных "
+"данных.\n"
+"                            "
+msgstr ""
+"\n"
+"                            En continuant à utiliser le service "
+"«Randoccasion»,\n"
+"                            vous confirmez avoir pris connaissance de la "
+"présente Politique de Confidentialité\n"
+"                            et acceptez le traitement de vos données "
+"personnelles.\n"
+"                            "
+
+#: .\templates\homepage\privacy.html:175 .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "Retour à l'accueil"
+
+#: .\templates\homepage\privacy.html:187
+msgid "Распечатать"
+msgstr "Imprimer"
 
 #: .\templates\includes\event_card.html:19
 msgid "🗺️ Место: "
@@ -1079,10 +1239,6 @@ msgstr "Déconnexion"
 #: .\templates\users\logout.html:9
 msgid "Вы успешно вышли из системы."
 msgstr "Vous vous êtes déconnecté avec succès."
-
-#: .\templates\users\logout.html:11
-msgid "На главную"
-msgstr "Retour à l'accueil"
 
 #: .\templates\users\password_change.html:5
 msgid "Смена пароля"
@@ -1337,30 +1493,61 @@ msgstr "Le lien d'activation est obsolète."
 msgid "Неверная ссылка для активации."
 msgstr "Lien d'activation incorrect."
 
-#: .\users\views.py:249
+#: .\users\views.py:251
 msgid "Вы не можете добавить самого себя."
 msgstr "Vous ne pouvez pas vous ajouter."
 
-#: .\users\views.py:259
+#: .\users\views.py:262
 msgid "Заявка уже отправлена."
 msgstr "La demande a déjà été envoyée."
 
-#: .\users\views.py:288
+#: .\users\views.py:291
 msgid "Заявка в друзья отправлена."
 msgstr "Demande d'amis envoyée."
 
-#: .\users\views.py:308
+#: .\users\views.py:311
 msgid "Заявка принята!"
 msgstr "Demande acceptée!"
 
-#: .\users\views.py:371
+#: .\users\views.py:374
 #, python-format
 msgid "Вы удалили %s из друзей"
 msgstr "Avez-vous supprimé %s de vos amis"
 
-#: .\users\views.py:387
+#: .\users\views.py:391
 msgid "Аккаунт успешно удален"
 msgstr "Compte supprimé avec succès"
+
+#~ msgid "Связь с пользователями"
+#~ msgstr "Communication avec les utilisateurs"
+
+#~ msgid "На доступ"
+#~ msgstr "Accès"
+
+#~ msgid "Получать информацию об обработке ваших данных"
+#~ msgstr "Recevoir des informations sur le traitement de vos données"
+
+#~ msgid "На отзыв согласия"
+#~ msgstr "Rétractation du consentement"
+
+#~ msgid "Отозвать согласие на обработку данных"
+#~ msgstr "Retirer votre consentement au traitement des données"
+
+#~ msgid ""
+#~ "\n"
+#~ "                            Для запросов, связанных с обработкой "
+#~ "персональных данных,\n"
+#~ "                            обращайтесь по email:\n"
+#~ "                            "
+#~ msgstr ""
+#~ "\n"
+#~ "                            Pour les demandes liées au traitement des "
+#~ "données personnelles,\n"
+#~ "                            contactez-nous par e-mail :\n"
+#~ "                            "
+
+#~ msgid "Пользовательское соглашение"
+#~ msgstr "Conditions d'utilisation"
 
 #~ msgid "Нет аватарки"
 #~ msgstr "Pas d'avatar"
