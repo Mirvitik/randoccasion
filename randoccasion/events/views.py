@@ -5,7 +5,7 @@ import uuid
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q, Prefetch
+from django.db.models import Prefetch, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -53,8 +53,11 @@ class EventIndexView(ListView):
             if cur_user.is_authenticated:
                 events = events.filter(
                     Q(who_can_see="all")
-                    | Q(who_can_see="only_friends", creator__in=cur_user.friends.all())
-                    | Q(creator=cur_user)
+                    | Q(
+                        who_can_see="only_friends",
+                        creator__in=cur_user.friends.all(),
+                    )
+                    | Q(creator=cur_user),
                 )
             else:
                 events = events.filter(who_can_see="all")
@@ -73,6 +76,7 @@ class EventIndexView(ListView):
 
         if date_from:
             events = events.filter(created_at__gte=date_from)
+
         if date_to:
             events = events.filter(created_at__lte=date_to)
 
@@ -96,18 +100,23 @@ class EventIndexView(ListView):
         if not ordering:
             ordering = ["-created_at"]
 
-        events = events.select_related('creator').prefetch_related(
-            Prefetch(
-                'participants',
-                queryset=get_user_model().objects.select_related('profile')
+        events = (
+            events.select_related("creator")
+            .prefetch_related(
+                Prefetch(
+                    "participants",
+                    queryset=get_user_model().objects.select_related(
+                        "profile",
+                    ),
+                ),
             )
-        ).order_by(*ordering)
+            .order_by(*ordering)
+        )
 
         return events
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        return super().get_context_data(**kwargs)
 
 
 class EventDetailView(DetailView):
