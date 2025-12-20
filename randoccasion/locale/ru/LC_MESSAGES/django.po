@@ -302,13 +302,11 @@ msgstr "Регистрация"
 
 #: .\templates\api\apicreate.html:15
 msgid "Ключ создан! Сохраните его в безопасном месте"
-msgstr "Ключ создан! Сохраните его в безопасном мес"
+msgstr "Ключ создан! Сохраните его в безопасном месе"
 
 #: .\templates\api\apicreate.html:21
-#, fuzzy
-#| msgid "Тема события"
 msgid "Создать ещё один ключ"
-msgstr "Тема события"
+msgstr "Cоздать ещё один ключ"
 
 #: .\templates\api\apicreate.html:91
 msgid "Быстрый выбор:"
@@ -543,11 +541,11 @@ msgstr "По дате публикации:"
 
 #: .\templates\events\events.html:88 .\templates\events\my_events.html:69
 msgid "Сначала новые"
-msgstr "Сначала новы"
+msgstr "Сначала новые"
 
 #: .\templates\events\events.html:94 .\templates\events\my_events.html:72
 msgid "Сначала старые"
-msgstr "Сначала стары"
+msgstr "Сначала старые"
 
 #: .\templates\events\events.html:100 .\templates\events\events.html:122
 #: .\templates\events\events.html:144 .\templates\users\user_list.html:66

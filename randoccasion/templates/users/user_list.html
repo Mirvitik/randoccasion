@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n events_tags %}
+{% load static i18n events_tags %}
 
 {% block content %}
 <h2>{% translate "Список пользователей" %}</h2>
@@ -86,6 +86,8 @@
         <div class="card">
             {% if user.profile.image %}
             <img src="{{ user.profile.get_image_300x300.url }}" class="card-img-top" alt="{{ user.username }}">
+            {% else %}
+            <img src="{% static 'img/noavatar.jpg' %}" width="400" height="415" class="card-img-top" alt="{{ user.username }}">
             {% endif %}
             <div class="card-body">
                 {% if request.user == user %}<span class="badge bg-secondary rounded-pill flex-shrink-0">{% translate "Это вы" %}</span>{% endif %}
@@ -93,6 +95,10 @@
                 {% if user.profile.birthday %}
                 <p class="card-text">
                     {% translate "День рождения:" %} {{ user.profile.birthday|date:"d M" }}
+                </p>
+                {% else %}
+                <p class="card-text">
+                    {% translate "День рождения: не указан" %}
                 </p>
                 {% endif %}
                 <a href="{% url 'users:user_detail' user.pk %}" class="btn btn-primary">{% translate "Подробнее" %}</a>

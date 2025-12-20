@@ -267,20 +267,16 @@ msgid "French"
 msgstr ""
 
 #: .\templates\api\apicreate.html:9
-#, fuzzy
-#| msgid "Регистрация"
 msgid "Регистрация API ключа"
-msgstr "Sign up"
+msgstr "Creation of API key"
 
 #: .\templates\api\apicreate.html:15
 msgid "Ключ создан! Сохраните его в безопасном месте"
 msgstr "Key is created! Save it in your secure place"
 
 #: .\templates\api\apicreate.html:21
-#, fuzzy
-#| msgid "Создать новое событие"
 msgid "Создать ещё один ключ"
-msgstr "Create a new event"
+msgstr "Create a new key"
 
 #: .\templates\api\apicreate.html:91
 msgid "Быстрый выбор:"
@@ -318,7 +314,7 @@ msgstr "Not selected"
 
 #: .\templates\api\apicreate.html:139
 msgid "Создать ключ"
-msgstr "Create an event"
+msgstr "Create a key"
 
 #: .\templates\api\apicreate.html:150
 msgid "Все поля обязательны для заполнения"

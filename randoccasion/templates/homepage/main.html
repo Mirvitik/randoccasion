@@ -2,8 +2,8 @@
 {% load i18n static %}
 
 {% block content %}
-<div align="center"><h1>{% translate "Ивенты, которые могут Вам понравиться:" %}</h1></div>
 {% if events %}
+<div align="center"><h1>{% translate "Ивенты, которые могут Вам понравиться:" %}</h1></div>
 <div class="row g-3">
     {% for event in events %}
     {% include "includes/event_card.html" %}
@@ -11,5 +11,7 @@
 </div>
 <div align="center"><a class="btn btn-primary" href="{% url 'events:recommended-events' %}">{% translate "Посмотреть больше мероприятий" %}</a>
 </div>
+{% else %}
+<div align="center"><h1>{% translate "Мы не нашли ивенты, которые Вам по душе :(" %}</h1></div>
 {% endif %}
 {% endblock %}

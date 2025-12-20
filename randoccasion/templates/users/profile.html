@@ -1,8 +1,19 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block content %}
-<h2>{% translate "Мой профиль" %}</h2>
+<h2 align="center">{% translate "Мой профиль" %}</h2>
+<p>Аватарка: </p>
+{% if user.profile.image %}
+<img src="{{ user.profile.get_image_300x300.url }}"
+     class="rounded-circle me-3"
+     alt="{{ user.username }}"
+     style="width: 64px; height: 64px; object-fit: cover;">
+{% else %}
+<img src="{% static  'img/noavatar.jpg' %}" class="rounded-circle me-3" width="64" height="64"
+     alt="{{ user.username }}">
+{% endif %}
+<p>Ваше имя пользователя: {{ user.username }}</p>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

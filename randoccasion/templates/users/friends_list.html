@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block content %}
 <h2>{% translate "Мои друзья" %}</h2>
@@ -14,15 +14,14 @@
                         <div class="col-md-8">
                             <div class="d-flex align-items-center">
                                 {% if friend.profile.image %}
-                                    <img src="{{ friend.profile.get_image_300x300.url }}" 
-                                         class="rounded-circle me-3" 
+                                    <img src="{{ friend.profile.get_image_300x300.url }}"
+                                         class="rounded-circle me-3"
                                          alt="{{ friend.username }}"
                                          style="width: 64px; height: 64px; object-fit: cover;">
                                 {% else %}
-                                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-3" 
-                                         style="width: 64px; height: 64px;">
-                                        <i class="fas fa-user text-white"></i>
-                                    </div>
+
+                                        <img src="{% static  'img/noavatar.jpg' %}" class="rounded-circle me-3" width="64" height="64" alt="{{ user.username }}">
+
                                 {% endif %}
                                 <div>
                                     <h5 class="card-title mb-1">
@@ -47,8 +46,8 @@
                         <div class="col-md-4 mt-2 mt-md-0">
                             <form method="post" action="{% url 'users:remove_friend' friend.id %}" class="d-grid">
                                 {% csrf_token %}
-                                <button type="submit" 
-                                        name="remove_friend" 
+                                <button type="submit"
+                                        name="remove_friend"
                                         class="btn btn-outline-danger btn-sm"
                                         onclick="return confirm('{% trans "Вы уверены, что хотите удалить" %} {{ friend.username }} {% trans "из друзей?" %}')">
                                     <i class="fas fa-user-minus me-1"></i>
