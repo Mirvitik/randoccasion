@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-21 00:27+0300\n"
+"POT-Creation-Date: 2025-12-21 22:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,23 +243,35 @@ msgstr "Événement créé avec succès!"
 msgid "Пожалуйста, исправьте ошибки в форме."
 msgstr "Veuillez corriger les erreurs de formulaire."
 
-#: .\randoccasion\settings.py:126
+#: .\homepage\views.py:31
+msgid "Главная страница"
+msgstr "Page d'accueil"
+
+#: .\homepage\views.py:35
+msgid "Добро пожаловать"
+msgstr "Bienvenue"
+
+#: .\homepage\views.py:49
+msgid "Конфиденциальность"
+msgstr "Politique de confidentialité"
+
+#: .\randoccasion\settings.py:128
 msgid "Russian"
 msgstr "Russe"
 
-#: .\randoccasion\settings.py:127
+#: .\randoccasion\settings.py:129
 msgid "English"
 msgstr "Anglais"
 
-#: .\randoccasion\settings.py:128
+#: .\randoccasion\settings.py:130
 msgid "German"
 msgstr "Allemand"
 
-#: .\randoccasion\settings.py:129
+#: .\randoccasion\settings.py:131
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: .\randoccasion\settings.py:130
+#: .\randoccasion\settings.py:132
 msgid "French"
 msgstr "Français"
 
@@ -697,6 +709,92 @@ msgstr ""
 msgid "Посмотреть все события"
 msgstr "Voir tous les événements"
 
+#: .\templates\homepage\apidocs.html:9
+msgid "API Документация"
+msgstr "Documentation de l'API"
+
+#: .\templates\homepage\apidocs.html:10
+msgid "Краткое руководство по использованию API"
+msgstr "Guide rapide d'utilisation de l'API"
+
+#: .\templates\homepage\apidocs.html:17
+msgid "Быстрый старт"
+msgstr "Démarrage rapide"
+
+#: .\templates\homepage\apidocs.html:23
+msgid "API-ключ (только чтение)"
+msgstr "Clé API (lecture seule)"
+
+#: .\templates\homepage\apidocs.html:25
+msgid "Генерируется на"
+msgstr "Généré sur"
+
+#: .\templates\homepage\apidocs.html:28
+msgid "Токен (чтение и запись)"
+msgstr "Jeton (lecture et écriture)"
+
+#: .\templates\homepage\apidocs.html:30
+msgid "Получается на"
+msgstr "Obtenu sur"
+
+#: .\templates\homepage\apidocs.html:39
+msgid "Эндпоинты"
+msgstr "Points de terminaison"
+
+#: .\templates\homepage\apidocs.html:96
+msgid "Примеры"
+msgstr "Exemples"
+
+#: .\templates\homepage\apidocs.html:100
+msgid "Python (requests)"
+msgstr "Python (requests)"
+
+#: .\templates\homepage\apidocs.html:112
+msgid "Параметры поиска"
+msgstr "Paramètres de recherche"
+
+#: .\templates\homepage\apidocs.html:119
+msgid "поиск по названию"
+msgstr "recherche par titre"
+
+#: .\templates\homepage\apidocs.html:120
+msgid "с даты"
+msgstr "à partir de la date"
+
+#: .\templates\homepage\apidocs.html:121
+msgid "до даты"
+msgstr "jusqu'à la date"
+
+#: .\templates\homepage\apidocs.html:122
+msgid "только активные"
+msgstr "actifs uniquement"
+
+#: .\templates\homepage\apidocs.html:127
+msgid "по интересу ID"
+msgstr "par ID d'intérêt"
+
+#: .\templates\homepage\apidocs.html:128
+msgid "сортировка по дате"
+msgstr "tri par date"
+
+#: .\templates\homepage\apidocs.html:129
+msgid "сортировка по сроку"
+msgstr "tri par échéance"
+
+#: .\templates\homepage\apidocs.html:130
+msgid "по алфавиту"
+msgstr "par ordre alphabétique"
+
+#: .\templates\homepage\apidocs.html:139 .\templates\homepage\privacy.html:175
+#: .\templates\users\logout.html:11
+msgid "На главную"
+msgstr "Retour à l'accueil"
+
+#: .\templates\homepage\apidocs.html:143 .\templates\includes\header.html:122
+#: .\templates\includes\header.html:126
+msgid "Создать API-ключ"
+msgstr "Créer une clé API"
+
 #: .\templates\homepage\guest_main.html:7
 msgid "Сервис «Встречалки»"
 msgstr "Service «Randoccasion»"
@@ -1094,10 +1192,6 @@ msgstr ""
 "personnelles.\n"
 "                            "
 
-#: .\templates\homepage\privacy.html:175 .\templates\users\logout.html:11
-msgid "На главную"
-msgstr "Retour à l'accueil"
-
 #: .\templates\includes\event_card.html:17
 msgid "🗺️ Место: "
 msgstr "🗺️ Lieu : "
@@ -1159,10 +1253,6 @@ msgstr "Se connecter"
 #: .\templates\includes\header.html:118
 msgid "Панель администратора"
 msgstr "Panneau d'administration"
-
-#: .\templates\includes\header.html:122 .\templates\includes\header.html:126
-msgid "Создать API-ключ"
-msgstr "Créer une clé API"
 
 #: .\templates\users\friend_requests.html:5
 msgid "Входящие заявки в друзья"
@@ -1476,74 +1566,74 @@ msgstr ""
 "\n"
 "Si vous ne vous êtes pas inscrit, ignorez cette lettre."
 
-#: .\users\views.py:44
+#: .\users\views.py:43
 msgid "Проверьте почту для активации аккаунта"
 msgstr "Vérifiez le courrier pour activer votre compte"
 
-#: .\users\views.py:49
+#: .\users\views.py:48
 #, python-format
 msgid "Добро пожаловать, %s!"
 msgstr "Bienvenue, %s!"
 
-#: .\users\views.py:55
+#: .\users\views.py:54
 msgid "Исправьте ошибки в форме регистрации"
 msgstr "Corriger les erreurs dans le formulaire d'inscription"
 
-#: .\users\views.py:68
+#: .\users\views.py:67
 msgid "Срок действия ссылки истек"
 msgstr "Le lien a expiré"
 
-#: .\users\views.py:77
+#: .\users\views.py:76
 msgid "Аккаунт успешно активирован!"
 msgstr "Événement créé avec succès!"
 
-#: .\users\views.py:80
+#: .\users\views.py:79
 msgid "Неверная ссылка активации"
 msgstr "Le compte a été activé avec succès!"
 
-#: .\users\views.py:174
+#: .\users\views.py:173
 msgid "PROFILE: Профиль обновлен"
 msgstr "Profil de l'utilisateur"
 
-#: .\users\views.py:179
+#: .\users\views.py:178
 #, python-format
 msgid "PROFILE: Ошибка - %s"
 msgstr "PROFILE: Erreur - %s"
 
-#: .\users\views.py:201
+#: .\users\views.py:200
 msgid "Ваш аккаунт успешно активирован!"
 msgstr "Votre compte a été activé avec succès!"
 
-#: .\users\views.py:204
+#: .\users\views.py:203
 msgid "Ссылка для активации устарела."
 msgstr "Le lien d'activation est obsolète."
 
-#: .\users\views.py:207
+#: .\users\views.py:206
 msgid "Неверная ссылка для активации."
 msgstr "Lien d'activation incorrect."
 
-#: .\users\views.py:223
+#: .\users\views.py:222
 msgid "Вы не можете добавить самого себя."
 msgstr "Vous ne pouvez pas vous ajouter."
 
-#: .\users\views.py:234
+#: .\users\views.py:233
 msgid "Заявка уже отправлена."
 msgstr "La demande a déjà été envoyée."
 
-#: .\users\views.py:263
+#: .\users\views.py:262
 msgid "Заявка в друзья отправлена."
 msgstr "Demande d'amis envoyée."
 
-#: .\users\views.py:283
+#: .\users\views.py:282
 msgid "Заявка принята!"
 msgstr "Demande acceptée!"
 
-#: .\users\views.py:346
+#: .\users\views.py:345
 #, python-format
 msgid "Вы удалили %s из друзей"
 msgstr "Avez-vous supprimé %s de vos amis"
 
-#: .\users\views.py:366
+#: .\users\views.py:365
 msgid "Аккаунт успешно удален"
 msgstr "Compte supprimé avec succès"
 
@@ -1598,6 +1688,3 @@ msgstr "Compte supprimé avec succès"
 
 #~ msgid "Сервис "
 #~ msgstr "Service"
-
-#~ msgid "Главная страница"
-#~ msgstr "Page d'accueil"
