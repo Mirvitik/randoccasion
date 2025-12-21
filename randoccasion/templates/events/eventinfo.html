@@ -9,6 +9,11 @@
         <a class="text-decoration-none link-light" href="{% url "events:all_events" %}">{% translate "К списку событий" %}</a>
     </button>
 </div>
+{% if event.get_image_300x300.url %}
+<img style="margin-top: 20px" src="{{event.get_image_300x300.url}}">
+{% else %}
+<img style="margin-top: 20px" width="300" height="300" src="{% static 'img/noimage.jpg' %}">
+{% endif %}
 <div class="container py-4">
     <strong>{{event.name}}</strong>
     <div>{{event.topic}}</div>

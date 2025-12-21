@@ -19,12 +19,10 @@
     <form class="d-flex" role="search" action="{% url 'events:my_events' %}" method="get">
     <div class="card mb-4">
         <div class="card-body">
-            <!-- Скрытые поля для сохранения текущих параметров -->
             <input type="hidden" name="type" value="{{ current_type }}">
             <input type="hidden" name="status" id="statusField" value="{{ current_status }}">
             <input type="hidden" name="sort_by" id="sortByField" value="{{ current_sort }}">
 
-            <!-- Табы (они теперь обновляют скрытые поля через JS) -->
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
                     <button type="button"

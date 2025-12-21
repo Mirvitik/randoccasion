@@ -104,12 +104,12 @@ class UserListView(LoginRequiredMixin, ListView):
 
         if sort_by_alpha == "desc":
             return queryset.order_by(
-                "first_name",
-                "last_name",
-                "username",
+                "-first_name",
+                "-last_name",
+                "-username",
             )
 
-        return queryset.order_by("-first_name", "-last_name", "-username")
+        return queryset.order_by("first_name", "last_name", "username")
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
