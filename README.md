@@ -253,7 +253,7 @@ print(s.get('http://127.0.0.1:8000/api/v1/events/').json())
 
 ### Пример 1: Поиск активных событий
 ```
-GET /api/events/search/?only_active=true&sort_published=desc
+GET /api/v1/events/search/?only_active=true&sort_published=desc
 ```
 
 ## Архитектура базы данных проекта
