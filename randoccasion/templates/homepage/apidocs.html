@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold mb-3">{% translate "API Документация" %}</h1>
+                <p class="lead text-muted">{% translate "Краткое руководство по использованию API" %}</p>
+            </div>
+
+            <section class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-rocket-takeoff me-2"></i>
+                        {% translate "Быстрый старт" %}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <h4 class="h5">{% translate "API-ключ (только чтение)" %}</h4>
+                            <pre><code>Authorization: Api-Key &lt;ключ&gt;</code></pre>
+                            <p class="small">{% translate "Генерируется на" %} <code>/api/v1/apikey-create/</code></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="h5">{% translate "Токен (чтение и запись)" %}</h4>
+                            <pre><code>Authorization: Token &lt;токен&gt;</code></pre>
+                            <p class="small">{% translate "Получается на" %} <code>POST /api/v1/login/</code></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-link me-2"></i>
+                        {% translate "Эндпоинты" %}
+                    </h2>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-success">POST</span>
+                                <code class="ms-2">/api/v1/register/</code>
+                            </div>
+                            <span class="badge bg-info">API-Key</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-success">POST</span>
+                                <code class="ms-2">/api/v1/login/</code>
+                            </div>
+                            <span class="badge bg-secondary">None</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-primary">GET</span>
+                                <span class="badge bg-success">POST</span>
+                                <code class="ms-2">/api/v1/events/</code>
+                            </div>
+                            <div>
+                                <span class="badge bg-info">API-Key</span>
+                                <span class="badge bg-warning">Token</span>
+                            </div>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-primary">GET</span>
+                                <code class="ms-2">/api/v1/events/search/</code>
+                            </div>
+                            <div>
+                                <span class="badge bg-info">API-Key</span>
+                                <span class="badge bg-warning">Token</span>
+                            </div>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-primary">GET</span>
+                                <code class="ms-2">/api/v1/users/</code>
+                            </div>
+                            <div>
+                                <span class="badge bg-info">API-Key</span>
+                                <span class="badge bg-warning">Token</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-code-slash me-2"></i>
+                        {% translate "Примеры" %}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="mb-3">{% translate "Python (requests)" %}</h5>
+                    <pre class="bg-dark text-white p-3 rounded"><code class="language-python">import requests
+
+s = requests.Session()
+s.headers.update({'Authorization': 'API-key <ВАШ-API-ключ>'})
+print(s.get('http://127.0.0.1:8000/api/v1/events/').json()</code></pre>
+                </div>
+            </section>
+            <section class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-search me-2"></i>
+                        {% translate "Параметры поиска" %}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><code>?q=текст</code> - {% translate "поиск по названию" %}</li>
+                                <li><code>?date_from=2024-01-01</code> - {% translate "с даты" %}</li>
+                                <li><code>?date_to=2024-12-31</code> - {% translate "до даты" %}</li>
+                                <li><code>?only_active=true</code> - {% translate "только активные" %}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><code>?interest=1</code> - {% translate "по интересу ID" %}</li>
+                                <li><code>?sort_published=desc</code> - {% translate "сортировка по дате" %}</li>
+                                <li><code>?sort_expiry=asc</code> - {% translate "сортировка по сроку" %}</li>
+                                <li><code>?sort_alpha=asc</code> - {% translate "по алфавиту" %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="text-center mt-5">
+                <a href="{% url 'homepage:main' %}" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-house me-1"></i>
+                    {% translate "На главную" %}
+                </a>
+                <a href="/api/v1/apikey-create/" class="btn btn-primary">
+                    <i class="bi bi-key me-1"></i>
+                    {% translate "Создать API-ключ" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

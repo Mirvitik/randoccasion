@@ -12,7 +12,14 @@ class TestAPI(TestCase):
 
     def setUp(self):
         _, self.key = APIKey.objects.create_key(name="test-key")
-        self.client = Client(headers={"authorization": f"Api-Key {self.key}"})
+        self.client = Client(headers={"Authorization": f"Api-Key {self.key}"})
+        self.token = self.client.post(
+            reverse("api:login"),
+            {"username": "user1", "password": "fpuWIOYT#WUEY2"},
+        ).json()["token"]
+        self.client_login = Client(
+            headers={"Authorization": f"Token {self.token}"},
+        )
 
     def test_list(self):
         response = self.client.get(reverse("api:user-list"))
@@ -81,3 +88,14 @@ class TestAPI(TestCase):
             {"id": 1, "name": "music", "slug": "music"},
             response.json(),
         )
+
+    def test_deny_post_events(self):
+        response = self.client.post(reverse("api:event-list"))
+        self.assertEqual(response.status_code, HTTPStatus.UNAUTHORIZED)
+
+    def test_access_login(self):
+        response = self.client_login.post(
+            reverse("api:event-list"),
+            {"slug": "random-slug"},
+        )
+        self.assertEqual(response.status_code, HTTPStatus.CREATED)

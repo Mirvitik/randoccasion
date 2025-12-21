@@ -2,6 +2,7 @@ from django.urls import path
 
 from api.views import (
     APIKeyCreate,
+    CustomAuthToken,
     EventDetail,
     EventSearchAPIView,
     InterestDetail,
@@ -14,6 +15,7 @@ from api.views import (
 app_name = "api"
 
 urlpatterns = [
+    path("login/", CustomAuthToken.as_view(), name="login"),
     path("register/", RegisterView.as_view(), name="register"),
     path("users/", UserListCreate.as_view(), name="user-list"),
     path("users/<int:pk>/", UserDetail.as_view(), name="user-detail"),

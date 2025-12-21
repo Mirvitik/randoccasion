@@ -1,5 +1,9 @@
 __all__ = ()
 
+import base64
+import uuid
+
+from django.core.files.base import ContentFile
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 
@@ -68,7 +72,32 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+class Base64ImageField(serializers.ImageField):
+    def to_internal_value(self, data):
+        if isinstance(data, str) and data.startswith("data:image"):
+            try:
+                formatik, imgstr = data.split(";base64,")
+                ext = formatik.split("/")[-1]
+                data = base64.b64decode(imgstr)
+                file_name = f"{uuid.uuid4()}.{ext}"
+                data = ContentFile(data, name=file_name)
+            except Exception as e:
+                raise serializers.ValidationError(
+                    f"Некорректный формат base64 изображения: {str(e)}",
+                )
+
+        return super().to_internal_value(data)
+
+
 class EventSerializer(serializers.ModelSerializer):
+    is_active = serializers.BooleanField(default=True)
+    image = Base64ImageField(
+        required=False,
+        allow_null=True,
+        allow_empty_file=True,
+        max_length=None,
+    )
+
     class Meta:
         model = Event
         fields = (

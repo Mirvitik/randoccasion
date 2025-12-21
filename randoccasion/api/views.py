@@ -8,10 +8,13 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView
 from rest_framework import generics
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
 from rest_framework_api_key.models import APIKey
-from rest_framework_api_key.permissions import HasAPIKey
 
 from api.forms import APICreateForm
+from api.permissions import AllowCreateWithToken
 from api.serializers import (
     EventSerializer,
     InterestSerializer,
@@ -23,14 +26,33 @@ from events.utils import q_search
 from users.models import Interest, User
 
 
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data,
+            context={"request": request},
+        )
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data["user"]
+        token, created = Token.objects.get_or_create(user=user)
+        return Response(
+            {
+                "token": token.key,
+                "user_id": user.pk,
+                "username": user.username,
+                "email": user.email,
+            },
+        )
+
+
 class UserListCreate(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
 
 
 class RegisterView(generics.CreateAPIView):
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
     serializer_class = UserRegisterSerializer
 
     def create(self, request, *args, **kwargs):
@@ -47,31 +69,34 @@ class RegisterView(generics.CreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
 
 
-class EventListCreate(generics.ListAPIView):
+class EventListCreate(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
 
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
 
 
 class InterestListCreate(generics.ListAPIView):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
 
 
 class InterestDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
 
 
 @method_decorator(staff_member_required, name="dispatch")
@@ -97,9 +122,9 @@ class APIKeyCreate(LoginRequiredMixin, FormView):
         return context
 
 
-class EventSearchAPIView(generics.ListAPIView):
+class EventSearchAPIView(generics.ListCreateAPIView):
     serializer_class = EventSerializer
-    permission_classes = (HasAPIKey,)
+    permission_classes = (AllowCreateWithToken,)
     paginate_by = 100
 
     def get_queryset(self):
@@ -175,3 +200,6 @@ class EventSearchAPIView(generics.ListAPIView):
             ordering = ["-created_at"]
 
         return events.order_by(*ordering)
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
