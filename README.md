@@ -1,6 +1,5 @@
 ## Проект "Встречалки", разработанный в рамках обучения в Яндекс Лицее
 
-[![pipeline status](https://gitlab.crja72.ru/django/2025/autumn/course/projects/team-8/badges/main/pipeline.svg?key_text=Django%20Project%20Tests&key_width=150)](https://gitlab.crja72.ru/django/2025/autumn/course/projects/team-8/-/pipelines)
 
 Перед запуском убедитесь, что у вас установлены:
 
@@ -14,7 +13,7 @@
 Для клонирования репозитория на свой компьютер воспользуйтесь следующей командой:
 
 ```bash
-git clone https://gitlab.crja72.ru/django/2025/autumn/course/projects/team-8
+git clone https://github.com/mirvitik/randoccasion
 ```
 
 И перейдите в папку с проектом:
